@@ -1,0 +1,118 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><!-- InstanceBegin template="/Templates/designTemplate.dwt" codeOutsideHTMLIsLocked="false" -->
+<head>
+
+  <!-- DC Contact Form CSS -->
+<link type="text/css" rel="stylesheet" href="form.css" />
+ 
+<!-- DC Contact Form JS -->
+<script type="text/javascript" src="form.js"></script>
+
+
+<meta name="keywords" content="">
+
+<meta name="description" content="">
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<!-- InstanceBeginEditable name="doctitle" -->
+<title>Rodrigo Araújo ::: Software Engineer / Computer Scientist</title>
+
+
+<!-- InstanceEndEditable -->
+
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<link href="stylesheet.css" rel="stylesheet" type="text/css" /><!--[if IE]>
+
+<style type="text/css"> 
+/* place css fixes for all versions of IE in this conditional comment */
+.twoColHybRtHdr #sidebar1 { padding-top: 30px; }
+.twoColHybRtHdr #mainContent { zoom: 1; padding-top: 15px; }
+/* the above proprietary zoom property gives IE the hasLayout it may need to avoid several bugs */
+</style>
+<![endif]-->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+</head>
+
+<body class="twoColHybRtHdr">
+
+<div id="container"><!-- InstanceBeginEditable name="headerNav" -->
+  <div id="header">
+    
+      <tr>
+        <h1><a href="./HomePage.html">Rodrigo Araújo</a></h1>
+      </tr>
+        <h4>Software Engineer & Computer Scientist</h4>
+
+    
+    <tr>
+      <h4>-------------------------------------------------------------------------------------------------------------------------------------------</h4>
+    </tr>
+    <tr>
+      <h3>
+        <!--<a href="./HomePage.html"><img src="./images/back.png" width="15"></a>
+              <tr>
+        <td>&nbsp;</td>
+      </tr><-->
+
+        <a href="" onclick="window.open('http://www.universocomputacao.com','_blank');window.close();return false">BLOG    &nbsp;&nbsp;</a> 
+        <a href="./about.html">ABOUT    &nbsp;&nbsp;</a>
+        <a href="./work.html">WORK    &nbsp;&nbsp;</a>
+        <a href="./contact.html">CONTACT    &nbsp;&nbsp;</a>
+      </h3>
+    </tr>
+    
+    <!-- end #header -->
+  </div>
+
+  <div id="mainContent">
+    
+    <p>
+      <!-- DC Contact Form Start -->
+  <form action="" class="tsc_form_contact_light">
+    <label for="name">Name <span>(required)</span></label>
+    <input type="text" name="name" class="form-input" required />
+    <label for="email">Email <span>(required)</span></label>
+    <input type="email" name="email" class="form-input" required />
+    <label for="subject">Subject <span>(optional)</span></label>
+    <input type="text" name="subject" class="form-input" />
+    <label for="message">Message <span>(required)</span></label>
+    <textarea name="message" class="form-input" required></textarea>
+    <input class="form-btn" type="submit" value="Send Message" />
+  </form>
+<!-- DC Contact Form End -->
+
+    </p>
+
+  </div>
+
+<!-- InstanceEndEditable --><!-- InstanceBeginEditable name="subNav" --><!-- InstanceEndEditable --><!-- InstanceBeginEditable name="mainContent" --><!-- InstanceEndEditable -->
+  <!-- This clearing element should immediately follow the #mainContent div in order to force the #container div to contain all child floats -->
+  <br class="clearfloat" />
+  <!-- InstanceBeginEditable name="footer" -->
+  <div id="footer">
+    <!-- end #footer -->
+    </div>
+  <!-- InstanceEndEditable -->
+  <!-- end #container --></div>
+    
+
+</body>
+
+<script>
+$(document).ready(function(){
+    // to fade in on page load
+    $("p").css("display", "none");
+    $("p").fadeIn(800); 
+    // to fade out before redirect
+    $('a').click(function(e){
+        redirect = $(this).attr('href');
+        e.preventDefault();
+        $('p').fadeOut(400, function(){
+            document.location.href = redirect
+        });
+    });
+})
+</script>
+<!-- InstanceEnd --></html>

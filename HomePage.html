@@ -1,0 +1,90 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><!-- InstanceBegin template="/Templates/designTemplate.dwt" codeOutsideHTMLIsLocked="false" -->
+<head>
+
+
+<meta name="keywords" content="">
+
+<meta name="description" content="">
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<!-- InstanceBeginEditable name="doctitle" -->
+<title>Rodrigo Araújo ::: Software Engineer / Computer Scientist</title>
+
+
+<!-- InstanceEndEditable -->
+
+<link href="stylesheet.css" rel="stylesheet" type="text/css" /><!--[if IE]>
+<style type="text/css"> 
+/* place css fixes for all versions of IE in this conditional comment */
+.twoColHybRtHdr #sidebar1 { padding-top: 30px; }
+.twoColHybRtHdr #mainContent { zoom: 1; padding-top: 15px; }
+/* the above proprietary zoom property gives IE the hasLayout it may need to avoid several bugs */
+</style>
+<![endif]-->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+</head>
+
+<body class="twoColHybRtHdr">
+
+<div id="container"><!-- InstanceBeginEditable name="headerNav" -->
+  <div id="header">
+    <div id="headcontent">
+    <table width="800" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <h1>Rodrigo Araújo</h1>
+      </tr>
+      <h4>Software Engineer & Computer Scientist</h4>
+      <tr>
+      </tr>
+      <tr>
+        <td><table width="600" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+              <a href="" onclick="window.open('http://www.universocomputacao.com','_blank');window.close();return false"><p>BLOG</p></a>
+          </tr>
+          <tr>
+              <a href="./about.html"><p>ABOUT</p></a>
+          </tr>
+          <tr>
+              <a href="./work.html"><p>WORK</p></a>
+          </tr>
+          <tr>
+              <a href="./contact.html"><p>CONTACT</p></a>
+          </tr>
+        </table></td>
+      </tr>
+    </table>
+  </div>
+    
+    <!-- end #header -->
+  </div>
+
+<!-- InstanceEndEditable --><!-- InstanceBeginEditable name="subNav" --><!-- InstanceEndEditable --><!-- InstanceBeginEditable name="mainContent" --><!-- InstanceEndEditable -->
+  <!-- This clearing element should immediately follow the #mainContent div in order to force the #container div to contain all child floats -->
+	<br class="clearfloat" />
+	<!-- InstanceBeginEditable name="footer" -->
+	<div id="footer">
+	  <!-- end #footer -->
+    </div>
+	<!-- InstanceEndEditable -->
+	<!-- end #container --></div>
+    
+
+</body>
+<script>
+$(document).ready(function(){
+    // to fade in on page load
+    $("table").css("display", "none");
+    $("table").fadeIn(800); 
+    // to fade out before redirect
+    $('a').click(function(e){
+        redirect = $(this).attr('href');
+        e.preventDefault();
+        $('table').fadeOut(400, function(){
+            document.location.href = redirect
+        });
+    });
+})
+</script>
+<!-- InstanceEnd --></html>

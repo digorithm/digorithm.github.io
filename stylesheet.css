@@ -1,0 +1,291 @@
+@charset "UTF-8";
+@font-face {
+font-family: 'archerpro';
+src: url('fonts/ArcherPro-Bold.otf');  
+}
+
+@font-face {
+font-family: 'archerprolight';
+src: url('fonts/ArcherPro-Light.otf');  
+}
+
+@font-face{
+	font-family: 'gotham';
+	src: url('fonts/GothamHTF-Book.otf');
+}
+@font-face{
+	font-family:'gothambold';
+	src: url('fonts/GothamHTF-Bold.otf');
+}
+
+@font-face {
+font-family: 'museo100';
+src: url('fonts/MuseoSans-100.otf');  
+}
+
+@font-face {
+font-family: 'museo300';
+src: url('fonts/MuseoSans-300.otf');  
+}
+
+@font-face{
+	font-family: 'museo500';
+	src: url('fonts/MuseoSans_500.otf');
+}
+@font-face{
+	font-family:'museo700';
+	src: url('fonts/MuseoSans_700.otf');
+}
+
+@font-face{
+	font-family:'museo900';
+	src: url('fonts/MuseoSans_900.otf');
+}
+
+body  {
+	background: #666666;
+	margin: 0; 
+	padding: 0;
+	text-align: center; 
+	color: #9E9A98;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	font-style: normal;
+	line-height: 17px;
+	background-color: #FFF;
+	background-image: url();
+	background-repeat: repeat;
+}
+.twoColHybRtHdr #container {
+	width: 985px;  
+	background: #FFFFFF;
+	text-align: left; 
+	margin-top: 55px;
+	margin-right: auto;
+	margin-bottom: 0px;
+	margin-left: 160px;
+	border: 1px solid #FFF;
+} 
+
+.twoColHybRtHdr #header {
+	padding-top: 0;
+	padding-bottom: 0;
+	padding-left: 73px;
+	padding-right: 0px;
+	margin-top: 50px;
+	background-color: #FFF;
+	font-family: 'museo900', sans-serif;
+	font-size: 50px;
+
+
+} 
+.twoColHybRtHdr #header table {
+	line-height: 0px;
+	height: 0px;
+
+} 
+
+.twoColHybRtHdr #headcontent {
+	background-color: #FFF;
+	font-family: 'museo300', sans-serif;
+	font-size: 50px;
+}
+
+
+/*algumas cores que encaixaram nesse h1 + h4 (original = 666):
+#056E8C
+#00A632
+*/
+.twoColHybRtHdr #header h1 {
+	margin: 0; 
+	padding: 10px 0; 
+	color: #666;
+	font-size: 38px;
+	letter-spacing: 2px;
+}
+.boldmod{
+	font-family: 'gothambold';
+	font-size: inherit;
+}
+.twoColHybRtHdr #header h4 {
+	color: #666;
+	font-family: 'museo100'; 
+	font-size: 14px;
+	margin: 0px;
+	letter-spacing: 1px;
+}
+.twoColHybRtHdr #header h3 {
+	color: #666;
+	font-family: 'museo500'; 
+	font-size: 15px;
+	margin: 0px;
+	letter-spacing: 1px;
+}
+
+.twoColHybRtHdr #header a:link{
+	color: #666;
+	text-decoration: none;
+}
+
+.twoColHybRtHdr #header a:active{
+	color: #666;
+}
+
+.twoColHybRtHdr #header a:visited{
+	color: #666;
+}
+
+.twoColHybRtHdr #header a:hover{
+	color: #E11F00;
+};
+
+.twoColHybRtHdr #sidebar1 {
+	float: right;
+	width: 17em;
+	padding-top: 35px;
+	padding-right: 0;
+	padding-bottom: 15px;
+	padding-left: 0;
+	margin-right: 125px;
+	background-color: #FFF;
+}
+.twoColHybRtHdr #sidebar1 h3, .twoColHybRtHdr #sidebar1 p {
+	margin-left: 10px; 
+	margin-right: 10px;
+}
+
+
+/* Tips for mainContent:
+1. The space between the mainContent and sidebar1 is created with the right margin on the mainContent div.  No matter how much content the sidebar1 div contains, the column space will remain. You can remove this right margin if you want the #mainContent div's text to fill the #sidebar1 space when the content in #sidebar1 ends.
+2. Be aware it is possible to cause float drop (the dropping of the non-floated mainContent area below the sidebar) if an element wider than it can contain is placed within the mainContent div. WIth a hybrid layout (percentage-based overall width with em-based sidebar), it may not be possible to calculate the exact width available. If the user's text size is larger than average, you will have a wider sidebar div and thus, less room in the mainContent div. You should be aware of this limitation - especially if the client is adding content with Contribute.
+3. In the Internet Explorer Conditional Comment below, the zoom property is used to give the mainContent "hasLayout." This may help avoid several IE-specific bugs.
+*/
+.twoColHybRtHdr #mainContent {
+	margin-top: 0;
+	margin-right: 210px;
+	margin-bottom: 0;
+	margin-left: 75px;
+	padding-top: 40px;
+	text-align: left;
+	color: #333;
+	font-weight: normal;
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 10px;
+} 
+
+.spanpattern {
+	margin-top: 0;
+	margin-right: 210px;
+	margin-bottom: 0;
+	margin-left: 75px;
+	padding-top: 27px;
+}
+.twoColHybRtHdr #footer {
+	padding-top: 0;
+	padding-right: 10px;
+	padding-bottom: 0;
+	padding-left: 0px;
+	background-color: #FFF;
+	text-align: left;
+} 
+.twoColHybRtHdr #footer p {
+	margin: 0; /* padding on this element will create space, just as the the margin would have, without the margin collapse issue */
+	text-align: left;
+	padding-top: 10px;
+	padding-right: 0;
+	padding-bottom: 10px;
+	padding-left: 75px;
+}
+
+
+/* Miscellaneous classes for reuse */
+.fltrt { /* this class can be used to float an element right in your page. The floated element must precede the element it should be next to on the page. */
+	float: right;
+	margin-left: 8px;
+}
+.fltlft { /* this class can be used to float an element left in your page */
+	float: left;
+	margin-right: 8px;
+}
+.clearfloat { /* this class should be placed on a div or break element and should be the final element before the close of a container that should fully contain a float */
+	clear:both;
+    height:0;
+    font-size: 1px;
+    line-height: 0px;
+}
+.links {
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 10px;
+	font-style: normal;
+	line-height: 20px;
+	color: #09C;
+}
+.twoColHybRtHdr #container #mainContent p {
+	font-family: 'gotham';
+	font-size: 16px;
+	line-height: 20px;
+	color: #333;
+}
+.twoColHybRtHdr #container #mainContent h2 {
+	font-family: 'museo700', sans-serif;
+	color: #444;
+	font-size: 26px;
+	/*font-weight: 700;*/
+	letter-spacing: 1px;
+}
+
+.twoColHybRtHdr #container #mainContent h1 {
+	font-family: 'museo900', sans-serif;
+	color: #444;
+	letter-spacing: 1px;
+	/*font-weight:900;*/
+	font-size: 32px;	
+}
+
+.twoColHybRtHdr #container #mainContent h3 {
+	font-family: 'museo500', sans-serif;
+	color: #444;
+	font-size: 20px;
+	letter-spacing: 1px;
+	/*font-weight: 700;*/
+}
+
+
+.twoColHybRtHdr #container #mainContent h4 {
+	font-family: 'museo300', sans-serif;
+	color: #444;
+	font-size: 16px;
+	letter-spacing: 1px;
+	/*font-weight: 400;*/
+}
+
+.twoColHybRtHdr #container #mainContent a:link{
+	color: #9E9A98;
+	text-decoration: none;
+}
+
+.twoColHybRtHdr #container #mainContent a:active{
+	color: #9E9A98;
+}
+
+.twoColHybRtHdr #container #mainContentr a:visited{
+	color: #9E9A98;
+}
+
+
+.twoColHybRtHdr #container #mainContent a:hover{
+	color: #E11F00;
+};
+
+
+.grid {
+	clear: none;
+	margin-bottom: 0px;
+	margin-top: 0px;
+	margin-right: 15px;
+	margin-left: 0px;
+	height: 107px;
+	width: 245px;
+	padding: 0px;
+}
+
