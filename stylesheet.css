@@ -74,7 +74,7 @@ body  {
 	padding-right: 0px;
 	margin-top: 50px;
 	background-color: #FFF;
-	font-family: 'museo900', sans-serif;
+	font-family: 'archerpro', sans-serif;
 	font-size: 50px;
 
 
@@ -87,7 +87,7 @@ body  {
 
 .twoColHybRtHdr #headcontent {
 	background-color: #FFF;
-	font-family: 'museo700', sans-serif;
+	font-family: 'archerprolight', sans-serif;
 	font-size: 50px;
 }
 
@@ -110,7 +110,7 @@ body  {
 .twoColHybRtHdr #header h4 {
 	color: #666;
 	font-family: 'museo100'; 
-	font-size: 14px;
+	font-size: 15px;
 	margin: 0px;
 	letter-spacing: 1px;
 }
@@ -221,7 +221,7 @@ body  {
 	color: #09C;
 }
 .twoColHybRtHdr #container #mainContent p {
-	font-family: 'gotham';
+	font-family: 'museo300';
 	font-size: 16px;
 	line-height: 20px;
 	color: #333;
