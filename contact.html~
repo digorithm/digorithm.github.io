@@ -69,10 +69,20 @@
   <div id="mainContent">
     
     <p>
-      You can email me at <b>contatodigo@hotmail.com</b>
-    </p>
-    <p>
-      Or, if you prefer, just drop me a tweet at my <b><a href="http://www.twitter.com/digorithm">twitter</a></b>.
+      <!-- DC Contact Form Start -->
+  <form action="" class="tsc_form_contact_light">
+    <label for="name">Name <span>(required)</span></label>
+    <input type="text" name="name" class="form-input" required />
+    <label for="email">Email <span>(required)</span></label>
+    <input type="email" name="email" class="form-input" required />
+    <label for="subject">Subject <span>(optional)</span></label>
+    <input type="text" name="subject" class="form-input" />
+    <label for="message">Message <span>(required)</span></label>
+    <textarea name="message" class="form-input" required></textarea>
+    <input class="form-btn" type="submit" value="Send Message" />
+  </form>
+<!-- DC Contact Form End -->
+
     </p>
 
   </div>
