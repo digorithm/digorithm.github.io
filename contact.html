@@ -65,7 +65,7 @@
     <!-- end #header -->
   </div>
 
-  <div id="mainContent">
+  <div id="mainContent" class="hidden">
     
     <p>
       You can email me at <b>contatodigo@hotmail.com</b>
@@ -92,17 +92,16 @@
 <script>
 $(document).ready(function(){
     // to fade in on page load
-    $("p").css("display", "none");
-    $("p").fadeIn(800); 
-    // to fade out before redirect
-    $('a').click(function(e){
+   $("#mainContent").fadeIn(1500).removeClass("hidden");
+   $('a').click(function(e){
         redirect = $(this).attr('href');
         e.preventDefault();
-        $('p').fadeOut(400, function(){
+        $('#mainContent').fadeOut(500, function(){
             document.location.href = redirect
         });
     });
 })
+
 </script>
 
 <script>

@@ -67,7 +67,7 @@
     <!-- end #header -->
   </div>
 
-  <div id="mainContent">
+  <div id="mainContent" class="hidden">
     
     <p>Hey, guys! I'm a <b style="font-family:'gothambold';">Computer Science</b> Student, <img src="images/me.gif" width="200" height="200" align="right" style="padding-top:5px;" /> I'm the current President of the Academic Directory of Computer Science at Salvador University (A Brazilian university), I'm extremely interested in <i>Software Engineering, Artificial Intelligence and Security</i>. Since I was young I have a passion for mathematics and technology, so i, undoubtely, took this path and never looked back <i>(still happy about it, by the way)</i>.</p>
 
@@ -103,17 +103,16 @@
 <script>
 $(document).ready(function(){
     // to fade in on page load
-    $("p").css("display", "none");
-    $("p").fadeIn(800); 
-    // to fade out before redirect
-    $('a').click(function(e){
+   $("#mainContent").fadeIn(1500).removeClass("hidden");
+   $('a').click(function(e){
         redirect = $(this).attr('href');
         e.preventDefault();
-        $('p').fadeOut(400, function(){
+        $('#mainContent').fadeOut(500, function(){
             document.location.href = redirect
         });
     });
 })
+
 </script>
 
 <script>
