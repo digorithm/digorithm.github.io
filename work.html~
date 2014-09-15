@@ -42,10 +42,9 @@
 
     
     <tr>
-      <h4>-------------------------------------------------------------------------------------------------------------------------------</h4>
     </tr>
     <tr>
-      <h3>
+      <h3 style="padding-top:10px;">
         <!--<a href="./HomePage.html"><img src="./images/back.png" width="15"></a>
               <tr>
         <td>&nbsp;</td>
@@ -65,16 +64,19 @@
     
 
     <p><h1>Research</h1></p>
-    <p>-------------------------------------------------------------------------------------------</p>
+    <hr/>
       <p>
-        <h2>Research Scientist
+        <h2>Assistant Research Scientist
           <h3>
-            at <a href="http://www.fapesb.ba.gov.br/#">FABESB</a>/<a href="http://dgp.cnpq.br/dgp/espelhogrupo/2178422134545563">Software Engineering and Applications Group (SEAG)</a>
+            at <a href="http://www.fapesb.ba.gov.br/#">FABESB</a>/<a href="http://www.tdresearchteam.com/?page_id=11">Technical Debt Research Team (TDRT)</a>
             <h4>
               <font color="#E11F00">2014 - now</font>
             </h4>
           </h3>
         </h2>
+      </p>
+      <p>
+        Working in a project of the University of Maryland Baltimore County, Federal University of Bahia, University of Salvador, SENAI-CIMATEC and the Fraunhofer Center for Experimental Software Engineering.
       </p>
       <p>
         I'm currently researching about Software Engineering, Technical Debt, Artificial Intelligence (mostly on 
@@ -87,7 +89,7 @@
       <div class="spanpattern"></div>
 
     <p><h1>Industry</h1></p>
-    <p>-------------------------------------------------------------------------------------------</p>
+    <hr/>
       <p>
         <h2>Software Engineer (Internship) 
           <h3>
@@ -104,7 +106,7 @@
         written in classic ASP <i>(HTML, asp code, sql code, javascript code... all in the same file, cool, ham?)</i>
       </p>
       <p>
-        Also, I worked on two big projects for the <b>Brazilian Government Policy</b>, which was a huge experience
+        Also, I worked on two big projects for the <b>Brazilian Government Police</b>, which was a huge experience
         dealing with complex and extremely large systems.
       </p>
 
@@ -120,11 +122,11 @@
       </p>
       <p>
         Worked developing medium size enterprise software systems with C#/ASP.net. Participated in 
-        analysis phase, modeling phase and development phase over Scrum metholody.
+        analysis phase, modeling phase and development phase over Scrum methodology.
       </p>
       <div class="spanpattern"></div>      
       <p><h1>Teaching Assitantship</h1></p>
-      <p>-------------------------------------------------------------------------------------------</p>
+      <hr/>
       <p>
         <h2>Programming Language
           <h3>
@@ -166,8 +168,8 @@
         </h2>
       </p>
       <div class="spanpattern"></div>
-      <p><h1>Software Projects</h1></p>
-      <p>-------------------------------------------------------------------------------------------</p>
+      <!--<p><h1>Software Projects</h1></p>
+      <p>-------------------------------------------------------------------------------------------</p>-->
       
       
 
@@ -200,5 +202,16 @@ $(document).ready(function(){
         });
     });
 })
+</script>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-38327934-3', 'auto');
+  ga('send', 'pageview');
+
 </script>
 <!-- InstanceEnd --></html>
