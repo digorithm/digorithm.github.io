@@ -78,7 +78,7 @@ font-style: normal;
 	margin-left: -150px;
 	padding-right: 0px;
 	margin-top: 50px;
-	background-color: #EEEEEE;
+	background-color: #f3f3f3;
 	font-family: 'archerpro', sans-serif;
 	font-size: 50px;
         width:350px;
@@ -87,14 +87,14 @@ font-style: normal;
 } 
 .twoColHybRtHdr #header table {
 	line-height: 0px;
-        background-color:#EEEEEE;
+        background-color:#f3f3f3;
         width:350px;
 	height: 0px;
 
 } 
 
 .twoColHybRtHdr #headcontent {
-	background-color: #EEEEEE;
+	background-color: #f3f3f3;
 	font-family: 'archerpro', sans-serif;
 	font-size: 50px;
         width:350px;
@@ -261,7 +261,7 @@ i	line-height: 20px;
 }
 
 .twoColHybRtHdr #container #sidebar{
-	background-color:#EEEEEE;
+	background-color:#f3f3f3;
 	height: 700px;
 	width: 345px;
 	float:left;
@@ -368,6 +368,6 @@ color:#E11F00;
         float:left;
         height:100vh;
         width:400px;
-        background-color: #EEEEEE;
+        background-color: #f3f3f3;
 
 }
