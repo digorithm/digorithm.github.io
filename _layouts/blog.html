@@ -41,9 +41,9 @@
 </head>
 
 <body class="twoColHybRtHdr">
-
+        <div class="sidebar" style="height:100%;">
 <div id="container"><!-- InstanceBeginEditable name="headerNav" -->
-  <div id="header" style='margin-top:-30px;'>
+  <div id="header" style='margin-top:-30px;padding-bottom:25px;'>
     
       <tr>
         <h1><a href="../../../../../index.html">Rodrigo Araújo</a></h1>
@@ -70,7 +70,7 @@
     <!-- end #header -->
   </div>
   
-  <div style="width:330px;" id="sidebar">
+  <div style="width:400px; margin-top:0px;" id="sidebar">
        <ul>
                <hr/>
           <li style="font-size:22px;"><a href="/archives/">Archives</a></li>
@@ -78,7 +78,7 @@
       </ul>
 </div>  
 
-  <div style="margin-left:140px;margin-top:-135px;" id="mainContent" class="hidden">
+  <div style="margin-left:180px;margin-top:-158px;" id="mainContent" class="hidden">
     {{ title }}
     {{ content }}
 
@@ -113,13 +113,13 @@ $(window).scroll(function() {                  // assign scroll event listener
         $('#sidebar').css({                      // scroll to that element or below it
             position: 'fixed',
             top: '0',
-	    'margin-top':'10px',
+	    'margin-top':'0px',
             'left': '200'
         });
     } else {                                   // apply position: static
         $('#sidebar').css({                      // if you scroll above it
             position: 'static',
-            'margin-top': '30px',
+            'margin-top': '0px',
             'left':'200px'
         });
     }
