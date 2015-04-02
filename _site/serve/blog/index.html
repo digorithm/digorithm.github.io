@@ -1,0 +1,860 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><!-- InstanceBegin template="/Templates/designTemplate.dwt" codeOutsideHTMLIsLocked="false" -->
+<head>
+<style type="text/css">
+  .centeredImage
+    {
+    text-align:center;
+    margin-top:0px;
+    margin-bottom:0px;
+    padding:0px;
+    }
+</style>
+
+<meta name="keywords" content="">
+
+<meta name="description" content="">
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<!-- InstanceBeginEditable name="doctitle" -->
+<title>Rodrigo Araújo ::: Software Engineer / Computer Scientist</title>
+
+
+<!-- InstanceEndEditable -->
+
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<link href="../../../../../css/stylesheet.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="../../../../../css/styles/github.css">
+<script src="../../../../../highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script><!--[if IE]>
+
+<style type="text/css"> 
+/* place css fixes for all versions of IE in this conditional comment */
+.twoColHybRtHdr #sidebar1 { padding-top: 30px; }
+.twoColHybRtHdr #mainContent { zoom: 1; padding-top: 15px; }
+/* the above proprietary zoom property gives IE the hasLayout it may need to avoid several bugs */
+</style>
+<![endif]-->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+</head>
+
+<body class="twoColHybRtHdr">
+        <div class="sidebar" style="height:100%;">
+<div id="container"><!-- InstanceBeginEditable name="headerNav" -->
+  <div id="header" style='margin-top:-30px;padding-bottom:25px;'>
+    
+      <tr>
+        <h1><a href="../../../../../index.html">Rodrigo Araújo</a></h1>
+      </tr>
+        <h4>Software Engineer & Computer Scientist</h4>
+
+    
+    <tr>
+    </tr>
+    <tr>
+      <h3 style="padding-top:10px; margin-left:2px;">
+        <!--<a href="./HomePage.html"><img src="./images/back.png" width="15"></a>
+              <tr>
+        <td>&nbsp;</td>
+      </tr><-->
+
+        <a href="/blog/" onclick="">BLOG    &nbsp;&nbsp;</a> 
+        <a href="/about/">ABOUT    &nbsp;&nbsp;</a>
+        <a href="/work/">WORK    &nbsp;&nbsp;</a>
+        <a href="/contact/">CONTACT    &nbsp;&nbsp;</a>
+      </h3>
+    </tr>
+    
+    <!-- end #header -->
+  </div>
+  
+  <div style="width:390px; margin-top:0px;" id="sidebar">
+       <ul>
+               <hr/>
+          <li style="font-size:22px;"><a href="/archives/">Archives</a></li>
+          <hr/>
+      </ul>
+</div>  
+
+  <div style="margin-left:180px;margin-top:-158px;" id="mainContent" class="hidden">
+    
+    <ul>
+  
+    <li>
+	<h1>
+      <a href="/2015/03/31/using-python-and-AI-to-predict-types-of-wine/">
+	
+	<div style="line-height:35px;color:#444;">Using Python and AI to predict types of wine</div>
+	
+	</a>
+	</h1>
+	<div style="margin-top:-15px;color:#E11F00;">31 March 2015</div>
+        &nbsp;
+      <p><html>
+        <p>
+                I've been doing AI/Machine Learning at Jusbrasil recently, and it's being pretty challenging due to the huge amount of data that we have to deal with, I'm talking about millions users' data, so cleaning this data and making predictions and classifications in an acceptable time demands a nice AI architecture.</p>
+        <p>
+                That said I can say that I'm extremely thankful for a few technologies that are helping me go through this challenge <em>(and the pain of cleaning this amount of data)</em>: Python, Scikit Learn, Pandas, and the whole stack that the Scikit Learn use, such as NumPy, SciPy, matplotlib and few others.</p>
+
+        <p>
+        So, this inspired me to <em>spread the word</em>, so I'll be showing here a simple example of Machine Learning using Python, Pandas and Scikit Learn to predict, given a great amount of data/features about wines, if a wine is white or red.
+        </p>
+
+        <p>
+        <strong>disclaimer:</strong><em> I'm assuming that you already have a small knowledge on the ideas of the machine learning and its mathematical aspects (altought not necessary to implement the code that I'll show here), this is just a simple introduction to scikit learn and its power, so the example is pretty simple and straight foward, if you just want the code, here it is: <a href="https://gist.github.com/digorithm/ad742f9314f76e732888">github link</a> </em>
+        </p>
+&nbsp;
+        <h2>What's Pandas?</h2>
+        <p>Pandas is an amazing library for data manipulation, it makes the process of dealing with data very easy and straight foward, we can work with CSV, JSON and plenty other formats without struggling to manipulate the data, give it five minutes and skim their docs, it will definitely worth it! </p>
+&nbsp;
+        <h2>Fetching the data</h2>
+
+        <p>
+                Let's start fetching the data with Pandas, to do so, just import Pandas and read the CSV file, just like that:
+        </p>
+
+        <pre>
+        <code class="hljs python">
+import pandas as pd
+        
+reds = pd.read_csv('winequality-red.csv', sep=';')
+whites = pd.read_csv('winequality-white.csv', sep=';')
+        </code>
+        </pre>
+        <p style="margin-top:-20px;">
+        We can see how the data is structured by doing a few commands:
+        </p>
+        <pre>
+        <code class="hljs python">
+
+reds.values[0:6]
+
+        </code>
+        </pre>
+        <p style="margin-top:-40px;">As output, we have the first 5 rows of the red wine's data</p>
+        <pre>
+        <code class="hljs">
+
+array([[7.4, 0.7, 0.0, 1.9, 0.076, 11.0, 34.0, 0.9978, 3.51, 0.56, 9.4, 5],
+       [7.8, 0.88, 0.0, 2.6, 0.098, 25.0, 67.0, 0.9968, 3.2, 0.68, 9.8, 5],
+       [7.8, 0.76, 0.04, 2.3, 0.092, 15.0, 54.0, 0.997, 3.26, 0.65, 9.8, 5],
+       [11.2, 0.28, 0.56, 1.9, 0.075, 17.0, 60.0, 0.998, 3.16, 0.58, 9.8,6],
+       [7.4, 0.7, 0.0, 1.9, 0.076, 11.0, 34.0, 0.9978, 3.51, 0.56, 9.4, 5],
+       [7.4, 0.66, 0.0, 1.8, 0.075, 13.0, 40.0, 0.9978, 3.51, 0.56, 9.4, 5]], 
+dtype=object)
+        </code>
+        </pre>
+        <p>Or we just use a function from Pandas that describe very well our data</p>
+        <pre>
+        <code class="hljs python">
+
+reds.head()
+
+        </code>
+        </pre>
+        <pre style="margin-top:-65px;">
+        <code class="hljs">
+       <class 'pandas.core.frame.DataFrame'>
+Int64Index: 5 entries, 0 to 4
+Data columns:
+fixed acidity           5  non-null values
+volatile acidity        5  non-null values
+citric acid             5  non-null values
+residual sugar          5  non-null values
+chlorides               5  non-null values
+free sulfur dioxide     5  non-null values
+total sulfur dioxide    5  non-null values
+density                 5  non-null values
+pH                      5  non-null values
+sulphates               5  non-null values
+alcohol                 5  non-null values
+quality                 5  non-null values
+dtypes: float64(11), int64(1), object(1)
+        </code>
+        </pre>
+
+        <h2> Understanding our data </h2>
+        <p>
+        Matplotlib gives you many ways to plot our data into graphs so we can understand what is going on with the data so we can choose the best model/algorithm for the given scenario,
+        </p>
+        <p>
+        For instance, let's take a look on the relation between the red wines and its fixed acidity 
+        </p>
+        <pre>
+        <code class="python hljs">
+x = plt.subplots(figsize=(10, 5))
+plt.plot(reds.index, reds.get("fixed acidity"), 'ro')
+ax.set_title('Wines vs fixed acidity')
+ax.set_xlabel('red wine index')
+ax.set_ylabel('Fixed Acidity')
+plt.show()
+        </code>
+        </pre>
+        <img src="/images/mlproblem.png" style="margin-left:-55px;margin-top:-20px;" width=800 height=400/>
+      &nbsp;
+        <h2>Preparing the Data for classification</h2>
+        <p>
+        Now we're going to add a new feature/variable to our data, which is our target variable, the <em>Y</em>, that will be telling if the wine from our dataset is white or red
+        </p>
+        <pre>
+        <code class="python hljs">
+reds['kind'] = 'red'
+whites['kind'] = 'white'
+        </code>
+        </pre>
+
+        <p style="margin-top:-20px;">
+        We need to get all of our feature into a vector called X, that will be set into our algorithm, right? And we need to get all our targets (white or red) and set into a Y variable
+        </p>
+        <pre>
+        <code class="python hljs">
+wines = reds.append(whites, ignore_index=True)
+X = wines.ix[:, 0:-1]
+y = wines.kind
+        </code>
+        </pre>
+        <p style="margin-top:-20px;">
+        Notice that we're merging both dataset together, the one with the red wines and the one with the white wines, so we can send them together to the algorithm. Now we're going to binarize the labels 'white' and 'red', so the mathematical model can use it. It's pretty simple
+        </p>
+        <pre>
+        <code class="python hljs">
+y = y.apply(lambda val: 0 if val == 'white' else 1)
+        </code>
+        </pre>
+
+        <h2>The algorithm</h2>
+        <p>
+        Now that we have our data well structured and we do understand it, we can start looking for an algorithm to use. A good algorithm for our scenario is a simple <strong>Logistic Regression</strong>, that will return a model that we'll use to make our predictions/classification. The mathematical linear model that will use is the following:
+        </p>
+        <span style="font-size:16px;">
+        $$
+        f(w) := \lambda\, R(w) + \frac1n \sum_{i=1}^n L(w;x_i,y_i) \label{eq:regPrimal}\
+        $$
+        </span>
+
+        <p>In addition with the loss function defined by the logistic loss</p>
+        <span style="font-size:16px;">
+        $$
+        L(w;x,y) :=  \log(1+\exp( -y w^T x ))
+        $$
+        </span>
+
+        <p>The Scikit learn provides an awesome library with an amazingly ease of use, so that we don't have to implement the whole model from scratch. All we have to do is create a object from the model we want to use, understand how it works (at least understand how to use its interface to do what we want). In this case we will be using the <em>cross validation</em> object, which is another discussion for another time, but, in a few words, it will divide our dataset and test the result with all parts of the divided dataset, this way we make sure that we're validating the quality of the result. </p>
+        <pre>
+        <code class="python hljs">
+clf = LogisticRegression()
+scores = cross_val_score(clf, X, y, cv=5)
+print scores.mean(), scores.std()
+        </code>
+        </pre>
+        <p>And as the result we get:</p>
+        <pre>
+        <code class="python hljs">
+0.981376321334 0.00638795038332
+        </code>
+        </pre>
+        <p style="margin-top:-25px;">
+        And that's the exactly the precision of the algorithm over the given dataset, <strong>98% of precision</strong>, which is quite good!
+        </p>
+
+</html>
+
+
+</p>
+    </li>
+    <hr/>
+    &nbsp;
+  
+    <li>
+	<h1>
+      <a href="/2015/01/09/Making-Your-Machine-Think-Learn-And-Predict--Gradient-Descent-Algorithm-in-Java/">
+	
+	<div style="line-height:35px;color:#444;">Making your machine think, learn and predict - Gradient Descent Algorithm in Java</div>
+	
+	</a>
+	</h1>
+	<div style="margin-top:-15px;color:#E11F00;">9 January 2015</div>
+        &nbsp;
+      <p><html>
+
+
+<h2>How can we make a machine learn from data?</h2>
+
+<p>Then, how can we make the machine predicts things based on that learned data? Those are the question answered by one of the most classic Machine Learning Algorithms, the <strong>Gradient Descent Algorithm</strong>, from a Mathematical-Statistical side it’s called <strong>Univariate Linear Regression</strong>.</p>
+
+
+<p>This is one of the tools of the Machine Learning toolbox, and what it tries to do is to model a relationship between a scalar dependent variable Y and a explanatory variable X.</p>
+&nbsp;
+
+<h2>in Layman’s term…</h2>
+
+<p>Let’s suppose you have a few points distributed in a Graph, so you already know that in a point A you have a well defined X and Y, which means, if you input X, your output will be Y, and in a point B you have a well defined X’ and Y’ as well. But, thing is, if a point emerge between A and B, and you only have the X…  what will be the Y <em>(the output)</em>?</p>
+
+<p>What this algorithm does is: <strong>It tries to predict this Y value, based on the previous data</strong>! Amazing, right?</p>
+
+<p>At the end of the execution, you’ll have a full trend line that you can use to predict values! just like the image below.</p>
+<div align=center>
+<img src="/images/linearRegression.png" width=500 height=400/>
+</div>
+
+<h2>The Theory Behind It</h2>
+
+<p>I’ll cover a few theories about this algorithm here, but, it won’t be complete, as this demand a great coverage of mathematical material that if I would write it all here, It would be a <em>long, long</em>, <strong>very</strong> <em>long</em> post. So I’m assuming that you’re already familiar with Calculus <em>(Sums, Partial Derivatives)</em>, Statistics and Discrete Mathematics.</p>
+
+<p>So, our goal here is to <strong>fit the best straight line in our initial data</strong>, right?</p>
+
+<p>Thus, we need something to represent this straight line, which will be our hypothesis function:</p>
+<span style="font-size:169%;">
+$$
+
+h_{\Theta}(X) = \Theta_{0} + \Theta_{1}x
+
+$$
+</span>
+
+<p>Where this \( \Theta_{0} \) and \( \Theta_{1} \) are the parameters of the function, and <strong>finding the best parameters for this function is what is going to give us the correct straight line to plot on our data</strong>.</p>
+
+<p>Here’s an example of what we're trying to do, which is, fit the best straight line in the data:</p>
+
+<div align=center>
+        <img src="/images/Linear-regression.svg"/>
+</div>
+
+<p>So what we want to do is to find a \( \Theta_{0} \) and \( \Theta_{1} \) so our Hypothesis outputs can be very close to the real Y output.</p>
+<p>Formally we want:<p>
+<span style="font-size:160%;">
+$$
+\underset{\Theta_{0}\Theta_{1}}{min}(h_{\Theta}(x) - y)^2
+$$
+</span>
+
+<p>So we want <strong>minimize</strong> \( \Theta_{0} \) and \( \Theta_{1} \) so the difference between the <strong>Hypothesis</strong> and the <strong>real output</strong> is minimal.</p>
+
+<p><strong>But we want it for every point in our data</strong>, which is \(x(i)\) <em>(which is the i-th x of our data)</em>, so we want the <strong>sum of this average</strong>, which is, formally:</p>
+
+<span style="font-size:199%;">
+$$
+\underset{\Theta_{0}\Theta_{1}}{min}\,\frac{1}{2m} \sum_{i=1}^{m} (h_{0}(x^{(i)}) - y^{(i)})^2
+$$
+</span>
+
+<p>And we’re going to call this function <strong>Cost Function</strong>, with the following notation:</p>
+<span style="font-size:160%;">
+$$
+J(\Theta_{0}, \Theta_{1}) = \,\frac{1}{2m} \sum_{i=1}^{m} (h_{0}(x^{(i)}) - y^{(i)})^2
+$$
+</span>
+
+<p>So, our goals is to <strong>minimize this cost function</strong>:</p>
+
+<span style="font-size:160%;">
+$$
+\underset{\Theta_{0}\Theta_{1}}{min}\,\, J(\Theta_{0}, \Theta_{1})
+$$
+</span>
+
+
+<p>This cost function is also called <a href="http://en.wikipedia.org/wiki/Mean_squared_error">Square Error Function</a>.</p>
+
+<p><strong>Now, the gradient descent algorithm</strong></p>
+
+<p>With our cost function built, we need to “keep” finding values for \( \Theta_{0} \) and \( \Theta_{1} \) so we can reach our ideal trend line. So, basically:</p>
+
+<p>1. We start with some \( \Theta_{0} \) and \( \Theta_{1} \)</p>
+<p>2. keep changing \( \Theta_{0} \) and \( \Theta_{1} \) to reduce our cost function \( J(\Theta_{0}, \Theta_{1}) \), until we find the minimum.</p>
+
+<p>That’s quite simple and intuitive, right? There’s a lot of intuitive explanation and more visual examples of what this algorithm is doing in the <a href="https://class.coursera.org/ml-007/">machine learning course taught by Andrews Ng (From Stanford)</a>.</p>
+
+
+<p>What this algorithm will be doing is: partially derive our cost function for \( \Theta_{0} \) and \( \Theta_{1} \) simultaneously, so we can find the minimum value for them, with every iteration updating our \( \Theta_{0} \) and \( \Theta_{1} \) with their new value!</p>
+
+<p><em>- Meh, talk is cheap show me the math!</em></p>
+
+<p>Formally, the algorithm is:</p>
+
+<span style="font-size:160%;">
+$$
+repeat \, until  \, convergence\,\{
+\\
+\,\,\,\,\,\,\,\,\,\,\,\, \Theta_{j} := \Theta_{j} - \alpha \frac{\partial }{\partial \Theta_{j}} \,\, J(\Theta_{0}, \Theta_{1})
+
+\\ \} \,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,
+
+$$
+</span>
+
+<p><em><strong>Make sure that this will run for j = 0 and j = 1.</em></strong></p>
+
+<p>But, pay attention, this is the generic version, the \( \Theta_{j} \) represent both \( \Theta_{0} \) and \( \Theta_{1} \).</p>
+
+<p>What the algorithm is saying is that we’ll be doing this procedure to \( \Theta_{0} \) and \( \Theta_{1} \) at the same time!</p>
+
+<p>So, we can put it in this way:</p>
+<span style="font-size:160%;">
+$$
+repeat \, until  \, convergence\,\{
+\\
+\Theta_{0} := \Theta_{0} - \alpha \frac{\partial }{\partial \Theta_{0}} \,\, J(\Theta_{0}, \Theta_{1})
+\\
+\Theta_{1} := \Theta_{1} - \alpha \frac{\partial }{\partial \Theta_{1}} \,\, J(\Theta_{0}, \Theta_{1})
+
+\\ \} \,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\
+
+
+$$
+</span>
+
+<p>Also, we can expand the <strong>Cost Function</strong> that is being derived, doing this, it will be exactly what I’ll be putting into code soon, so, our <strong>final algorithm</strong> is:</p>
+<span style="font-size:160%;">
+$$
+repeat \, until  \, convergence\,\{
+\\
+\Theta_{0} := \Theta_{0} - \alpha \frac{\partial }{\partial \Theta_{0}} \,\, \Big (\frac{1}{2m} \sum_{i=1}^{m} (h_{\Theta}(x^{(i)}) - y^{(i)})^2 \Big) 
+\\
+\Theta_{1} := \Theta_{1} - \alpha \frac{\partial }{\partial \Theta_{1}} \,\, \Big (\frac{1}{2m} \sum_{i=1}^{m} (h_{\Theta}(x^{(i)}) - y^{(i)})^2 \Big)
+
+\\ \} \,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\
+
+$$
+</span>
+
+
+<p><strong>Now it’s time to code all of it!</strong></p>
+
+<p>First things first, we’ll be using <a href="http://code.google.com/p/jmathplot/">Google’s JMathPlot</a> to plot graphs using Java and Swing to use its JFrame, we shall start with our class to represent our <strong>Initial Data</strong>, which will be the <strong>Training Set</strong>.</p>
+
+
+<pre>
+<code class="hljs java">
+
+import javax.swing.JFrame;
+import org.math.plot.*;
+
+public class InitialData{
+        public static double[] x = {2, 4, 6, 8};
+        public static double[] y = {2, 5, 5, 8};
+
+
+        public void plotData(){
+                Plot2DPanel plot = new Plot2DPanel();
+                plot.addScatterPlot("X-Y", this.x, this.y);
+                JFrame frame = new JFrame("Original X-Y Data");
+                frame.setContentPane(plot);
+                frame.setSize(600, 600);
+                frame.setVisible(true);
+        }
+}
+
+</code>
+</pre>
+
+<p>To try out the data plotting, create a main class and call <em>plotData()</em> from <strong>InitialData.java</strong>, so we can have this:</p>
+<div align=center>
+<img src="/images/example-plot.png" width=400 height=400/>
+</div>
+
+<p>Now we’re going to take our first steps on writing the <strong>GradientDescent.java</strong>, we must be very careful here.</p>
+
+<p>Let’s start with the main settings and parameters of it:</p>
+
+<pre>
+<code class="hljs java">
+
+import javax.swing.JFrame;
+import org.math.plot.*;
+
+public class GradientDescent{
+        private double theta0;
+        private double theta1;
+
+        private int trendline;
+
+        // Algorithm settings
+    double alpha = 0.01;  // learning rate
+    double tol = 1e-11;   // tolerance to determine convergence
+    int maxiter = 9000;   // maximum number of iterations in case convergence is not reached
+    int dispiter = 100;   // interval for displaying results during iterations
+    int iters = 0;
+
+    //track of results
+    double[] theta0plot = new double[maxiter+1];
+    double[] theta1plot = new double[maxiter+1];
+    double[] tplot = new double[maxiter+1];
+
+    InitialData initial_data;
+
+    Plot2DPanel plot;
+
+    public GradientDescent(InitialData id){
+                //initial guesses
+        this.theta0 = 0;
+        this.theta1 = 0;
+        this.initial_data = id;
+
+        plot = new Plot2DPanel();
+        plot.addScatterPlot("X-Y", initial_data.x, initial_data.y);
+        JFrame frame = new JFrame("Final X-Y Data");
+        frame.setContentPane(plot);
+        frame.setSize(600, 600);
+        frame.setVisible(true);
+    }
+[...]
+
+</code>
+</pre>
+
+
+
+<p>Now let me explain a few details of this part:</p>
+
+<p><strong>Alpha</strong> is the <strong>Learning Rate</strong>, it’s a <em>dangerous variable</em>, it’s used to set the size of the step that the algorithm will take while trying to find the \( \Theta_{0} \) and \( \Theta_{1} \), that’s the learning rate of the algorithm. If Alpha is <strong>too low</strong>, the algorithm can be very slow, although very precise, if Alpha is <strong>higher</strong>, it will be taking <strong>larger steps</strong>, which can be <strong>faster</strong>, or <strong><style="font-color:red;">dangerous</style></strong>, causing the algorithm to <strong>DIVERGE</strong>, which, <em>trust me</em>, you don’t want this! <em>(Andrew Ng explain this part very well in its course)</em></p>
+
+
+<p>The variable <strong>TrendLine</strong> is what we’ll use to plot the straight line which is our main goal.</p>
+
+<p>The <strong>tol</strong> variable is our safe move in case of a dangerous convergence, which means, in case of convergence, it will stop the execution.</p>
+
+<p>The other variables and objects in this part are very intuitive to understand, it’s auto explainable! <em>(forgive if i’m wrong, just say something and I’ll put more detail on that)</em>.</p>
+
+<p>About the Constructor, we’re saying that our initial guesses for \( \Theta_{0} \) and \( \Theta_{1} \) is 0. The rest is just data plotting.</p>
+
+<p><strong>next: our Hypothesis Function</strong> <em>(that will be doing exactly as the model that I did show above)</em></p>
+
+
+<pre>
+<code class="hljs java">
+public double hypothesisFunction(double x){
+        return this.theta1*x + theta0;
+    }
+</code>
+</pre>
+
+<p>Now, our two function to derive our \( \Theta \), again, it will be doing exactly the same as the mathematical model, there’s no magic!</p>
+
+<pre>
+<code class="hljs java">
+public double deriveTheta1(){
+        double sum = 0;
+
+        for (int j=0; j&lt;initial_data.x.length; j++){
+                sum += (initial_data.y[j] - hypothesisFunction(initial_data.x[j])) * initial_data.x[j];
+        }
+        return -2 * sum / initial_data.x.length;
+    }
+
+    public double deriveTheta0(){
+        double sum = 0;
+
+        for (int j=0; j&lt;initial_data.x.length; j++) {
+                sum += initial_data.y[j] - hypothesisFunction(initial_data.x[j]);
+        }
+        return -2 * sum / initial_data.x.length;
+
+    }
+</code>
+</pre>
+
+<p>Now, the <strong>Gradient Descent Algorithm</strong> <em>per se</em>, making use of the functions above:</p>
+
+<pre>
+<code class="hljs java">
+
+public void execute(){
+        do {
+
+                this.theta1 -= alpha * deriveTheta1();
+                this.theta0 -= alpha * deriveTheta0();
+
+                //used for plotting
+                tplot[iters] = iters;
+                theta0plot[iters] = theta0;
+                theta1plot[iters] = theta1;
+                iters++;
+
+                if (iters % dispiter == 0){
+                        addTrendLine(plot, true);
+
+                }
+
+                if (iters &gt; maxiter) break;
+        } while (Math.abs(theta1) &gt; tol || Math.abs(theta0) &gt; tol);
+        plot.addScatterPlot("X-Y", initial_data.x, initial_data.y);
+        System.out.println("theta0 = " + this.theta0 + " and theta1 = " + this.theta1);
+    }
+
+</code>
+</pre>
+
+<p>Note that it does <em>almost</em> exactly the same as the mathematical model of the Gradient Descent demonstrated above, the difference is only a few details, such as the <em>if</em> and <em>while</em> to verify convergence or divergence <em>(which is, if it reached the iteration’s limit)</em></p>
+
+<p>Next we have the <strong>addTrendLine</strong> function, used to keep plotting our straight line as it will become more updated.</p>
+
+<pre>
+<code class="hljs java">
+public void addTrendLine(Plot2DPanel plot, boolean removePrev){
+        if (removePrev){
+                plot.removePlot(trendline);
+        }
+        double[] yEnd = new double[initial_data.x.length];
+        for (int i=0; i&lt;initial_data.x.length; i++)
+                yEnd[i] = hypothesisFunction(initial_data.x[i]);
+        trendline = plot.addLinePlot("final", initial_data.x, yEnd);
+    }
+</code>
+</pre>
+
+<p>And now we have an extra, it’s a function to store and plot the convergence history of both \( \Theta_{0} \) and \( \Theta_{1} \), so we can see how it happened.</p>
+<pre>
+<code class="hljs java">
+public void printConvergence(){
+
+      double[] theta0plot2 = new double[iters];
+      double[] theta1plot2 = new double[iters];
+      double[] tplot2 = new double[iters];
+      System.arraycopy(theta0plot, 0, theta0plot2, 0, iters);
+      System.arraycopy(theta1plot, 0, theta1plot2, 0, iters);
+      System.arraycopy(tplot, 0, tplot2, 0, iters);
+                
+      // Plot the convergence of data
+      Plot2DPanel convPlot = new Plot2DPanel();
+ 
+      // add a line plot to the PlotPanel
+      convPlot.addLinePlot("theta0", tplot2, theta0plot2);
+      convPlot.addLinePlot("theta1", tplot2, theta1plot2);
+ 
+      // put the PlotPanel in a JFrame, as a JPanel
+      JFrame frame2 = new JFrame("Convergence of parameters over time");
+      frame2.setContentPane(convPlot);
+      frame2.setSize(600, 600);
+      frame2.setVisible(true);
+    }
+
+</code>
+</pre>
+
+<p>Finally, we have our <strong>Test Class</strong>, that will execute everything:</p>
+
+<pre>
+<code class="hljs java">
+
+import javax.swing.JFrame;
+
+import org.math.plot.*;
+
+public class TestGradDescent {
+        public static void main(String[] args ){
+                InitialData id = new InitialData();
+                id.plotData();
+                GradientDescent gd = new GradientDescent(id);
+                gd.execute();
+                gd.printConvergence();
+
+        }
+}
+
+</code>
+</pre>
+
+<p>Now, executing the code, the output will be, at first, the initial data:</p>
+<div align=center>
+<img src="/images/example-plot-2.png"/>
+</div>
+<p><strong>Executing the algorithm, it learns and generate its prediction based on its initial data:</strong></p>
+
+<h2>Magical, right?</h2>
+
+<p>And then, we can see the <strong>convergence</strong>:</p>
+
+<div align=center>
+<img src="/images/example-convergence.png"/>
+</div>
+
+<p>And you can see in the terminal the final values of \( \Theta_{0} \) and \( \Theta_{1} \) that minimized the Cost Function.</p>
+
+<p><em>If it wasn’t science, probably would be black magic. heh.</em></p>
+
+<h2>A few considerations</h2>
+
+<p>You can download the complete code <a href="https://github.com/digorithm/ArtificialIntelligenceAlgorithms">here</a>.</p>
+
+<p>If you have any questions/suggestion, drop me an email so we can talk!</p>
+
+<p>If you need further details of the mathematical model, I ultra advice to watch Andrew’s Ng Videos at Stanford@Coursera. <strong>His skills to teach it is something unbelievable awesome</strong>.</p>
+
+<p><em>Thanks for the reading!</em></p>
+
+
+</html>
+
+
+</p>
+    </li>
+    <hr/>
+    &nbsp;
+  
+    <li>
+	<h1>
+      <a href="/2015/01/06/Why-How-and-Where-To-Learn-Design-Patterns/">
+	
+	<div style="line-height:35px;color:#444;">Why, how and where to Learn Design Patterns</div>
+	
+	</a>
+	</h1>
+	<div style="margin-top:-15px;color:#E11F00;">6 January 2015</div>
+        &nbsp;
+      <p><html>
+
+<p>The first thought I had when I started to study <a href="http://en.wikipedia.org/wiki/Software_design_pattern">Design Patterns</a> was:</p>
+
+<p><em>- “damn, is all this really necessary?”</em></p>
+
+<p>I mean, so many patterns, so many details to do things that look simple to do without any further detailed thoughts. And I started to question myself if this was really a productive thing.</p>
+
+<p>The first answer I gave was:</p>
+
+
+<p><em>-”no, *wonderful not-bad-word* this, I’m losing too much time trying to wrap my head around this”</em></p>
+
+<p>So I forgot it and kept developing my software using something like <a href="https://gist.github.com/banaslee/4147370#file-xgh-en-txt">Extreme Go Horse</a>. (i was younger at that time)</p>
+
+<p>Then, I saw a pattern being formed:</p>
+
+<p><strong>Every time I came back to my old codes I couldn’t extend nor debbug it in a easy way. It was always extremely hard to work on it.</strong></p>
+
+<p>And then I realized why: <strong>lack of good architectural decisions.</strong></p>
+
+<p>So I decided to give another chance to learning Design Patterns and finally I understood its beauty.</p>
+&nbsp;
+
+<h2>Few things to keep in mind:</h2>
+
+<p>1. It’s not about trying to fit every problem in every Design Pattern. That’s just a waste of time</p>
+<p>2. It may be not very productive at start, the process of applying a DP in a determined problem takes time.</p>
+<p>3. On the other hand, it will be extremely productive when you try to debug your code or try to extend it. Everything starts to make more sense and it’s way easier to change things when you’ve followed some patterns</p>
+<p>4. When studying a Design Pattern, try hard to implement that solution in a problem. This will make total difference</p>
+
+&nbsp;
+
+<h2>Now, to the materials!</h2>
+
+<p>Start with the classics:</p>
+
+<h3><a href="http://www.amazon.com/Design-Patterns-Object-Oriented-Professional-Computing/dp/0201634988">Design Patterns</a> (a.k.a Gang of Four)</h3>
+
+<p>This is the all times classic. These four gentlemen were the firsts to formalized and compile all patterns found on Object Oriented Systems. Here my advice is to go one by one, pick a pattern, read it, understand it, implement it and ,finally, really understand it.</p>
+
+<h3><a href="http://www.amazon.com/Head-First-Design-Patterns-Freeman/dp/0596007124">Head First Design Patterns</a></h3>
+
+<p>This one I’ve used when I didn’t understand a concept from the Gang of Four, it is easier to grasp the concepts, the approach is way less hardcore than the original GoF, but it still is a great book.</p>
+
+&nbsp;
+
+<h2>Code Samples</h2>
+
+<p>That said, it’s always good to have examples of each Design Pattern by your side, so you can study the DP and check other examples, so real world examples are perfect for it:</p>
+
+<p><a href="http://stackoverflow.com/questions/1673841/examples-of-gof-design-patterns/2707195#2707195">List with Examples of Patterns implemented in the Java SE and EE API</a></p>
+
+<p><a href="http://www.dofactory.com/net/design-patterns">List with Examples of patterns demonstrated with C#</a></p>
+
+<p><a href="http://sourcemaking.com/design_patterns">Excellent examples and explanations of each Design Pattern</a></p>
+
+<p><a href="http://c2.com/cgi/wiki?PeopleProjectsAndPatterns">Another great material on Design Patterns, with lots of great thoughts on it</a></p>
+
+<p>I believe this is a good start to learn Design Pattern and I hope this helps someone, mainly if they’re struggling with the same doubts I had when trying to learn it.</p>
+
+<p>Oh, one more thing: <strong>Do not ever go Extreme Go Horse, really.</strong></p>
+</html>
+
+</p>
+    </li>
+    <hr/>
+    &nbsp;
+  
+  &nbsp;
+  &nbsp;
+  &nbsp;
+        <div style="width:95%;display:block-inline;font-size:20px; margin-left:12px;">
+                
+                
+
+                <div style="font-family:'proregular';float:right;"><a href="">Older Posts -></a></div>
+                
+
+
+        </div>
+</ul>
+
+
+  </div>
+
+
+<!-- InstanceEndEditable --><!-- InstanceBeginEditable name="subNav" --><!-- InstanceEndEditable --><!-- InstanceBeginEditable name="mainContent" --><!-- InstanceEndEditable -->
+  <!-- This clearing element should immediately follow the #mainContent div in order to force the #container div to contain all child floats -->
+  <br class="clearfloat" />
+  <!-- InstanceBeginEditable name="footer" -->
+  <div id="footer">
+    <!-- end #footer -->
+    </div>
+  <!-- InstanceEndEditable -->
+  <!-- end #container --></div>
+    
+
+</body>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<script>
+
+
+var fixmeTop = $('#sidebar').offset().top;       // get initial position of the element
+
+$(window).scroll(function() {                  // assign scroll event listener
+
+    var currentScroll = $(window).scrollTop(); // get current position
+
+    if (currentScroll + 20 >= fixmeTop) {           // apply position: fixed if you
+        $('#sidebar').css({                      // scroll to that element or below it
+            position: 'fixed',
+            top: '0',
+	    'margin-top':'0px',
+            'left': '200'
+        });
+    } else {                                   // apply position: static
+        $('#sidebar').css({                      // if you scroll above it
+            position: 'static',
+            'margin-top': '0px',
+            'left':'200px'
+        });
+    }
+
+});
+
+
+$(document).ready(function(){
+    // to fade in on page load
+   $("#mainContent").fadeIn(1500).removeClass("hidden");
+   $('a').click(function(e){
+        redirect = $(this).attr('href');
+        e.preventDefault();
+        $('#mainContent').fadeOut(500, function(){
+            document.location.href = redirect
+        });
+    });
+})
+
+</script>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-38327934-3', 'auto');
+  ga('send', 'pageview');
+
+</script>
+<!-- InstanceEnd --></html>

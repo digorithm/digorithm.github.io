@@ -232,8 +232,8 @@ i	line-height: 20px;
 }
 .twoColHybRtHdr #container #mainContent p {
 	font-family: 'proregular';
-	font-size: 20px;
-	line-height: 1.6em;
+	font-size: 19px;
+	line-height: 1.5em;
 	color: #333;
 }
 .twoColHybRtHdr #container #mainContent h2 {
@@ -370,4 +370,8 @@ color:#E11F00;
         width:390px;
         background-color: #f3f3f3;
 
+}
+
+pre {
+        margin-top:-20px;
 }
