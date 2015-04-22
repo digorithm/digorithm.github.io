@@ -8,3 +8,8 @@ paginate_path: "/blog/page:num/"
 markdown: rdiscount
 permalink: pretty
 pygments: true
+
+
+name: Rodrigo Araujo's blog
+description: Few notes and thoughts on computer science, mathematics and technology
+url: http://rodrigoaraujo.me/blog
