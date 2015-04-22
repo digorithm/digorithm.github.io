@@ -94,7 +94,7 @@
         &nbsp;
       <p><html>
         <p>
-                I've been doing AI/Machine Learning at Jusbrasil recently, and it's being pretty challenging due to the huge amount of data that we have to deal with, I'm talking about millions users' data, so cleaning this data and making predictions and classifications in an acceptable time demands a nice AI architecture.</p>
+        I've been working with AI/Machine Learning at <a href="http://www.jusbrasil.com.br/">Jusbrasil</a> recently, and it's being pretty challenging due to the <em>huge</em> amount of data that we have to deal with, so cleaning this data and making predictions and classifications in an acceptable time demands a nice AI architecture.</p>
         <p>
                 That said I can say that I'm extremely thankful for a few technologies that are helping me go through this challenge <em>(and the pain of cleaning this amount of data)</em>: Python, Scikit Learn, Pandas, and the whole stack that the Scikit Learn use, such as NumPy, SciPy, matplotlib and few others.</p>
 
@@ -103,16 +103,16 @@
         </p>
 
         <p>
-        <strong>disclaimer:</strong><em> I'm assuming that you already have a small knowledge on the ideas of the machine learning and its mathematical aspects (altought not necessary to implement the code that I'll show here), this is just a simple introduction to scikit learn and its power, so the example is pretty simple and straight foward, if you just want the code, here it is: <a href="https://gist.github.com/digorithm/ad742f9314f76e732888">github link</a> </em>
+        <strong>disclaimer:</strong><em> I'm assuming that you already have a small knowledge on the ideas of the machine learning and its mathematical aspects (although not necessary to implement the code that I'll show here), this is just a simple introduction to scikit learn and its power, so the example is pretty simple and straight forward, if you just want the code, here it is: <a href="https://gist.github.com/digorithm/ad742f9314f76e732888">github link</a> </em>
         </p>
 &nbsp;
         <h2>What's Pandas?</h2>
-        <p>Pandas is an amazing library for data manipulation, it makes the process of dealing with data very easy and straight foward, we can work with CSV, JSON and plenty other formats without struggling to manipulate the data, give it five minutes and skim their docs, it will definitely worth it! </p>
+        <p>Pandas is an amazing library for data manipulation, it makes the process of dealing with data very easy and straight forward, we can work with CSV, JSON and plenty other formats without struggling to manipulate the data, <a href="https://signalvnoise.com/posts/3124-give-it-five-minutes">give it five minutes</a> and skim their <a href="http://pandas.pydata.org/pandas-docs/dev/">docs</a>, it will definitely worth it! </p>
 &nbsp;
         <h2>Fetching the data</h2>
 
         <p>
-                Let's start fetching the data with Pandas, to do so, just import Pandas and read the CSV file, just like that:
+        Let's start fetching the data with Pandas, <em>(you can download the data <a href="https://archive.ics.uci.edu/ml/machine-learning-databases/wine-quality/">here</a>)</em> to do so, just import Pandas and read the CSV file, just like that:
         </p>
 
         <pre>
@@ -180,7 +180,7 @@ dtypes: float64(11), int64(1), object(1)
         Matplotlib gives you many ways to plot our data into graphs so we can understand what is going on with the data so we can choose the best model/algorithm for the given scenario,
         </p>
         <p>
-        For instance, let's take a look on the relation between the red wines and its fixed acidity 
+        For instance, let's take a look at the relation between the red wines and its fixed acidity 
         </p>
         <pre>
         <code class="python hljs">
@@ -206,7 +206,7 @@ whites['kind'] = 'white'
         </pre>
 
         <p style="margin-top:-20px;">
-        We need to get all of our feature into a vector called X, that will be set into our algorithm, right? And we need to get all our targets (white or red) and set into a Y variable
+        We need to get all of our feature into a vector called X, that will be set into our algorithm, right? And, we need to get all our targets (white or red) and set into a Y variable
         </p>
         <pre>
         <code class="python hljs">
@@ -216,7 +216,7 @@ y = wines.kind
         </code>
         </pre>
         <p style="margin-top:-20px;">
-        Notice that we're merging both dataset together, the one with the red wines and the one with the white wines, so we can send them together to the algorithm. Now we're going to binarize the labels 'white' and 'red', so the mathematical model can use it. It's pretty simple
+        Notice that we're merging both datasets together, the one with the red wines and the one with the white wines, so we can send them together to the algorithm. Now we're going to binarize the labels 'white' and 'red', so the mathematical model can use it. It's pretty simple
         </p>
         <pre>
         <code class="python hljs">
@@ -241,7 +241,7 @@ y = y.apply(lambda val: 0 if val == 'white' else 1)
         $$
         </span>
 
-        <p>The Scikit learn provides an awesome library with an amazingly ease of use, so that we don't have to implement the whole model from scratch. All we have to do is create a object from the model we want to use, understand how it works (at least understand how to use its interface to do what we want). In this case we will be using the <em>cross validation</em> object, which is another discussion for another time, but, in a few words, it will divide our dataset and test the result with all parts of the divided dataset, this way we make sure that we're validating the quality of the result. </p>
+        <p>The Scikit learn provides an awesome library with an amazingly ease of use, so that we don't have to implement the whole model from scratch. All we have to do is create a object from the model we want to use, understand how it works <em>(at least understand how to use its interface to do what we want)</em>. In this case, we will be using the <em>cross validation</em> object, which is another discussion for another time, but in a few words, it will divide our dataset and test it against all parts of the divided dataset, this way we make sure that we're validating the quality of the result. </p>
         <pre>
         <code class="python hljs">
 clf = LogisticRegression()
@@ -256,7 +256,7 @@ print scores.mean(), scores.std()
         </code>
         </pre>
         <p style="margin-top:-25px;">
-        And that's the exactly the precision of the algorithm over the given dataset, <strong>98% of precision</strong>, which is quite good!
+        And that's the exactly the precision of the algorithm over the given dataset, <strong>98% of precision</strong>, which is quite good! Now, for example, we can save this trained classifier and use it for future classifications of incoming data about wines that need to be classified as white or red, to do so, we just call the method <em>clf.predict(X) </em> where this X will be the new wine's data. simplicity at its best! 
         </p>
 
 </html>

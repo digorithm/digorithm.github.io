@@ -1,0 +1,319 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><!-- InstanceBegin template="/Templates/designTemplate.dwt" codeOutsideHTMLIsLocked="false" -->
+<head>
+<style type="text/css">
+  .centeredImage
+    {
+    text-align:center;
+    margin-top:0px;
+    margin-bottom:0px;
+    padding:0px;
+    }
+</style>
+
+
+<meta name="description" content="Why should you learn design patterns and where to get some resources"/>
+
+
+<meta name="keywords" content="design pattern, patterns, software, architecture, design, engineering, science, computer"/>
+
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<!-- InstanceBeginEditable name="doctitle" -->
+<title>Rodrigo Araújo ::: Software Engineer / Computer Scientist</title>
+
+
+<!-- InstanceEndEditable -->
+
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<link href="../../../../../css/stylesheet.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="../../../../../css/styles/github.css">
+<script src="../../../../../highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script><!--[if IE]>
+
+<style type="text/css"> 
+/* place css fixes for all versions of IE in this conditional comment */
+.twoColHybRtHdr #sidebar1 { padding-top: 30px; }
+.twoColHybRtHdr #mainContent { zoom: 1; padding-top: 15px; }
+/* the above proprietary zoom property gives IE the hasLayout it may need to avoid several bugs */
+</style>
+<![endif]-->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+</head>
+
+<body class="twoColHybRtHdr">
+        <div class="sidebar" style="height:100%;">
+<div id="container"><!-- InstanceBeginEditable name="headerNav" -->
+  <div id="header" style='margin-top:-55px; padding-top:25px;'>
+    
+      <tr>
+        <h1><a href="../../../../../index.html">Rodrigo Araújo</a></h1>
+      </tr>
+        <h4>Software Engineer & Computer Scientist</h4>
+
+    
+    <tr>
+    </tr>
+    <tr>
+      <h3 style="padding-top:10px; margin-left:2px;">
+        <!--<a href="./HomePage.html"><img src="./images/back.png" width="15"></a>
+              <tr>
+        <td>&nbsp;</td>
+      </tr><-->
+
+        <a href="/blog/" onclick="">BLOG    &nbsp;&nbsp;</a> 
+        <a href="/about/">ABOUT    &nbsp;&nbsp;</a>
+        <a href="/work/">WORK    &nbsp;&nbsp;</a>
+        <a href="/contact/">CONTACT    &nbsp;&nbsp;</a>
+      </h3>
+    </tr>
+    
+    <!-- end #header -->
+  </div>
+  <div style="width:390px; margin-top:0px;" id="sidebar">
+       <ul style="padding-top: 18px;">
+               <hr/>
+          <li style="font-size:22px;"><a href="/archives/">Archives</a></li>
+          <hr/>
+      </ul>
+</div> 
+
+  <div style="margin-left:235px;margin-top:-128px;" id="mainContent" class="hidden">
+          <h1> <div style="margin-top:-10px;line-height:1.2em;">Building your first Rest API with python </div></h1>
+          <div style="margin-top:-20px;color:#E11F00;">22 April 2015</div>
+          &nbsp;
+    <html>
+
+<p>Are you total lost in this world full of jargons like: API, Rest API, microservices and stuffs? Come here, sit, grab a cup of coffe, and let's talk briefly about it.</p>
+
+<p>Today a lot is said about APIs. Everything has an API, every programmer (newbie to expert) uses tons of API. Also, today we can see a lot of people talking about microservices and the idea of total separation of backend, frontend, web services or <em>whatever</em>. So we can <em>(and we do)</em> hear a lot about REST/RESTful APIs. We have 3 current problems with it:</p>
+
+
+<p>1. Many new programmers don’t have a single clue of what a Rest API is.</p>
+<p>2. It’s probable that they’re using Rest APIs and don’t know about it.</p>
+<p>3. When they feel that they should learn more about it, there’s hardly any good and accessible material to learn it.</p>
+
+
+&nbsp;
+<h3 id="so-heres-a-extremely-simplistic-approach-to-try-to-explain-what-is-a-rest-api">So here’s a extremely simplistic approach to try to explain what is a Rest API</h3>
+
+<p>Starting with the concept of API, which stands for <strong>A</strong>pplication <strong>P</strong>rogramming <strong>I</strong>nterface, it’s just an interface which you, <em>dear programmer</em>, will be dealing with to extract what ever you <em>(or your program)</em> want.</p>
+
+<p>Suppose your program needs to create a connection with a given database, normally you do:</p>
+
+<p>1. You import the <em>library</em> that will abstract the connection with the database</p>
+<p>2. You create an object to represent a Connection with the database</p>
+<p>3. You call functions that this object provide to you, so you can do what ever you want (and whatever they provide)</p>
+
+<p>Here's a silly example:</p>
+
+<pre>
+<code class="hljs python">
+from database_library import Connection
+
+connection = Connection()
+connection.OpenConnection()
+… do whatever you want
+connection.CloseConnection()
+</code>
+</pre>
+
+<p>When you called those function, you were dealing with the interface that the object provided to you, sure the object may be doing thousand of things at the moment you call its functions, but, it doesn’t matter to you, does it? You just want the <em>damn</em> connection open and then closed.</p>
+
+<p>So the library that you imported is giving you something you want, offering a service or a resource. That’s the sole purpose of an API. It’s a layer that you can use to get things from other(s) component(s).</p>
+
+<p>So, it’s easy to deduct that, the better the engineer planned the API, the easier it will be to deal with and extract what you want, and the contrary is true.</p>
+
+<p>But still, you're processing the core of this API in your own machine, which isn’t that great, here’s when the API evolves to whole web hosted services, so you can request this API something, and this API can give you something, through the WEB, via HTTP request. And that’s amazing.</p>
+
+<p>And the community, recently, decided that the request and response that happen between applications and APIs, should be done with JSON, so this communication can become uniform and APIs can talk to other APIs effortlessly.</p>
+
+<p>So, basically, what’s going on is:</p>
+
+
+
+<div class="sequence-diagram"><svg height="216" version="1.1" width="279.6875" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="overflow: hidden; position: relative; top: -0.4375px;"><desc style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">Created with Raphaël 2.1.2</desc><defs style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><path stroke-linecap="round" d="M5,0 0,2.5 5,5z" id="raphael-marker-block" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><marker id="raphael-marker-endblock55-obj1238" markerHeight="5" markerWidth="5" orient="auto" refX="2.5" refY="2.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#raphael-marker-block" transform="rotate(180 2.5 2.5) scale(1,1)" stroke-width="1.0000" fill="#000" stroke="none" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></use></marker><marker id="raphael-marker-endblock55-obj1241" markerHeight="5" markerWidth="5" orient="auto" refX="2.5" refY="2.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#raphael-marker-block" transform="rotate(180 2.5 2.5) scale(1,1)" stroke-width="1.0000" fill="#000" stroke="none" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></use></marker></defs><rect x="10" y="20" width="106.53125" height="39" rx="0" ry="0" fill="none" stroke="#000000" stroke-width="2" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><rect x="20" y="30" width="86.53125" height="19" rx="0" ry="0" fill="#ffffff" stroke="none" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><text x="63.265625" y="39.5" text-anchor="middle" font-family="Andale Mono, monospace" font-size="12px" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-family: 'Andale Mono', monospace; font-size: 12px;"><tspan dy="5.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">Your Program</tspan></text><rect x="10" y="157" width="106.53125" height="39" rx="0" ry="0" fill="none" stroke="#000000" stroke-width="2" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><rect x="20" y="167" width="86.53125" height="19" rx="0" ry="0" fill="#ffffff" stroke="none" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><text x="63.265625" y="176.5" text-anchor="middle" font-family="Andale Mono, monospace" font-size="12px" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-family: 'Andale Mono', monospace; font-size: 12px;"><tspan dy="5.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">Your Program</tspan></text><path fill="none" stroke="#000000" d="M63.265625,59L63.265625,157" stroke-width="2" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><rect x="189.53125" y="20" width="60.15625" height="39" rx="0" ry="0" fill="none" stroke="#000000" stroke-width="2" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><rect x="199.53125" y="30" width="40.15625" height="19" rx="0" ry="0" fill="#ffffff" stroke="none" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><text x="219.609375" y="39.5" text-anchor="middle" font-family="Andale Mono, monospace" font-size="12px" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-family: 'Andale Mono', monospace; font-size: 12px;"><tspan dy="5.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">An API</tspan></text><rect x="189.53125" y="157" width="60.15625" height="39" rx="0" ry="0" fill="none" stroke="#000000" stroke-width="2" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><rect x="199.53125" y="167" width="40.15625" height="19" rx="0" ry="0" fill="#ffffff" stroke="none" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><text x="219.609375" y="176.5" text-anchor="middle" font-family="Andale Mono, monospace" font-size="12px" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-family: 'Andale Mono', monospace; font-size: 12px;"><tspan dy="5.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">An API</tspan></text><path fill="none" stroke="#000000" d="M219.609375,59L219.609375,157" stroke-width="2" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><rect x="96.828125" y="74.5" width="89.21875" height="19" rx="0" ry="0" fill="#ffffff" stroke="none" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><text x="141.4375" y="84" text-anchor="middle" font-family="Andale Mono, monospace" font-size="12px" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-family: 'Andale Mono', monospace; font-size: 12px;"><tspan dy="5.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">Gibe me stuffs</tspan></text><path fill="none" stroke="#000000" d="M63.265625,98C63.265625,98,187.8921682741493,98,214.60654937637173,98" stroke-width="2" marker-end="url(#raphael-marker-endblock55-obj1238)" stroke-dasharray="0" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><rect x="73.265625" y="113.5" width="136.34375" height="19" rx="0" ry="0" fill="#ffffff" stroke="none" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><text x="141.4375" y="123" text-anchor="middle" font-family="Andale Mono, monospace" font-size="12px" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-family: 'Andale Mono', monospace; font-size: 12px;"><tspan dy="5.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">Here, Take your stuffs</tspan></text><path fill="none" stroke="#000000" d="M219.609375,137C219.609375,137,94.9828317258507,137,68.26845062362827,137" stroke-width="2" marker-end="url(#raphael-marker-endblock55-obj1241)" stroke-dasharray="0" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path></svg></div>
+
+<p>So your program can keep working just fine, with the data provided by the API. More detailed:</p>
+
+
+
+<div class="sequence-diagram"><svg height="216" version="1.1" width="345.09375" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="overflow: hidden; position: relative; top: 0.96875px;"><desc style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">Created with Raphaël 2.1.2</desc><defs style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><marker id="raphael-marker-endblock55-obj8222" markerHeight="5" markerWidth="5" orient="auto" refX="2.5" refY="2.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#raphael-marker-block" transform="rotate(180 2.5 2.5) scale(1,1)" stroke-width="1.0000" fill="#000" stroke="none" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></use></marker><marker id="raphael-marker-endblock55-obj8225" markerHeight="5" markerWidth="5" orient="auto" refX="2.5" refY="2.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#raphael-marker-block" transform="rotate(180 2.5 2.5) scale(1,1)" stroke-width="1.0000" fill="#000" stroke="none" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></use></marker></defs><rect x="10" y="20" width="106.53125" height="39" rx="0" ry="0" fill="none" stroke="#000000" stroke-width="2" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><rect x="20" y="30" width="86.53125" height="19" rx="0" ry="0" fill="#ffffff" stroke="none" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><text x="63.265625" y="39.5" text-anchor="middle" font-family="Andale Mono, monospace" font-size="12px" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-family: 'Andale Mono', monospace; font-size: 12px;"><tspan dy="5.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">Your Program</tspan></text><rect x="10" y="157" width="106.53125" height="39" rx="0" ry="0" fill="none" stroke="#000000" stroke-width="2" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><rect x="20" y="167" width="86.53125" height="19" rx="0" ry="0" fill="#ffffff" stroke="none" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><text x="63.265625" y="176.5" text-anchor="middle" font-family="Andale Mono, monospace" font-size="12px" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-family: 'Andale Mono', monospace; font-size: 12px;"><tspan dy="5.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">Your Program</tspan></text><path fill="none" stroke="#000000" d="M63.265625,59L63.265625,157" stroke-width="2" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><rect x="254.9375" y="20" width="60.15625" height="39" rx="0" ry="0" fill="none" stroke="#000000" stroke-width="2" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><rect x="264.9375" y="30" width="40.15625" height="19" rx="0" ry="0" fill="#ffffff" stroke="none" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><text x="285.015625" y="39.5" text-anchor="middle" font-family="Andale Mono, monospace" font-size="12px" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-family: 'Andale Mono', monospace; font-size: 12px;"><tspan dy="5.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">An API</tspan></text><rect x="254.9375" y="157" width="60.15625" height="39" rx="0" ry="0" fill="none" stroke="#000000" stroke-width="2" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><rect x="264.9375" y="167" width="40.15625" height="19" rx="0" ry="0" fill="#ffffff" stroke="none" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><text x="285.015625" y="176.5" text-anchor="middle" font-family="Andale Mono, monospace" font-size="12px" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-family: 'Andale Mono', monospace; font-size: 12px;"><tspan dy="5.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">An API</tspan></text><path fill="none" stroke="#000000" d="M285.015625,59L285.015625,157" stroke-width="2" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><rect x="73.265625" y="74.5" width="201.75" height="19" rx="0" ry="0" fill="#ffffff" stroke="none" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><text x="174.140625" y="84" text-anchor="middle" font-family="Andale Mono, monospace" font-size="12px" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-family: 'Andale Mono', monospace; font-size: 12px;"><tspan dy="5.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">*(HTTP Request)* GET /resource</tspan></text><path fill="none" stroke="#000000" d="M63.265625,98C63.265625,98,247.15701526403427,98,280.0204180162982,98" stroke-width="2" marker-end="url(#raphael-marker-endblock55-obj8222)" stroke-dasharray="0" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><rect x="105.546875" y="113.5" width="137.1875" height="19" rx="0" ry="0" fill="#ffffff" stroke="none" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><text x="174.140625" y="123" text-anchor="middle" font-family="Andale Mono, monospace" font-size="12px" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-family: 'Andale Mono', monospace; font-size: 12px;"><tspan dy="5.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">JSON of that resource</tspan></text><path fill="none" stroke="#000000" d="M285.015625,137C285.015625,137,101.12423473596573,137,68.26083198370179,137" stroke-width="2" marker-end="url(#raphael-marker-endblock55-obj8225)" stroke-dasharray="0" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path></svg></div>
+
+<p>So, yes, you make your function calls, now, with just a simple URL + HTTP methods, wanna see a real example? We can just send a request to the Facebook’s API by accessing this URL: <a href="http://graph.facebook.com/contatodigo">http://graph.facebook.com/contatodigo</a></p>
+
+<p>Which will request my profile’s data, and the Facebook’s API will return:</p>
+
+<pre><code>{
+   "id": "100001638888259",
+   "first_name": "Rodrigo",
+   "gender": "male",
+   "last_name": "Ara\u00fajo",
+   "link": "https://www.facebook.com/contatodigo",
+   "locale": "pt_BR",
+   "name": "Rodrigo Ara\u00fajo",
+   "username": "contatodigo"
+}
+</code></pre>
+
+<p>As simple as that.</p>
+
+<p>Now with this basic idea explained, we can do a simple Rest API using Python and Flask. (I’m assuming you’re already familiar with both technologies).</p>
+
+<p>All we’re gonna do is, using the flask routing, create routes to the users so they can interact with the resources of our API. Let’s suppose our API will serve and receive only Books. So this is the resource we’re dealing with, users may use our API to get Books and insert new Books, so our only URIs will be:</p>
+
+
+<p>1. <em>/bookapi/v1.0/books</em> with a GET method, which will just return the list of books</p>
+<p>2. <em>/bookapi/v1.0/books</em> with a POST method, which will insert a book</p>
+
+<p>So after the API is built, you or you program can get books or insert books by sending HTTP request to the API’s URIs, simple as that. I’ll be very straight forward, here’s the code:</p>
+
+<pre>
+<code class="hljs python">
+#!flask/bin/python
+from flask import Flask, jsonify, request
+
+app = Flask(__name__)
+
+books = [
+    {
+        'id': 1,
+        'title': u'Game of Thrones',
+        'description': u'Cool dragons', 
+        'finished': False
+    },
+    {
+        'id': 2,
+        'title': u'50 shadows of grey',
+        'description': u'It start as bullshit, end as a huge bullshit', 
+        'finished': True
+    }
+]
+
+@app.route('/bookapi/v1.0/books/', methods=['GET'])
+def get_books():
+    return jsonify({'books': books})
+
+@app.route('/bookapi/v1.0/books', methods=['POST'])
+def create_book():
+    if not request.json or not 'title' in request.json:
+        abort(404)
+        
+    book = {
+            'id': books[-1]['id'] + 1,
+            'title': request.json['title'],
+            'description': request.json.get('description', ""),
+            'finished': False
+            }
+
+    books.append(book)
+    return jsonify({'book': book}), 201 
+
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
+
+</code>
+</pre>
+
+<p>Note that we’re creating a simple in-memory <em>database</em>, which is a simple python’s dict. This could be a database. But for the sake of simplicity, I'm using just a dict.</p>
+
+<p>When the requests come, it verifies the route that the user is asking for, which is: what resources is he/she wanting? and then, the code do whatever it must do (<em>remember the API idea of hiding the complexity, the user requesting just want the result</em>), and then it put everything in a JSON and returns it. That simple! </p>
+
+<p>Of course, many improvements and extensions (<em>there are infinity possibilities</em>) can be made to this code, but, here’s a skeleton of the idea of an API, it’s just a start. One good practice it’s to <em>not</em> return the ID of the resource, but return just its URI, which is surely a great idea. Another good practice is to ask authentication in every HTTP request, so your API won’t be exposed to everybody. There are, indeed, endless improvements, but in this code, you, that are completely beginner to the API’s concept, can now understand what’s going on underneath and start planning and building your own API using Flask. </p>
+
+</html>
+
+
+
+<hr/>
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    // Required: on line below, replace text in quotes with your forum shortname
+    var disqus_shortname = 'rodrigoaraujo';
+        
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                                        
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+
+  </div>
+  </div>
+
+<!-- InstanceEndEditable --><!-- InstanceBeginEditable name="subNav" --><!-- InstanceEndEditable --><!-- InstanceBeginEditable name="mainContent" --><!-- InstanceEndEditable -->
+  <!-- This clearing element should immediately follow the #mainContent div in order to force the #container div to contain all child floats -->
+  <br class="clearfloat" />
+  <!-- InstanceBeginEditable name="footer" -->
+  <div id="footer">
+    <!-- end #footer -->
+    </div>
+  <!-- InstanceEndEditable -->
+  <!-- end #container --></div>
+    
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+</body>
+
+<script>
+
+var fixmeTop = $('#sidebar').offset().top;       // get initial position of the element
+
+$(window).scroll(function() {                  // assign scroll event listener
+
+    var currentScroll = $(window).scrollTop(); // get current position
+
+    if (currentScroll >= fixmeTop) {           // apply position: fixed if you
+        $('#sidebar').css({                      // scroll to that element or below it
+            position: 'fixed',
+            top: '0',
+	    'margin-top':'0',
+            //left: '0'
+        });
+    } else {                                   // apply position: static
+        $('#sidebar').css({                      // if you scroll above it
+            position: 'static',
+            'margin-top': '0px'
+        });
+    }
+
+});
+
+
+$(document).ready(function(){
+    // to fade in on page load
+   $("#mainContent").fadeIn(1500).removeClass("hidden");
+   $('a').click(function(e){
+        redirect = $(this).attr('href');
+        e.preventDefault();
+        $('#mainContent').fadeOut(500, function(){
+            document.location.href = redirect
+        });
+    });
+})
+
+</script>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-38327934-3', 'auto');
+  ga('send', 'pageview');
+
+</script>
+<!-- InstanceEnd --></html>
