@@ -91,6 +91,16 @@ comments: true
           <div style="margin-top:-20px;color:#E11F00;">{{ page.date | date: "%-d %B %Y" }}</div>
           &nbsp;
     {{ content }}
+&nbsp;
+    <hr/>
+    <p> <em>Thanks for reading!</em>
+   <a href="https://twitter.com/intent/tweet?url={{ site.url  }}{{ page.url  }}&text={{ page.title  }}&via=digorithm" 
+             target="_blank">
+            Share it on Twitter</a> 
+  or 
+  <a href="https://twitter.com/digorithm" target="_blank">
+           follow me on Twitter</a>!
+   </p>
 <hr/>
 {% if page.comments %}
 <div id="disqus_thread"></div>
