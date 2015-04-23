@@ -84,6 +84,165 @@
   
     <li>
 	<h1>
+      <a href="/2015/04/22/Build-your-first-Rest-API-with-Python/">
+	
+	<div style="line-height:35px;color:#444;">Building your first Rest API with python</div>
+	
+	</a>
+	</h1>
+	<div style="margin-top:-15px;color:#E11F00;">22 April 2015</div>
+        &nbsp;
+      <p><html>
+
+<p>Are you total lost in this world full of jargons like: API, Rest API, microservices and stuffs? Come here, sit, grab a cup of coffee, and let's talk briefly about it.</p>
+
+<p>Today a lot is said about APIs. Everything has an API, every programmer (newbie to expert) uses tons of API. Also, today we can see a lot of people talking about microservices and the idea of total separation of backend, frontend, web services or <em>whatever</em>. So we can <em>(and we do)</em> hear a lot about REST/RESTful APIs. We have 3 current problems with it:</p>
+
+
+<p>1. Many new programmers don’t have a single clue of what a Rest API is.</p>
+<p>2. It’s probable that they’re using Rest APIs and don’t know about it.</p>
+<p>3. When they feel that they should learn more about it, there’s hardly any good and accessible material to learn it.</p>
+
+
+&nbsp;
+<h3 id="so-heres-a-extremely-simplistic-approach-to-try-to-explain-what-is-a-rest-api">So here’s a extremely simplistic approach to try to explain what is a Rest API</h3>
+
+<p>Starting with the concept of API, which stands for <strong>A</strong>pplication <strong>P</strong>rogramming <strong>I</strong>nterface, it’s just an interface which you, <em>dear programmer</em>, will be dealing with to extract whatever you <em>(or your program)</em> want.</p>
+
+<p>Suppose your program needs to create a connection with a given database, normally you do:</p>
+
+<p>1. You import the <em>library</em> that will abstract the connection with the database</p>
+<p>2. You create an object to represent a Connection with the database</p>
+<p>3. You call functions that this object provide to you, so you can do whatever you want (and whatever they provide)</p>
+
+<p>Here's a silly example:</p>
+
+<pre>
+<code class="hljs python">
+from database_library import Connection
+
+connection = Connection()
+connection.OpenConnection()
+… do whatever you want
+connection.CloseConnection()
+</code>
+</pre>
+
+<p>When you called those function, you were dealing with the interface that the object provided to you, sure the object may be doing thousand of things at the moment you call its functions, but, it doesn’t matter to you, does it? You just want the <em>damn</em> connection open and then closed.</p>
+
+<p>So the library that you imported is giving you something you want, offering a service or a resource. That’s the sole purpose of an API. It’s a layer that you can use to get things from other(s) component(s).</p>
+
+<p>So, it’s easy to deduct that, the better the engineer planned the API, the easier it will be to deal with and extract what you want, and the contrary is true.</p>
+
+<p>But still, you're processing the core of this API in your own machine, which isn’t that great, here’s when the API evolves to whole web hosted services, so you can request this API something, and this API can give you something, through the WEB, via HTTP request. And that’s amazing.</p>
+
+<p>And the community, recently, decided that the request and response that happen between applications and APIs, should be done with JSON, so this communication can become uniform and APIs can talk to other APIs effortlessly.</p>
+
+<p>So, basically, what’s going on is:</p>
+
+
+
+<div class="sequence-diagram"><svg height="216" version="1.1" width="279.6875" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="overflow: hidden; position: relative; top: -0.4375px;"><desc style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">Created with Raphaël 2.1.2</desc><defs style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><path stroke-linecap="round" d="M5,0 0,2.5 5,5z" id="raphael-marker-block" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><marker id="raphael-marker-endblock55-obj1238" markerHeight="5" markerWidth="5" orient="auto" refX="2.5" refY="2.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#raphael-marker-block" transform="rotate(180 2.5 2.5) scale(1,1)" stroke-width="1.0000" fill="#000" stroke="none" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></use></marker><marker id="raphael-marker-endblock55-obj1241" markerHeight="5" markerWidth="5" orient="auto" refX="2.5" refY="2.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#raphael-marker-block" transform="rotate(180 2.5 2.5) scale(1,1)" stroke-width="1.0000" fill="#000" stroke="none" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></use></marker></defs><rect x="10" y="20" width="106.53125" height="39" rx="0" ry="0" fill="none" stroke="#000000" stroke-width="2" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><rect x="20" y="30" width="86.53125" height="19" rx="0" ry="0" fill="#ffffff" stroke="none" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><text x="63.265625" y="39.5" text-anchor="middle" font-family="Andale Mono, monospace" font-size="12px" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-family: 'Andale Mono', monospace; font-size: 12px;"><tspan dy="5.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">Your Program</tspan></text><rect x="10" y="157" width="106.53125" height="39" rx="0" ry="0" fill="none" stroke="#000000" stroke-width="2" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><rect x="20" y="167" width="86.53125" height="19" rx="0" ry="0" fill="#ffffff" stroke="none" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><text x="63.265625" y="176.5" text-anchor="middle" font-family="Andale Mono, monospace" font-size="12px" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-family: 'Andale Mono', monospace; font-size: 12px;"><tspan dy="5.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">Your Program</tspan></text><path fill="none" stroke="#000000" d="M63.265625,59L63.265625,157" stroke-width="2" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><rect x="189.53125" y="20" width="60.15625" height="39" rx="0" ry="0" fill="none" stroke="#000000" stroke-width="2" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><rect x="199.53125" y="30" width="40.15625" height="19" rx="0" ry="0" fill="#ffffff" stroke="none" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><text x="219.609375" y="39.5" text-anchor="middle" font-family="Andale Mono, monospace" font-size="12px" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-family: 'Andale Mono', monospace; font-size: 12px;"><tspan dy="5.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">An API</tspan></text><rect x="189.53125" y="157" width="60.15625" height="39" rx="0" ry="0" fill="none" stroke="#000000" stroke-width="2" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><rect x="199.53125" y="167" width="40.15625" height="19" rx="0" ry="0" fill="#ffffff" stroke="none" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><text x="219.609375" y="176.5" text-anchor="middle" font-family="Andale Mono, monospace" font-size="12px" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-family: 'Andale Mono', monospace; font-size: 12px;"><tspan dy="5.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">An API</tspan></text><path fill="none" stroke="#000000" d="M219.609375,59L219.609375,157" stroke-width="2" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><rect x="96.828125" y="74.5" width="89.21875" height="19" rx="0" ry="0" fill="#ffffff" stroke="none" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><text x="141.4375" y="84" text-anchor="middle" font-family="Andale Mono, monospace" font-size="12px" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-family: 'Andale Mono', monospace; font-size: 12px;"><tspan dy="5.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">Gibe me stuffs</tspan></text><path fill="none" stroke="#000000" d="M63.265625,98C63.265625,98,187.8921682741493,98,214.60654937637173,98" stroke-width="2" marker-end="url(#raphael-marker-endblock55-obj1238)" stroke-dasharray="0" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><rect x="73.265625" y="113.5" width="136.34375" height="19" rx="0" ry="0" fill="#ffffff" stroke="none" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><text x="141.4375" y="123" text-anchor="middle" font-family="Andale Mono, monospace" font-size="12px" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-family: 'Andale Mono', monospace; font-size: 12px;"><tspan dy="5.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">Here, Take your stuffs</tspan></text><path fill="none" stroke="#000000" d="M219.609375,137C219.609375,137,94.9828317258507,137,68.26845062362827,137" stroke-width="2" marker-end="url(#raphael-marker-endblock55-obj1241)" stroke-dasharray="0" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path></svg></div>
+
+<p>So your program can keep working just fine, with the data provided by the API. More detailed:</p>
+
+
+
+<div class="sequence-diagram"><svg height="216" version="1.1" width="345.09375" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="overflow: hidden; position: relative; top: 0.96875px;"><desc style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">Created with Raphaël 2.1.2</desc><defs style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><marker id="raphael-marker-endblock55-obj8222" markerHeight="5" markerWidth="5" orient="auto" refX="2.5" refY="2.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#raphael-marker-block" transform="rotate(180 2.5 2.5) scale(1,1)" stroke-width="1.0000" fill="#000" stroke="none" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></use></marker><marker id="raphael-marker-endblock55-obj8225" markerHeight="5" markerWidth="5" orient="auto" refX="2.5" refY="2.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#raphael-marker-block" transform="rotate(180 2.5 2.5) scale(1,1)" stroke-width="1.0000" fill="#000" stroke="none" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></use></marker></defs><rect x="10" y="20" width="106.53125" height="39" rx="0" ry="0" fill="none" stroke="#000000" stroke-width="2" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><rect x="20" y="30" width="86.53125" height="19" rx="0" ry="0" fill="#ffffff" stroke="none" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><text x="63.265625" y="39.5" text-anchor="middle" font-family="Andale Mono, monospace" font-size="12px" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-family: 'Andale Mono', monospace; font-size: 12px;"><tspan dy="5.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">Your Program</tspan></text><rect x="10" y="157" width="106.53125" height="39" rx="0" ry="0" fill="none" stroke="#000000" stroke-width="2" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><rect x="20" y="167" width="86.53125" height="19" rx="0" ry="0" fill="#ffffff" stroke="none" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><text x="63.265625" y="176.5" text-anchor="middle" font-family="Andale Mono, monospace" font-size="12px" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-family: 'Andale Mono', monospace; font-size: 12px;"><tspan dy="5.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">Your Program</tspan></text><path fill="none" stroke="#000000" d="M63.265625,59L63.265625,157" stroke-width="2" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><rect x="254.9375" y="20" width="60.15625" height="39" rx="0" ry="0" fill="none" stroke="#000000" stroke-width="2" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><rect x="264.9375" y="30" width="40.15625" height="19" rx="0" ry="0" fill="#ffffff" stroke="none" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><text x="285.015625" y="39.5" text-anchor="middle" font-family="Andale Mono, monospace" font-size="12px" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-family: 'Andale Mono', monospace; font-size: 12px;"><tspan dy="5.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">An API</tspan></text><rect x="254.9375" y="157" width="60.15625" height="39" rx="0" ry="0" fill="none" stroke="#000000" stroke-width="2" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><rect x="264.9375" y="167" width="40.15625" height="19" rx="0" ry="0" fill="#ffffff" stroke="none" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><text x="285.015625" y="176.5" text-anchor="middle" font-family="Andale Mono, monospace" font-size="12px" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-family: 'Andale Mono', monospace; font-size: 12px;"><tspan dy="5.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">An API</tspan></text><path fill="none" stroke="#000000" d="M285.015625,59L285.015625,157" stroke-width="2" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><rect x="73.265625" y="74.5" width="201.75" height="19" rx="0" ry="0" fill="#ffffff" stroke="none" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><text x="174.140625" y="84" text-anchor="middle" font-family="Andale Mono, monospace" font-size="12px" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-family: 'Andale Mono', monospace; font-size: 12px;"><tspan dy="5.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">*(HTTP Request)* GET /resource</tspan></text><path fill="none" stroke="#000000" d="M63.265625,98C63.265625,98,247.15701526403427,98,280.0204180162982,98" stroke-width="2" marker-end="url(#raphael-marker-endblock55-obj8222)" stroke-dasharray="0" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><rect x="105.546875" y="113.5" width="137.1875" height="19" rx="0" ry="0" fill="#ffffff" stroke="none" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><text x="174.140625" y="123" text-anchor="middle" font-family="Andale Mono, monospace" font-size="12px" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-family: 'Andale Mono', monospace; font-size: 12px;"><tspan dy="5.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">JSON of that resource</tspan></text><path fill="none" stroke="#000000" d="M285.015625,137C285.015625,137,101.12423473596573,137,68.26083198370179,137" stroke-width="2" marker-end="url(#raphael-marker-endblock55-obj8225)" stroke-dasharray="0" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path></svg></div>
+
+<p>So, yes, you make your function calls, now, with just a simple URL + HTTP methods, wanna see a real example? We can just send a request to the Facebook’s API by accessing this URL: <a href="http://graph.facebook.com/contatodigo">http://graph.facebook.com/contatodigo</a></p>
+
+<p>Which will request my profile’s data, and the Facebook’s API will return:</p>
+
+<pre><code>{
+   "id": "100001638888259",
+   "first_name": "Rodrigo",
+   "gender": "male",
+   "last_name": "Ara\u00fajo",
+   "link": "https://www.facebook.com/contatodigo",
+   "locale": "pt_BR",
+   "name": "Rodrigo Ara\u00fajo",
+   "username": "contatodigo"
+}
+</code></pre>
+
+<p>As simple as that.</p>
+
+<p>Now with this basic idea explained, we can do a simple Rest API using Python and Flask. (I’m assuming you’re already familiar with both technologies).</p>
+
+<p>All we’re gonna do is, using the flask routing, create routes to the users so they can interact with the resources of our API. Let’s suppose our API will serve and receive only Books. So this is the resource we’re dealing with, users may use our API to get Books and insert new Books, so our only URIs will be:</p>
+
+
+<p>1. <em>/bookapi/v1.0/books</em> with a GET method, which will just return the list of books</p>
+<p>2. <em>/bookapi/v1.0/books</em> with a POST method, which will insert a book</p>
+
+<p>So after the API is built, you or you program can get books or insert books by sending HTTP request to the API’s URIs, simple as that. I’ll be very straight forward, here’s the code:</p>
+
+<pre>
+<code class="hljs python">
+#!flask/bin/python
+from flask import Flask, jsonify, request
+
+app = Flask(__name__)
+
+books = [
+    {
+        'id': 1,
+        'title': u'Game of Thrones',
+        'description': u'Cool dragons', 
+        'finished': False
+    },
+    {
+        'id': 2,
+        'title': u'50 shadows of grey',
+        'description': u'It start as bullshit, end as a huge bullshit', 
+        'finished': True
+    }
+]
+
+@app.route('/bookapi/v1.0/books/', methods=['GET'])
+def get_books():
+    return jsonify({'books': books})
+
+@app.route('/bookapi/v1.0/books', methods=['POST'])
+def create_book():
+    if not request.json or not 'title' in request.json:
+        abort(404)
+        
+    book = {
+            'id': books[-1]['id'] + 1,
+            'title': request.json['title'],
+            'description': request.json.get('description', ""),
+            'finished': False
+            }
+
+    books.append(book)
+    return jsonify({'book': book}), 201 
+
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
+
+</code>
+</pre>
+
+<p>Note that we’re creating a simple in-memory <em>database</em>, which is a simple python’s dict. This could be a database. But for the sake of simplicity, I'm using just a dict.</p>
+
+<p>When the requests come, it verifies the route that the user is asking for, which is: what resources is he/she wanting? and then, the code do whatever it must do (<em>remember the API idea of hiding the complexity, the user requesting just want the result</em>), and then it put everything in a JSON and returns it. That simple! </p>
+
+<p>Of course, many improvements and extensions (<em>there are infinity possibilities</em>) can be made to this code, but, here’s a skeleton of the idea of an API, it’s just a start. One good practice it’s to <em>not</em> return the ID of the resource, but return just its URI, which is surely a great idea. Another good practice is to ask authentication in every HTTP request, so your API won’t be exposed to everybody. There are, indeed, endless improvements, but in this code, you, that are completely beginner to the API’s concept, can now understand what’s going on underneath and start planning and building your own API using Flask. </p>
+
+</html>
+
+
+</p>
+    </li>
+    <hr/>
+    &nbsp;
+  
+    <li>
+	<h1>
       <a href="/2015/03/31/using-python-and-AI-to-predict-types-of-wine/">
 	
 	<div style="line-height:35px;color:#444;">Using Python and AI to predict types of wine</div>
@@ -688,85 +847,6 @@ public class TestGradDescent {
 
 </html>
 
-
-</p>
-    </li>
-    <hr/>
-    &nbsp;
-  
-    <li>
-	<h1>
-      <a href="/2015/01/06/Why-How-and-Where-To-Learn-Design-Patterns/">
-	
-	<div style="line-height:35px;color:#444;">Why, how and where to Learn Design Patterns</div>
-	
-	</a>
-	</h1>
-	<div style="margin-top:-15px;color:#E11F00;">6 January 2015</div>
-        &nbsp;
-      <p><html>
-
-<p>The first thought I had when I started to study <a href="http://en.wikipedia.org/wiki/Software_design_pattern">Design Patterns</a> was:</p>
-
-<p><em>- “damn, is all this really necessary?”</em></p>
-
-<p>I mean, so many patterns, so many details to do things that look simple to do without any further detailed thoughts. And I started to question myself if this was really a productive thing.</p>
-
-<p>The first answer I gave was:</p>
-
-
-<p><em>-”no, *wonderful not-bad-word* this, I’m losing too much time trying to wrap my head around this”</em></p>
-
-<p>So I forgot it and kept developing my software using something like <a href="https://gist.github.com/banaslee/4147370#file-xgh-en-txt">Extreme Go Horse</a>. (i was younger at that time)</p>
-
-<p>Then, I saw a pattern being formed:</p>
-
-<p><strong>Every time I came back to my old codes I couldn’t extend nor debbug it in a easy way. It was always extremely hard to work on it.</strong></p>
-
-<p>And then I realized why: <strong>lack of good architectural decisions.</strong></p>
-
-<p>So I decided to give another chance to learning Design Patterns and finally I understood its beauty.</p>
-&nbsp;
-
-<h2>Few things to keep in mind:</h2>
-
-<p>1. It’s not about trying to fit every problem in every Design Pattern. That’s just a waste of time</p>
-<p>2. It may be not very productive at start, the process of applying a DP in a determined problem takes time.</p>
-<p>3. On the other hand, it will be extremely productive when you try to debug your code or try to extend it. Everything starts to make more sense and it’s way easier to change things when you’ve followed some patterns</p>
-<p>4. When studying a Design Pattern, try hard to implement that solution in a problem. This will make total difference</p>
-
-&nbsp;
-
-<h2>Now, to the materials!</h2>
-
-<p>Start with the classics:</p>
-
-<h3><a href="http://www.amazon.com/Design-Patterns-Object-Oriented-Professional-Computing/dp/0201634988">Design Patterns</a> (a.k.a Gang of Four)</h3>
-
-<p>This is the all times classic. These four gentlemen were the firsts to formalized and compile all patterns found on Object Oriented Systems. Here my advice is to go one by one, pick a pattern, read it, understand it, implement it and ,finally, really understand it.</p>
-
-<h3><a href="http://www.amazon.com/Head-First-Design-Patterns-Freeman/dp/0596007124">Head First Design Patterns</a></h3>
-
-<p>This one I’ve used when I didn’t understand a concept from the Gang of Four, it is easier to grasp the concepts, the approach is way less hardcore than the original GoF, but it still is a great book.</p>
-
-&nbsp;
-
-<h2>Code Samples</h2>
-
-<p>That said, it’s always good to have examples of each Design Pattern by your side, so you can study the DP and check other examples, so real world examples are perfect for it:</p>
-
-<p><a href="http://stackoverflow.com/questions/1673841/examples-of-gof-design-patterns/2707195#2707195">List with Examples of Patterns implemented in the Java SE and EE API</a></p>
-
-<p><a href="http://www.dofactory.com/net/design-patterns">List with Examples of patterns demonstrated with C#</a></p>
-
-<p><a href="http://sourcemaking.com/design_patterns">Excellent examples and explanations of each Design Pattern</a></p>
-
-<p><a href="http://c2.com/cgi/wiki?PeopleProjectsAndPatterns">Another great material on Design Patterns, with lots of great thoughts on it</a></p>
-
-<p>I believe this is a good start to learn Design Pattern and I hope this helps someone, mainly if they’re struggling with the same doubts I had when trying to learn it.</p>
-
-<p>Oh, one more thing: <strong>Do not ever go Extreme Go Horse, really.</strong></p>
-</html>
 
 </p>
     </li>
