@@ -231,13 +231,13 @@ i	line-height: 20px;
 	color: #09C;
 }
 .twoColHybRtHdr #container #mainContent p {
-	font-family: 'proregular';
-	font-size: 19px;
-	line-height: 1.5em;
+	font-family: 'gotham';
+	font-size: 15px;
+	line-height: 1.6em;
 	color: #333;
 }
 .twoColHybRtHdr #container #mainContent h2 {
-	font-family: 'proregular', sans-serif;
+	font-family: 'gotham', sans-serif;
 	color: rgba(68, 68, 68, 0.87);
 	font-size: 26px;
 	/*font-weight: 700;*/
@@ -245,19 +245,20 @@ i	line-height: 20px;
 }
 
 .twoColHybRtHdr #container #mainContent h1 {
-	font-family: 'proregular', sans-serif;
+	font-family: 'gotham', sans-serif;
 	color: #444;
 	letter-spacing: 1px;
 	/*font-weight:900;*/
-	font-size: 32px;	
+	font-size: 30px;	
 }
 
 .twoColHybRtHdr #container #mainContent h3 {
-	font-family: 'proregular', sans-serif;
+	font-family: 'gotham', sans-serif;
 	color: #444;
 	font-size: 20px;
 	letter-spacing: 1px;
 	/*font-weight: 700;*/
+        line-height: 24px;
 }
 
 .twoColHybRtHdr #container #sidebar{
@@ -277,7 +278,7 @@ i	line-height: 20px;
 }
 
 .twoColHybRtHdr #container #sidebar ul, li{
-	font-family: 'proregular';
+	font-family: 'gotham';
 	font-size: 14px;
 	color: #444;
 	margin-left: 11px;

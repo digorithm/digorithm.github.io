@@ -3,8 +3,8 @@
         <channel>
                 <title>Rodrigo Araujo's blog</title>
                 <description>Few notes and thoughts on computer science, mathematics and technology</description>              
-                <link>http://rodrigoaraujo.me/blog</link>
-                <atom:link href="http://rodrigoaraujo.me/blog/feed.xml" rel="self" type="application/rss+xml" />
+                <link>http://rodrigoaraujo.me</link>
+                <atom:link href="http://rodrigoaraujo.me/feed.xml" rel="self" type="application/rss+xml" />
                 
                         <item>
                                 <title>Building your first Rest API with python</title>
@@ -13,8 +13,8 @@
                                         <description>Are you total lost in this world full of jargons like API, Rest API, microservices and stuffs? Come here, sit, grab a cup of coffee, and let's talk briefly about it.</description>
                                 
                                 <pubDate>Wed, 22 Apr 2015 00:00:00 -0300</pubDate>
-                                <link>http://rodrigoaraujo.me/blog/2015/04/22/Build-your-first-Rest-API-with-Python/</link>
-                                <guid isPermaLink="true">http://rodrigoaraujo.me/blog/2015/04/22/Build-your-first-Rest-API-with-Python/</guid>
+                                <link>http://rodrigoaraujo.me/2015/04/22/Build-your-first-Rest-API-with-Python/</link>
+                                <guid isPermaLink="true">http://rodrigoaraujo.me/2015/04/22/Build-your-first-Rest-API-with-Python/</guid>
                         </item>
                 
                         <item>
@@ -194,8 +194,8 @@ print scores.mean(), scores.std()
 </description>
                                 
                                 <pubDate>Tue, 31 Mar 2015 00:00:00 -0300</pubDate>
-                                <link>http://rodrigoaraujo.me/blog/2015/03/31/using-python-and-AI-to-predict-types-of-wine/</link>
-                                <guid isPermaLink="true">http://rodrigoaraujo.me/blog/2015/03/31/using-python-and-AI-to-predict-types-of-wine/</guid>
+                                <link>http://rodrigoaraujo.me/2015/03/31/using-python-and-AI-to-predict-types-of-wine/</link>
+                                <guid isPermaLink="true">http://rodrigoaraujo.me/2015/03/31/using-python-and-AI-to-predict-types-of-wine/</guid>
                         </item>
                 
                         <item>
@@ -205,8 +205,8 @@ print scores.mean(), scores.std()
                                         <description>The first thought I had when I started to study Design Patterns was “damn, is all this really necessary?&quot; I mean, so many patterns, so many details to do things that look simple to do without any further detailed thoughts. And I started to question myself if this was really a productive thing.</description>
                                 
                                 <pubDate>Fri, 09 Jan 2015 00:00:00 -0300</pubDate>
-                                <link>http://rodrigoaraujo.me/blog/2015/01/09/Making-Your-Machine-Think-Learn-And-Predict--Gradient-Descent-Algorithm-in-Java/</link>
-                                <guid isPermaLink="true">http://rodrigoaraujo.me/blog/2015/01/09/Making-Your-Machine-Think-Learn-And-Predict--Gradient-Descent-Algorithm-in-Java/</guid>
+                                <link>http://rodrigoaraujo.me/2015/01/09/Making-Your-Machine-Think-Learn-And-Predict--Gradient-Descent-Algorithm-in-Java/</link>
+                                <guid isPermaLink="true">http://rodrigoaraujo.me/2015/01/09/Making-Your-Machine-Think-Learn-And-Predict--Gradient-Descent-Algorithm-in-Java/</guid>
                         </item>
                 
                         <item>
@@ -216,8 +216,8 @@ print scores.mean(), scores.std()
                                         <description>The first thought I had when I started to study Design Patterns was “damn, is all this really necessary?&quot; I mean, so many patterns, so many details to do things that look simple to do without any further detailed thoughts. And I started to question myself if this was really a productive thing.</description>
                                 
                                 <pubDate>Tue, 06 Jan 2015 00:00:00 -0300</pubDate>
-                                <link>http://rodrigoaraujo.me/blog/2015/01/06/Why-How-and-Where-To-Learn-Design-Patterns/</link>
-                                <guid isPermaLink="true">http://rodrigoaraujo.me/blog/2015/01/06/Why-How-and-Where-To-Learn-Design-Patterns/</guid>
+                                <link>http://rodrigoaraujo.me/2015/01/06/Why-How-and-Where-To-Learn-Design-Patterns/</link>
+                                <guid isPermaLink="true">http://rodrigoaraujo.me/2015/01/06/Why-How-and-Where-To-Learn-Design-Patterns/</guid>
                         </item>
                 
                         <item>
@@ -227,8 +227,8 @@ print scores.mean(), scores.std()
                                         <description>I’ve been reading many texts on automata theory these times, and let me tell you, that’s such a wonderful thing. It pretty much explain how computers can…. compute! Simply put, Automata Theory deals with the logic of computation with respect to simple machines, referred to as Automata.</description>
                                 
                                 <pubDate>Fri, 31 Oct 2014 00:00:00 -0300</pubDate>
-                                <link>http://rodrigoaraujo.me/blog/2014/10/31/Thoughts-on-Automata-Theory/</link>
-                                <guid isPermaLink="true">http://rodrigoaraujo.me/blog/2014/10/31/Thoughts-on-Automata-Theory/</guid>
+                                <link>http://rodrigoaraujo.me/2014/10/31/Thoughts-on-Automata-Theory/</link>
+                                <guid isPermaLink="true">http://rodrigoaraujo.me/2014/10/31/Thoughts-on-Automata-Theory/</guid>
                         </item>
                 
                         <item>
@@ -238,8 +238,8 @@ print scores.mean(), scores.std()
                                         <description>Graph Theory is definitely one of my favorite branches of the Mathematics &amp; Computer Science, mostly because of its nearest infinity applications, in both real world problems and pure theoretical problems.</description>
                                 
                                 <pubDate>Fri, 10 Oct 2014 00:00:00 -0300</pubDate>
-                                <link>http://rodrigoaraujo.me/blog/2014/10/10/Fun-with-graphs-pt1/</link>
-                                <guid isPermaLink="true">http://rodrigoaraujo.me/blog/2014/10/10/Fun-with-graphs-pt1/</guid>
+                                <link>http://rodrigoaraujo.me/2014/10/10/Fun-with-graphs-pt1/</link>
+                                <guid isPermaLink="true">http://rodrigoaraujo.me/2014/10/10/Fun-with-graphs-pt1/</guid>
                         </item>
                 
                         <item>
@@ -249,8 +249,8 @@ print scores.mean(), scores.std()
                                         <description>One of the most common kind of application in today's tech/business is the CRUD system, that is the idea of the user interacting with a database, so the user can Create, Retrieve, Update and Delete data from a database. Also, learning how to create a CRUD with a language is a great way to understand the basics of this language, the basics of software design, engineering and architecture.i</description>
                                 
                                 <pubDate>Tue, 22 Jul 2014 00:00:00 -0300</pubDate>
-                                <link>http://rodrigoaraujo.me/blog/2014/07/22/CRUD-with-Java%2C-JSP%2C-and-MySQL/</link>
-                                <guid isPermaLink="true">http://rodrigoaraujo.me/blog/2014/07/22/CRUD-with-Java%2C-JSP%2C-and-MySQL/</guid>
+                                <link>http://rodrigoaraujo.me/2014/07/22/CRUD-with-Java%2C-JSP%2C-and-MySQL/</link>
+                                <guid isPermaLink="true">http://rodrigoaraujo.me/2014/07/22/CRUD-with-Java%2C-JSP%2C-and-MySQL/</guid>
                         </item>
                 
                         <item>
@@ -260,8 +260,8 @@ print scores.mean(), scores.std()
                                         <description>Let’s say that OO programming did never exist, so, i can say that any procedural programmer (C, fortran, cobol, etc..) who has a little notion about how to build organized codes, would, naturally, evolve to an organization that would look like the actual concept of OO programming.</description>
                                 
                                 <pubDate>Wed, 16 Jul 2014 00:00:00 -0300</pubDate>
-                                <link>http://rodrigoaraujo.me/blog/2014/07/16/Object-Oriented-Thinking/</link>
-                                <guid isPermaLink="true">http://rodrigoaraujo.me/blog/2014/07/16/Object-Oriented-Thinking/</guid>
+                                <link>http://rodrigoaraujo.me/2014/07/16/Object-Oriented-Thinking/</link>
+                                <guid isPermaLink="true">http://rodrigoaraujo.me/2014/07/16/Object-Oriented-Thinking/</guid>
                         </item>
                 
                         <item>
@@ -271,8 +271,8 @@ print scores.mean(), scores.std()
                                         <description>Well, it all will start with your first steps on studying programming, a very innocent and and naive programming, i mean, your very first “Hello World” and the classics “Read 3 inputs and print the sum of them”, where your concerns will happen because of some missing commas, whitespaces and some misplaced IF’s… things that at first sight may cause a little confusion, you’ll start to think that’s even something hard.</description>
                                 
                                 <pubDate>Wed, 16 Jul 2014 00:00:00 -0300</pubDate>
-                                <link>http://rodrigoaraujo.me/blog/2014/07/16/A-Romantic-Vision-Of-The-Software-Engineering/</link>
-                                <guid isPermaLink="true">http://rodrigoaraujo.me/blog/2014/07/16/A-Romantic-Vision-Of-The-Software-Engineering/</guid>
+                                <link>http://rodrigoaraujo.me/2014/07/16/A-Romantic-Vision-Of-The-Software-Engineering/</link>
+                                <guid isPermaLink="true">http://rodrigoaraujo.me/2014/07/16/A-Romantic-Vision-Of-The-Software-Engineering/</guid>
                         </item>
                 
         </channel>
