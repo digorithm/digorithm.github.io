@@ -47,6 +47,16 @@ src: url('../fonts/MuseoSans-300.otf');
         src: url('../fonts/Adobe Garamond Pro Regular.ttf')
 }
 
+@font-face{
+        font-family:'proximanova';
+        src: url('../fonts/proximanova/proximanovalight.otf')
+}
+
+@font-face{
+        font-family:'proximanovaregular';
+        src: url('../fonts/proximanova/proximanovaregular.otf')
+}
+
 body  {
 	background: #666666;
 	margin: 0; 
