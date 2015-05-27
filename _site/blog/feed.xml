@@ -13,8 +13,8 @@
                                         <description>Redis is such a great technology. Unfortunately, there's still people who doesn't know Redis or doesn't know that Redis can be used as Cache System to improve speed of responses.</description>
                                 
                                 <pubDate>Mon, 25 May 2015 00:00:00 -0300</pubDate>
-                                <link>http://rodrigoaraujo.me/2015/05/25/Scaling-Python:-Using-Redis-as-Cache/</link>
-                                <guid isPermaLink="true">http://rodrigoaraujo.me/2015/05/25/Scaling-Python:-Using-Redis-as-Cache/</guid>
+                                <link>http://rodrigoaraujo.me/2015/05/25/Web-Scaling:-Using-Redis-as-Cache/</link>
+                                <guid isPermaLink="true">http://rodrigoaraujo.me/2015/05/25/Web-Scaling:-Using-Redis-as-Cache/</guid>
                         </item>
                 
                         <item>
