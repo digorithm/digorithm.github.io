@@ -7,6 +7,17 @@
                 <atom:link href="http://rodrigoaraujo.me/feed.xml" rel="self" type="application/rss+xml" />
                 
                         <item>
+                                <title>Scaling Python - Using Redis as Cache</title>
+                                        
+                                
+                                        <description>Are you total lost in this world full of jargons like API, Rest API, microservices and stuffs? Come here, sit, grab a cup of coffee, and let's talk briefly about it.</description>
+                                
+                                <pubDate>Mon, 25 May 2015 00:00:00 -0300</pubDate>
+                                <link>http://rodrigoaraujo.me/2015/05/25/Scaling-Python%3A-Using-Redis-as-Cache/</link>
+                                <guid isPermaLink="true">http://rodrigoaraujo.me/2015/05/25/Scaling-Python%3A-Using-Redis-as-Cache/</guid>
+                        </item>
+                
+                        <item>
                                 <title>Building your first Rest API with python</title>
                                         
                                 

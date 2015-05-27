@@ -84,6 +84,433 @@
   
     <li>
 	<h1>
+      <a href="/2015/01/09/Making-Your-Machine-Think-Learn-And-Predict--Gradient-Descent-Algorithm-in-Java/">
+	
+	<div style="line-height:35px;color:#444;">Making your machine think, learn and predict - Gradient Descent Algorithm in Java</div>
+	
+	</a>
+	</h1>
+	<div style="margin-top:-15px;color:#E11F00;">9 January 2015</div>
+        &nbsp;
+      <p><html>
+
+
+<h2>How can we make a machine learn from data?</h2>
+
+<p>Then, how can we make the machine predicts things based on that learned data? Those are the question answered by one of the most classic Machine Learning Algorithms, the <strong>Gradient Descent Algorithm</strong>, from a Mathematical-Statistical side it’s called <strong>Univariate Linear Regression</strong>.</p>
+
+
+<p>This is one of the tools of the Machine Learning toolbox, and what it tries to do is to model a relationship between a scalar dependent variable Y and a explanatory variable X.</p>
+&nbsp;
+
+<h2>in Layman’s term…</h2>
+
+<p>Let’s suppose you have a few points distributed in a Graph, so you already know that in a point A you have a well defined X and Y, which means, if you input X, your output will be Y, and in a point B you have a well defined X’ and Y’ as well. But, thing is, if a point emerge between A and B, and you only have the X…  what will be the Y <em>(the output)</em>?</p>
+
+<p>What this algorithm does is: <strong>It tries to predict this Y value, based on the previous data</strong>! Amazing, right?</p>
+
+<p>At the end of the execution, you’ll have a full trend line that you can use to predict values! just like the image below.</p>
+<div align=center>
+<img src="/images/linearRegression.png" width=500 height=400/>
+</div>
+
+<h2>The Theory Behind It</h2>
+
+<p>I’ll cover a few theories about this algorithm here, but, it won’t be complete, as this demand a great coverage of mathematical material that if I would write it all here, It would be a <em>long, long</em>, <strong>very</strong> <em>long</em> post. So I’m assuming that you’re already familiar with Calculus <em>(Sums, Partial Derivatives)</em>, Statistics and Discrete Mathematics.</p>
+
+<p>So, our goal here is to <strong>fit the best straight line in our initial data</strong>, right?</p>
+
+<p>Thus, we need something to represent this straight line, which will be our hypothesis function:</p>
+<span style="font-size:169%;">
+$$
+
+h_{\Theta}(X) = \Theta_{0} + \Theta_{1}x
+
+$$
+</span>
+
+<p>Where this \( \Theta_{0} \) and \( \Theta_{1} \) are the parameters of the function, and <strong>finding the best parameters for this function is what is going to give us the correct straight line to plot on our data</strong>.</p>
+
+<p>Here’s an example of what we're trying to do, which is, fit the best straight line in the data:</p>
+
+<div align=center>
+        <img src="/images/Linear-regression.svg"/>
+</div>
+
+<p>So what we want to do is to find a \( \Theta_{0} \) and \( \Theta_{1} \) so our Hypothesis outputs can be very close to the real Y output.</p>
+<p>Formally we want:<p>
+<span style="font-size:160%;">
+$$
+\underset{\Theta_{0}\Theta_{1}}{min}(h_{\Theta}(x) - y)^2
+$$
+</span>
+
+<p>So we want <strong>minimize</strong> \( \Theta_{0} \) and \( \Theta_{1} \) so the difference between the <strong>Hypothesis</strong> and the <strong>real output</strong> is minimal.</p>
+
+<p><strong>But we want it for every point in our data</strong>, which is \(x(i)\) <em>(which is the i-th x of our data)</em>, so we want the <strong>sum of this average</strong>, which is, formally:</p>
+
+<span style="font-size:199%;">
+$$
+\underset{\Theta_{0}\Theta_{1}}{min}\,\frac{1}{2m} \sum_{i=1}^{m} (h_{0}(x^{(i)}) - y^{(i)})^2
+$$
+</span>
+
+<p>And we’re going to call this function <strong>Cost Function</strong>, with the following notation:</p>
+<span style="font-size:160%;">
+$$
+J(\Theta_{0}, \Theta_{1}) = \,\frac{1}{2m} \sum_{i=1}^{m} (h_{0}(x^{(i)}) - y^{(i)})^2
+$$
+</span>
+
+<p>So, our goals is to <strong>minimize this cost function</strong>:</p>
+
+<span style="font-size:160%;">
+$$
+\underset{\Theta_{0}\Theta_{1}}{min}\,\, J(\Theta_{0}, \Theta_{1})
+$$
+</span>
+
+
+<p>This cost function is also called <a href="http://en.wikipedia.org/wiki/Mean_squared_error">Square Error Function</a>.</p>
+
+<p><strong>Now, the gradient descent algorithm</strong></p>
+
+<p>With our cost function built, we need to “keep” finding values for \( \Theta_{0} \) and \( \Theta_{1} \) so we can reach our ideal trend line. So, basically:</p>
+
+<p>1. We start with some \( \Theta_{0} \) and \( \Theta_{1} \)</p>
+<p>2. keep changing \( \Theta_{0} \) and \( \Theta_{1} \) to reduce our cost function \( J(\Theta_{0}, \Theta_{1}) \), until we find the minimum.</p>
+
+<p>That’s quite simple and intuitive, right? There’s a lot of intuitive explanation and more visual examples of what this algorithm is doing in the <a href="https://class.coursera.org/ml-007/">machine learning course taught by Andrews Ng (From Stanford)</a>.</p>
+
+
+<p>What this algorithm will be doing is: partially derive our cost function for \( \Theta_{0} \) and \( \Theta_{1} \) simultaneously, so we can find the minimum value for them, with every iteration updating our \( \Theta_{0} \) and \( \Theta_{1} \) with their new value!</p>
+
+<p><em>- Meh, talk is cheap show me the math!</em></p>
+
+<p>Formally, the algorithm is:</p>
+
+<span style="font-size:160%;">
+$$
+repeat \, until  \, convergence\,\{
+\\
+\,\,\,\,\,\,\,\,\,\,\,\, \Theta_{j} := \Theta_{j} - \alpha \frac{\partial }{\partial \Theta_{j}} \,\, J(\Theta_{0}, \Theta_{1})
+
+\\ \} \,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,
+
+$$
+</span>
+
+<p><em><strong>Make sure that this will run for j = 0 and j = 1.</em></strong></p>
+
+<p>But, pay attention, this is the generic version, the \( \Theta_{j} \) represent both \( \Theta_{0} \) and \( \Theta_{1} \).</p>
+
+<p>What the algorithm is saying is that we’ll be doing this procedure to \( \Theta_{0} \) and \( \Theta_{1} \) at the same time!</p>
+
+<p>So, we can put it in this way:</p>
+<span style="font-size:160%;">
+$$
+repeat \, until  \, convergence\,\{
+\\
+\Theta_{0} := \Theta_{0} - \alpha \frac{\partial }{\partial \Theta_{0}} \,\, J(\Theta_{0}, \Theta_{1})
+\\
+\Theta_{1} := \Theta_{1} - \alpha \frac{\partial }{\partial \Theta_{1}} \,\, J(\Theta_{0}, \Theta_{1})
+
+\\ \} \,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\
+
+
+$$
+</span>
+
+<p>Also, we can expand the <strong>Cost Function</strong> that is being derived, doing this, it will be exactly what I’ll be putting into code soon, so, our <strong>final algorithm</strong> is:</p>
+<span style="font-size:160%;">
+$$
+repeat \, until  \, convergence\,\{
+\\
+\Theta_{0} := \Theta_{0} - \alpha \frac{\partial }{\partial \Theta_{0}} \,\, \Big (\frac{1}{2m} \sum_{i=1}^{m} (h_{\Theta}(x^{(i)}) - y^{(i)})^2 \Big) 
+\\
+\Theta_{1} := \Theta_{1} - \alpha \frac{\partial }{\partial \Theta_{1}} \,\, \Big (\frac{1}{2m} \sum_{i=1}^{m} (h_{\Theta}(x^{(i)}) - y^{(i)})^2 \Big)
+
+\\ \} \,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\
+
+$$
+</span>
+
+
+<p><strong>Now it’s time to code all of it!</strong></p>
+
+<p>First things first, we’ll be using <a href="http://code.google.com/p/jmathplot/">Google’s JMathPlot</a> to plot graphs using Java and Swing to use its JFrame, we shall start with our class to represent our <strong>Initial Data</strong>, which will be the <strong>Training Set</strong>.</p>
+
+
+<pre>
+<code class="hljs java">
+
+import javax.swing.JFrame;
+import org.math.plot.*;
+
+public class InitialData{
+        public static double[] x = {2, 4, 6, 8};
+        public static double[] y = {2, 5, 5, 8};
+
+
+        public void plotData(){
+                Plot2DPanel plot = new Plot2DPanel();
+                plot.addScatterPlot("X-Y", this.x, this.y);
+                JFrame frame = new JFrame("Original X-Y Data");
+                frame.setContentPane(plot);
+                frame.setSize(600, 600);
+                frame.setVisible(true);
+        }
+}
+
+</code>
+</pre>
+
+<p>To try out the data plotting, create a main class and call <em>plotData()</em> from <strong>InitialData.java</strong>, so we can have this:</p>
+<div align=center>
+<img src="/images/example-plot.png" width=400 height=400/>
+</div>
+
+<p>Now we’re going to take our first steps on writing the <strong>GradientDescent.java</strong>, we must be very careful here.</p>
+
+<p>Let’s start with the main settings and parameters of it:</p>
+
+<pre>
+<code class="hljs java">
+
+import javax.swing.JFrame;
+import org.math.plot.*;
+
+public class GradientDescent{
+        private double theta0;
+        private double theta1;
+
+        private int trendline;
+
+        // Algorithm settings
+    double alpha = 0.01;  // learning rate
+    double tol = 1e-11;   // tolerance to determine convergence
+    int maxiter = 9000;   // maximum number of iterations in case convergence is not reached
+    int dispiter = 100;   // interval for displaying results during iterations
+    int iters = 0;
+
+    //track of results
+    double[] theta0plot = new double[maxiter+1];
+    double[] theta1plot = new double[maxiter+1];
+    double[] tplot = new double[maxiter+1];
+
+    InitialData initial_data;
+
+    Plot2DPanel plot;
+
+    public GradientDescent(InitialData id){
+                //initial guesses
+        this.theta0 = 0;
+        this.theta1 = 0;
+        this.initial_data = id;
+
+        plot = new Plot2DPanel();
+        plot.addScatterPlot("X-Y", initial_data.x, initial_data.y);
+        JFrame frame = new JFrame("Final X-Y Data");
+        frame.setContentPane(plot);
+        frame.setSize(600, 600);
+        frame.setVisible(true);
+    }
+[...]
+
+</code>
+</pre>
+
+
+
+<p>Now let me explain a few details of this part:</p>
+
+<p><strong>Alpha</strong> is the <strong>Learning Rate</strong>, it’s a <em>dangerous variable</em>, it’s used to set the size of the step that the algorithm will take while trying to find the \( \Theta_{0} \) and \( \Theta_{1} \), that’s the learning rate of the algorithm. If Alpha is <strong>too low</strong>, the algorithm can be very slow, although very precise, if Alpha is <strong>higher</strong>, it will be taking <strong>larger steps</strong>, which can be <strong>faster</strong>, or <strong><style="font-color:red;">dangerous</style></strong>, causing the algorithm to <strong>DIVERGE</strong>, which, <em>trust me</em>, you don’t want this! <em>(Andrew Ng explain this part very well in its course)</em></p>
+
+
+<p>The variable <strong>TrendLine</strong> is what we’ll use to plot the straight line which is our main goal.</p>
+
+<p>The <strong>tol</strong> variable is our safe move in case of a dangerous convergence, which means, in case of convergence, it will stop the execution.</p>
+
+<p>The other variables and objects in this part are very intuitive to understand, it’s auto explainable! <em>(forgive if i’m wrong, just say something and I’ll put more detail on that)</em>.</p>
+
+<p>About the Constructor, we’re saying that our initial guesses for \( \Theta_{0} \) and \( \Theta_{1} \) is 0. The rest is just data plotting.</p>
+
+<p><strong>next: our Hypothesis Function</strong> <em>(that will be doing exactly as the model that I did show above)</em></p>
+
+
+<pre>
+<code class="hljs java">
+public double hypothesisFunction(double x){
+        return this.theta1*x + theta0;
+    }
+</code>
+</pre>
+
+<p>Now, our two function to derive our \( \Theta \), again, it will be doing exactly the same as the mathematical model, there’s no magic!</p>
+
+<pre>
+<code class="hljs java">
+public double deriveTheta1(){
+        double sum = 0;
+
+        for (int j=0; j&lt;initial_data.x.length; j++){
+                sum += (initial_data.y[j] - hypothesisFunction(initial_data.x[j])) * initial_data.x[j];
+        }
+        return -2 * sum / initial_data.x.length;
+    }
+
+    public double deriveTheta0(){
+        double sum = 0;
+
+        for (int j=0; j&lt;initial_data.x.length; j++) {
+                sum += initial_data.y[j] - hypothesisFunction(initial_data.x[j]);
+        }
+        return -2 * sum / initial_data.x.length;
+
+    }
+</code>
+</pre>
+
+<p>Now, the <strong>Gradient Descent Algorithm</strong> <em>per se</em>, making use of the functions above:</p>
+
+<pre>
+<code class="hljs java">
+
+public void execute(){
+        do {
+
+                this.theta1 -= alpha * deriveTheta1();
+                this.theta0 -= alpha * deriveTheta0();
+
+                //used for plotting
+                tplot[iters] = iters;
+                theta0plot[iters] = theta0;
+                theta1plot[iters] = theta1;
+                iters++;
+
+                if (iters % dispiter == 0){
+                        addTrendLine(plot, true);
+
+                }
+
+                if (iters &gt; maxiter) break;
+        } while (Math.abs(theta1) &gt; tol || Math.abs(theta0) &gt; tol);
+        plot.addScatterPlot("X-Y", initial_data.x, initial_data.y);
+        System.out.println("theta0 = " + this.theta0 + " and theta1 = " + this.theta1);
+    }
+
+</code>
+</pre>
+
+<p>Note that it does <em>almost</em> exactly the same as the mathematical model of the Gradient Descent demonstrated above, the difference is only a few details, such as the <em>if</em> and <em>while</em> to verify convergence or divergence <em>(which is, if it reached the iteration’s limit)</em></p>
+
+<p>Next we have the <strong>addTrendLine</strong> function, used to keep plotting our straight line as it will become more updated.</p>
+
+<pre>
+<code class="hljs java">
+public void addTrendLine(Plot2DPanel plot, boolean removePrev){
+        if (removePrev){
+                plot.removePlot(trendline);
+        }
+        double[] yEnd = new double[initial_data.x.length];
+        for (int i=0; i&lt;initial_data.x.length; i++)
+                yEnd[i] = hypothesisFunction(initial_data.x[i]);
+        trendline = plot.addLinePlot("final", initial_data.x, yEnd);
+    }
+</code>
+</pre>
+
+<p>And now we have an extra, it’s a function to store and plot the convergence history of both \( \Theta_{0} \) and \( \Theta_{1} \), so we can see how it happened.</p>
+<pre>
+<code class="hljs java">
+public void printConvergence(){
+
+      double[] theta0plot2 = new double[iters];
+      double[] theta1plot2 = new double[iters];
+      double[] tplot2 = new double[iters];
+      System.arraycopy(theta0plot, 0, theta0plot2, 0, iters);
+      System.arraycopy(theta1plot, 0, theta1plot2, 0, iters);
+      System.arraycopy(tplot, 0, tplot2, 0, iters);
+                
+      // Plot the convergence of data
+      Plot2DPanel convPlot = new Plot2DPanel();
+ 
+      // add a line plot to the PlotPanel
+      convPlot.addLinePlot("theta0", tplot2, theta0plot2);
+      convPlot.addLinePlot("theta1", tplot2, theta1plot2);
+ 
+      // put the PlotPanel in a JFrame, as a JPanel
+      JFrame frame2 = new JFrame("Convergence of parameters over time");
+      frame2.setContentPane(convPlot);
+      frame2.setSize(600, 600);
+      frame2.setVisible(true);
+    }
+
+</code>
+</pre>
+
+<p>Finally, we have our <strong>Test Class</strong>, that will execute everything:</p>
+
+<pre>
+<code class="hljs java">
+
+import javax.swing.JFrame;
+
+import org.math.plot.*;
+
+public class TestGradDescent {
+        public static void main(String[] args ){
+                InitialData id = new InitialData();
+                id.plotData();
+                GradientDescent gd = new GradientDescent(id);
+                gd.execute();
+                gd.printConvergence();
+
+        }
+}
+
+</code>
+</pre>
+
+<p>Now, executing the code, the output will be, at first, the initial data:</p>
+<div align=center>
+<img src="/images/example-plot-2.png"/>
+</div>
+<p><strong>Executing the algorithm, it learns and generate its prediction based on its initial data:</strong></p>
+
+<h2>Magical, right?</h2>
+
+<p>And then, we can see the <strong>convergence</strong>:</p>
+
+<div align=center>
+<img src="/images/example-convergence.png"/>
+</div>
+
+<p>And you can see in the terminal the final values of \( \Theta_{0} \) and \( \Theta_{1} \) that minimized the Cost Function.</p>
+
+<p><em>If it wasn’t science, probably would be black magic. heh.</em></p>
+
+<h2>A few considerations</h2>
+
+<p>You can download the complete code <a href="https://github.com/digorithm/ArtificialIntelligenceAlgorithms">here</a>.</p>
+
+<p>If you have any questions/suggestion, drop me an email so we can talk!</p>
+
+<p>If you need further details of the mathematical model, I ultra advice to watch Andrew’s Ng Videos at Stanford@Coursera. <strong>His skills to teach it is something unbelievable awesome</strong>.</p>
+
+<p><em>Thanks for the reading!</em></p>
+
+
+</html>
+
+
+</p>
+    </li>
+    <hr/>
+    &nbsp;
+  
+    <li>
+	<h1>
       <a href="/2015/01/06/Why-How-and-Where-To-Learn-Design-Patterns/">
 	
 	<div style="line-height:35px;color:#444;">Why, how and where to Learn Design Patterns</div>
@@ -267,610 +694,6 @@ $$
 
 
 </html>
-
-</p>
-    </li>
-    <hr/>
-    &nbsp;
-  
-    <li>
-	<h1>
-      <a href="/2014/10/10/Fun-with-graphs-pt1/">
-	
-	<div style="line-height:35px;color:#444;">Fun with graphs pt1</div>
-	
-	</a>
-	</h1>
-	<div style="margin-top:-15px;color:#E11F00;">10 October 2014</div>
-        &nbsp;
-      <p><html>
-
-<p>Graph Theory is definitely one of my favorite branches of the Mathematics & Computer Science, mostly because of its nearest infinity applications, in both real world problems and pure theoretical problems.</p>
-
-<p>These days I’ve been working (with my buddy Daniel Almeida) in a framework to create and manipulate graphs. Which means, creating a data structure to represent graphs, edges, vertexes and creating algorithms to work on this structure. All this is being made with Java and I’ll expose this code here, as I saw a terrible lack of good readable codes about it on the internet.</p>
-
-<p>So, before we start coding the graph’s structure… we must clarify what a graph is and why it’s so important to the Computer Science (and many other sciences).</p>
-
-<p>
-A graph is a ordered pair \(G = (V,E)\) , where \(V\) is a set of Vertices/Nodes and \(E\) is a set of Edges, an extremely mple example of a complete <a href="http://mathworld.wolfram.com/SimpleGraph.html">simple</a>, <a href="http://mathworld.wolfram.com/ConnectedGraph.html">connected</a> and <a href="http://mathworld.wolfram.com/CompleteGraph.html">complete</a> graph is:</p>
-<div align="middle">
-<img src="/images/graph1.png" width=119 height=259/>
-
-<p><em>So, what’s the huge deal with this graph theory thing?</em></p>
-</div>
-
-<p>Well, not only theoretical computer science problems lay on the graph theory but also in many other distinct fields, from particle physics, chemistry to <a href="http://en.wikipedia.org/wiki/Mathematical_sociology">sociology</a>.</p>
-
-<p>All this because every little thing in our universe is linked, and when this set of things became a “web of things”, we need to study its properties. And that’s where graph theory get in.</p>
-
-<p>So when a graph gets bigger, we need to represent this structure in a computational way, so we can compute things like shortest path between two nodes, connectivity and thousand of other properties and techniques.</p>
-
-<p>The most common ways to represent graph mathematically are:</p>
-&nbsp;
-<h2>Adjacency Matrix</h2>
-
-<p>It’s a matrix that represent the adjacency of every node in a graph, it’s an excellent way to work computationally with graphs. The same graph that I presented previously in a visual way can be represented by the following adjacency matrix:</p>
-<p>$$ 
-\begin{bmatrix}
-0 & 1 & 1\\ 
-1 & 0 & 1\\ 
-1 & 1 & 0
-\end{bmatrix}
-$$ 
-</p>
-&nbsp;
-<h2>Adjacency List</h2>
-
-<p>This is another common way to represent graph mathematically, it’s a simple list of lists, each node in the main list points to a list of their adjacent nodes.</p>
-
-<p>Here’s an example:</p>
-<img src="/images/graph2.png" width=119 height=259/>
-<img src="/images/adjaceny-list.gif" style="padding-left:50px; padding-bottom:50px;" width=272 height=132/>
-
-&nbsp;
-&nbsp;
-&nbsp;
-
-<h2>Data Structures to represent Graphs</h2>
-
-<p>Ok, so, how do we represent graphs, edges and vertexes in terms of data structures? Before we dig deeper in the algorithms and the mathematical properties of the graphs, we need to create our Data Structure to work with.</p>
-
-<h3>The vertex</h3>
-
-<pre>
-<code class="java hljs">
-package GraphModels;
-
-public class Vertex {
-    /* This Data Structure will be capable to represent a Vertex,
-    * which is a Node that will be used on a graph
-    */
-    
-    public String id;
-    public String name;
-    public boolean visited = false;
-    
-    public Vertex(String id, String name) {
-        this.id = id;
-        this.name = name;
-    }
-    public String getId() {
-        return id;
-    }
-    
-    public String getName() {
-        return name;
-    }
-    
-  @Override
-  public String toString() {
-    return name;
-  }
-    
-}
-
-</code>
-</pre>
-
-<p>For now you may be asking yourself why do we need a variable called “Visited”. Well, we’ll be using it in algorithms to walk through the graph, so we must need to know which nodes were visited. It will became more clear soon!</p>
-
-&nbsp;
-
-<h3>The Edge</h3>
-
-<p>Yes, the edge must be represented computationally! That’s our way to figure out paths through the vertexes, the edge may or may not have a weight, the edge must know its source vertex and its destination vertex</p>
-
-<pre>
-<code>
-package GraphModels;
-
-public class Edge {
-    
-     /* This Data Structure will be capable to represent a Edge,
-    *    that will be used on a graph
-    */
-    
-    public String id;
-    public Vertex source;
-    public Vertex destination;
-    private final int weight;
-    
-    public Edge(String id, Vertex source, Vertex destination, int weight) {
-        this.id = id;
-        this.source = source;
-        this.destination = destination;
-        this.weight = weight;
-    }
-    
-    public String getId() {
-        return id;
-    }
-    public Vertex getDestination() {
-        return destination;
-    }
-    
-    public Vertex getSource() {
-        return source;
-    }
-    public int getWeight() {
-        return weight;
-    }
-    
-    @Override
-    public String toString() {
-        return source + " " + destination;
-    }
-} 
-</code>
-</pre>
-
-&nbsp;
-
-<h3>The Graph</h3>
-
-<p>That’s for sure the biggest and most complex part, don’t panic with the many algorithms already implemented in this code. I’ll be explaining one by one.</p>
-
-<p>We’re reading a text file containing the text file, if you want to test by yourself, make sure to create a .txt in the correct way and to pass the correct file path! You can find the instructions to write the .txt graph in the comments of this code</p>
-
-
-<pre>
-<code class="java hljs">
-
-package GraphModels;
-
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Queue;
-
-public class Graph {
-    
-    /* This Data Structure will be capable to represent a Graph,
-    *   where G = (V, E)
-    */
-    
-   private  List<Vertex> nodes;
-   private  List<Edge> edges;
-   public Vertex node;
-   public Edge edge;
-   private String path;
-   private int [][] adjacencyMatrix;
-   private Map nodesMatrixMap;
-   private List<Vertex> adjacentNodes;
-   public int degree;
-   public int minDegree;
-   public int maxDegree;
-   public int avgDegree;
-   
-
-   public Graph() {
-    
-  }
-
-
-  public List<Vertex> getNodes() {
-    return nodes;
-  }
-
-  public List<Edge> getEdges() {
-    return edges;
-  }
-  
-  public void setNodes(List<Vertex> vertex){
-      this.nodes = vertex;
-  }
-  
-  public void setEdges(List<Edge> edges){
-      this.edges = edges;
-  }
-  
-  // Find an edge
-  // TO-DO: Change == to equals
-  public Edge getEdge(Vertex source, Vertex destination) {
-      for (Edge edge : this.getEdges()) {
-          if ((edge.getSource().getId() == source.getId() && edge.getDestination().getId() == destination.getId()) || (edge.getSource().getId() == destination.getId() && edge.getDestination().getId() == source.getId())) {
-              return edge;
-          }
-      }
-      return null;
-  }
- 
-  // Check if there is an edge for two given vertices
-  public boolean hasEdge(Vertex source, Vertex destination) {
-      Edge result = this.getEdge(source, destination);
-      if (result != null) {
-        return true;
-      } else {
-        return false;
-      }
-  }
-  
-  public List<Vertex> getAdjacentNodes(Vertex node){
-      adjacentNodes = new ArrayList<Vertex>();
-      
-      for (Vertex currentNode : nodes){
-          if (hasEdge(node, currentNode)){
-              adjacentNodes.add(currentNode);
-          }
-      }
-       
-      return adjacentNodes;
-  }
-  
-  public int getMinDegree(){
-      minDegree = 99999999;
-      
-      for (Vertex node : nodes){
-          if (this.getDegree(node)<minDegree){
-              minDegree = this.getDegree(node);
-          }
-      }
-      
-      
-      return minDegree;
-  }
-  public int getMaxDegree(){
-      maxDegree = 0;
-      
-      for (Vertex node : nodes){
-          if (this.getDegree(node)>maxDegree){
-              maxDegree = this.getDegree(node);
-          }
-      }
-
-      return maxDegree;
-  }
-  public int getAvgDegree(){
-      avgDegree = 0;
-      
-      for (Vertex node : nodes){
-          avgDegree += this.getDegree(node);
-      }
-      avgDegree = avgDegree/nodes.size();
-      
-      return avgDegree;
-  }
-  
- 
-  //modified for our needs   
-  public int breadthFirstSearch(Vertex rootNode){
-      
-      int visitedNodes = 0;
-      Queue q = new LinkedList();
-      q.add(rootNode);
-
-      while (!q.isEmpty()){
-          Vertex currentNode = (Vertex) q.peek();
-          for (Vertex node : this.getAdjacentNodes(currentNode)){
-              if (!node.visited){   
-                  node.visited = true;
-                  q.add(node);
-                  visitedNodes++;
-              }
-          }
-          q.remove();   
-      }
-      //reseting all flags
-      for (Vertex node : nodes){
-          node.visited = false;
-      }
-
-      return visitedNodes;
-    
-  }
-  
-  public boolean isConnected(){
-      int numberOfNodes = nodes.size();
-      
-      for (Vertex node : nodes){
-          if (!(this.breadthFirstSearch(node) == numberOfNodes)){
-              return false;
-          }
-      }
-      return true;
-  }
-  
-  //TO-DO: error treatment. 
-  // while this treatment doesn't exist: BE EXTREMELY CAREFUL WITH GRAPH.TXT
-  // the right syntax is:
-  //line (1) :1,2,...,n 
-  //line (2) :1-2
-  //line (3) : weight of the previous connection
-  //line (n) :2-n
-  //line (n+1) : weight of the previous connection
-  //line (n+2) :-1
-  //where the first line you must declare the nodes, each one separated by comma
-  //the second til the n-th line you must declare the connections between the nodes declared 
-  //in the first line
-  //after every connection, in the next line, you must declare the weight of the connection
-  // leave everything zero to create a unweighted graph
-  //after the last connection, you must end with a -1
-  // if you don't do this your computer may explode lol
-  //...
-  //...
-  //...
-  // i don't know, i did never try that.
-  public void createGraph(String path) throws FileNotFoundException, IOException{
-      this.path = path;
-      
-      nodes = new ArrayList<Vertex>();
-      edges = new ArrayList<Edge>();
-            
-      FileReader fr = new FileReader(path);
-      BufferedReader textReader = new BufferedReader(fr);
-     
-      //gets the first line, which are the nodes that must be created
-      String TextData = textReader.readLine();
-      
-      //separate the string with numbers
-      String[] nodesInString = TextData.split("\\s*,\\s*");
-      
-      //create the list of nodes
-      for (String nodeInString : nodesInString){
-
-          node = new Vertex(nodeInString, "node " + nodeInString);
-          nodes.add(node);
-          
-      }
-      
-      //create the list of edges
-      String edgeIntoString;
-      Vertex vertex_aux1 = new Vertex("-1","-1");
-      Vertex vertex_aux2 = new Vertex("-1","-1");;
-      int n = 0;
-      //varre a linha que tem x-y
-      while (!(edgeIntoString = textReader.readLine()).equals("-1")){
-          
-          String[] nodesConnected = edgeIntoString.split("\\s*-\\s*");
-          //varre os dois nodes
-         
-          int peso = Integer.parseInt(textReader.readLine());
-              
-              //verifica se x e y passados no txt estão instanciados em nodes 
-              for (Vertex node : nodes){
-         
-                  if (nodesConnected[0].equals(node.getId())){
-                      //se o node do txt foi achado em nodes
-                      
-                      vertex_aux1 = new Vertex(node.getId(), node.getName());
-                  }
-              }
-              for (Vertex node : nodes){
-         
-                  if (nodesConnected[1].equals(node.getId())){
-                     
-                      
-                      vertex_aux2 = new Vertex(node.getId(), node.getName());
-                  }
-              }
-              
-              
-          edge = new Edge(Integer.toString(n),vertex_aux1, vertex_aux2, peso);
-          edges.add(edge);
-      }
-      
-      
-      
-  }
-  // Add a new edge
-  public boolean addEdge(Vertex source, Vertex destination) {
-      Edge newEdge = new Edge("id", source, destination, 0);
-      return this.edges.add(newEdge);
-  }
-  
-  // Remove an edge
-  public boolean removeEdge(Vertex source, Vertex destination) {
-    
-      Edge result = this.getEdge(source, destination);
-      
-      if (result != null) {
-          return this.edges.remove(result);
-      } else {
-          System.out.println("Couldn't find edge");
-          return false;
-      }
-  }
-  
-  public int getDegree(Vertex node){
-      
-      degree = 0;
-      
-      for (Vertex CurrentNode : nodes){
-          if (hasEdge(node, CurrentNode)){
-              degree++;
-          }
-      }
-  
-      return degree;
-  }
-  
-  public void printGraph() {
-   
-      for (Vertex node: this.getNodes()){
-          System.out.println(node.getName());
-          System.out.print("Adjacent nodes: ");
-          adjacentNodes = getAdjacentNodes(node);
-          for (Vertex adjacentNode : adjacentNodes){
-              System.out.print(adjacentNode.getName() + " ");
-          }
-
-          System.out.println(" ");
-          System.out.println("Degree of this node: " + getDegree(node));
-          System.out.println(" "); 
-      }
-      System.out.println("- - - - - - - - - - - - - - - - ");
-      System.out.println(" ");
-      System.out.println("Min Degree of this Graph: " + getMinDegree());
-      System.out.println(" ");
-      System.out.println("Max Degree of this Graph: " + getMaxDegree());
-      System.out.println(" ");
-      System.out.println("Average Degree of this Graph: " + getAvgDegree());
-      System.out.println(" ");
-      System.out.println("Graph is connected: " + this.isConnected());
-      System.out.println(" ");
-      System.out.println("- - - - - - - - - - - - - - - - ");
-      System.out.println("Connections: ");
-      System.out.println(" ");
-      for (Edge edge : this.getEdges() ){
-          System.out.print(edge.getSource().getId() +"<->"+edge.getDestination().getId()+" ");
-          System.out.println("weight: " + edge.getWeight());
-      }
-      System.out.println(" ");
-      System.out.println("- - - - - - - - - - - - - - - - ");
-    }
-  
-  public void setAdjacencyMatrix() {
-    
-    initializeAdjacencyMatrix();
-    int weigth;
-    int source;
-    int destination;
-    for (Edge currentEdge : this.getEdges() ){
-        weigth = currentEdge.getWeight();
-        source = (int) nodesMatrixMap.get(currentEdge.getSource().getName());
-        destination = (int) nodesMatrixMap.get(currentEdge.getDestination().getName());
-
-        adjacencyMatrix[source][destination] = weigth; 
-        //must be symmetric
-        adjacencyMatrix[destination][source] = weigth; 
-    }
-  }
-  
-  public void initializeAdjacencyMatrix(){
-      int numNodes = this.nodes.size();
-      adjacencyMatrix = new int[numNodes][numNodes];
-      nodesMatrixMap = new HashMap();
-      for (int i = 0; i < numNodes; i++) {
-          nodesMatrixMap.put(this.nodes.get(i).getName(), i);
-          for (int j = 0; j < numNodes; j++) {
-              adjacencyMatrix[i][j] = -1;
-          }
-      }
-  }
-  
-  public void printAdjacencyMatrix() {
-    
-      String sourceName;
-      String destName;
-      int source;
-      int dest;
-      
-      System.out.println(" ");
-      System.out.println("Adjacency Matrix: ");
-      System.out.println(" ");
-      
-      for (int i = 0; i < this.nodes.size(); i++) {
-          sourceName = this.nodes.get(i).getName();
-          source = (int) nodesMatrixMap.get(sourceName);
-          for (int j = 0; j < this.nodes.size(); j++) {
-              destName = this.nodes.get(j).getName();
-              dest = (int) nodesMatrixMap.get(destName);
-              if (adjacencyMatrix[source][dest] == -1) {
-                  System.out.print("- ");
-              } else {
-                  System.out.print(adjacencyMatrix[source][dest] + " ");
-              }
-          }
-          System.out.print("\n");
-      }
-  }
-  
-}
-
-</code>
-</pre>
-
-&nbsp;
-
-<h3>The test file</h3>
-
-<p>Here’s the file containing the main, if you want to test, remember to change the path file!</p>
-
-<pre>
-<code class="java hljs">
-package graphproject;
-import GraphModels.*;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
-public class GraphProject {
-    
-    //graph creation procedure
-    private List<Vertex> nodes;
-    private List<Edge> edges;
-    private Graph graph;
-    public Vertex node;
-    public Edge edge;
-    
-    public void printGraph(Graph graph) {
-      for (Vertex node: graph.getNodes()){
-             System.out.println(node.toString());
-      }
-      
-      for (Edge edge : graph.getEdges() ){
-             System.out.println(edge.toString());
-             System.out.println(" ");
-      }
-      
-    }
-    
-    public void test() throws IOException{
-        
-        Graph graph = new Graph();
-        graph.createGraph("/Users/daniel/Documents/workspace_java/GraphProject/src/graphproject/graph.txt");
-        
-        graph.printGraph();
-        graph.setAdjacencyMatrix();
-        graph.printAdjacencyMatrix();
-    }
-    //end of graph creation procedure
- 
-    public static void main(String[] args) throws IOException {
-       GraphProject gp = new GraphProject();
-       
-       gp.test();
-    }
-}
-
-</code>
-</pre>
-&nbsp;
-
-<h2>Conclusion and next steps</h2>
-
-<p>At this moment, you’re perfectly able to create a graph (via .txt file) and run all those algorithms to extract information about your graph. Just make sure to import the right libraries and to put the files in the right package. Doing these little things right, I’m pretty sure this will work perfectly.</p>
-
-<p>But I’m sure you may be a little lost about a few algorithms and techniques we’ve implemented in the Graph.java. But, don’t worry, i’ll be explaining each method one by one in the next parts of this post!</p>
-
-</html>
-
 
 </p>
     </li>
