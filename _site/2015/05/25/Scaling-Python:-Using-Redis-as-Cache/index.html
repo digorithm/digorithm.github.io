@@ -94,13 +94,13 @@
 
 <p><h2>Why Redis</strong></h2>
 
-<p>Well, let's start this discussion remembering how a common Relational Database basically works: Suppose we're using a MySQL, every time your app send a request to the MySQL client, the MySQL client gotta make a trip to the hard drive to get the data asked in the request, this can become a problem if the data asked in request is big... and if there are many requests at the same time, this can generate a huge latency, annoying users or worse. </p>
+<p>Well, let's start this discussion remembering how a common Relational Database basically works: Suppose we're using a MySQL, every time your app sends a request to the MySQL client, the MySQL client gotta make a trip to the hard drive to get the data asked in the request, this can become a problem if the data asked in request is big... and if there are many requests at the same time, this can generate a huge latency, annoying users or worse. </p>
 
 <p>This is where Redis comes into play, Redis is a key-value database that will be running and storing data inside your memory, if you remember the basic of computers architecture: </p>
 <img src="/images/memchart.jpg">
 
 
-<p>It's way faster to access data in the memory (Physical RAM, main memory) than to access data in the Hard Drive, so it's easy to notice that if the data that the application wants to access is inside the main memory, it's way easier to reach to that data than if it was stored in the Hard Drive.</p>
+<p>It's way faster to access data in memory (Physical RAM, main memory) than to access data in the Hard Drive, so it's easy to notice that if the data that the application wants to access is inside the main memory, it's way easier to reach to that data than if it was stored in the Hard Drive.</p>
 
 <p>So, like I said, Redis will be storing its data inside the memory, but you may ask yourself: "but what if I turn off the machine?? isn't the ram memory volatile? " Yes, that's why Redis will be flushing the data to the hard drive from time to time, it's up to you to choose this time between flushes, it's all about Performance vs. Security.</p>
 
@@ -111,7 +111,7 @@
 </div>
 
 <p><strong>As you can see: So much win. We avoided redundant trips to the disk.</p></strong>
-<p>Now that we understand the concept of what we'll be doing, the code becomes very easy to implement, here's a simple idea <em>(thought it can be improved and extended in many ways, but it can demonstrate the idea we're working here)</em></p>
+<p>Now that we understand the concept of what we'll be doing, the code becomes very easy to implement, here's a simple idea <em>(thougt it can be improved and extended in many ways, but it can demonstrate the idea we're working here)</em></p>
 
 <pre>
 <code class="python hljs"> 
