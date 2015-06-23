@@ -1,4 +1,0 @@
-1 - adicionar tags aos posts
-2 - no front end, expor as tags
-3 - após postar tudo, padronizar o design dos posts
-4 - melhorar o design da lista de posts na pagina de post
