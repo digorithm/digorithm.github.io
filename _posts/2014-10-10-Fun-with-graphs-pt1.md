@@ -1,0 +1,557 @@
+---
+layout: post
+title: Fun with graphs pt1
+categories: [general, setup, demo]
+keywords: "graph theory, computer science, java, programming, tutorial, engineering"
+tags: [graph theory, computer science, java, programming, tutorial, engineering]
+fullview: true
+---
+
+Graph Theory is definitely one of my favorite branches of the Mathematics & Computer Science, mostly because of its nearest infinity applications, in both real world problems and pure theoretical problems.
+
+These days I’ve been working (with my buddy Daniel Almeida) in a framework to create and manipulate graphs. Which means, creating a data structure to represent graphs, edges, vertexes and creating algorithms to work on this structure. All this is being made with Java and I’ll expose this code here, as I saw a terrible lack of good readable codes about it on the internet.
+
+So, before we start coding the graph’s structure… we must clarify what a graph is and why it’s so important to the Computer Science (and many other sciences).
+
+A graph is a ordered pair \(G = (V,E)\) , where \(V\) is a set of Vertices/Nodes and \(E\) is a set of Edges, an extremely mple example of a complete [simple](http://mathworld.wolfram.com/SimpleGraph.html), [connected](http://mathworld.wolfram.com/ConnectedGraph.html) and [complete](http://mathworld.wolfram.com/CompleteGraph.html) graph is:
+
+![alt](/content/images/2015/06/graph1.png)
+
+_So, what’s the huge deal with this graph theory thing?_
+
+
+Well, not only theoretical computer science problems lay on the graph theory but also in many other distinct fields, from particle physics, chemistry to [sociology](http://en.wikipedia.org/wiki/Mathematical_sociology).
+
+All this because every little thing in our universe is linked, and when this set of things became a “web of things”, we need to study its properties. And that’s where graph theory get in.
+
+So when a graph gets bigger, we need to represent this structure in a computational way, so we can compute things like shortest path between two nodes, connectivity and thousand of other properties and techniques.
+
+The most common ways to represent graph mathematically are:
+
+## Adjacency Matrix
+
+It’s a matrix that represent the adjacency of every node in a graph, it’s an excellent way to work computationally with graphs. The same graph that I presented previously in a visual way can be represented by the following adjacency matrix:
+
+$$ 
+\begin{bmatrix}
+0 & 1 & 1 \\\ 
+1 & 0 & 1 \\\ 
+1 & 1 & 0
+\end{bmatrix}
+$$ 
+
+## Adjacency List
+
+This is another common way to represent graph mathematically, it’s a simple list of lists, each node in the main list points to a list of their adjacent nodes.
+
+Here’s an example:
+
+![](/content/images/2015/06/graph2.png)
+
+![](/content/images/2015/06/adjaceny-list.gif)
+
+## Data Structures to represent Graphs
+
+Ok, so, how do we represent graphs, edges and vertexes in terms of data structures? Before we dig deeper in the algorithms and the mathematical properties of the graphs, we need to create our Data Structure to work with.
+
+### The vertex
+<pre>
+<code class="java hljs">
+package GraphModels;
+
+public class Vertex {
+    /* This Data Structure will be capable to represent a Vertex,
+    * which is a Node that will be used on a graph
+    */
+    
+    public String id;
+    public String name;
+    public boolean visited = false;
+    
+    public Vertex(String id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+    public String getId() {
+        return id;
+    }
+    
+    public String getName() {
+        return name;
+    }
+    
+  @Override
+  public String toString() {
+    return name;
+  }
+    
+}
+
+</code>
+</pre>
+
+For now you may be asking yourself why do we need a variable called “Visited”. Well, we’ll be using it in algorithms to walk through the graph, so we must need to know which nodes were visited. It will became more clear soon!
+
+### The Edge
+
+Yes, the edge must be represented computationally! That’s our way to figure out paths through the vertexes, the edge may or may not have a weight, the edge must know its source vertex and its destination vertex
+<pre>
+<code class="java hljs">
+    package GraphModels;
+
+    public class Edge {
+
+         /* This Data Structure will be capable to represent a Edge,
+        *    that will be used on a graph
+        */
+
+        public String id;
+        public Vertex source;
+        public Vertex destination;
+        private final int weight;
+
+        public Edge(String id, Vertex source, Vertex destination, int weight) {
+            this.id = id;
+            this.source = source;
+            this.destination = destination;
+            this.weight = weight;
+        }
+
+        public String getId() {
+            return id;
+        }
+        public Vertex getDestination() {
+            return destination;
+        }
+
+        public Vertex getSource() {
+            return source;
+        }
+        public int getWeight() {
+            return weight;
+        }
+
+        @Override
+        public String toString() {
+            return source + " " + destination;
+        }
+    } 
+</code>
+</pre>
+
+### The Graph
+
+That’s for sure the biggest and most complex part, don’t panic with the many algorithms already implemented in this code. I’ll be explaining one by one.
+
+We’re reading a text file containing the text file, if you want to test by yourself, make sure to create a .txt in the correct way and to pass the correct file path! You can find the instructions to write the .txt graph in the comments of this code
+
+<pre>
+<code class="java hljs">
+    package GraphModels;
+
+    import java.io.BufferedReader;
+    import java.io.FileNotFoundException;
+    import java.io.FileReader;
+    import java.io.IOException;
+    import java.util.ArrayList;
+    import java.util.HashMap;
+    import java.util.LinkedList;
+    import java.util.List;
+    import java.util.Map;
+    import java.util.Queue;
+
+    public class Graph {
+
+        /* This Data Structure will be capable to represent a Graph,
+        *   where G = (V, E)
+        */
+
+       private  List nodes;
+       private  List edges;
+       public Vertex node;
+       public Edge edge;
+       private String path;
+       private int [][] adjacencyMatrix;
+       private Map nodesMatrixMap;
+       private List adjacentNodes;
+       public int degree;
+       public int minDegree;
+       public int maxDegree;
+       public int avgDegree;
+
+       public Graph() {
+
+      }
+
+      public List getNodes() {
+        return nodes;
+      }
+
+      public List getEdges() {
+        return edges;
+      }
+
+      public void setNodes(List vertex){
+          this.nodes = vertex;
+      }
+
+      public void setEdges(List edges){
+          this.edges = edges;
+      }
+
+      // Find an edge
+      // TO-DO: Change == to equals
+      public Edge getEdge(Vertex source, Vertex destination) {
+          for (Edge edge : this.getEdges()) {
+              if ((edge.getSource().getId() == source.getId() && edge.getDestination().getId() == destination.getId()) || (edge.getSource().getId() == destination.getId() && edge.getDestination().getId() == source.getId())) {
+                  return edge;
+              }
+          }
+          return null;
+      }
+
+      // Check if there is an edge for two given vertices
+      public boolean hasEdge(Vertex source, Vertex destination) {
+          Edge result = this.getEdge(source, destination);
+          if (result != null) {
+            return true;
+          } else {
+            return false;
+          }
+      }
+
+      public List getAdjacentNodes(Vertex node){
+          adjacentNodes = new ArrayList();
+
+          for (Vertex currentNode : nodes){
+              if (hasEdge(node, currentNode)){
+                  adjacentNodes.add(currentNode);
+              }
+          }
+
+          return adjacentNodes;
+      }
+
+      public int getMinDegree(){
+          minDegree = 99999999;
+
+          for (Vertex node : nodes){
+              if (this.getDegree(node)maxDegree){
+                  maxDegree = this.getDegree(node);
+              }
+          }
+
+          return maxDegree;
+      }
+      public int getAvgDegree(){
+          avgDegree = 0;
+
+          for (Vertex node : nodes){
+              avgDegree += this.getDegree(node);
+          }
+          avgDegree = avgDegree/nodes.size();
+
+          return avgDegree;
+      }
+
+      //modified for our needs   
+      public int breadthFirstSearch(Vertex rootNode){
+
+          int visitedNodes = 0;
+          Queue q = new LinkedList();
+          q.add(rootNode);
+
+          while (!q.isEmpty()){
+              Vertex currentNode = (Vertex) q.peek();
+              for (Vertex node : this.getAdjacentNodes(currentNode)){
+                  if (!node.visited){   
+                      node.visited = true;
+                      q.add(node);
+                      visitedNodes++;
+                  }
+              }
+              q.remove();   
+          }
+          //reseting all flags
+          for (Vertex node : nodes){
+              node.visited = false;
+          }
+
+          return visitedNodes;
+
+      }
+
+      public boolean isConnected(){
+          int numberOfNodes = nodes.size();
+
+          for (Vertex node : nodes){
+              if (!(this.breadthFirstSearch(node) == numberOfNodes)){
+                  return false;
+              }
+          }
+          return true;
+      }
+
+      //TO-DO: error treatment. 
+      // while this treatment doesn't exist: BE EXTREMELY CAREFUL WITH GRAPH.TXT
+      // the right syntax is:
+      //line (1) :1,2,...,n 
+      //line (2) :1-2
+      //line (3) : weight of the previous connection
+      //line (n) :2-n
+      //line (n+1) : weight of the previous connection
+      //line (n+2) :-1
+      //where the first line you must declare the nodes, each one separated by comma
+      //the second til the n-th line you must declare the connections between the nodes declared 
+      //in the first line
+      //after every connection, in the next line, you must declare the weight of the connection
+      // leave everything zero to create a unweighted graph
+      //after the last connection, you must end with a -1
+      // if you don't do this your computer may explode lol
+      //...
+      //...
+      //...
+      // i don't know, i did never try that.
+      public void createGraph(String path) throws FileNotFoundException, IOException{
+          this.path = path;
+
+          nodes = new ArrayList();
+          edges = new ArrayList();
+
+          FileReader fr = new FileReader(path);
+          BufferedReader textReader = new BufferedReader(fr);
+
+          //gets the first line, which are the nodes that must be created
+          String TextData = textReader.readLine();
+
+          //separate the string with numbers
+          String[] nodesInString = TextData.split("\\s*,\\s*");
+
+          //create the list of nodes
+          for (String nodeInString : nodesInString){
+
+              node = new Vertex(nodeInString, "node " + nodeInString);
+              nodes.add(node);
+
+          }
+
+          //create the list of edges
+          String edgeIntoString;
+          Vertex vertex_aux1 = new Vertex("-1","-1");
+          Vertex vertex_aux2 = new Vertex("-1","-1");;
+          int n = 0;
+          //varre a linha que tem x-y
+          while (!(edgeIntoString = textReader.readLine()).equals("-1")){
+
+              String[] nodesConnected = edgeIntoString.split("\\s*-\\s*");
+              //varre os dois nodes
+
+              int peso = Integer.parseInt(textReader.readLine());
+
+                  //verifica se x e y passados no txt estão instanciados em nodes 
+                  for (Vertex node : nodes){
+
+                      if (nodesConnected[0].equals(node.getId())){
+                          //se o node do txt foi achado em nodes
+
+                          vertex_aux1 = new Vertex(node.getId(), node.getName());
+                      }
+                  }
+                  for (Vertex node : nodes){
+
+                      if (nodesConnected[1].equals(node.getId())){
+
+                          vertex_aux2 = new Vertex(node.getId(), node.getName());
+                      }
+                  }
+
+              edge = new Edge(Integer.toString(n),vertex_aux1, vertex_aux2, peso);
+              edges.add(edge);
+          }
+
+      }
+      // Add a new edge
+      public boolean addEdge(Vertex source, Vertex destination) {
+          Edge newEdge = new Edge("id", source, destination, 0);
+          return this.edges.add(newEdge);
+      }
+
+      // Remove an edge
+      public boolean removeEdge(Vertex source, Vertex destination) {
+
+          Edge result = this.getEdge(source, destination);
+
+          if (result != null) {
+              return this.edges.remove(result);
+          } else {
+              System.out.println("Couldn't find edge");
+              return false;
+          }
+      }
+
+      public int getDegree(Vertex node){
+
+          degree = 0;
+
+          for (Vertex CurrentNode : nodes){
+              if (hasEdge(node, CurrentNode)){
+                  degree++;
+              }
+          }
+
+          return degree;
+      }
+
+      public void printGraph() {
+
+          for (Vertex node: this.getNodes()){
+              System.out.println(node.getName());
+              System.out.print("Adjacent nodes: ");
+              adjacentNodes = getAdjacentNodes(node);
+              for (Vertex adjacentNode : adjacentNodes){
+                  System.out.print(adjacentNode.getName() + " ");
+              }
+
+              System.out.println(" ");
+              System.out.println("Degree of this node: " + getDegree(node));
+              System.out.println(" "); 
+          }
+          System.out.println("- - - - - - - - - - - - - - - - ");
+          System.out.println(" ");
+          System.out.println("Min Degree of this Graph: " + getMinDegree());
+          System.out.println(" ");
+          System.out.println("Max Degree of this Graph: " + getMaxDegree());
+          System.out.println(" ");
+          System.out.println("Average Degree of this Graph: " + getAvgDegree());
+          System.out.println(" ");
+          System.out.println("Graph is connected: " + this.isConnected());
+          System.out.println(" ");
+          System.out.println("- - - - - - - - - - - - - - - - ");
+          System.out.println("Connections: ");
+          System.out.println(" ");
+          for (Edge edge : this.getEdges() ){
+              System.out.print(edge.getSource().getId() +"<->"+edge.getDestination().getId()+" ");
+              System.out.println("weight: " + edge.getWeight());
+          }
+          System.out.println(" ");
+          System.out.println("- - - - - - - - - - - - - - - - ");
+        }
+
+      public void setAdjacencyMatrix() {
+
+        initializeAdjacencyMatrix();
+        int weigth;
+        int source;
+        int destination;
+        for (Edge currentEdge : this.getEdges() ){
+            weigth = currentEdge.getWeight();
+            source = (int) nodesMatrixMap.get(currentEdge.getSource().getName());
+            destination = (int) nodesMatrixMap.get(currentEdge.getDestination().getName());
+
+            adjacencyMatrix[source][destination] = weigth; 
+            //must be symmetric
+            adjacencyMatrix[destination][source] = weigth; 
+        }
+      }
+
+      public void initializeAdjacencyMatrix(){
+          int numNodes = this.nodes.size();
+          adjacencyMatrix = new int[numNodes][numNodes];
+          nodesMatrixMap = new HashMap();
+          for (int i = 0; i < numNodes; i++) {
+              nodesMatrixMap.put(this.nodes.get(i).getName(), i);
+              for (int j = 0; j < numNodes; j++) {
+                  adjacencyMatrix[i][j] = -1;
+              }
+          }
+      }
+
+      public void printAdjacencyMatrix() {
+
+          String sourceName;
+          String destName;
+          int source;
+          int dest;
+
+          System.out.println(" ");
+          System.out.println("Adjacency Matrix: ");
+          System.out.println(" ");
+
+          for (int i = 0; i < this.nodes.size(); i++) {
+              sourceName = this.nodes.get(i).getName();
+              source = (int) nodesMatrixMap.get(sourceName);
+              for (int j = 0; j < this.nodes.size(); j++) {
+                  destName = this.nodes.get(j).getName();
+                  dest = (int) nodesMatrixMap.get(destName);
+                  if (adjacencyMatrix[source][dest] == -1) {
+                      System.out.print("- ");
+                  } else {
+                      System.out.print(adjacencyMatrix[source][dest] + " ");
+                  }
+              }
+              System.out.print("\n");
+          }
+      }
+
+    }
+</code>
+</pre>
+
+### The test file
+
+Here’s the file containing the main, if you want to test, remember to change the path file!
+
+<pre>
+<code class="java hljs">
+    package graphproject;
+    import GraphModels.*;
+    import java.io.IOException;
+    import java.util.ArrayList;
+    import java.util.List;
+
+    public class GraphProject {
+
+        //graph creation procedure
+        private List nodes;
+        private List edges;
+        private Graph graph;
+        public Vertex node;
+        public Edge edge;
+
+        public void printGraph(Graph graph) {
+          for (Vertex node: graph.getNodes()){
+                 System.out.println(node.toString());
+          }
+
+          for (Edge edge : graph.getEdges() ){
+                 System.out.println(edge.toString());
+                 System.out.println(" ");
+          }
+
+        }
+
+        public void test() throws IOException{
+
+            Graph graph = new Graph();
+            graph.createGraph("/Users/daniel/Documents/workspace_java/GraphProject/src/graphproject/graph.txt");
+
+            graph.printGraph();
+            graph.setAdjacencyMatrix();
+            graph.printAdjacencyMatrix();
+        }
+        //end of graph creation procedure
+
+        public static void main(String[] args) throws IOException {
+           GraphProject gp = new GraphProject();
+
+           gp.test();
+        }
+    }
+</code>
+</pre>
+
+## Conclusion and next steps
+
+At this moment, you’re perfectly able to create a graph (via .txt file) and run all those algorithms to extract information about your graph. Just make sure to import the right libraries and to put the files in the right package. Doing these little things right, I’m pretty sure this will work perfectly.
+
+But I’m sure you may be a little lost about a few algorithms and techniques we’ve implemented in the Graph.java. But, don’t worry, i’ll be explaining each method one by one in the next parts of this post!
