@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Why, how and where to Learn Design Patterns</title>
+	
+	<meta name="author" content="Rodrigo Araújo">
+
+	<!-- Enable responsive viewport -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+	<!--[if lt IE 9]>
+	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+
+	
+	<meta name="description" content="I'm a Computer Scientist and Software Engineer, I enjoy Artificial Intelligence, Programming, Software Engineering."/>
+	
+	
+	<meta name="keywords" content="design patterns, tips, thoughts, software engineering, programming"/>
+	
+
+	<!-- Le styles -->
+	<link href="/assets/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/assets/resources/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+	<link href="/assets/resources/syntax/syntax.css" rel="stylesheet">
+	<link href="/assets/css/style.css" rel="stylesheet">
+
+	<!-- Le fav and touch icons -->
+	<!-- Update these with your own images
+	<link rel="shortcut icon" href="images/favicon.ico">
+	<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+	-->
+
+	<link rel="alternate" type="application/rss+xml" title="" href="/feed.xml">
+	<link rel="stylesheet" href="/assets/css/styles/hybrid.css">
+	<script src="/assets/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+</head>
+
+<body>
+	<nav class="navbar navbar-default visible-xs" role="navigation">
+		<!-- Brand and toggle get grouped for better mobile display -->
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			
+			<a type="button" class="navbar-toggle nav-link" href="http://github.com/digorithm">
+				<i class="fa fa-github"></i>
+			</a>
+			
+			
+			<a type="button" class="navbar-toggle nav-link" href="http://twitter.com/digorithm">
+				<i class="fa fa-twitter"></i>
+			</a>
+			
+			
+			<a type="button" class="navbar-toggle nav-link" href="mailto:rod.dearaujo@gmail.com">
+				<i class="fa fa-envelope"></i>
+			</a>
+			
+			<a class="navbar-brand" href="/">
+				<img src="http://www.gravatar.com/avatar/?s=35" class="img-circle" />
+				
+			</a>
+		</div>
+
+		<!-- Collect the nav links, forms, and other content for toggling -->
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			<ul class="nav navbar-nav">
+				<li class="active"><a href="/">Home</a></li>
+				<li><a href="/categories.html">Categories</a></li>
+				<li><a href="/tags.html">Tags</a></li>
+			</ul>
+		</div><!-- /.navbar-collapse -->
+	</nav>
+
+	<!-- nav-menu-dropdown -->
+	<div class="btn-group hidden-xs" id="nav-menu">
+		<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+			<i class="fa fa-bars"></i>
+		</button>
+		<ul class="dropdown-menu" role="menu">
+			<li><a href="/"><i class="fa fa-home"></i>Home</a></li>
+			<li><a href="/categories.html"><i class="fa fa-folder"></i>Categories</a></li>
+			<li><a href="/tags.html"><i class="fa fa-tags"></i>Tags</a></li>
+			<li class="divider"></li>
+			<li><a href="#"><i class="fa fa-arrow-up"></i>Top of Page</a></li>
+		</ul>
+	</div>
+
+	<div class="col-sm-3 sidebar hidden-xs">
+		<!-- sidebar.html -->
+<header class="sidebar-header" role="banner">
+	<a href="/">
+		<img src="/content/images/images/pic.jpg" width="180" height="180" class="img-circle" />
+	</a>
+	<h3 class="title">
+        <a href="/">Rodrigo Araújo</a>
+    </h3>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+</header>
+
+
+<div id="bio" class="text-center">
+	Stories, Thoughts and Ideas on Computer Science, Mathematics and Technology
+</div>
+
+
+<div class="pages">
+	<ul>
+		<li><a href="/about">Who I am</a></li>
+		<li>
+			<div id="workexpand"><a href="/work">The work I do</a>
+			<div id="subitem">
+			<ul>
+				<li>
+					<a href="/work/#research">Research</a>
+				</li>
+				<li>
+					<a href="/work/#industry">Industry</a>
+				</li>
+				<li>
+					<a href="/work/#pub">Publications</a>
+				</li>
+				<li>
+					<a href="/work/#talk">Talks</a>
+				</li>
+				<li>
+					<a href="/work/#releases">Releases</a>
+				</li>
+				<li>
+					<a href="/work/#ta">Teaching</a>
+				</li>
+			</ul>
+			</div>
+			</div>
+			
+			
+		</li>
+		<li><a href="/archives">Archives</a></li>
+		<li><a href="/readings">Recommended Readings</a></li>
+	</ul>
+</div>
+<div id="contact-list" class="text-center">
+	<ul class="list-unstyled list-inline">
+		
+		<li>
+			<a class="btn btn-default btn-sm" href="https://github.com/digorithm">
+				<i class="fa fa-github-alt fa-lg"></i>
+			</a>
+		</li>
+		
+		
+		<li>
+			<a class="btn btn-default btn-sm" href="https://twitter.com/digorithm">
+				<i class="fa fa-twitter fa-lg"></i>
+			</a>
+		</li>
+		
+		
+		<li>
+			<a class="btn btn-default btn-sm" href="mailto:rod.dearaujo@gmail.com">
+				<i class="fa fa-envelope fa-lg"></i>
+			</a>
+		</li>
+		
+	</ul>
+	<ul id="contact-list-secondary" class="list-unstyled list-inline">
+		
+		
+		<li>
+			<a class="btn btn-default btn-sm" href="/feed.xml">
+				<i class="fa fa-rss fa-lg"></i>
+			</a>
+		</li>
+	</ul>
+</div>
+<!-- sidebar.html end -->
+<script>
+
+	$(function () {
+
+	var pathname = window.location.pathname;
+	console.log(pathname);
+	if (pathname == "/work/"){
+		$("#subitem").fadeIn();
+	} else {
+		$("#subitem").fadeOut();
+	}
+});
+
+$(function() {
+  $('a[href*=#]:not([href=#])').click(function() {
+    if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+      var target = $(this.hash);
+      target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+      if (target.length) {
+        $('html,body').animate({
+          scrollTop: target.offset().top
+        }, 1000);
+        return false;
+      }
+    }
+  });
+});
+</script>
+	</div>
+
+	<div class="col-sm-9 col-sm-offset-3">
+		<div class="page-header">
+  <h1>Why, how and where to Learn Design Patterns </h1>
+</div>
+	
+<article>
+
+	<div class="col-sm-10">
+	 <span class="post-date" style="margin-left:-15px;">
+	   
+	   January 
+	   6th,
+	   
+	   2015
+	 </span>
+	  <div class="article_body">
+	  <p>The first thought I had when I started to study <a href="http://en.wikipedia.org/wiki/Software_design_pattern">Design Patterns</a> was:</p>
+
+<blockquote>
+  <p><em>- “damn, is all this really necessary?”</em>	</p>
+</blockquote>
+
+<p>I mean, so many patterns, so many details to do things that look simple to do without any further detailed thoughts. And I started to question myself if this was really a productive thing. The first answer I gave was:</p>
+
+<blockquote>
+  <p><em>-”no, *wonderful not-bad-word* this, I’m losing too much time trying to wrap my head around this”</em></p>
+</blockquote>
+
+<p>So I forgot it and kept developing my software using something like <a href="https://gist.github.com/banaslee/4147370#file-xgh-en-txt">Extreme Go Horse</a>. (i was younger at that time). Then, I saw a pattern being formed:</p>
+
+<h3 id="every-time-i-came-back-to-my-old-codes-i-couldnt-extend-nor-debbug-it-in-a-easy-way-it-was-always-extremely-hard-to-work-on-it">Every time I came back to my old codes I couldn’t extend nor debbug it in a easy way. It was always extremely hard to work on it.</h3>
+
+<p>And then I realized why: <strong>lack of good architectural decisions.</strong></p>
+
+<p>So I decided to give another chance to learning Design Patterns and finally I understood its beauty.</p>
+
+<h2 id="few-things-to-keep-in-mind">Few things to keep in mind:</h2>
+
+<p>1. It’s not about trying to fit every problem in every Design Pattern. That’s just a waste of time</p>
+
+<p>2. It may be not very productive at start, the process of applying a DP in a determined problem takes time.</p>
+
+<p>3. On the other hand, it will be extremely productive when you try to debug your code or try to extend it. Everything starts to make more sense and it’s way easier to change things when you’ve followed some patterns</p>
+
+<p>4. When studying a Design Pattern, try hard to implement that solution in a problem. This will make total difference</p>
+
+<h2 id="now-to-the-materials">Now, to the materials!</h2>
+
+<p>Start with the classics:</p>
+
+<h4 id="design-patternshttpwwwamazoncomdesign-patterns-object-oriented-professional-computingdp0201634988-aka-gang-of-four"><a href="http://www.amazon.com/Design-Patterns-Object-Oriented-Professional-Computing/dp/0201634988">Design Patterns</a> (a.k.a Gang of Four)</h4>
+
+<p>This is the all times classic. These four gentlemen were the firsts to formalized and compile all patterns found on Object Oriented Systems. Here my advice is to go one by one, pick a pattern, read it, understand it, implement it and ,finally, really understand it.</p>
+
+<p> </p>
+
+<h4 id="head-first-design-patternshttpwwwamazoncomhead-first-design-patterns-freemandp0596007124"><a href="http://www.amazon.com/Head-First-Design-Patterns-Freeman/dp/0596007124">Head First Design Patterns</a></h4>
+
+<p>This one I’ve used when I didn’t understand a concept from the Gang of Four, it is easier to grasp the concepts, the approach is way less hardcore than the original GoF, but it still is a great book.</p>
+
+<h3 id="code-samples">Code Samples</h3>
+
+<p>That said, it’s always good to have examples of each Design Pattern by your side, so you can study the DP and check other examples, so real world examples are perfect for it:</p>
+
+<p><a href="http://stackoverflow.com/questions/1673841/examples-of-gof-design-patterns/2707195#2707195">List with Examples of Patterns implemented in the Java SE and EE API</a></p>
+
+<p><a href="http://www.dofactory.com/net/design-patterns">List with Examples of patterns demonstrated with C#</a></p>
+
+<p><a href="http://sourcemaking.com/design_patterns">Excellent examples and explanations of each Design Pattern</a></p>
+
+<p><a href="http://c2.com/cgi/wiki?PeopleProjectsAndPatterns">Another great material on Design Patterns, with lots of great thoughts on it</a></p>
+
+<p>I believe this is a good start to learn Design Pattern and I hope this helps someone, mainly if they’re struggling with the same doubts I had when trying to learn it.</p>
+
+<p>Oh, one more thing: <strong>Do not ever go Extreme Go Horse, really.</strong></p>
+
+	  </div>
+
+		
+		<ul class="list-inline">
+		  <li><i class="fa fa-tags"></i></li>
+		  
+		  
+			 
+				<li>
+					<a href="/tags.html#design patterns-ref">
+					design patterns <span>(1)</span>
+					,
+					</a>
+				</li>
+			 
+				<li>
+					<a href="/tags.html#tips-ref">
+					tips <span>(1)</span>
+					,
+					</a>
+				</li>
+			 
+				<li>
+					<a href="/tags.html#thoughts-ref">
+					thoughts <span>(4)</span>
+					,
+					</a>
+				</li>
+			 
+				<li>
+					<a href="/tags.html#software engineering-ref">
+					software engineering <span>(1)</span>
+					,
+					</a>
+				</li>
+			 
+				<li>
+					<a href="/tags.html#programming-ref">
+					programming <span>(10)</span>
+					
+					</a>
+				</li>
+			
+		  
+		  
+		</ul>
+		  
+
+		<hr>
+
+		<div>
+      <section class="share col-sm-6">
+        <h4 class="section-title">Share Post</h4>
+        <a class="btn btn-default btn-sm twitter" href="http://twitter.com/share?text=Why, how and where to Learn Design Patterns&via=digorithm"
+           onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+          <i class="fa fa-twitter fa-lg"></i>
+          Twitter
+        </a>
+        <a class="btn btn-default btn-sm facebook" href="https://www.facebook.com/sharer/sharer.php"
+           onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+          <i class="fa fa-facebook fa-lg"></i>
+          Facebook
+        </a>
+        <a class="btn btn-default btn-sm gplus"
+           onclick="window.open('https://plus.google.com/share?url='+window.location.href, 'google-plus-share', 'width=490,height=530');return false;">
+          <i class="fa fa-google-plus fa-lg"></i>
+          Google+
+        </a>
+      </section>
+    </div>
+
+    <div class="clearfix"></div>
+
+		<ul class="pager">
+		  
+		  <li class="previous"><a href="/general/setup/demo/2014/10/31/Thoughts-on-Automata-Theory.html" title="Thoughts on Automata Theory">&larr; Previous</a></li>
+		  
+		  
+		  <li class="next"><a href="/general/setup/demo/2015/01/09/Making-Your-Machine-Think-Learn-And-Predict--Gradient-Descent-Algorithm-in-Java.html" title="Making your machine think, learn and predict - Gradient Descent Algorithm in Java">Next &rarr;</a></li>
+		  
+		</ul>
+
+		<hr>
+	</div>
+	
+	<div class="col-sm-2 sidebar-2">
+	
+	</div>
+</article>
+<div class="clearfix"></div>
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    // Required: on line below, replace text in quotes with your forum shortname
+    var disqus_shortname = 'rodrigoaraujo';
+        
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                                        
+    })();
+</script>
+
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+
+		<footer>
+			<hr/>
+			<p>
+				&copy; 2015 Rodrigo Araújo with Jekyll.</a>
+			</p>
+		</footer>
+	</div>
+
+	<script type="text/javascript" src="/assets/resources/jquery/jquery.min.js"></script>
+	<script type="text/javascript" src="/assets/resources/bootstrap/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="/assets/js/app.js"></script>
+
+	<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">  
+MathJax.Hub.Config({  
+    tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+
+
+</script>
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-38327934-3', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</body>
+</html>
+

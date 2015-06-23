@@ -1,15 +1,29 @@
-name: ""
-description: ""
+# visit https://github.com/mojombo/jekyll/wiki/Configuration for more settings
 
-url: "localhost:4000"
-paginate: 3
-paginate_path: "/blog/page:num/"
-
-markdown: rdiscount
-permalink: pretty
-pygments: true
+paginate: 5 # pagination based on number of posts
+paginate_path: "page:num"
+exclude: ["README.md"] # files to exclude
+highlighter: pygments
+markdown: kramdown
 
 
-name: Rodrigo Araujo's blog
-description: Few notes and thoughts on computer science, mathematics and technology
-url: http://rodrigoaraujo.me
+defaults:
+  -
+    scope:
+      path: "" # empty string for all files
+    values:
+      title: Rodrigo Araújo
+
+description: Stylish Jekyll Theme
+author:
+  name: Rodrigo Araújo
+  email: rod.dearaujo@gmail.com
+  github: digorithm
+  twitter: digorithm
+  bio: "Stories, Thoughts and Ideas on Computer Science, Mathematics and Technology"
+
+rss_path: feed.xml
+categories_path: categories.html
+tags_path: tags.html
+
+BASE_PATH:
