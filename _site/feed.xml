@@ -7,6 +7,155 @@
 		<atom:link href="/feed.xml" rel="self" type="application/rss+xml" />
 		
 			<item>
+				<title>A Generic Architecture for Text Classification with Machine Learning</title>
+				<description>&lt;p&gt;One of the most commons tasks in Machine Learning is text classification, which is simply teaching your machine how to read and interpret a text and predict what kind of text it is. &lt;/p&gt;
+
+&lt;p&gt;The purpose of this essay is to talk about a simple and generic enough Architecture to a supervised learning text classification. The interesting point of this Architecture is that you can use it as a basic/initial model for many classifications tasks. &lt;/p&gt;
+
+&lt;h2 id=&quot;supervised-learning&quot;&gt;Supervised Learning&lt;/h2&gt;
+
+&lt;p&gt;If you’re already familiar with this concept, just jump this step, but I feel it’s important to beginners to know. &lt;/p&gt;
+
+&lt;p&gt;Supervised Learning is when you have to first train your model with already existing labeled dataset, just like teaching a kid how to differentiate between a car and a motorcycle, you have to expose its differences, similarities and such. Whereas unsupervised learning is about learning and predicting without a pre-labeled dataset.&lt;/p&gt;
+
+&lt;h2 id=&quot;starting-to-sketch-the-architecture&quot;&gt;Starting to sketch the Architecture&lt;/h2&gt;
+
+&lt;p&gt;With the dataset in hands, we start to think about how is going to be our architecture to achieve the given goal, we can resume the steps in:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Cleaning the dataset&lt;/li&gt;
+  &lt;li&gt;Partitioning the dataset&lt;/li&gt;
+  &lt;li&gt;Feature Engineering&lt;/li&gt;
+  &lt;li&gt;Chosing the right Algorithms, Mathematical Models and Methods&lt;/li&gt;
+  &lt;li&gt;Wrapping everything up&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;cleaning-the-dataset&quot;&gt;Cleaning the dataset&lt;/h2&gt;
+
+&lt;p&gt;Cleaning the dataset is a crucial initial step in Machine Learning, many Toy Datasets don’t need to be cleaned, because it’s already clean, peer-reviewed and published in a way you can use it exactly to work on the learning algorithms.&lt;/p&gt;
+
+&lt;p&gt;The problem is: &lt;/p&gt;
+
+&lt;h4 id=&quot;the-real-world-is-full-of-painful-and-noisy-datasets&quot;&gt;The real world is full of painful and noisy datasets&lt;/h4&gt;
+
+&lt;p&gt;If there’s one thing I learned while working with Machine Learning is, there’s no such thing as shiny and perfect dataset in the real world, so we have to deal with this beforehand. Situations where there are many empty fields, wrong and non-homogeneous formats, broken characters, is very common. I won’t talk about such techniques now, but I will write something about it in another post.&lt;/p&gt;
+
+&lt;h2 id=&quot;partitioning-the-dataset&quot;&gt;Partitioning the Dataset&lt;/h2&gt;
+
+&lt;p&gt;We always need to partition the dataset in, at least, 2 partitions: the training dataset and the test/validation dataset. Why?&lt;/p&gt;
+
+&lt;p&gt;Suppose we fed the learning algorithm with a training data X and it already known the output Y (because it’s a training data pair (X,Y)), which is, for given text X, Y is its classification, the algorithm will learn it. &lt;/p&gt;
+
+&lt;p&gt;Great, the algorithm learned this. But now, we’re going to validate the learning, so we use the same data X, I mean, we pass X to the model and ask what’s its classification… &lt;/p&gt;
+
+&lt;p&gt;Do you see the problem here?&lt;/p&gt;
+
+&lt;p&gt;Of course the algorithm will output Y, the same Y we passed to its training. So, if we pass the complete dataset D in the training phase, then we validate the model using the SAME D dataset, we will be steping onto this very same situation. It’s like cheating, it’s like we point to a car and say “this is a car”, then, at the same time and with the same car, we ask to the kid “is this a car?”, it will be highly probable that the kid will answer correctly, though it may not learned correctly. What we must do is, point to a car and say “this is a car”, and then, point to a different car and ask “is this a car?”.&lt;/p&gt;
+
+&lt;p&gt;Stepping out of the metaphor, we must check if the machine learned correctly by using a diferent portion of the dataset.&lt;/p&gt;
+
+&lt;p&gt;So, at the end of this step, we’ll have the training dataset and the test dataset, both are subset of the same initial dataset. &lt;/p&gt;
+
+&lt;p&gt;With Python’s Scikit Learn you can do this easily using &lt;a href=&quot;http://scikit-learn.org/stable/modules/generated/sklearn.cross_validation.train_test_split.html&quot; target=&quot;_blank&quot;&gt;Train Test Split&lt;/a&gt; &lt;em&gt;(read the docs, it’s very simple to use it.)&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;div class=&quot;imgcenter&quot;&gt;
+&lt;img src=&quot;/content/images/images/ml1.png&quot; /&gt;
+&lt;/div&gt;
+&lt;p&gt; &lt;/p&gt;
+
+&lt;h2 id=&quot;feature-engineering&quot;&gt;Feature Engineering&lt;/h2&gt;
+
+&lt;p&gt;This is one of the most important steps when doing Machine Learning. Briefly, Features are the data that the learning algorithm will use as the “X”, which will be used to compute and understand the patterns. A simpler example would be a non-text classification or a regression, e.g: house pricing predictions, where our Features could be: number of rooms, size in squared meters, location and more. As you can see, these feature will describe the patterns of each data point and will affect how the house will be priced. &lt;/p&gt;
+
+&lt;p&gt;The crucial point is, features can vary, you can identify new features that can level up your model’s predictions in huge proportions, a simple example would be, in a text classification you count the frequency of each word, this is one feature… you feed your learning algorithm with it… and the result isn’t enough: 50% of precision. But then you see that, in this case, the length of the whole data point (the text) plays a huge role determining a pattern for each class. Now that you &lt;strong&gt;identified&lt;/strong&gt; this feature, you do something to &lt;strong&gt;extract&lt;/strong&gt; that feature and then add this new feature and feed your learning algorithm with it, then, the result: 95% of precision. &lt;/p&gt;
+
+&lt;p&gt;Ok, so you know the importance of the feature engineering phase, now it’s time to understand the most common technique to extract feature in texts: &lt;strong&gt;TF-IDF&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;h4 id=&quot;tf-idf&quot;&gt;TF-IDF&lt;/h4&gt;
+
+&lt;p&gt;Though the most intuitive way to look for patterns in texts is to count each word in the text (and use it as a Feature), it may not be the best way to do it. A few reasons for it is, larger texts will have higher averages than the shorter texts, these discrepancies can hurt the learning algorithm, and this Feature &lt;strong&gt;doesn’t say much about the importance of the words&lt;/strong&gt;, which is very important to find patterns.&lt;/p&gt;
+
+&lt;p&gt;So, instead of computing the occurrence, it’s better to compute the importance of the words. to accomplish this we can use 2 statistic’s techniques:&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;TF&lt;/strong&gt; - which is basically the raw frequency of the word given the document, raw frequency of t by f(t,d), then the simple tf scheme is tf(t,d) = f(t,d).&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;IDF&lt;/strong&gt; - Inverse Document Frequency, which is a technique to give emphasis to words that &lt;em&gt;don’t appear with high frequency&lt;/em&gt;, because these are the words that can differentiate the texts, which means, in this case, these are the most important words, so we inverse its frequencies. So, an example, if the word &lt;em&gt;“the”&lt;/em&gt; happens to appear very often in a text, it will weight &lt;strong&gt;less&lt;/strong&gt;, because it’s a common word, thus, don’t cause very impact when fiding patterns to differentiate the texts.&lt;/p&gt;
+
+&lt;p&gt;So the whole TF-IDF can be computed by&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://upload.wikimedia.org/math/e/8/1/e81492e44713270fd230d821ccebd100.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Scikit Learn gives us a great API to use the TF-IDF method, it’s really simple. &lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;    from sklearn.feature_extraction.text import TfidfVectorizer
+
+    vectorizer = TfidfVectorizer()
+    vectorized_x = vectorizer.fit_transform(X)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Which will do the TF-IDF on the X data, and then vectorize this data, in other words, transform the whole thing into an array of inverse frequencies.
+So, extracting those features, &lt;strong&gt;this&lt;/strong&gt; will be our training and test data, that will feed the algorithm (along with the Y, which is the output, the class of each training data).&lt;/p&gt;
+
+&lt;p&gt;Re-thinking our Architecture, now we have:&lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;div class=&quot;imgcenter&quot;&gt;
+&lt;img src=&quot;/content/images/images/ml2.svg&quot; /&gt;
+&lt;/div&gt;
+&lt;p&gt; &lt;/p&gt;
+
+&lt;p&gt;Remembering that X is the set of features (e.g: vector with the TF-IDF of each data point) and Y is the output, which is, the labels/class (e.g: Spam or not-spam).&lt;/p&gt;
+
+&lt;h2 id=&quot;chosing-the-right-algorithms-mathematical-models-and-methods&quot;&gt;Chosing the right Algorithms, Mathematical Models and Methods&lt;/h2&gt;
+
+&lt;p&gt;With the data prepared, features selected and extracted, it’s time to feed the algorithm with this data, this topic &lt;em&gt;per se&lt;/em&gt; could go pages and pages, as learning algorithms is such a huge fields, with many publications and ideas to solve every kind of problem.&lt;/p&gt;
+
+&lt;p&gt;To not extend it very much, and as the purpose of this essay is to discuss the architecture, I’ll use a few commons algorithms, such as Logistic Regression, Decision Trees, SVM and Neural Networks.&lt;/p&gt;
+
+&lt;p&gt;So, at this point, we’ll treat the learning algorithm as a black-box algorithm, where it:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;receive a training data X which is a vector of features, and training data Y, which is the label/class/output (we can binarize it, such as spam=1, ham=0)&lt;/li&gt;
+  &lt;li&gt;return a model, where given an text X, can output its predicted class Y.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;After generating this model, we will test it with our test dataset and check its performance, if it can predict correctly &lt;em&gt;(the test dataset has output values (Y) so we can check them)&lt;/em&gt;, it is ready to predict new data &lt;em&gt;(data completely outside our initial dataset)&lt;/em&gt;, so we say that the machine learned the task. &lt;/p&gt;
+
+&lt;p&gt;Our architecure now:&lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;div class=&quot;imgcenter&quot;&gt;
+&lt;img src=&quot;/content/images/images/ml3.svg&quot; height=&quot;800&quot; /&gt;
+&lt;/div&gt;
+&lt;p&gt; &lt;/p&gt;
+
+&lt;h2 id=&quot;wrapping-everything-up&quot;&gt;Wrapping everything up&lt;/h2&gt;
+
+&lt;p&gt;With this architecture, we should be able to do most of the simple text classification tasks, as the main flow is: get data, clean data, identify and extract features, train your algorithm/mathematical model of choice, validate it and then, use the generated model to do the estimations.&lt;/p&gt;
+
+&lt;p&gt;Of course there are many improvements that can be made on this architecture and many, many, many lower level details, but you can see this architecture as a &lt;em&gt;“boilerplate code”&lt;/em&gt; to get you started with the machine learning engineering task.&lt;/p&gt;
+
+&lt;p&gt;A few tips:&lt;/p&gt;
+
+&lt;p&gt;Learn the underlying mathematical models of the most commons learning algorithms, this will teach you the trade offs of each one, so you can apply the correct algorithms to the given dataset and scenario. For example, SVM can be good for unbalanced dataset, but why? You gotta know this. Neural Networks can be slow to be trained, but, if training time is not critical, it’s okay to use Neural Networks.&lt;/p&gt;
+
+&lt;p&gt;Master the skills to clean data, if using Python, learn to use Pandas. This will be an extremely important skill.&lt;/p&gt;
+
+&lt;p&gt;Master the skills to understand data, this will be crucial to make you see what algorithm to use, you can’t make something learn if you don’t know about what you are teaching.&lt;/p&gt;
+
+</description>
+				<pubDate>Tue, 30 Jun 2015 00:00:00 -0300</pubDate>
+				<link>/general/setup/demo/2015/06/30/A-Generic-Architecture-for-Text-Classification.html</link>
+				<guid isPermaLink="true">/general/setup/demo/2015/06/30/A-Generic-Architecture-for-Text-Classification.html</guid>
+			</item>
+		
+			<item>
 				<title>Case Study: Python Performance on rotating one-dimensional vectors</title>
 				<description>&lt;p&gt;I’m a big fan of a nice challenge, therefore, I like books like Programming Pearls, I like to dive into many kinds of solutions to the same problem and try to differentiate them by novelty, performance, elegance, etc… &lt;/p&gt;
 
@@ -1758,93 +1907,6 @@ CREATE TABLE IF NOT EXISTS `smallcrud`.`person` (
 				<pubDate>Tue, 22 Jul 2014 00:00:00 -0300</pubDate>
 				<link>/general/setup/demo/2014/07/22/CRUD-with-Java,-JSP,-and-MySQL.html</link>
 				<guid isPermaLink="true">/general/setup/demo/2014/07/22/CRUD-with-Java,-JSP,-and-MySQL.html</guid>
-			</item>
-		
-			<item>
-				<title>Object Oriented Thinking</title>
-				<description>&lt;h3 id=&quot;what-are-the-main-goals-of-the-object-oriented-programming&quot;&gt;What are the main goals of the object-oriented programming?&lt;/h3&gt;
-
-&lt;p&gt;&lt;em&gt;1. Abstraction, yes, i had to put this in the first place, in my point of view, this is the biggest goal of the OO programming&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;2. Encapsulation, which is a form of abstraction!&lt;/p&gt;
-
-&lt;p&gt;3. Reusability&lt;/p&gt;
-
-&lt;p&gt;4. Modularity&lt;/p&gt;
-
-&lt;p&gt;5. Readability&lt;/p&gt;
-
-&lt;p&gt;Let’s say that OO programming did &lt;strong&gt;never&lt;/strong&gt; exist, so, i can say that any procedural programmer &lt;em&gt;(C, fortran, cobol, etc..)&lt;/em&gt; who has a little notion about how to build organized codes, would, naturally, evolve to an organization that would look like the actual concept of OO programming.&lt;/p&gt;
-
-&lt;p&gt;Don’t you think? It would be intuitive, the object-oriented thinking is a quite natural way to think, let me show you… We are used to separate &lt;em&gt;things&lt;/em&gt; (from now we’ll call thing as objects) by it’s &lt;em&gt;class&lt;/em&gt;, just like the class “Car”, we know GM, wolksvagem, nissan, honda…but they all are cars, right? And we’re also used to say that something &lt;em&gt;inherited&lt;/em&gt; some particularities from his precedent… And that’s the idea behind the OO programming, grab the main concept of object and class that defines objects in &lt;strong&gt;real world&lt;/strong&gt; and use it on programming!&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/content/images/2015/06/dog.gif&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Just before the creation of Object-Oriented Programming, the system development in C was using the concept of breaking the big problem into small sub-problems, where each sub-result together would generate the solution of the big problem in question. It’s actually smart to think like this, the OOP languages just formalized this concept (and of course, create others features, but this was the start point). Look at this following problem: We want a data structure to represent the functionaries of determined business, this functionary should have a name, age, salary and a function to change his salary. Let’s deal with it in the smartest way, which is, creating separately some structure that will represent the functionaries, in C we would code something like this:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;typedef struct functionary{
-  int age;
-  char name[50];
-  float salary;
-}stru_func, *ap_func;
-
-void riseSalary(ap_func pthis){ 
-      int n;
-      printf(&quot;Enter new salary: \n&quot;);
-      scanf(&quot;%d&quot;, n);
-      pthis-&amp;gt;salary = n;
-  }
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;As you can see, in this func.c, we have the structure to represent the functionaries and the function that we will use. (from now, we’ll call function as METHODS)&lt;/p&gt;
-
-&lt;p&gt;And here’s the &lt;strong&gt;main code:&lt;/strong&gt;&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;#include &quot;func.c&quot;
-int main(){
-  stru_func new;
-  printf(&quot;Enter the age, name and salary: \n&quot;);
-  scanf(&quot;%d&quot;, &amp;amp;new.age);
-  scanf(&quot;%s&quot;, &amp;amp;new.name);
-  scanf(&quot;%f&quot;, &amp;amp;new.salary);
-  printf (&quot;%d \n&quot;, new.age);
-  printf (&quot;%s \n&quot;, new.name);
-  printf (&quot;%f \n&quot;, new.salary);
-  riseSalary(&amp;amp;new);
-  printf(&quot;%f&quot;, new.salary);
-  return 0;
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Done, now we have a nice example of class and object…but, made with C! Where the class is this struct called “functionary” and the variables inside it we call “attributes” and the function “riseSalary” we call “method” (obs: look that the function/method is OUTSIDE the struct functionary), in fact we separate the module that represent the functionaries from the main module, and if we want, we can use this functionary module in other problems that need a struct to represent functionaries with those attributes/methods!&lt;/p&gt;
-
-&lt;p&gt;And…where’s the object? Right there in the main module, where we created a “variable” called “new” from the struct functionary, this is called “INSTANCE”, in this moment, we create a object from its class! Again, the class is the structure that represent the functionary and the object is the “variable” that we created with this structure!&lt;/p&gt;
-
-&lt;p&gt;All these concepts already happened before the creation of the pure Object-Oriented languages, but there was a need of formalize these techniques, creating more rigorous, useful and trustful standards.&lt;/p&gt;
-
-&lt;p&gt;The same problem that we solved in C, in java, would be something like this:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;public class functionary
-{
-  public int age;
-  public string name;
-  public int salary;
-  public void riseSalary(int n)
-  {
-      this.salary = n;
-  }
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;As you should have noticed, the method now is INSIDE the structure that represent the functionary (the class). And what the big advantage of this? the class is now more portable, we can reuse it easily!&lt;/p&gt;
-
-&lt;p&gt;in the main module we could just create as many object as we want just using: &lt;em&gt;“functionary func = new functionary();”&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Conclusion&lt;/strong&gt;: Of course that the big evolution of procedural to Object-Oriented did not stop there! The concept of reuse, organize and divide the code and the problem created others many famous techniques that we can use on classes and objects, like the &lt;strong&gt;polymorfism&lt;/strong&gt;, inheritance, abstract class and many others! But this evolution kept one main goal: &lt;strong&gt;modularity with more abstraction.&lt;/strong&gt;&lt;/p&gt;
-</description>
-				<pubDate>Wed, 16 Jul 2014 00:00:00 -0300</pubDate>
-				<link>/general/setup/demo/2014/07/16/Object-Oriented-Thinking.html</link>
-				<guid isPermaLink="true">/general/setup/demo/2014/07/16/Object-Oriented-Thinking.html</guid>
 			</item>
 		
 	</channel>
