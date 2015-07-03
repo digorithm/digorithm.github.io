@@ -221,6 +221,222 @@ $(function() {
 <article class="home">
 
   <h2>
+    <a href="/general/setup/demo/2015/07/02/Case-Study:-Sentiment-Analysis-on-Movie-Reviews.html">Case Study: Sentiment Analysis On Movie Reviews</a>
+  </h2>
+
+  <div class="post-date" style="margin-bottom:15px; margin-top:-15px;">
+    
+    July
+    2nd,
+    
+    2015
+  </div>
+
+
+  <div>
+    
+    <p>Well, this case was a fun one, sentiment analysis is a sub type of NLP <em>(natural language processing)</em> in which you have to train a model to analyze a text, and classify it was a negative sentiment or a positive sentiment. In this case, I wanted to apply it on movies reviews, to see if a review is a negative one or a positive one. So, basically, teaching this kind of sentiment to the machine.</p>
+
+<p>There’s a lot of challenges in doing this kind of NLP, experience has told me that when the text is big, it is usually hard to predict things about it… and most of the times, movie reviews are big chunk of text.</p>
+
+<p>That’s the case where I needed to learn and use a few <em>extremely</em> useful things:</p>
+
+<ol>
+  <li>Pipeline</li>
+  <li>Grid Search</li>
+</ol>
+
+<p>These two techniques made total difference in my results. Let’s go through the concept of these two:</p>
+
+<h3 id="pipeline">Pipeline</h3>
+
+<p>In a <a href="http://rodrigoaraujo.me/general/setup/demo/2015/06/30/A-Generic-Architecture-for-Text-Classification.html" target="_blank">previous post</a> I talked about a generic Architecture or Flow to achieve basic text classification tasks, so, Pipeline is a way to automate all those tasks, so, instead of explicitly and separately select features, extract features, train the learning algorithms, you can do all of these things inside the pipeline, and, the amazing scikit learn API gives you an awesome Pipeline interface, pretty similar to a basic estimator’s interface, so you can call methods such as <em>fit, fit_transform, predict</em>, etc…</p>
+
+<p>So you can do even more inside a pipeline, such as new methods for feature extraction/selection, FeatureUnion, use other estimators to select better features for your estimator <em>(do you even neural netception? LOL).</em></p>
+
+<p>Here’s an example of a simple pipeline that does PCA to reduce the dimension of the features and creates a SVC:</p>
+
+<pre><code>    from sklearn.pipeline import Pipeline
+    from sklearn.svm import SVC
+    from sklearn.decomposition import PCA
+    estimators = [('reduce_dim', PCA()), ('svm', SVC())]
+    clf = Pipeline(estimators)
+</code></pre>
+
+<h3 id="grid-search">Grid Search</h3>
+
+<p>This was the answer for many hours of pure pain tweaking gazillions of parameters to improve the algorithm’s performance. Grid Search is a way to automate parameters changes, so it can run many times with many different parameters… and choose the best for you, magical, right?</p>
+
+<p>And, once again, the Grid Search object has an interface similar to the basic estimator’s interface, so you can call all the same methods. But, when you create the object grid search, you gotta pass a estimator as parameter… and here’s when things get interesting:</p>
+
+<p>You can pass a pipeline to the grid search. <strong>so much win!</strong></p>
+
+<div class="imgcenter">
+	<img src="http://cdn.meme.am/instances2/500x/581044.jpg" />
+</div>
+
+<p> </p>
+
+<p>But, the truth is: this operation is <em>extremely</em> expensive, and it’s recommended to use it only on the few first tries, where you don’t know exactly the best parameters values for the task.</p>
+
+<p>Another interesting thing is, after the model inside the grid search is trained, methods like <em>predict</em> are computed using the best features. If we look inside the SKlearn’s grid search’s code, we can see how easily and elegant it’s done:</p>
+
+<pre>
+<code class="python hljs">
+[...]
+scores = list()
+grid_scores = list()
+for grid_start in range(0, n_fits, n_folds):
+    n_test_samples = 0
+    score = 0
+    all_scores = []
+    for this_score, this_n_test_samples, _, parameters in \
+            out[grid_start:grid_start + n_folds]:
+        all_scores.append(this_score)
+        if self.iid:
+            this_score *= this_n_test_samples
+            n_test_samples += this_n_test_samples
+        score += this_score
+    if self.iid:
+        score /= float(n_test_samples)
+    else:
+        score /= float(n_folds)
+    scores.append((score, parameters))
+    # TODO: shall we also store the test_fold_sizes?
+    grid_scores.append(_CVScoreTuple(
+        parameters,
+        score,
+        np.array(all_scores)))
+# Store the computed scores
+self.grid_scores_ = grid_scores
+
+# Find the best parameters by comparing on the mean validation score:
+# note that `sorted` is deterministic in the way it breaks ties
+best = sorted(grid_scores, key=lambda x: x.mean_validation_score,
+              reverse=True)[0]
+self.best_params_ = best.parameters
+self.best_score_ = best.mean_validation_score
+</code>
+</pre>
+
+<p>As you can see, in the end it keeps the best parameters and scores, so it can be used when it needs to predict or output its <em>predict_proba</em> or <em>decision_function</em></p>
+
+<h3 id="correctly-mixing-pipeline-grid-search-and-cross-validation-correctly-the-hidden-wizardry">Correctly mixing Pipeline, Grid Search and Cross Validation correctly: the hidden wizardry</h3>
+
+<p>It’s tricky to mix all these things up, the most dangerous mistake that everybody does sometime is: <strong>using the same dataset to the grid search AND the cross validation</strong></p>
+
+<p>So, here’s a nice technique to avoid this: Split the initial dataset into Development Dataset, which will be used to train the algorithm and to execute the grid search, and the Validation Dataset, which will be passed to the cross_val_score and internally splitted again to avoid bias (CV parameter can configure this).</p>
+
+<p>So, in the end, you train the grid search with a subset of the dataset, and validate it with another subset, avoiding many kind of undesired effects.</p>
+
+<h3 id="the-movie-review-problem">The Movie Review Problem</h3>
+
+<p>Ok, so now let’s head to the real problem. The dataset can be downloaded with:</p>
+
+<pre><code>wget http://www.cs.cornell.edu/people/pabo/movie-review-data/review_polarity.tar.gz
+tar xzf review_polarity.tar.gz
+</code></pre>
+
+<p>What I did to solve it was: I used grid search to search a few parameters, such as <em>TfidfVectorizer’s max_features</em>, that in the end I kept with max_features=10000, also its ngram_range, searching between (1,1) and (1,2) and <em>the LinearSVC()’s C parameter</em>.</p>
+
+<p>I used a few other algorithms, but I found the best performance with LinearSVC, though I did not try all the other possibilities <em>(I could create many pipelines to test many algorithms, but my computer would be unusable during many hours, probably, which I couldn’t afford)</em>.</p>
+
+<p>Why Linear SVC?</p>
+
+<p>The Linear SVC is very similar to the SVC object but using the <em>kernel = “linear”</em>. LinearSVC is a type of <em>Support Vector Machines</em>, it’s known that SVMs are effective in <strong>high dimensional spaces</strong>, which is our case here. Also, it can give weights to classes, helping to go through unbalanced datasets
+<img src="http://scikit-learn.org/stable/_images/plot_separating_hyperplane_unbalanced_0011.png" alt="" /></p>
+
+<p>And, basically, what the SVMs does is create a hyper-plane (or a set of it) in a high or even infinite dimensional space. And it solves the primal problem:</p>
+
+<div class="imgcenter">
+<img src="http://scikit-learn.org/stable/_images/math/396704acdf11cc18d2d02b32275c0ee42d76b95e.png" />
+</div>
+<p> </p>
+
+<p>Where Xi are the training vectors and Y is a vector in {1,-1}^n.</p>
+
+<p>So, here’s the code where I built the pipeline, the gridsearch, use a subset of the dataset to develop the grid search and another subset to validate using the <em>cross_val_scores</em>, then, I call <em>predict</em> to get the vector of predictions to build a report <em>(or, with this, I can start to build a ROC curve, confusion matrix and other statistics debug tools)</em></p>
+
+<pre><code>from sklearn.datasets import load_files
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.grid_search import GridSearchCV
+from sklearn.pipeline import make_pipeline
+from sklearn.svm import LinearSVC
+from sklearn.cross_validation import train_test_split
+from sklearn.cross_validation import cross_val_score
+from sklearn.metrics import classification_report
+
+data = load_files('../txt_sentoken/')
+
+X_train, X_test, y_train, y_test = train_test_split(data.data, data.target, test_size=0.5, random_state=0)
+
+pipeline = make_pipeline(TfidfVectorizer(sublinear_tf=True, max_features=10000), LinearSVC())
+
+parameters = {
+        'tfidfvectorizer__ngram_range': [(1,1), (1,2)],
+        'linearsvc__C':(.01,.1,1),
+        }
+
+grid_search = GridSearchCV(pipeline, parameters, n_jobs=-1) 
+
+grid_search.fit(X_train, y_train)
+
+print("Best score: %0.3f" % grid_search.best_score_)
+print("Best parameters iset:")
+best_parameters = grid_search.best_estimator_.get_params()
+for param_name in sorted(parameters.keys()):
+    print("\t%s: %r" % (param_name, best_parameters[param_name]))
+
+print "The model was trained on the full development set"
+print "the scores are going to be computed with the evaluation set"
+scores = cross_val_score(grid_search, X_test, y_test, cv=5)
+
+print scores.mean(), scores.std()
+
+y_pred = grid_search.predict(X_test)
+
+print classification_report(y_test, y_pred)
+</code></pre>
+
+<p>and the output:</p>
+
+<pre><code>Best score: 0.849
+
+Best parameters iset:
+	linearsvc__C: 1
+	tfidfvectorizer__ngram_range: (1, 2)
+
+The model was trained on the full development set
+the scores are going to be computed with the evaluation set
+0.865933623341 0.0281523948704
+
+Classification report:
+             precision    recall  f1-score   support
+
+          0       0.88      0.86      0.87       496
+          1       0.87      0.88      0.87       504
+
+avg / total       0.87      0.87      0.87      1000
+</code></pre>
+
+<p>So, around 86%~87% of precision/f1-score, not <em>that</em> bad.</p>
+
+<h3 id="further-improvements">Further Improvements</h3>
+
+<p>There are many things I could to do elevate this performance, but due the lack of time to play with this dataset, those improvements will be in a next post.</p>
+
+<p>Possible improvements could be: find and extracting new features, to do this, we gotta understand better this data, extract more information about it. Trying new algorithms and techniques such as Ensemble, Classifiers Combination or Fusion. Stemming and Stop Words could improve it too. If you solved this problem and got a better result, share it with me, I’m very curious about how to improve this!</p>
+
+    
+  </div>
+
+</article>
+<hr/>
+
+
+<article class="home">
+
+  <h2>
     <a href="/general/setup/demo/2015/06/30/A-Generic-Architecture-for-Text-Classification.html">A Generic Architecture for Text Classification with Machine Learning</a>
   </h2>
 
@@ -837,189 +1053,6 @@ if __name__ == '__main__':
 <p>When the requests come, it verifies the route that the user is asking for, which is: what resources is he/she wanting? and then, the code do whatever it must do (<em>remember the API idea of hiding the complexity, the user requesting just want the result</em>), and then it put everything in a JSON and returns it. That simple!</p>
 
 <p>Of course, many improvements and extensions (<em>there are infinity possibilities</em>) can be made to this code, but, here’s a skeleton of the idea of an API, it’s just a start. One good practice it’s to <em>not</em> return the ID of the resource, but return just its URI, which is surely a great idea. Another good practice is to ask authentication in every HTTP request, so your API won’t be exposed to everybody. There are, indeed, endless improvements, but in this code, you, that are completely beginner to the API’s concept, can now understand what’s going on underneath and start planning and building your own API using Flask.</p>
-
-    
-  </div>
-
-</article>
-<hr/>
-
-
-<article class="home">
-
-  <h2>
-    <a href="/general/setup/demo/2015/03/31/using-python-and-AI-to-predict-types-of-wine.html">Using Python and AI to predict types of wine</a>
-  </h2>
-
-  <div class="post-date" style="margin-bottom:15px; margin-top:-15px;">
-    
-    March
-    31st,
-    
-    2015
-  </div>
-
-
-  <div>
-    
-    <p>I’ve been working with AI/Machine Learning at <a href="http://www.jusbrasil.com.br/">Jusbrasil</a> recently, and it’s being pretty challenging due to the <em>huge</em> amount of data that we have to deal with, so cleaning this data and making predictions and classifications in an acceptable time demands a nice AI architecture.</p>
-
-<p>That said I can say that I’m extremely thankful for a few technologies that are helping me go through this challenge <em>(and the pain of cleaning this amount of data)</em>: Python, Scikit Learn, Pandas, and the whole stack that the Scikit Learn use, such as NumPy, SciPy, matplotlib and few others.</p>
-
-<p>So, this inspired me to <em>spread the word</em>, so I’ll be showing here a simple example of Machine Learning using Python, Pandas and Scikit Learn to predict, given a great amount of data/features about wines, if a wine is white or red.</p>
-
-<p><strong>disclaimer:</strong> <em>I’m assuming that you already have a small knowledge on the ideas of the machine learning and its mathematical aspects (although not necessary to implement the code that I’ll show here), this is just a simple introduction to scikit learn and its power, so the example is pretty simple and straight forward, if you just want the code, here it is: <a href="https://gist.github.com/digorithm/ad742f9314f76e732888">github link</a></em></p>
-
-<h2 id="whats-pandas">What’s Pandas?</h2>
-
-<p>Pandas is an amazing library for data manipulation, it makes the process of dealing with data very easy and straight forward, we can work with CSV, JSON and plenty other formats without struggling to manipulate the data, <a href="https://signalvnoise.com/posts/3124-give-it-five-minutes">give it five minutes</a> and skim their <a href="http://pandas.pydata.org/pandas-docs/dev/">docs</a>, it will definitely worth it!</p>
-
-<h2 id="fetching-the-data">Fetching the data</h2>
-
-<p>Let’s start fetching the data with Pandas, <em>(you can download the data <a href="https://archive.ics.uci.edu/ml/machine-learning-databases/wine-quality/">here</a>)</em> to do so, just import Pandas and read the CSV file, just like that:</p>
-
-<pre>
-<code class="python hljs">
-import pandas as pd
-reds = pd.read_csv('winequality-red.csv', sep=';')
-whites = pd.read_csv('winequality-white.csv', sep=';')
-</code>
-</pre>
-
-<p>We can see how the data is structured by doing a few commands:</p>
-
-<pre>
-<code class="python hljs">
-reds.values[0:6]
-</code>
-</pre>
-
-<p>As output, we have the first 5 rows of the red wine’s data</p>
-
-<pre>
-<code class="python hljs">
-array([[7.4, 0.7, 0.0, 1.9, 0.076, 11.0, 34.0, 0.9978, 3.51, 0.56, 9.4, 5],
-       [7.8, 0.88, 0.0, 2.6, 0.098, 25.0, 67.0, 0.9968, 3.2, 0.68, 9.8, 5],
-       [7.8, 0.76, 0.04, 2.3, 0.092, 15.0, 54.0, 0.997, 3.26, 0.65, 9.8, 5],
-       [11.2, 0.28, 0.56, 1.9, 0.075, 17.0, 60.0, 0.998, 3.16, 0.58, 9.8,6],
-       [7.4, 0.7, 0.0, 1.9, 0.076, 11.0, 34.0, 0.9978, 3.51, 0.56, 9.4, 5],
-       [7.4, 0.66, 0.0, 1.8, 0.075, 13.0, 40.0, 0.9978, 3.51, 0.56, 9.4, 5]], 
-dtype=object)
-</code>
-</pre>
-
-<p>Or we just use a function from Pandas that describe very well our data</p>
-
-<pre>
-<code class="python hljs">
-reds.head()
-</code>
-</pre>
-
-<pre>
-<code class="python hljs">
-
-&lt;class 'pandas.core.frame.dataframe'=""&gt;Int64Index: 5 entries, 0 to 4
-Data columns:
-fixed acidity           5  non-null values
-volatile acidity        5  non-null values
-citric acid             5  non-null values
-residual sugar          5  non-null values
-chlorides               5  non-null values
-free sulfur dioxide     5  non-null values
-total sulfur dioxide    5  non-null values
-density                 5  non-null values
-pH                      5  non-null values
-sulphates               5  non-null values
-alcohol                 5  non-null values
-quality                 5  non-null values
-dtypes: float64(11), int64(1), object(1)
-</code>
-</pre>
-
-<h2 id="understanding-our-data">Understanding our data</h2>
-
-<p>Matplotlib gives you many ways to plot our data into graphs so we can understand what is going on with the data so we can choose the best model/algorithm for the given scenario,</p>
-
-<p>For instance, let’s take a look at the relation between the red wines and its fixed acidity</p>
-
-<pre>
-<code class="python hljs">
-x = plt.subplots(figsize=(10, 5))
-plt.plot(reds.index, reds.get("fixed acidity"), 'ro')
-ax.set_title('Wines vs fixed acidity')
-ax.set_xlabel('red wine index')
-ax.set_ylabel('Fixed Acidity')
-plt.show()
-</code>
-</pre>
-
-<p><img src="/content/images/2015/06/mlproblem.png" alt="" /></p>
-
-<h2 id="preparing-the-data-for-classification">Preparing the Data for classification</h2>
-
-<p>Now we’re going to add a new feature/variable to our data, which is our target variable, the <em>Y</em>, that will be telling if the wine from our dataset is white or red</p>
-
-<pre>
-<code class="python hljs">
-reds['kind'] = 'red'
-whites['kind'] = 'white'
-</code>
-</pre>
-
-<p>We need to get all of our feature into a vector called X, that will be set into our algorithm, right? And, we need to get all our targets (white or red) and set into a Y variable</p>
-
-<pre>
-<code class="python hljs">
-wines = reds.append(whites, ignore_index=True)
-X = wines.ix[:, 0:-1]
-y = wines.kind
-</code>
-</pre>
-
-<p>Notice that we’re merging both datasets together, the one with the red wines and the one with the white wines, so we can send them together to the algorithm. Now we’re going to binarize the labels ‘white’ and ‘red’, so the mathematical model can use it. It’s pretty simple</p>
-
-<pre>
-<code class="python hljs">
-y = y.apply(lambda val: 0 if val == 'white' else 1)
-</code>
-</pre>
-
-<h2 id="the-algorithm">The algorithm</h2>
-
-<p>Now that we have our data well structured and we do understand it, we can start looking for an algorithm to use. A good algorithm for our scenario is a simple <strong>Logistic Regression</strong>, that will return a model that we’ll use to make our predictions/classification. The mathematical linear model that will use is the following:</p>
-
-<script type="math/tex; mode=display">
- 
-f(w) := \lambda\, R(w) + \frac1n \sum_{i=1}^n L(w;x_i,y_i) \label{eq:regPrimal}\
-
-</script>
-
-<p>In addition with the loss function defined by the logistic loss</p>
-
-<script type="math/tex; mode=display">
-L(w;x,y) := \log(1+\exp( -y w^T x )) 
-</script>
-
-<p>The Scikit learn provides an awesome library with an amazingly ease of use, so that we don’t have to implement the whole model from scratch. All we have to do is create a object from the model we want to use, understand how it works <em>(at least understand how to use its interface to do what we want)</em>. In this case, we will be using the <em>cross validation</em> object, which is another discussion for another time, but in a few words, it will divide our dataset and test it against all parts of the divided dataset, this way we make sure that we’re validating the quality of the result.</p>
-
-<pre>
-<code class="python hljs">
-clf = LogisticRegression()
-scores = cross_val_score(clf, X, y, cv=5)
-print scores.mean(), scores.std()
-</code>
-</pre>
-
-<p>And as the result we get:</p>
-
-<pre>
-<code class="python hljs">
-0.981376321334 0.00638795038332
-</code>
-</pre>
-
-<p>And that’s the exactly the precision of the algorithm over the given dataset, <strong>98% of precision</strong>, which is quite good! Now, for example, we can save this trained classifier and use it for future classifications of incoming data about wines that need to be classified as white or red, to do so, we just call the method <em>clf.predict(X)</em> where this X will be the new wine’s data. simplicity at its best!</p>
 
     
   </div>
