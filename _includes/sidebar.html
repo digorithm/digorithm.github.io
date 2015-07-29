@@ -1,4 +1,23 @@
 <!-- sidebar.html -->
+<style>
+#focusbutton {
+        position: absolute;
+        top: 0;
+        right:0;
+        cursor: pointer;
+        padding-right: 5px;
+        padding-top:5px;
+}
+
+.fa-2x {
+        color:#00ccd6;
+}
+
+#focusoff {
+        display:none;
+}
+</style>
+
 <header class="sidebar-header" role="banner">
 	<a href="{{ site.BASE_PATH }}/">
 		<img src="/content/images/images/pic3.jpg" width="180" height="180" class="img-circle" />
@@ -7,8 +26,12 @@
         <a href="{{ site.BASE_PATH }}/">Rodrigo Araújo</a>
     </h3>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 </header>
-
+        <div id='focusbutton'>
+        <i id="focus" class="fa fa-minus-circle fa-2x"></i>
+        <i id="focusoff" class="fa fa-plus-circle fa-2x"></i>
+        </div>
 {% if site.author.bio %}
 <div id="bio" class="text-center">
 	{{ site.author.bio }}
@@ -97,6 +120,30 @@
 </div>
 <!-- sidebar.html end -->
 <script>
+
+$('#focus').on("click", function(){
+    $('.sidebar-header').css('display', 'none');
+    $('#bio').css('display', 'none');
+    $('.pages').css('display', 'none');
+    $('#contact-list').css('display', 'none');
+    $('.col-sm-3').css('width', '3%');
+    $('#focusoff').css('display', 'block');
+    $('#focus').css('display', 'none');
+
+});
+
+$('#focusoff').on("click", function(){
+    $('.sidebar-header').css('display', 'block');
+    $('#bio').css('display', 'block');
+    $('.pages').css('display', 'block');
+    $('#contact-list').css('display', 'block');
+    $('.col-sm-3').css('width', '25%');
+    $('#focusbutton').css('display', 'block');
+    $('#focusoff').css('display', 'none');
+    $('#focus').css('display', 'block');
+
+});
+
 
 	$(function () {
 
