@@ -7,6 +7,213 @@
 		<atom:link href="/feed.xml" rel="self" type="application/rss+xml" />
 		
 			<item>
+				<title>Neural Computation: Toward an Intuitive Understanding of the Perceptron</title>
+				<description>&lt;p&gt;Artificial Neurons is one of the most beautiful ways to simulate a biological behavior through computation, despite the fact that it’s not very close to the level of details of a real neuron. But it captured the core of what a neuron is doing. &lt;/p&gt;
+
+&lt;p&gt;And I find that trying to understand this mathematical method by first understanding the concept through a metaphor &lt;em&gt;(which, in this case, I think that the metaphor is our mathematical side, and not the biological one, the biological is just, you know, the real thing)&lt;/em&gt; is really valuable to gain an intuition on this topic. &lt;/p&gt;
+
+&lt;p&gt;If you were about to make a decision, given many variables, how would you make this decision? It may not look obvious, due the fact that, on normal occasions, we’re not thinking about our thinking process, but the truth is, we are collecting those variables that affect the future decision, and we’re giving weights to them. Weights? how? Simple, some variables are more crucial than other while making decision, isn’t it? the word &lt;em&gt;‘crucial’&lt;/em&gt;, in this case, means a huge weight on this variable, and it will strongly affect the final decision. &lt;/p&gt;
+
+&lt;p&gt;Suppose a scenario: we’re deciding whether we should go to beach or not. Let’s put a few binary variables on table:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Are we in the mood to go to the beach?&lt;/li&gt;
+  &lt;li&gt;Is it raining?&lt;/li&gt;
+  &lt;li&gt;Our other friends are going?&lt;/li&gt;
+  &lt;li&gt;Do we have money?&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;So, depending on those variables, it will be more likely that we will go to the beach… or not. Let’s think about the variable &lt;em&gt;‘is it raining?’&lt;/em&gt;, if it’s raining, we can say that it’s a deal breaker, so we can conclude that this variable has more weights than the other. The fact is that we already trained those weights inside our brain, long time ago. &lt;/p&gt;
+
+&lt;p&gt;That’s what an Artificial Neuron try to do, the AN try to learn the weights of things so it can make decisions. So, drawing back to the mathematical and computational aspect of it, the perceptron is a single unit that will receive external inputs&lt;em&gt;(variables)&lt;/em&gt;, it will have a weight for each input, it will do some computation, send this result to a decision function, and, finally, output the final decision. &lt;/p&gt;
+
+&lt;p&gt;Those inputs are the variables we’re talking before, and like our process to make a decision, the Perceptron will weight each input to make a decision. &lt;/p&gt;
+
+&lt;p&gt;Now, how the Perceptron knows how the weights should be for each input? Well… it doesn’t. At least, not from the beginning of the learning process, just like you and me, when trying to learn something new. &lt;/p&gt;
+
+&lt;p&gt;That’s why this case is a case of supervised learning, what the Perceptron will do is: start with a random small weights, take one previously trained example &lt;em&gt;(e.g: (1) yes to mood to beach, (2) not raining, (3) yes to friends going to beach and (4) yes to money, the output: 1 - yes, we shall go to the beach)&lt;/em&gt; do some computation taking in consideration the random weights we defined before, send it to a decision function, output something &lt;em&gt;(1 - yes, 0 - no)&lt;/em&gt; and check if this output is equal to the expected &lt;em&gt;(we’re using a trained example, remember?)&lt;/em&gt;, of course that at the first try, it won’t be equal. So the Perceptron calculate the error rate and update its weights… after this, guess what? it repeat the process of trying to predict, but now, with the updated weights, after a few tries, the error rate tends to reduce and it starts predicting correctly. So it learned to predict a behavior, by training with previously trained examples.&lt;/p&gt;
+
+&lt;p&gt;So, a nice learning behavior would be something like this:&lt;/p&gt;
+
+&lt;div class=&quot;imgcenter&quot;&gt;
+	&lt;img src=&quot;/content/images/images/perceptron_0.1.gif&quot; /&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Which means, at every iteration &lt;em&gt;(we call it epochs)&lt;/em&gt;, the error rate tend to decrease and, as consequence, the Perceptron starts to predict correctly!&lt;/p&gt;
+
+&lt;p&gt;As you may have noted, I omitted a few details of the process so you could see the whole picture of the process: we take an example, we practice on it, we see what we missed, we try again, we learn. That’s the core process. &lt;/p&gt;
+
+&lt;p&gt;Now, to the details:&lt;/p&gt;
+
+&lt;h3 id=&quot;the-computation&quot;&gt;The computation&lt;/h3&gt;
+
+&lt;p&gt;The first step that the Perceptron does it’s a computation that I referred as &lt;em&gt;“some computation”&lt;/em&gt;, this is a simple computation, it’s just a simple Linear Combination of the feature vector &lt;em&gt;(the variables)&lt;/em&gt; and the weight vector, which is just the sum of the products between feature/input and its respective weight:&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;
+x_{1}w_{1}+x_{2}w_{2}+x_{3}w_{3}+ \cdots +x_{n}w_{n}
+&lt;/script&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;h3 id=&quot;the-decision-function&quot;&gt;The Decision Function&lt;/h3&gt;
+&lt;p&gt;So, after the Linear Combination, we send the result of it to a decision function, which will, somehow, based on some threshold &lt;em&gt;(or without a threshold as we’re going to see)&lt;/em&gt;, give us the output, that will be checked with the correct output, in case if it’s correct, fine, keep the weights like this, otherwise, it will calculate the error rate, adjust the weights and restart the process.&lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;h4 id=&quot;binary-output-with-threshold&quot;&gt;Binary output with threshold&lt;/h4&gt;
+
+&lt;p&gt;This technique is very simple, after the linear combination, if the output is bigger than some threshold, it outputs 1 and we say that the neuron was activated, otherwise, output 0.&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
+
+\begin{equation}
+    X=
+    \begin{cases}
+      1, &amp; \text{if}\ Linear\,Combination&gt;0 \\
+      0, &amp; \text{otherwise}
+    \end{cases}
+  \end{equation}
+ %]]&gt;&lt;/script&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;h4 id=&quot;using-sigmoid-function&quot;&gt;Using sigmoid function&lt;/h4&gt;
+
+&lt;p&gt;Now, that a interesting one, it won’t use a threshold anymore, we’ll send the output of the Linear Combination to a sigmoid function&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;
+S(\vec{w}\vec{x}) = \dfrac{1}{1+e^{-\vec{w}\vec{x}}}
+&lt;/script&gt;
+
+&lt;p&gt;which will, then, smooth the output, making it in the range of 0 and 1. Which is the most used in many Machine Learning Algorithms.&lt;/p&gt;
+
+&lt;div class=&quot;imgcenter&quot;&gt;
+	&lt;img src=&quot;https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Logistic-curve.svg/600px-Logistic-curve.svg.png&quot; /&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;adjusting-the-weights-and-learning&quot;&gt;Adjusting the weights and learning&lt;/h3&gt;
+
+&lt;p&gt;After the perceptron fails to predict correctly, it’s time to adjust the weight, using some rule, the classic perceptron has 2 rules:&lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;h4 id=&quot;perceptron-learning-rule&quot;&gt;Perceptron Learning Rule&lt;/h4&gt;
+&lt;p&gt;This is very simple, when the perceptron has the incorrect output, it update its weights following this:&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;
+w_{i} = w_{i} + \eta (t_{i} - o_{i})x_{i}
+&lt;/script&gt;
+
+&lt;p&gt;Which is simply multiplying a learning rate &lt;em&gt;(usually 0.001)&lt;/em&gt; by the difference between the correct output and the wrong output and then multiplying it by its original input, after this, we add this value to the previous weight and then we have the value of the new weight. 
+It’s fair simple, isn’t it? The problem arises when the data isn’t linearly separable, like this:&lt;/p&gt;
+
+&lt;div class=&quot;imgcenter&quot;&gt;
+	&lt;img src=&quot;https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/DBSCAN-density-data.svg/2000px-DBSCAN-density-data.svg.png&quot; width=&quot;400&quot; /&gt;
+&lt;/div&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;p&gt;With this scenario, the result just won’t converge. So we adopt another rule!&lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;h4 id=&quot;delta-rule&quot;&gt;Delta Rule&lt;/h4&gt;
+
+&lt;p&gt;Now we must find a way to have a non-linear output, and what’s the best for this if not the classic Gradient Descent algorithm? GD will simply search through hypothesis spaces and try to minimize the cost function, I wrote about this &lt;a href=&quot;http://rodrigoaraujo.me/general/setup/demo/2015/01/09/Making-Your-Machine-Think-Learn-And-Predict--Gradient-Descent-Algorithm-in-Java.html&quot;&gt;here&lt;/a&gt;. &lt;/p&gt;
+
+&lt;div class=&quot;imgcenter&quot;&gt;
+	&lt;img src=&quot;http://www.yaldex.com/game-development/FILES/17fig06.gif&quot; /&gt;
+&lt;/div&gt;
+
+&lt;p&gt;So, it’s just a technique to solve our previous problem, but still, the weights will be updated &lt;em&gt;(now, using the GD)&lt;/em&gt; and then the process start over!&lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;h3 id=&quot;code-of-a-perceptron&quot;&gt;Code of a Perceptron&lt;/h3&gt;
+
+&lt;p&gt;Now, here’s a code of a Perceptron that will behave like a simple Boolean function. I didn’t use the Delta Dule (Gradient Descent) to optimize the weights, as this problem (binary Boolean functions) is linearly separable.&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;code class=&quot;python hljs&quot;&gt;
+
+import math
+from numpy import random, array
+from random import choice
+import matplotlib.pyplot as plt
+
+class Perceptron():
+    
+        &quot;&quot;&quot;
+    this is the thereshold to activate the unit 
+    &quot;&quot;&quot;
+    def activation(self,x):
+        return 1/(1 + math.exp(-x))
+
+    def linear_combination(self, X):
+        total = 0
+        for i in xrange(len(self.weights)):
+            total += self.weights[i] * X[i]
+        return total
+    
+    def unit_output(self, X):
+        return self.activation(self.linear_combination(X))
+
+    def train(self, training_data, epochs):
+        
+        self.learning_rate = 0.5
+        self.errors = []
+
+        # initializing weights
+        self.weights = random.rand(len(training_data[1][0]))
+        
+        for i in xrange(epochs):
+            X, y = choice(training_data)
+            # &amp;gt; calculate output with current weight
+            output = self.unit_output(X)
+            # &amp;gt; calculate error rate (t - o)
+            error_rate = y - output
+            self.errors.append(error_rate)
+            print 'the X: ', X
+            print 'output: ',output
+            print 'correct target: ', y
+            # &amp;gt; apply learning rule which will update weights
+            self.weights += self.learning_rate * error_rate * X
+
+    def predict(self,X):
+        y = self.unit_output(X)
+        return y
+                
+
+        training_data = [
+                (array([0,0,1]), 0),
+                (array([0,1,1]), 0),
+                (array([1,0,1]), 0),
+                (array([1,1,1]), 1),
+                
+        ]
+
+p = Perceptron()
+
+p.train(training_data, 2000)
+print p.predict([1,0,1])
+plt.plot(p.errors)
+plt.ylabel('errors')
+plt.xlabel('epochs')
+plt.show()
+&lt;/code&gt;
+&lt;/pre&gt;
+
+&lt;h3 id=&quot;conclusion-and-next-steps&quot;&gt;Conclusion and next steps&lt;/h3&gt;
+
+&lt;p&gt;With this we conclude what a simple single Perceptron is doing! Of course there are many improvements on it and we can connect many of these Artificial Neurons in many layers… that’s what is called Artificial Neural Network, I’ll be writing about it soon!&lt;/p&gt;
+
+</description>
+				<pubDate>Thu, 16 Jul 2015 00:00:00 -0300</pubDate>
+				<link>/general/setup/demo/2015/07/16/Neural-Computation-pt1.html</link>
+				<guid isPermaLink="true">/general/setup/demo/2015/07/16/Neural-Computation-pt1.html</guid>
+			</item>
+		
+			<item>
 				<title>Case Study: Sentiment Analysis On Movie Reviews</title>
 				<description>&lt;p&gt;Well, this case was a fun one, sentiment analysis is a sub type of NLP &lt;em&gt;(natural language processing)&lt;/em&gt; in which you have to train a model to analyze a text, and classify it was a negative sentiment or a positive sentiment. In this case, I wanted to apply it on movies reviews, to see if a review is a negative one or a positive one. So, basically, teaching this kind of sentiment to the machine.&lt;/p&gt;
 
@@ -1447,562 +1654,6 @@ L(A) = \{ \omega \,|\, \delta(q0, \omega)\, is\, in\, F \}
 				<pubDate>Fri, 31 Oct 2014 00:00:00 -0300</pubDate>
 				<link>/general/setup/demo/2014/10/31/Thoughts-on-Automata-Theory.html</link>
 				<guid isPermaLink="true">/general/setup/demo/2014/10/31/Thoughts-on-Automata-Theory.html</guid>
-			</item>
-		
-			<item>
-				<title>Fun with graphs pt1</title>
-				<description>&lt;p&gt;Graph Theory is definitely one of my favorite branches of the Mathematics &amp;amp; Computer Science, mostly because of its nearest infinity applications, in both real world problems and pure theoretical problems.&lt;/p&gt;
-
-&lt;p&gt;These days I’ve been working (with my buddy Daniel Almeida) in a framework to create and manipulate graphs. Which means, creating a data structure to represent graphs, edges, vertexes and creating algorithms to work on this structure. All this is being made with Java and I’ll expose this code here, as I saw a terrible lack of good readable codes about it on the internet.&lt;/p&gt;
-
-&lt;p&gt;So, before we start coding the graph’s structure… we must clarify what a graph is and why it’s so important to the Computer Science (and many other sciences).&lt;/p&gt;
-
-&lt;p&gt;A graph is a ordered pair (G = (V,E)) , where (V) is a set of Vertices/Nodes and (E) is a set of Edges, an extremely mple example of a complete &lt;a href=&quot;http://mathworld.wolfram.com/SimpleGraph.html&quot;&gt;simple&lt;/a&gt;, &lt;a href=&quot;http://mathworld.wolfram.com/ConnectedGraph.html&quot;&gt;connected&lt;/a&gt; and &lt;a href=&quot;http://mathworld.wolfram.com/CompleteGraph.html&quot;&gt;complete&lt;/a&gt; graph is:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/content/images/2015/06/graph1.png&quot; alt=&quot;alt&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;So, what’s the huge deal with this graph theory thing?&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;Well, not only theoretical computer science problems lay on the graph theory but also in many other distinct fields, from particle physics, chemistry to &lt;a href=&quot;http://en.wikipedia.org/wiki/Mathematical_sociology&quot;&gt;sociology&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;All this because every little thing in our universe is linked, and when this set of things became a “web of things”, we need to study its properties. And that’s where graph theory get in.&lt;/p&gt;
-
-&lt;p&gt;So when a graph gets bigger, we need to represent this structure in a computational way, so we can compute things like shortest path between two nodes, connectivity and thousand of other properties and techniques.&lt;/p&gt;
-
-&lt;p&gt;The most common ways to represent graph mathematically are:&lt;/p&gt;
-
-&lt;h2 id=&quot;adjacency-matrix&quot;&gt;Adjacency Matrix&lt;/h2&gt;
-
-&lt;p&gt;It’s a matrix that represent the adjacency of every node in a graph, it’s an excellent way to work computationally with graphs. The same graph that I presented previously in a visual way can be represented by the following adjacency matrix:&lt;/p&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
- 
-\begin{bmatrix}
-0 &amp; 1 &amp; 1 \\\ 
-1 &amp; 0 &amp; 1 \\\ 
-1 &amp; 1 &amp; 0
-\end{bmatrix}
- %]]&gt;&lt;/script&gt;
-
-&lt;h2 id=&quot;adjacency-list&quot;&gt;Adjacency List&lt;/h2&gt;
-
-&lt;p&gt;This is another common way to represent graph mathematically, it’s a simple list of lists, each node in the main list points to a list of their adjacent nodes.&lt;/p&gt;
-
-&lt;p&gt;Here’s an example:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/content/images/2015/06/graph2.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/content/images/2015/06/adjaceny-list.gif&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;data-structures-to-represent-graphs&quot;&gt;Data Structures to represent Graphs&lt;/h2&gt;
-
-&lt;p&gt;Ok, so, how do we represent graphs, edges and vertexes in terms of data structures? Before we dig deeper in the algorithms and the mathematical properties of the graphs, we need to create our Data Structure to work with.&lt;/p&gt;
-
-&lt;h3 id=&quot;the-vertex&quot;&gt;The vertex&lt;/h3&gt;
-&lt;pre&gt;
-&lt;code class=&quot;java hljs&quot;&gt;
-package GraphModels;
-
-public class Vertex {
-    /* This Data Structure will be capable to represent a Vertex,
-    * which is a Node that will be used on a graph
-    */
-    
-    public String id;
-    public String name;
-    public boolean visited = false;
-    
-    public Vertex(String id, String name) {
-        this.id = id;
-        this.name = name;
-    }
-    public String getId() {
-        return id;
-    }
-    
-    public String getName() {
-        return name;
-    }
-    
-  @Override
-  public String toString() {
-    return name;
-  }
-    
-}
-
-&lt;/code&gt;
-&lt;/pre&gt;
-
-&lt;p&gt;For now you may be asking yourself why do we need a variable called “Visited”. Well, we’ll be using it in algorithms to walk through the graph, so we must need to know which nodes were visited. It will became more clear soon!&lt;/p&gt;
-
-&lt;h3 id=&quot;the-edge&quot;&gt;The Edge&lt;/h3&gt;
-
-&lt;p&gt;Yes, the edge must be represented computationally! That’s our way to figure out paths through the vertexes, the edge may or may not have a weight, the edge must know its source vertex and its destination vertex&lt;/p&gt;
-&lt;pre&gt;
-&lt;code class=&quot;java hljs&quot;&gt;
-    package GraphModels;
-
-    public class Edge {
-
-         /* This Data Structure will be capable to represent a Edge,
-        *    that will be used on a graph
-        */
-
-        public String id;
-        public Vertex source;
-        public Vertex destination;
-        private final int weight;
-
-        public Edge(String id, Vertex source, Vertex destination, int weight) {
-            this.id = id;
-            this.source = source;
-            this.destination = destination;
-            this.weight = weight;
-        }
-
-        public String getId() {
-            return id;
-        }
-        public Vertex getDestination() {
-            return destination;
-        }
-
-        public Vertex getSource() {
-            return source;
-        }
-        public int getWeight() {
-            return weight;
-        }
-
-        @Override
-        public String toString() {
-            return source + &quot; &quot; + destination;
-        }
-    } 
-&lt;/code&gt;
-&lt;/pre&gt;
-
-&lt;h3 id=&quot;the-graph&quot;&gt;The Graph&lt;/h3&gt;
-
-&lt;p&gt;That’s for sure the biggest and most complex part, don’t panic with the many algorithms already implemented in this code. I’ll be explaining one by one.&lt;/p&gt;
-
-&lt;p&gt;We’re reading a text file containing the text file, if you want to test by yourself, make sure to create a .txt in the correct way and to pass the correct file path! You can find the instructions to write the .txt graph in the comments of this code&lt;/p&gt;
-
-&lt;pre&gt;
-&lt;code class=&quot;java hljs&quot;&gt;
-    package GraphModels;
-
-    import java.io.BufferedReader;
-    import java.io.FileNotFoundException;
-    import java.io.FileReader;
-    import java.io.IOException;
-    import java.util.ArrayList;
-    import java.util.HashMap;
-    import java.util.LinkedList;
-    import java.util.List;
-    import java.util.Map;
-    import java.util.Queue;
-
-    public class Graph {
-
-        /* This Data Structure will be capable to represent a Graph,
-        *   where G = (V, E)
-        */
-
-       private  List nodes;
-       private  List edges;
-       public Vertex node;
-       public Edge edge;
-       private String path;
-       private int [][] adjacencyMatrix;
-       private Map nodesMatrixMap;
-       private List adjacentNodes;
-       public int degree;
-       public int minDegree;
-       public int maxDegree;
-       public int avgDegree;
-
-       public Graph() {
-
-      }
-
-      public List getNodes() {
-        return nodes;
-      }
-
-      public List getEdges() {
-        return edges;
-      }
-
-      public void setNodes(List vertex){
-          this.nodes = vertex;
-      }
-
-      public void setEdges(List edges){
-          this.edges = edges;
-      }
-
-      // Find an edge
-      // TO-DO: Change == to equals
-      public Edge getEdge(Vertex source, Vertex destination) {
-          for (Edge edge : this.getEdges()) {
-              if ((edge.getSource().getId() == source.getId() &amp;amp;&amp;amp; edge.getDestination().getId() == destination.getId()) || (edge.getSource().getId() == destination.getId() &amp;amp;&amp;amp; edge.getDestination().getId() == source.getId())) {
-                  return edge;
-              }
-          }
-          return null;
-      }
-
-      // Check if there is an edge for two given vertices
-      public boolean hasEdge(Vertex source, Vertex destination) {
-          Edge result = this.getEdge(source, destination);
-          if (result != null) {
-            return true;
-          } else {
-            return false;
-          }
-      }
-
-      public List getAdjacentNodes(Vertex node){
-          adjacentNodes = new ArrayList();
-
-          for (Vertex currentNode : nodes){
-              if (hasEdge(node, currentNode)){
-                  adjacentNodes.add(currentNode);
-              }
-          }
-
-          return adjacentNodes;
-      }
-
-      public int getMinDegree(){
-          minDegree = 99999999;
-
-          for (Vertex node : nodes){
-              if (this.getDegree(node)maxDegree){
-                  maxDegree = this.getDegree(node);
-              }
-          }
-
-          return maxDegree;
-      }
-      public int getAvgDegree(){
-          avgDegree = 0;
-
-          for (Vertex node : nodes){
-              avgDegree += this.getDegree(node);
-          }
-          avgDegree = avgDegree/nodes.size();
-
-          return avgDegree;
-      }
-
-      //modified for our needs   
-      public int breadthFirstSearch(Vertex rootNode){
-
-          int visitedNodes = 0;
-          Queue q = new LinkedList();
-          q.add(rootNode);
-
-          while (!q.isEmpty()){
-              Vertex currentNode = (Vertex) q.peek();
-              for (Vertex node : this.getAdjacentNodes(currentNode)){
-                  if (!node.visited){   
-                      node.visited = true;
-                      q.add(node);
-                      visitedNodes++;
-                  }
-              }
-              q.remove();   
-          }
-          //reseting all flags
-          for (Vertex node : nodes){
-              node.visited = false;
-          }
-
-          return visitedNodes;
-
-      }
-
-      public boolean isConnected(){
-          int numberOfNodes = nodes.size();
-
-          for (Vertex node : nodes){
-              if (!(this.breadthFirstSearch(node) == numberOfNodes)){
-                  return false;
-              }
-          }
-          return true;
-      }
-
-      //TO-DO: error treatment. 
-      // while this treatment doesn't exist: BE EXTREMELY CAREFUL WITH GRAPH.TXT
-      // the right syntax is:
-      //line (1) :1,2,...,n 
-      //line (2) :1-2
-      //line (3) : weight of the previous connection
-      //line (n) :2-n
-      //line (n+1) : weight of the previous connection
-      //line (n+2) :-1
-      //where the first line you must declare the nodes, each one separated by comma
-      //the second til the n-th line you must declare the connections between the nodes declared 
-      //in the first line
-      //after every connection, in the next line, you must declare the weight of the connection
-      // leave everything zero to create a unweighted graph
-      //after the last connection, you must end with a -1
-      // if you don't do this your computer may explode lol
-      //...
-      //...
-      //...
-      // i don't know, i did never try that.
-      public void createGraph(String path) throws FileNotFoundException, IOException{
-          this.path = path;
-
-          nodes = new ArrayList();
-          edges = new ArrayList();
-
-          FileReader fr = new FileReader(path);
-          BufferedReader textReader = new BufferedReader(fr);
-
-          //gets the first line, which are the nodes that must be created
-          String TextData = textReader.readLine();
-
-          //separate the string with numbers
-          String[] nodesInString = TextData.split(&quot;\\s*,\\s*&quot;);
-
-          //create the list of nodes
-          for (String nodeInString : nodesInString){
-
-              node = new Vertex(nodeInString, &quot;node &quot; + nodeInString);
-              nodes.add(node);
-
-          }
-
-          //create the list of edges
-          String edgeIntoString;
-          Vertex vertex_aux1 = new Vertex(&quot;-1&quot;,&quot;-1&quot;);
-          Vertex vertex_aux2 = new Vertex(&quot;-1&quot;,&quot;-1&quot;);;
-          int n = 0;
-          //varre a linha que tem x-y
-          while (!(edgeIntoString = textReader.readLine()).equals(&quot;-1&quot;)){
-
-              String[] nodesConnected = edgeIntoString.split(&quot;\\s*-\\s*&quot;);
-              //varre os dois nodes
-
-              int peso = Integer.parseInt(textReader.readLine());
-
-                  //verifica se x e y passados no txt estão instanciados em nodes 
-                  for (Vertex node : nodes){
-
-                      if (nodesConnected[0].equals(node.getId())){
-                          //se o node do txt foi achado em nodes
-
-                          vertex_aux1 = new Vertex(node.getId(), node.getName());
-                      }
-                  }
-                  for (Vertex node : nodes){
-
-                      if (nodesConnected[1].equals(node.getId())){
-
-                          vertex_aux2 = new Vertex(node.getId(), node.getName());
-                      }
-                  }
-
-              edge = new Edge(Integer.toString(n),vertex_aux1, vertex_aux2, peso);
-              edges.add(edge);
-          }
-
-      }
-      // Add a new edge
-      public boolean addEdge(Vertex source, Vertex destination) {
-          Edge newEdge = new Edge(&quot;id&quot;, source, destination, 0);
-          return this.edges.add(newEdge);
-      }
-
-      // Remove an edge
-      public boolean removeEdge(Vertex source, Vertex destination) {
-
-          Edge result = this.getEdge(source, destination);
-
-          if (result != null) {
-              return this.edges.remove(result);
-          } else {
-              System.out.println(&quot;Couldn't find edge&quot;);
-              return false;
-          }
-      }
-
-      public int getDegree(Vertex node){
-
-          degree = 0;
-
-          for (Vertex CurrentNode : nodes){
-              if (hasEdge(node, CurrentNode)){
-                  degree++;
-              }
-          }
-
-          return degree;
-      }
-
-      public void printGraph() {
-
-          for (Vertex node: this.getNodes()){
-              System.out.println(node.getName());
-              System.out.print(&quot;Adjacent nodes: &quot;);
-              adjacentNodes = getAdjacentNodes(node);
-              for (Vertex adjacentNode : adjacentNodes){
-                  System.out.print(adjacentNode.getName() + &quot; &quot;);
-              }
-
-              System.out.println(&quot; &quot;);
-              System.out.println(&quot;Degree of this node: &quot; + getDegree(node));
-              System.out.println(&quot; &quot;); 
-          }
-          System.out.println(&quot;- - - - - - - - - - - - - - - - &quot;);
-          System.out.println(&quot; &quot;);
-          System.out.println(&quot;Min Degree of this Graph: &quot; + getMinDegree());
-          System.out.println(&quot; &quot;);
-          System.out.println(&quot;Max Degree of this Graph: &quot; + getMaxDegree());
-          System.out.println(&quot; &quot;);
-          System.out.println(&quot;Average Degree of this Graph: &quot; + getAvgDegree());
-          System.out.println(&quot; &quot;);
-          System.out.println(&quot;Graph is connected: &quot; + this.isConnected());
-          System.out.println(&quot; &quot;);
-          System.out.println(&quot;- - - - - - - - - - - - - - - - &quot;);
-          System.out.println(&quot;Connections: &quot;);
-          System.out.println(&quot; &quot;);
-          for (Edge edge : this.getEdges() ){
-              System.out.print(edge.getSource().getId() +&quot;&amp;lt;-&amp;gt;&quot;+edge.getDestination().getId()+&quot; &quot;);
-              System.out.println(&quot;weight: &quot; + edge.getWeight());
-          }
-          System.out.println(&quot; &quot;);
-          System.out.println(&quot;- - - - - - - - - - - - - - - - &quot;);
-        }
-
-      public void setAdjacencyMatrix() {
-
-        initializeAdjacencyMatrix();
-        int weigth;
-        int source;
-        int destination;
-        for (Edge currentEdge : this.getEdges() ){
-            weigth = currentEdge.getWeight();
-            source = (int) nodesMatrixMap.get(currentEdge.getSource().getName());
-            destination = (int) nodesMatrixMap.get(currentEdge.getDestination().getName());
-
-            adjacencyMatrix[source][destination] = weigth; 
-            //must be symmetric
-            adjacencyMatrix[destination][source] = weigth; 
-        }
-      }
-
-      public void initializeAdjacencyMatrix(){
-          int numNodes = this.nodes.size();
-          adjacencyMatrix = new int[numNodes][numNodes];
-          nodesMatrixMap = new HashMap();
-          for (int i = 0; i &amp;lt; numNodes; i++) {
-              nodesMatrixMap.put(this.nodes.get(i).getName(), i);
-              for (int j = 0; j &amp;lt; numNodes; j++) {
-                  adjacencyMatrix[i][j] = -1;
-              }
-          }
-      }
-
-      public void printAdjacencyMatrix() {
-
-          String sourceName;
-          String destName;
-          int source;
-          int dest;
-
-          System.out.println(&quot; &quot;);
-          System.out.println(&quot;Adjacency Matrix: &quot;);
-          System.out.println(&quot; &quot;);
-
-          for (int i = 0; i &amp;lt; this.nodes.size(); i++) {
-              sourceName = this.nodes.get(i).getName();
-              source = (int) nodesMatrixMap.get(sourceName);
-              for (int j = 0; j &amp;lt; this.nodes.size(); j++) {
-                  destName = this.nodes.get(j).getName();
-                  dest = (int) nodesMatrixMap.get(destName);
-                  if (adjacencyMatrix[source][dest] == -1) {
-                      System.out.print(&quot;- &quot;);
-                  } else {
-                      System.out.print(adjacencyMatrix[source][dest] + &quot; &quot;);
-                  }
-              }
-              System.out.print(&quot;\n&quot;);
-          }
-      }
-
-    }
-&lt;/code&gt;
-&lt;/pre&gt;
-
-&lt;h3 id=&quot;the-test-file&quot;&gt;The test file&lt;/h3&gt;
-
-&lt;p&gt;Here’s the file containing the main, if you want to test, remember to change the path file!&lt;/p&gt;
-
-&lt;pre&gt;
-&lt;code class=&quot;java hljs&quot;&gt;
-    package graphproject;
-    import GraphModels.*;
-    import java.io.IOException;
-    import java.util.ArrayList;
-    import java.util.List;
-
-    public class GraphProject {
-
-        //graph creation procedure
-        private List nodes;
-        private List edges;
-        private Graph graph;
-        public Vertex node;
-        public Edge edge;
-
-        public void printGraph(Graph graph) {
-          for (Vertex node: graph.getNodes()){
-                 System.out.println(node.toString());
-          }
-
-          for (Edge edge : graph.getEdges() ){
-                 System.out.println(edge.toString());
-                 System.out.println(&quot; &quot;);
-          }
-
-        }
-
-        public void test() throws IOException{
-
-            Graph graph = new Graph();
-            graph.createGraph(&quot;/Users/daniel/Documents/workspace_java/GraphProject/src/graphproject/graph.txt&quot;);
-
-            graph.printGraph();
-            graph.setAdjacencyMatrix();
-            graph.printAdjacencyMatrix();
-        }
-        //end of graph creation procedure
-
-        public static void main(String[] args) throws IOException {
-           GraphProject gp = new GraphProject();
-
-           gp.test();
-        }
-    }
-&lt;/code&gt;
-&lt;/pre&gt;
-
-&lt;h2 id=&quot;conclusion-and-next-steps&quot;&gt;Conclusion and next steps&lt;/h2&gt;
-
-&lt;p&gt;At this moment, you’re perfectly able to create a graph (via .txt file) and run all those algorithms to extract information about your graph. Just make sure to import the right libraries and to put the files in the right package. Doing these little things right, I’m pretty sure this will work perfectly.&lt;/p&gt;
-
-&lt;p&gt;But I’m sure you may be a little lost about a few algorithms and techniques we’ve implemented in the Graph.java. But, don’t worry, i’ll be explaining each method one by one in the next parts of this post!&lt;/p&gt;
-</description>
-				<pubDate>Fri, 10 Oct 2014 00:00:00 -0300</pubDate>
-				<link>/general/setup/demo/2014/10/10/Fun-with-graphs-pt1.html</link>
-				<guid isPermaLink="true">/general/setup/demo/2014/10/10/Fun-with-graphs-pt1.html</guid>
 			</item>
 		
 	</channel>

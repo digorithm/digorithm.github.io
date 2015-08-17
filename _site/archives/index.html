@@ -26,6 +26,7 @@
 	<link href="/assets/resources/font-awesome/css/font-awesome.min.css" rel="stylesheet">
 	<link href="/assets/resources/syntax/syntax.css" rel="stylesheet">
 	<link href="/assets/css/style.css" rel="stylesheet">
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
 
 	<!-- Le fav and touch icons -->
 	<!-- Update these with your own images
@@ -95,19 +96,41 @@
 			<li><a href="#"><i class="fa fa-arrow-up"></i>Top of Page</a></li>
 		</ul>
 	</div>
-
-	<div class="col-sm-3 sidebar hidden-xs">
+        <div class="col-sm-3 sidebar hidden-xs">
 		<!-- sidebar.html -->
+<style>
+#focusbutton {
+        position: absolute;
+        top: 0;
+        right:0;
+        cursor: pointer;
+        padding-right: 5px;
+        padding-top:5px;
+}
+
+.fa-2x {
+        color:#00ccd6;
+}
+
+#focusoff {
+        display:none;
+}
+</style>
+
 <header class="sidebar-header" role="banner">
-	<a href="/">
-		<img src="/content/images/images/pic3.jpg" width="180" height="180" class="img-circle" />
+	<a href="">
+		<img src="/content/images/images/pic5.jpg" width="180" height="180" class="img-circle" />
 	</a>
 	<h3 class="title">
         <a href="/">Rodrigo Araújo</a>
     </h3>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 </header>
-
+        <div id='focusbutton'>
+        <i id="focus" class="fa fa-minus-circle fa-2x"></i>
+        <i id="focusoff" class="fa fa-plus-circle fa-2x"></i>
+        </div>
 
 <div id="bio" class="text-center">
 	Stories, Thoughts and Ideas on Computer Science, Mathematics and Technology
@@ -185,6 +208,30 @@
 <!-- sidebar.html end -->
 <script>
 
+$('#focus').on("click", function(){
+    $('.sidebar-header').css('display', 'none');
+    $('#bio').css('display', 'none');
+    $('.pages').css('display', 'none');
+    $('#contact-list').css('display', 'none');
+    $('.col-sm-3').css('width', '3%');
+    $('#focusoff').css('display', 'block');
+    $('#focus').css('display', 'none');
+
+});
+
+$('#focusoff').on("click", function(){
+    $('.sidebar-header').css('display', 'block');
+    $('#bio').css('display', 'block');
+    $('.pages').css('display', 'block');
+    $('#contact-list').css('display', 'block');
+    $('.col-sm-3').css('width', '25%');
+    $('#focusbutton').css('display', 'block');
+    $('#focusoff').css('display', 'none');
+    $('#focus').css('display', 'block');
+
+});
+
+
 	$(function () {
 
 	var pathname = window.location.pathname;
@@ -240,6 +287,10 @@ $(function() {
 		font-size:10px;
 		color: #00ccd6;
 	}
+        h1 {
+                text-align:center;
+
+        }
 </style>
 <h1>Archive of all posts</h1>
 &nbsp;
@@ -249,10 +300,15 @@ $(function() {
 
   	<li style="list-style-type: circle;">
   		<div id="archivetitle">
-  			<a href="/general/setup/demo/2015/07/02/Case-Study:-Sentiment-Analysis-on-Movie-Reviews.html">Case Study: Sentiment Analysis On Movie Reviews</a>
+  			<a href="/general/setup/demo/2015/07/16/Neural-Computation-pt1.html">Neural Computation: Toward an Intuitive Understanding of the Perceptron</a>
   		</div>
-  		<div id="archivedate">
-  			-- 2 July 2015
+  	</li>
+    
+  
+
+  	<li style="list-style-type: circle;">
+  		<div id="archivetitle">
+  			<a href="/general/setup/demo/2015/07/02/Case-Study:-Sentiment-Analysis-on-Movie-Reviews.html">Case Study: Sentiment Analysis On Movie Reviews</a>
   		</div>
   	</li>
     
@@ -262,9 +318,6 @@ $(function() {
   		<div id="archivetitle">
   			<a href="/general/setup/demo/2015/06/30/A-Generic-Architecture-for-Text-Classification.html">A Generic Architecture for Text Classification with Machine Learning</a>
   		</div>
-  		<div id="archivedate">
-  			-- 30 June 2015
-  		</div>
   	</li>
     
   
@@ -272,9 +325,6 @@ $(function() {
   	<li style="list-style-type: circle;">
   		<div id="archivetitle">
   			<a href="/general/setup/demo/2015/06/19/Case-Study:-Python-Performance-on-rotating-one-dimensional-vector.html">Case Study: Python Performance on rotating one-dimensional vectors</a>
-  		</div>
-  		<div id="archivedate">
-  			-- 19 June 2015
   		</div>
   	</li>
     
@@ -284,9 +334,6 @@ $(function() {
   		<div id="archivetitle">
   			<a href="/general/setup/demo/2015/05/25/Web-Scaling:-Using-Redis-as-Cache.html">Web Scaling - using Redis as Cache</a>
   		</div>
-  		<div id="archivedate">
-  			-- 25 May 2015
-  		</div>
   	</li>
     
   
@@ -294,9 +341,6 @@ $(function() {
   	<li style="list-style-type: circle;">
   		<div id="archivetitle">
   			<a href="/general/setup/demo/2015/04/22/Build-your-first-Rest-API-with-Python.html">Building your first REST API with Python</a>
-  		</div>
-  		<div id="archivedate">
-  			-- 22 April 2015
   		</div>
   	</li>
     
@@ -306,9 +350,6 @@ $(function() {
   		<div id="archivetitle">
   			<a href="/general/setup/demo/2015/03/31/using-python-and-AI-to-predict-types-of-wine.html">Using Python and AI to predict types of wine</a>
   		</div>
-  		<div id="archivedate">
-  			-- 31 March 2015
-  		</div>
   	</li>
     
   
@@ -316,9 +357,6 @@ $(function() {
   	<li style="list-style-type: circle;">
   		<div id="archivetitle">
   			<a href="/general/setup/demo/2015/01/09/Making-Your-Machine-Think-Learn-And-Predict--Gradient-Descent-Algorithm-in-Java.html">Making your machine think, learn and predict - Gradient Descent Algorithm in Java</a>
-  		</div>
-  		<div id="archivedate">
-  			-- 9 January 2015
   		</div>
   	</li>
     
@@ -328,9 +366,6 @@ $(function() {
   		<div id="archivetitle">
   			<a href="/general/setup/demo/2015/01/06/Why-How-and-Where-To-Learn-Design-Patterns.html">Why, how and where to Learn Design Patterns</a>
   		</div>
-  		<div id="archivedate">
-  			-- 6 January 2015
-  		</div>
   	</li>
     
   
@@ -338,9 +373,6 @@ $(function() {
   	<li style="list-style-type: circle;">
   		<div id="archivetitle">
   			<a href="/general/setup/demo/2014/10/31/Thoughts-on-Automata-Theory.html">Thoughts on Automata Theory</a>
-  		</div>
-  		<div id="archivedate">
-  			-- 31 October 2014
   		</div>
   	</li>
     
@@ -350,9 +382,6 @@ $(function() {
   		<div id="archivetitle">
   			<a href="/general/setup/demo/2014/10/10/Fun-with-graphs-pt1.html">Fun with graphs pt1</a>
   		</div>
-  		<div id="archivedate">
-  			-- 10 October 2014
-  		</div>
   	</li>
     
   
@@ -360,9 +389,6 @@ $(function() {
   	<li style="list-style-type: circle;">
   		<div id="archivetitle">
   			<a href="/general/setup/demo/2014/07/22/CRUD-with-Java,-JSP,-and-MySQL.html">CRUD with Java, JSP and MySQL</a>
-  		</div>
-  		<div id="archivedate">
-  			-- 22 July 2014
   		</div>
   	</li>
     
@@ -372,9 +398,6 @@ $(function() {
   		<div id="archivetitle">
   			<a href="/general/setup/demo/2014/07/16/Object-Oriented-Thinking.html">Object Oriented Thinking</a>
   		</div>
-  		<div id="archivedate">
-  			-- 16 July 2014
-  		</div>
   	</li>
     
   
@@ -382,9 +405,6 @@ $(function() {
   	<li style="list-style-type: circle;">
   		<div id="archivetitle">
   			<a href="/general/setup/demo/2014/07/16/A-Romantic-Vision-Of-The-Software-Engineering.html">A Romantic Vision Of The Software Engineering</a>
-  		</div>
-  		<div id="archivedate">
-  			-- 16 July 2014
   		</div>
   	</li>
     

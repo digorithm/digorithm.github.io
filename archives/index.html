@@ -25,6 +25,10 @@ layout: page
 		font-size:10px;
 		color: #00ccd6;
 	}
+        h1 {
+                text-align:center;
+
+        }
 </style>
 <h1>Archive of all posts</h1>
 &nbsp;
@@ -35,9 +39,6 @@ layout: page
   	<li style="list-style-type: circle;">
   		<div id="archivetitle">
   			<a href="{{ post.url }}">{{ post.title }}</a>
-  		</div>
-  		<div id="archivedate">
-  			-- {{ post.date | date: "%-d %B %Y" }}
   		</div>
   	</li>
     

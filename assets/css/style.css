@@ -21,6 +21,16 @@ font-family: 'archerprobookitalic';
 src: url('/assets/fonts/ArcherPro-BookIta.otf');  
 }
 
+@font-face {
+font-family: 'sofiaprolight';
+src: url('/assets/fonts/SofiaPro/SofiaProLight.otf');  
+}
+
+@font-face {
+font-family: 'proximanovalight';
+src: url('/assets/fonts/proximanova/proximanovaregular.otf');  
+}
+
 #archivetitle{
 	font-family: Georgia;
 }
@@ -32,6 +42,19 @@ src: url('/assets/fonts/ArcherPro-BookIta.otf');
 	font-size: 18px;
 	margin-top: 30px;
 	margin-bottom: 30px;
+}
+
+.col-sm-6 {
+          width: 50%;
+            left: 25%;
+
+}
+
+.list-inline {
+          padding-left: 0;
+            list-style: none;
+            display:none;
+
 }
 
 .imgcenter{
@@ -76,6 +99,7 @@ a:hover{
 
 .home ul, li{
         list-style:inherit;
+        color: black;
 }
 
 .pages li li{
@@ -92,7 +116,7 @@ list-style: none;
 
 body{
 	color: #2c3e50;
-	font-family: 'gotham';
+	font-family: Georgia;
 	font-size: 16px;
 }
 
@@ -125,6 +149,7 @@ p{
 .sidebar-header .title a{
 	text-decoration: none;
 	color: #00ccd6;
+        font-weight:100 !important;
 }
 
 a.nav-link {
@@ -188,11 +213,13 @@ article .share .gplus:hover {
 .page-header {
 	color: #333333;
         margin-left:20px;
+        text-align:center;
 	
 }
 
 article{
 	margin-bottom: 40px;
+        text-align: justify;
 }
 
 .article_body{
@@ -265,8 +292,9 @@ article.home div a, article.home pre a { color: #2c3e50; }
 article.home div a:hover, article.home pre a:hover { color: #2c3e50; text-decoration: none; }
 article img { max-width: 100%; }
 
-h1,h2,h3,h4,h5,h6 { font-family: 'archerpro', sans-serif; 
+h1,h2,h3,h4,h5,h6 { font-family: Georgia, sans-serif; 
 margin-bottom: 20px;
+font-weight:900;
 }
 article.home h1,
 article.home h2,
@@ -274,9 +302,11 @@ article.home h3,
 article.home h4,
 article.home h5,
 article.home h6 {
-	font-family: 'archerpro', sans-serif;
-        text-align:center;
+	font-family: Georgia, sans-serif;
+        text-align:left;
+        font-weight: 900;
 	color: #333333;
+        text-align:center;
 }
 
 article_body h1, h2, h3, h4{
@@ -303,7 +333,8 @@ article.home h4 a:hover {
 
 footer {
 	padding-top: 15px;
-	font-family: 'gotham';
+	font-family: 'Open Sans';
+        text-align: center;
 }
 
 /* nav-vertical-tabs component */

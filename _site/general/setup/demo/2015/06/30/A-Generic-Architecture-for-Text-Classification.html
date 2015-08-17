@@ -26,6 +26,7 @@
 	<link href="/assets/resources/font-awesome/css/font-awesome.min.css" rel="stylesheet">
 	<link href="/assets/resources/syntax/syntax.css" rel="stylesheet">
 	<link href="/assets/css/style.css" rel="stylesheet">
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
 
 	<!-- Le fav and touch icons -->
 	<!-- Update these with your own images
@@ -95,19 +96,41 @@
 			<li><a href="#"><i class="fa fa-arrow-up"></i>Top of Page</a></li>
 		</ul>
 	</div>
-
-	<div class="col-sm-3 sidebar hidden-xs">
+        <div class="col-sm-3 sidebar hidden-xs">
 		<!-- sidebar.html -->
+<style>
+#focusbutton {
+        position: absolute;
+        top: 0;
+        right:0;
+        cursor: pointer;
+        padding-right: 5px;
+        padding-top:5px;
+}
+
+.fa-2x {
+        color:#00ccd6;
+}
+
+#focusoff {
+        display:none;
+}
+</style>
+
 <header class="sidebar-header" role="banner">
-	<a href="/">
-		<img src="/content/images/images/pic3.jpg" width="180" height="180" class="img-circle" />
+	<a href="">
+		<img src="/content/images/images/pic5.jpg" width="180" height="180" class="img-circle" />
 	</a>
 	<h3 class="title">
         <a href="/">Rodrigo Araújo</a>
     </h3>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 </header>
-
+        <div id='focusbutton'>
+        <i id="focus" class="fa fa-minus-circle fa-2x"></i>
+        <i id="focusoff" class="fa fa-plus-circle fa-2x"></i>
+        </div>
 
 <div id="bio" class="text-center">
 	Stories, Thoughts and Ideas on Computer Science, Mathematics and Technology
@@ -184,6 +207,30 @@
 </div>
 <!-- sidebar.html end -->
 <script>
+
+$('#focus').on("click", function(){
+    $('.sidebar-header').css('display', 'none');
+    $('#bio').css('display', 'none');
+    $('.pages').css('display', 'none');
+    $('#contact-list').css('display', 'none');
+    $('.col-sm-3').css('width', '3%');
+    $('#focusoff').css('display', 'block');
+    $('#focus').css('display', 'none');
+
+});
+
+$('#focusoff').on("click", function(){
+    $('.sidebar-header').css('display', 'block');
+    $('#bio').css('display', 'block');
+    $('.pages').css('display', 'block');
+    $('#contact-list').css('display', 'block');
+    $('.col-sm-3').css('width', '25%');
+    $('#focusbutton').css('display', 'block');
+    $('#focusoff').css('display', 'none');
+    $('#focus').css('display', 'block');
+
+});
+
 
 	$(function () {
 
@@ -382,21 +429,21 @@ So, extracting those features, <strong>this</strong> will be our training and te
 			 
 				<li>
 					<a href="/tags.html#machine learning-ref">
-					machine learning <span>(5)</span>
+					machine learning <span>(6)</span>
 					,
 					</a>
 				</li>
 			 
 				<li>
 					<a href="/tags.html#artificial intelligence-ref">
-					artificial intelligence <span>(5)</span>
+					artificial intelligence <span>(6)</span>
 					,
 					</a>
 				</li>
 			 
 				<li>
 					<a href="/tags.html#engineering-ref">
-					engineering <span>(11)</span>
+					engineering <span>(12)</span>
 					,
 					</a>
 				</li>
@@ -417,7 +464,7 @@ So, extracting those features, <strong>this</strong> will be our training and te
 			 
 				<li>
 					<a href="/tags.html#text classification-ref">
-					text classification <span>(2)</span>
+					text classification <span>(3)</span>
 					
 					</a>
 				</li>
