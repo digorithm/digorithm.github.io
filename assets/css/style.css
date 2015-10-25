@@ -1,4 +1,9 @@
 @import url(http://fonts.googleapis.com/css?family=Ubuntu:500&subset=latin,latin-ext);
+@import url(https://fonts.googleapis.com/css?family=Questrial);
+@import url(https://fonts.googleapis.com/css?family=Didact+Gothic);
+@import url(https://fonts.googleapis.com/css?family=Quicksand:400,700);
+@import url(https://fonts.googleapis.com/css?family=Lato:400,400italic,700,700italic,900,900italic);
+@import url(https://fonts.googleapis.com/css?family=Gentium+Book+Basic:400,400italic,700,700italic);
 
 @font-face{
 	font-family: 'gotham';
@@ -32,7 +37,7 @@ src: url('/assets/fonts/proximanova/proximanovaregular.otf');
 }
 
 #archivetitle{
-	font-family: Georgia;
+	font-family: "Gentium Book Basic";
 }
 
 .pages{
@@ -116,12 +121,12 @@ list-style: none;
 
 body{
 	color: #2c3e50;
-	font-family: Georgia;
-	font-size: 16px;
+	font-family: "Gentium Book Basic";
+	font-size: 18px;
 }
 
 p{
-	font-family: Georgia;
+	font-family: "Gentium Book Basic";
 	line-height: 1.8em !important;
 	color: black;
 }
@@ -292,7 +297,7 @@ article.home div a, article.home pre a { color: #2c3e50; }
 article.home div a:hover, article.home pre a:hover { color: #2c3e50; text-decoration: none; }
 article img { max-width: 100%; }
 
-h1,h2,h3,h4,h5,h6 { font-family: Georgia, sans-serif; 
+h1,h2,h3,h4,h5,h6 { font-family: "Gentium Book Basic", sans-serif; 
 margin-bottom: 20px;
 font-weight:900;
 }
@@ -302,7 +307,7 @@ article.home h3,
 article.home h4,
 article.home h5,
 article.home h6 {
-	font-family: Georgia, sans-serif;
+	font-family: "Gentium Book Basic", sans-serif;
         text-align:left;
         font-weight: 900;
 	color: #333333;
