@@ -4,6 +4,7 @@
 @import url(https://fonts.googleapis.com/css?family=Quicksand:400,700);
 @import url(https://fonts.googleapis.com/css?family=Lato:400,400italic,700,700italic,900,900italic);
 @import url(https://fonts.googleapis.com/css?family=Gentium+Book+Basic:400,400italic,700,700italic);
+@import url(https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic);
 
 @font-face{
 	font-family: 'gotham';
@@ -36,8 +37,9 @@ font-family: 'proximanovalight';
 src: url('/assets/fonts/proximanova/proximanovaregular.otf');  
 }
 
+
 #archivetitle{
-	font-family: "Gentium Book Basic";
+	font-family: "Lora";
 }
 
 .pages{
@@ -121,12 +123,12 @@ list-style: none;
 
 body{
 	color: #2c3e50;
-	font-family: "Gentium Book Basic";
-	font-size: 18px;
+	font-family: "Lora";
+	font-size: 16px;
 }
 
 p{
-	font-family: "Gentium Book Basic";
+	font-family: "Lora";
 	line-height: 1.8em !important;
 	color: black;
 }
@@ -297,7 +299,7 @@ article.home div a, article.home pre a { color: #2c3e50; }
 article.home div a:hover, article.home pre a:hover { color: #2c3e50; text-decoration: none; }
 article img { max-width: 100%; }
 
-h1,h2,h3,h4,h5,h6 { font-family: "Gentium Book Basic", sans-serif; 
+h1,h2,h3,h4,h5,h6 { font-family: "Lora", sans-serif; 
 margin-bottom: 20px;
 font-weight:900;
 }
@@ -307,7 +309,7 @@ article.home h3,
 article.home h4,
 article.home h5,
 article.home h6 {
-	font-family: "Gentium Book Basic", sans-serif;
+	font-family: "Lora", sans-serif;
         text-align:left;
         font-weight: 900;
 	color: #333333;
