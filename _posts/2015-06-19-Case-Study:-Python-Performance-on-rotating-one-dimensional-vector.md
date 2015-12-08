@@ -5,7 +5,9 @@ categories: [general, setup, demo]
 keywords: "machine learning, artificial intelligence, java, programming, engineering, tutorial"
 tags: [machine learning, artificial intelligence, java, programming, engineering, tutorial]
 fullview: true
+permalink: post/case-study-python-performance-rotating-vector
 ---
+
 
 
 

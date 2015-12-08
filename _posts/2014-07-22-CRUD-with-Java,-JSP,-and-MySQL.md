@@ -5,6 +5,7 @@ categories: [general, setup, demo]
 keywords: "java, tutorial, programming, engineering, design, architecture, jsp, crud"
 tags: [java, tutorial, programming, engineering, design, architecture, jsp, crud]
 fullview: true
+permalink: post/crud-with-java-jsp
 ---
 
 <p>One of the most common kind of applications in today's tech/business world is the CRUD system, that is the idea of the user interacting with a database, so the user can Create, Retrieve, Update and Delete <em>(yep, that awful name came from this)</em> data from this database. Also, <strong>learning how to create a CRUD with a language is a great way to understand the basics of this language, the basics of software design, engineering and architecture.</strong> In layman's term, a CRUD page is just a page where you can insert a thing, edit that thing, search that thing and delete that thing, just that!</p>

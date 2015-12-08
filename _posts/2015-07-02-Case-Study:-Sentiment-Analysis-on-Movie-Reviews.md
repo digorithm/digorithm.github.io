@@ -5,6 +5,7 @@ categories: [general, setup, demo]
 keywords: "machine learning, artificial intelligence, engineering, tutorial, sentiment analysis, nlp, python, scikit learn, sklearn"
 tags: [machine learning, artificial intelligence, engineering, tutorial, text classification, NLP, Sentiment Analysis]
 fullview: true
+permalink: post/case-study-sentiment-analysis-movie-reviews
 ---
 
 Well, this case was a fun one, sentiment analysis is a sub type of NLP *(natural language processing)* in which you have to train a model to analyze a text, and classify it was a negative sentiment or a positive sentiment. In this case, I wanted to apply it on movies reviews, to see if a review is a negative one or a positive one. So, basically, teaching this kind of sentiment to the machine.

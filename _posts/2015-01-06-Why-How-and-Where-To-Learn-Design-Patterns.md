@@ -5,6 +5,7 @@ categories: [general, setup, demo]
 tags: [design patterns, tips, thoughts, software engineering, programming]
 keywords: "design patterns, tips, thoughts, software engineering, programming"
 fullview: true
+permalink: post/learn-design-patterns
 ---
 
 The first thought I had when I started to study [Design Patterns](http://en.wikipedia.org/wiki/Software_design_pattern) was:

@@ -5,6 +5,7 @@ categories: [general, setup, demo]
 keywords: "theory, computer science, thoughts, automata, compilers, dfa, nfa"
 tags: [theory, computer science, thoughts, automata, compilers, dfa, nfa]
 fullview: true
+permalink: post/thoughts-on-automata-theory
 ---
 
 I’ve been reading many texts on automata theory these times, and let me tell you, that’s such a wonderful thing. It pretty much explain how computers can…. compute! Simply put, Automata Theory deals with the logic of computation with respect to simple machines, referred to as Automata.

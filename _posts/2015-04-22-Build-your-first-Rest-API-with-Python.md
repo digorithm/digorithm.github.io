@@ -5,6 +5,7 @@ categories: [general, setup, demo]
 keywords: "api, python, programming, engineering, rest, flask"
 tags: [api, python, programming, engineering, rest, flask]
 fullview: true
+permalink: post/build-your-first-rest-api-python
 ---
 
 Are you total lost in this world full of jargons like: API, Rest API, microservices and stuffs? Come here, sit, grab a cup of coffee, and let's talk briefly about it.

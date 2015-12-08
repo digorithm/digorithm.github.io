@@ -5,6 +5,7 @@ categories: [general, setup, demo]
 keywords: "thoughts, object oriented, programming, engineering, architecture"
 tags: [thoughts, object oriented, programming, engineering, architecture]
 fullview: true
+permalink: post/object-oriented-thinking
 ---
 
 ###What are the main goals of the object-oriented programming?###

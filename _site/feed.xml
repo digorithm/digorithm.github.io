@@ -7,6 +7,58 @@
 		<atom:link href="/feed.xml" rel="self" type="application/rss+xml" />
 		
 			<item>
+				<title>Thoughts on Visualizing Software Architecture</title>
+				<description>&lt;p&gt;The more I thought about the advantages and disadvantages of upfront design, the more I find it a really complex subject, I mean, the whole Software architecture diagramming in general. I’ve been following the development of the &lt;a href=&quot;http://www.codingthearchitecture.com/2014/08/24/c4_model_poster.html&quot;&gt;C4 model&lt;/a&gt; for a considerable time, I find it interesting, but it still brings me the old struggles about how much detail we should put into the diagrams and whether we should do it while planning the Software, while developing it, or after &lt;em&gt;(by doing reverse engineering)&lt;/em&gt;…. or even more extreme, doing these 3 options, developing the architecture diagrams and evolving them over time.&lt;/p&gt;
+
+&lt;p&gt;I think that, when drawing architecture diagrams, we should focus on getting the right purpose and the right level of abstraction. Two of the most important purposes to me, when designing a diagram, is:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;tech stack architecture and how each container and component relate to each other&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;deployment architecture&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;I do think that the diagram should reflect the code in certain level of abstraction and that this could be really useful for a new engineer in a large project. Tackling a huge codebase is not an easy task, and the diagrams should act as a map of the code, saying how things communicate with each other.&lt;/p&gt;
+
+&lt;p&gt;What I think is, we need certain kinds of architecture diagram, each one for a specific development phase. What comes to my mind is:&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Project planning phase&lt;/strong&gt;, We can’t code without any plan, at this level I feel necessary to draw the most ‘visible’ containers and components, this way we can plan what to do next, how to split up teams to each part of the system. It’s when a deployment architecture can be written as well&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Project evolution and maintenance&lt;/strong&gt;, as we reach this phase of the project, it’s interesting to see the Big Picture, the Not-So-Big Picture and the Small Picture. I can see many cases where this could be helpful, for instance: new engineers coming to the project, debugging something that crosses many components or even containers &lt;em&gt;(visualizing the flow can be helpful)&lt;/em&gt;, finding bottlenecks, and I’m sure there are many more.&lt;/p&gt;
+
+&lt;p&gt;Given this task, I’d prefer taking a top-down approach, going from a more “Big Picture” architecture to a more detailed one. As an example, I’m going to use a side project I was working on, which is a simple webapp to search for simple food recipes &lt;em&gt;(the difference, though, is that it crawls the recipes from other websites)&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;I took a backend&amp;amp;api + ClientApp approach, which means, in the backend is where the main logic happens, the core business classes and everything, in addition to exposing a HTTP API &lt;em&gt;(I would say REST API, but I’m scared of a few rest purist coming here and saying that this is not restful because of this and that, so let’s say it’s a simple api that talks over http)&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;Each of these 2 parts will be a different application, which can be dockerized and run in different plataforms &lt;em&gt;(two separate amazon EC2, for example)&lt;/em&gt;. So, if we’re planning it, we could start by saying:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/content/images/images/gdd20overview.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;So, yea, the webclient will talk to the backend’s api over HTTP, the backend will communicate to the webclient and to a database instance. Ok, that’s a start. We can easily separate a team for the backend and its api and another team for the webclient.&lt;/p&gt;
+
+&lt;p&gt;Still, it doesn’t say much about the inner details of each container, and now we need something more detailed. So we detail it a bit more:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/content/images/images/gdd20arch.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;As we can see now, it’s the same structur&lt;em&gt;e, **but with way more details now, which makes it clearer to everybody *(I hope so)&lt;/em&gt; how we can tackle the problem with code. An extra level of detail would be going down one more level of abstraction and describe the classes through a class diagram, explaining how the core backend would be implemented, for example.&lt;/p&gt;
+
+&lt;p&gt;Now, this diagram, plus all requirements gathered can be a nice start for the coding phase. We can add now how we would deploy it:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/content/images/images/gdd20deploy.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;So, in the end, I believe those 3 diagrams + the codebase could be helpful for a new engineer or to someone that is debugging the system or trying to improve it.&lt;/p&gt;
+
+&lt;p&gt;Though, I still have many questions and doubts about this, I can’t stop overthinking it, so I’m extremely open to any discussion about this.&lt;/p&gt;
+</description>
+				<pubDate>Tue, 08 Dec 2015 00:00:00 -0300</pubDate>
+				<link>/post/thoughts-visualizing-software-arch</link>
+				<guid isPermaLink="true">/post/thoughts-visualizing-software-arch</guid>
+			</item>
+		
+			<item>
 				<title>Neural Computation: Toward an Intuitive Understanding of the Perceptron</title>
 				<description>&lt;p&gt;Artificial Neurons is one of the most beautiful ways to simulate a biological behavior through computation, despite the fact that it’s not very close to the level of details of a real neuron. But it captured the core of what a neuron is doing. &lt;/p&gt;
 
@@ -209,8 +261,8 @@ plt.show()
 
 </description>
 				<pubDate>Thu, 16 Jul 2015 00:00:00 -0300</pubDate>
-				<link>/general/setup/demo/2015/07/16/Neural-Computation-pt1.html</link>
-				<guid isPermaLink="true">/general/setup/demo/2015/07/16/Neural-Computation-pt1.html</guid>
+				<link>/post/neural-computation-pt1</link>
+				<guid isPermaLink="true">/post/neural-computation-pt1</guid>
 			</item>
 		
 			<item>
@@ -408,8 +460,8 @@ avg / total       0.87      0.87      0.87      1000
 &lt;p&gt;Possible improvements could be: find and extracting new features, to do this, we gotta understand better this data, extract more information about it. Trying new algorithms and techniques such as Ensemble, Classifiers Combination or Fusion. Stemming and Stop Words could improve it too. If you solved this problem and got a better result, share it with me, I’m very curious about how to improve this!&lt;/p&gt;
 </description>
 				<pubDate>Thu, 02 Jul 2015 00:00:00 -0300</pubDate>
-				<link>/general/setup/demo/2015/07/02/Case-Study:-Sentiment-Analysis-on-Movie-Reviews.html</link>
-				<guid isPermaLink="true">/general/setup/demo/2015/07/02/Case-Study:-Sentiment-Analysis-on-Movie-Reviews.html</guid>
+				<link>/post/case-study-sentiment-analysis-movie-reviews</link>
+				<guid isPermaLink="true">/post/case-study-sentiment-analysis-movie-reviews</guid>
 			</item>
 		
 			<item>
@@ -557,8 +609,8 @@ So, extracting those features, &lt;strong&gt;this&lt;/strong&gt; will be our tra
 
 </description>
 				<pubDate>Tue, 30 Jun 2015 00:00:00 -0300</pubDate>
-				<link>/general/setup/demo/2015/06/30/A-Generic-Architecture-for-Text-Classification.html</link>
-				<guid isPermaLink="true">/general/setup/demo/2015/06/30/A-Generic-Architecture-for-Text-Classification.html</guid>
+				<link>/post/generic-architecture-text-classification</link>
+				<guid isPermaLink="true">/post/generic-architecture-text-classification</guid>
 			</item>
 		
 			<item>
@@ -738,8 +790,8 @@ ncalls tottime percall cumtime percall filename:lineno(function)
 &lt;p&gt;So, if you’re willing to reverse a list with Python, go with List.reverse() method (unless you want the iterators to do something), and if you want to rotate a vector, go with pop/append, it looks faster.&lt;/p&gt;
 </description>
 				<pubDate>Fri, 19 Jun 2015 00:00:00 -0300</pubDate>
-				<link>/general/setup/demo/2015/06/19/Case-Study:-Python-Performance-on-rotating-one-dimensional-vector.html</link>
-				<guid isPermaLink="true">/general/setup/demo/2015/06/19/Case-Study:-Python-Performance-on-rotating-one-dimensional-vector.html</guid>
+				<link>/post/case-study-python-performance-rotating-vector</link>
+				<guid isPermaLink="true">/post/case-study-python-performance-rotating-vector</guid>
 			</item>
 		
 			<item>
@@ -837,8 +889,8 @@ ncalls tottime percall cumtime percall filename:lineno(function)
 &lt;p&gt;And it can save a lot of computational resources and human time. Now, with this logic applied to one method (the method to get users), we can apply it to whichever method we want, or we can even create a generic decorator and annotate the methods that we want do the caching!!&lt;/p&gt;
 </description>
 				<pubDate>Mon, 25 May 2015 00:00:00 -0300</pubDate>
-				<link>/general/setup/demo/2015/05/25/Web-Scaling:-Using-Redis-as-Cache.html</link>
-				<guid isPermaLink="true">/general/setup/demo/2015/05/25/Web-Scaling:-Using-Redis-as-Cache.html</guid>
+				<link>/post/web-scaling-using-redis-as-cache</link>
+				<guid isPermaLink="true">/post/web-scaling-using-redis-as-cache</guid>
 			</item>
 		
 			<item>
@@ -967,8 +1019,8 @@ if __name__ == '__main__':
 &lt;p&gt;Of course, many improvements and extensions (&lt;em&gt;there are infinity possibilities&lt;/em&gt;) can be made to this code, but, here’s a skeleton of the idea of an API, it’s just a start. One good practice it’s to &lt;em&gt;not&lt;/em&gt; return the ID of the resource, but return just its URI, which is surely a great idea. Another good practice is to ask authentication in every HTTP request, so your API won’t be exposed to everybody. There are, indeed, endless improvements, but in this code, you, that are completely beginner to the API’s concept, can now understand what’s going on underneath and start planning and building your own API using Flask.&lt;/p&gt;
 </description>
 				<pubDate>Wed, 22 Apr 2015 00:00:00 -0300</pubDate>
-				<link>/general/setup/demo/2015/04/22/Build-your-first-Rest-API-with-Python.html</link>
-				<guid isPermaLink="true">/general/setup/demo/2015/04/22/Build-your-first-Rest-API-with-Python.html</guid>
+				<link>/post/build-your-first-rest-api-python</link>
+				<guid isPermaLink="true">/post/build-your-first-rest-api-python</guid>
 			</item>
 		
 			<item>
@@ -1133,8 +1185,8 @@ print scores.mean(), scores.std()
 &lt;p&gt;And that’s the exactly the precision of the algorithm over the given dataset, &lt;strong&gt;98% of precision&lt;/strong&gt;, which is quite good! Now, for example, we can save this trained classifier and use it for future classifications of incoming data about wines that need to be classified as white or red, to do so, we just call the method &lt;em&gt;clf.predict(X)&lt;/em&gt; where this X will be the new wine’s data. simplicity at its best!&lt;/p&gt;
 </description>
 				<pubDate>Tue, 31 Mar 2015 00:00:00 -0300</pubDate>
-				<link>/general/setup/demo/2015/03/31/using-python-and-AI-to-predict-types-of-wine.html</link>
-				<guid isPermaLink="true">/general/setup/demo/2015/03/31/using-python-and-AI-to-predict-types-of-wine.html</guid>
+				<link>/post/using-python-and-ai-to-predict-wine</link>
+				<guid isPermaLink="true">/post/using-python-and-ai-to-predict-wine</guid>
 			</item>
 		
 			<item>
@@ -1561,99 +1613,8 @@ Now, the &lt;strong&gt;Gradient Descent Algorithm&lt;/strong&gt; &lt;em&gt;per s
 &lt;p&gt;Oh, one more thing: &lt;strong&gt;Do not ever go Extreme Go Horse, really.&lt;/strong&gt;&lt;/p&gt;
 </description>
 				<pubDate>Tue, 06 Jan 2015 00:00:00 -0300</pubDate>
-				<link>/general/setup/demo/2015/01/06/Why-How-and-Where-To-Learn-Design-Patterns.html</link>
-				<guid isPermaLink="true">/general/setup/demo/2015/01/06/Why-How-and-Where-To-Learn-Design-Patterns.html</guid>
-			</item>
-		
-			<item>
-				<title>Thoughts on Automata Theory</title>
-				<description>&lt;p&gt;I’ve been reading many texts on automata theory these times, and let me tell you, that’s such a wonderful thing. It pretty much explain how computers can…. compute! Simply put, Automata Theory deals with the logic of computation with respect to simple machines, referred to as Automata.&lt;/p&gt;
-
-&lt;p&gt;From the mathematical models to represent it to the fun programming implementations, it’s really great and exciting to study it!&lt;/p&gt;
-
-&lt;p&gt;Automatons are abstract models of machines that perform computations on an input by moving through a series of states or configurations. At each state of the computation, a transition function determines the next configuration on the basis of a finite portion of the present configuration. As a result, once the computation reaches an accepting configuration, it accepts that input. The most general and powerful automata is the &lt;a href=&quot;http://en.wikipedia.org/wiki/Turing_machine&quot;&gt;Turing machine&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;In layman’s terms, FSM &lt;em&gt;(Finite State Machine)&lt;/em&gt; or Automaton is a device &lt;em&gt;(hardware or software)&lt;/em&gt; that responds to external events and produces actions. The actions generated depend on the past history of the system, i.e. its state.&lt;/p&gt;
-
-&lt;p&gt;This can go from a simple reserved word analyzer&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/content/images/2015/06/thenautomata2.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;To big Regular Expressions:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/content/images/2015/06/bigdfa.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Automatons are also essentials to understand the &lt;strong&gt;limits of the computation&lt;/strong&gt;, thus, we have now two important problems coming out from this thought:&lt;/p&gt;
-
-&lt;p&gt;1. What computers can do?&lt;/p&gt;
-
-&lt;p&gt;2. What computers can do efficiently?&lt;/p&gt;
-
-&lt;p&gt;The first one is called &lt;a href=&quot;http://courses.cs.washington.edu/courses/cse322/08sp/lec20.pdf&quot;&gt;Decidability&lt;/a&gt; and the second one is called &lt;a href=&quot;http://en.wikipedia.org/wiki/Computers_and_Intractability&quot;&gt;intractability&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;And it brings our minds to the very beginning of the Computing Science, where many scientist were thinking about the limits of computation, not that today there aren’t many scientists working on it, but today many programmers, sadly, ignore this kind of knowledge.&lt;/p&gt;
-
-&lt;p&gt;But, returning to our automatons, they’re represented by a bunch of states that we represent formally as \( Q \), a finite set of symbols ( \( \sum \) ), a transition function ( \( \delta \) ) that has two parameters: a state \( Q \) and a symbol, this function is responsible for the change of states in the automaton. An initial State from \( Q \) and a acceptance state also from \( Q \).&lt;/p&gt;
-
-&lt;p&gt;So we can say that a generic automaton can be represented formally as&lt;/p&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;
-A = \left ( Q, \sum, \delta, q0, F \right ) 
-&lt;/script&gt;
-
-&lt;p&gt;The automatons fall into two classifications, they can be:&lt;/p&gt;
-
-&lt;h2 id=&quot;deterministic&quot;&gt;Deterministic&lt;/h2&gt;
-
-&lt;p&gt;Where they can’t be at more than one state at the same time, it’s the real world way to represent abstracts machines, because this kind of automaton has no ambiguity . Here’s a simple example of an DFA &lt;em&gt;(Deterministic Finite Automaton)&lt;/em&gt; that only accepts string having 001 as substring.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/content/images/2015/06/dfaex1.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Informally speaking, if you put a string of 0s and 1s such as 10011 and process it number by number, following the states changes you will see that it will end the processing and your current state will be the acceptance state, so, this string is acceptable! So a string such as 11101010, if you try the same process, won’t end at an acceptable state, so we say that this string is not acceptable by this automaton.&lt;/p&gt;
-
-&lt;h2 id=&quot;non-deterministic&quot;&gt;Non Deterministic&lt;/h2&gt;
-
-&lt;p&gt;In this case, the automaton can change to multiple states at the same time, which means, it’s not so deterministic and precise as the deterministic automaton. So why one would use this non deterministic automaton? Simply put, it’s way easier to design a NFA (Non deterministic Finite Automaton) to solve a determined problem than to design a precise DFA to solve this same problem.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;But! We’ve a problem here!&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;How can a computer, which is an unambiguous machine, process something that is not deterministic?&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;It can’t. And it won’t!&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/content/images/2015/06/pergunta.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;So why in the seven hells would i want to use this NFA if the machine can’t understand?&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;The answer is, every NFA has an equivalent DFA, which means, if a language is recognized by the NFA and by the DFA, they’re equivalent. All you have to do is &lt;a href=&quot;http://web.cecs.pdx.edu/~harry/compilers/slides/LexicalPart3.pdf&quot;&gt;translate&lt;/a&gt; the NFA into a DFA so the machine can use it!&lt;/p&gt;
-
-&lt;h3 id=&quot;talking-about-language-what-is-it-in-this-context&quot;&gt;Talking about Language, what is it in this context?&lt;/h3&gt;
-
-&lt;p&gt;Well, this is what we call &lt;strong&gt;Regular Language&lt;/strong&gt; which is a Language L accepted by an Automaton, &lt;strong&gt;so the language of an Automaton is the set of all string that it accepts.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;We can define the language of a DFA as&lt;/p&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt; 
-L(A) = \{ \omega \,|\, \delta(q0, \omega)\, is\, in\, F \}
-&lt;/script&gt;
-
-&lt;p&gt;Which means, an Automaton processing a string, from its initial state, being computed by its transition function, if the processing ends in the acceptance state, this means that this is the language of this DFA.&lt;/p&gt;
-
-&lt;h2 id=&quot;conclusion-next-steps-and-further-readings&quot;&gt;Conclusion, next steps and further readings&lt;/h2&gt;
-
-&lt;p&gt;As you may have noticed, there are unimaginable ways to use Automatons, it wasn’t even created to apply directly in the Computer Science, two neurophysiologists, were the first to present a description of finite Automata in 1943. Their paper, entitled, “A Logical Calculus Immanent in Nervous Activity”, had a huge impact in the computer science.&lt;/p&gt;
-
-&lt;p&gt;For anyone who’s trying to dive deeper in this field, I strongly advice the &lt;a href=&quot;http://www.amazon.com/Introduction-Automata-Languages-Computation-Edition/dp/0321455363&quot;&gt;Ullman’s book on Automata and Complexity Theory&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;And soon I pretend to write few more thing on Automata, such as techniques to translate a NFA to a DFA using the algorithm of subset construction.&lt;/p&gt;
-
-&lt;p&gt;For now my main goal was to simply introduce this beautiful branch of the Computer Science and Mathematics and show its applications.&lt;/p&gt;
-
-&lt;p&gt;If something isn’t clear to you, drop me an email and let’s talk about it! :)&lt;/p&gt;
-</description>
-				<pubDate>Fri, 31 Oct 2014 00:00:00 -0300</pubDate>
-				<link>/general/setup/demo/2014/10/31/Thoughts-on-Automata-Theory.html</link>
-				<guid isPermaLink="true">/general/setup/demo/2014/10/31/Thoughts-on-Automata-Theory.html</guid>
+				<link>/post/learn-design-patterns</link>
+				<guid isPermaLink="true">/post/learn-design-patterns</guid>
 			</item>
 		
 	</channel>

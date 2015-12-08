@@ -5,6 +5,7 @@ categories: [general, setup, demo]
 keywords: "machine learning, artificial intelligence, python, sklearn, programming, engineering, tutorial"
 tags: [machine learning, artificial intelligence, python, sklearn, programming, engineering, tutorial]
 fullview: true
+permalink: post/using-python-and-ai-to-predict-wine
 ---
 
 I've been working with AI/Machine Learning at [Jusbrasil](http://www.jusbrasil.com.br/) recently, and it's being pretty challenging due to the _huge_ amount of data that we have to deal with, so cleaning this data and making predictions and classifications in an acceptable time demands a nice AI architecture.

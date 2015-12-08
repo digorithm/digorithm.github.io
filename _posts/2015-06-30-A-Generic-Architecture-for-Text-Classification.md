@@ -5,6 +5,7 @@ categories: [general, setup, demo]
 keywords: "machine learning, artificial intelligence, engineering, tips, architecture, text classification"
 tags: [machine learning, artificial intelligence, engineering, tips, architecture, text classification]
 fullview: true
+permalink: post/generic-architecture-text-classification
 ---
 
 One of the most commons tasks in Machine Learning is text classification, which is simply teaching your machine how to read and interpret a text and predict what kind of text it is. 

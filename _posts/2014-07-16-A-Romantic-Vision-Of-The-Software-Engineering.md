@@ -5,6 +5,7 @@ categories: [general, setup, demo]
 keywords: "engineering, software, thoughts, story"
 tags: [engineering, software, thoughts, story]
 fullview: true
+permalink: post/a-romantic-vision-of-the-software-engineering
 ---
 
 Well, it all will start with your first steps on studying programming, a very innocent and and naive programming, i mean, your very first “Hello World” and the classics “Read 3 inputs and print the sum of them”, where your concerns will happen because of some missing commas, whitespaces and some misplaced IF’s… things that at first sight may cause a little confusion, you’ll start to think that’s even something hard.

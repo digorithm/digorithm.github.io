@@ -247,7 +247,76 @@ $(function() {
 <article class="home">
 
   <h2>
-    <a href="/general/setup/demo/2015/07/16/Neural-Computation-pt1.html">Neural Computation: Toward an Intuitive Understanding of the Perceptron</a>
+    <a href="/post/thoughts-visualizing-software-arch">Thoughts on Visualizing Software Architecture</a>
+  </h2>
+
+  <div class="post-date" style="margin-bottom:15px; margin-top:-15px;">
+    
+    December
+    8th,
+    
+    2015
+  </div>
+
+
+  <div>
+    
+    <p>The more I thought about the advantages and disadvantages of upfront design, the more I find it a really complex subject, I mean, the whole Software architecture diagramming in general. I’ve been following the development of the <a href="http://www.codingthearchitecture.com/2014/08/24/c4_model_poster.html">C4 model</a> for a considerable time, I find it interesting, but it still brings me the old struggles about how much detail we should put into the diagrams and whether we should do it while planning the Software, while developing it, or after <em>(by doing reverse engineering)</em>…. or even more extreme, doing these 3 options, developing the architecture diagrams and evolving them over time.</p>
+
+<p>I think that, when drawing architecture diagrams, we should focus on getting the right purpose and the right level of abstraction. Two of the most important purposes to me, when designing a diagram, is:</p>
+
+<ol>
+  <li>
+    <p>tech stack architecture and how each container and component relate to each other</p>
+  </li>
+  <li>
+    <p>deployment architecture</p>
+  </li>
+</ol>
+
+<p>I do think that the diagram should reflect the code in certain level of abstraction and that this could be really useful for a new engineer in a large project. Tackling a huge codebase is not an easy task, and the diagrams should act as a map of the code, saying how things communicate with each other.</p>
+
+<p>What I think is, we need certain kinds of architecture diagram, each one for a specific development phase. What comes to my mind is:</p>
+
+<p><strong>Project planning phase</strong>, We can’t code without any plan, at this level I feel necessary to draw the most ‘visible’ containers and components, this way we can plan what to do next, how to split up teams to each part of the system. It’s when a deployment architecture can be written as well</p>
+
+<p><strong>Project evolution and maintenance</strong>, as we reach this phase of the project, it’s interesting to see the Big Picture, the Not-So-Big Picture and the Small Picture. I can see many cases where this could be helpful, for instance: new engineers coming to the project, debugging something that crosses many components or even containers <em>(visualizing the flow can be helpful)</em>, finding bottlenecks, and I’m sure there are many more.</p>
+
+<p>Given this task, I’d prefer taking a top-down approach, going from a more “Big Picture” architecture to a more detailed one. As an example, I’m going to use a side project I was working on, which is a simple webapp to search for simple food recipes <em>(the difference, though, is that it crawls the recipes from other websites)</em>.</p>
+
+<p>I took a backend&amp;api + ClientApp approach, which means, in the backend is where the main logic happens, the core business classes and everything, in addition to exposing a HTTP API <em>(I would say REST API, but I’m scared of a few rest purist coming here and saying that this is not restful because of this and that, so let’s say it’s a simple api that talks over http)</em>.</p>
+
+<p>Each of these 2 parts will be a different application, which can be dockerized and run in different plataforms <em>(two separate amazon EC2, for example)</em>. So, if we’re planning it, we could start by saying:</p>
+
+<p><img src="/content/images/images/gdd20overview.png" alt="" /></p>
+
+<p>So, yea, the webclient will talk to the backend’s api over HTTP, the backend will communicate to the webclient and to a database instance. Ok, that’s a start. We can easily separate a team for the backend and its api and another team for the webclient.</p>
+
+<p>Still, it doesn’t say much about the inner details of each container, and now we need something more detailed. So we detail it a bit more:</p>
+
+<p><img src="/content/images/images/gdd20arch.png" alt="" /></p>
+
+<p>As we can see now, it’s the same structur<em>e, **but with way more details now, which makes it clearer to everybody *(I hope so)</em> how we can tackle the problem with code. An extra level of detail would be going down one more level of abstraction and describe the classes through a class diagram, explaining how the core backend would be implemented, for example.</p>
+
+<p>Now, this diagram, plus all requirements gathered can be a nice start for the coding phase. We can add now how we would deploy it:</p>
+
+<p><img src="/content/images/images/gdd20deploy.png" alt="" /></p>
+
+<p>So, in the end, I believe those 3 diagrams + the codebase could be helpful for a new engineer or to someone that is debugging the system or trying to improve it.</p>
+
+<p>Though, I still have many questions and doubts about this, I can’t stop overthinking it, so I’m extremely open to any discussion about this.</p>
+
+    
+  </div>
+
+</article>
+<hr/>
+
+
+<article class="home">
+
+  <h2>
+    <a href="/post/neural-computation-pt1">Neural Computation: Toward an Intuitive Understanding of the Perceptron</a>
   </h2>
 
   <div class="post-date" style="margin-bottom:15px; margin-top:-15px;">
@@ -471,7 +540,7 @@ plt.show()
 <article class="home">
 
   <h2>
-    <a href="/general/setup/demo/2015/07/02/Case-Study:-Sentiment-Analysis-on-Movie-Reviews.html">Case Study: Sentiment Analysis On Movie Reviews</a>
+    <a href="/post/case-study-sentiment-analysis-movie-reviews">Case Study: Sentiment Analysis On Movie Reviews</a>
   </h2>
 
   <div class="post-date" style="margin-bottom:15px; margin-top:-15px;">
@@ -687,7 +756,7 @@ avg / total       0.87      0.87      0.87      1000
 <article class="home">
 
   <h2>
-    <a href="/general/setup/demo/2015/06/30/A-Generic-Architecture-for-Text-Classification.html">A Generic Architecture for Text Classification with Machine Learning</a>
+    <a href="/post/generic-architecture-text-classification">A Generic Architecture for Text Classification with Machine Learning</a>
   </h2>
 
   <div class="post-date" style="margin-bottom:15px; margin-top:-15px;">
@@ -853,7 +922,7 @@ So, extracting those features, <strong>this</strong> will be our training and te
 <article class="home">
 
   <h2>
-    <a href="/general/setup/demo/2015/06/19/Case-Study:-Python-Performance-on-rotating-one-dimensional-vector.html">Case Study: Python Performance on rotating one-dimensional vectors</a>
+    <a href="/post/case-study-python-performance-rotating-vector">Case Study: Python Performance on rotating one-dimensional vectors</a>
   </h2>
 
   <div class="post-date" style="margin-bottom:15px; margin-top:-15px;">
@@ -1040,122 +1109,6 @@ ncalls tottime percall cumtime percall filename:lineno(function)
 <p>So, as you can see, an interesting problem can have many solutions, one more elegant, others faster. In the end you may pick the simplest and most intuitive solution, this may be the best for the situation. Some times you gotta go with the strangest and most non-intuitive solution (which reminds me the first time I saw the Quick Sort and all its non-intuitive way to think)</p>
 
 <p>So, if you’re willing to reverse a list with Python, go with List.reverse() method (unless you want the iterators to do something), and if you want to rotate a vector, go with pop/append, it looks faster.</p>
-
-    
-  </div>
-
-</article>
-<hr/>
-
-
-<article class="home">
-
-  <h2>
-    <a href="/general/setup/demo/2015/05/25/Web-Scaling:-Using-Redis-as-Cache.html">Web Scaling - using Redis as Cache</a>
-  </h2>
-
-  <div class="post-date" style="margin-bottom:15px; margin-top:-15px;">
-    
-    May
-    25th,
-    
-    2015
-  </div>
-
-
-  <div>
-    
-    <p><strong>Redis is such a great technology.</strong> Unfortunately, there’s still people who don’t know Redis or don’t know that Redis can be used as a Cache System to improve the speed of responses.</p>
-
-<h2 id="why-redis">Why Redis</h2>
-
-<p>Well, let’s start this discussion remembering how a common Relational Database basically works: Suppose we’re using a MySQL, every time your app sends a request to the MySQL client, the MySQL client gotta make a trip to the hard drive to get the data asked in the request, this can become a problem if the data asked in request is big… and if there are many requests at the same time, this can generate a huge latency, annoying users or worse.</p>
-
-<p>This is where Redis comes into play, Redis is a key-value database that will be running and storing data inside your memory, if you remember the basic of computers architecture:</p>
-
-<p><img src="/content/images/2015/06/memchart.jpg" alt="" /></p>
-
-<p>It’s way faster to access data in memory (Physical RAM, main memory) than to access data in the Hard Drive, so it’s easy to notice that if the data that the application wants to access is inside the main memory, it’s way easier to reach to that data than if it was stored in the Hard Drive.</p>
-
-<p>So, like I said, Redis will be storing its data inside the memory, but you may ask yourself: “but what if I turn off the machine?? isn’t the ram memory volatile? “ Yes, that’s why Redis will be flushing the data to the hard drive from time to time, it’s up to you to choose this time between flushes, it’s all about Performance vs. Security.</p>
-
-<p>So, What we’ll be doing is just:</p>
-
-<p><img src="/content/images/2015/06/atv1.png" width="350" height="400" /></p>
-
-<p><em>note that this print is taken from a talk I gave in my country, so it’s in portuguese. aplicação = application, Não acha key = key don’t found, retorna dados = return data</em></p>
-
-<p><strong>As you can see: So much win. We avoided redundant trips to the disk.</strong></p>
-
-<p>Now that we understand the concept of what we’ll be doing, the code becomes very easy to implement, here’s a simple idea <em>(thougt it can be improved and extended in many ways, but it can demonstrate the idea we’re working here)</em></p>
-
-<pre>
-<code class="python hljs">
-    from flask import Flask
-    from flask.ext.sqlalchemy import SQLAlchemy
-    from sqlalchemy import create_engine
-    import redis
-
-    app = Flask(__name__)
-    url = 'mysql+pymysql://username:password@ip/dbname'
-    app.config['SQLALCHEMY_DATABASE_URI'] = url
-    db = SQLAlchemy(app)
-    cache = redis.StrictRedis(host='localhost', port=6379, db=0)
-
-    #improvement: model could stay in a different file
-    class User(db.Model):
-        id = db.Column(db.Integer, primary_key=True)
-        username = db.Column(db.String(80))
-        email = db.Column(db.String(120))
-
-        def __init__(self, username, email):
-            self.username = username
-            self.email = email
-
-        def __repr__(self):
-            return '' % self.username
-
-    def createUsers():
-            for x in xrange(0,100000):
-                user = User('test', 'test')
-                db.session.add(user)
-            db.session.commit()
-
-    def getUsers():
-            users = cache.get('users')
-            if not users:
-                users = User.query.all()
-                cache.set('users', users)
-
-    # improvement: views/routing should stay in a different file
-    @app.route('/')
-    def hello_world():
-        getUsers()
-        return 'Hello Worldd!'
-
-    if __name__ == '__main__':
-        app.debug=True
-        app.run(host='0.0.0.0')
-</code>
-</pre>
-
-<p>So, after you create the correct database, populate the database (there’s a function in the code for that) and change username/password/dbname in the code, we’ll run the app.py and go to localhost:port-you-exposed.</p>
-
-<h2 id="what-will-happen"><em>What will happen?</em></h2>
-
-<p>1. The first time you access it, it will take a few seconds to get the data from the MySQL</p>
-
-<p>2. The second time you access it, it will take just a few milliseconds to get the same data from redis</p>
-
-<p>In my computer the result was:</p>
-
-<p>first access: 45861 milliseconds</p>
-
-<p><strong>second access: 5ms</strong></p>
-
-<p><strong>I know, right? That’s just blazing fast!</strong></p>
-
-<p>And it can save a lot of computational resources and human time. Now, with this logic applied to one method (the method to get users), we can apply it to whichever method we want, or we can even create a generic decorator and annotate the methods that we want do the caching!!</p>
 
     
   </div>

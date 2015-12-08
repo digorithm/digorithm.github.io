@@ -5,6 +5,7 @@ categories: [general, setup, demo]
 keywords: "redis, web, scalability, programming, python, programming, engineering"
 tags: [redis, web, scalability, programming, python, programming, engineering]
 fullview: true
+permalink: post/web-scaling-using-redis-as-cache
 ---
 **Redis is such a great technology.** Unfortunately, there's still people who don't know Redis or don't know that Redis can be used as a Cache System to improve the speed of responses.
 

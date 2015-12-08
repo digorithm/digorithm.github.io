@@ -84,19 +84,7 @@
 	</nav>
 
 	<!-- nav-menu-dropdown -->
-	<div class="btn-group hidden-xs" id="nav-menu">
-		<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-			<i class="fa fa-bars"></i>
-		</button>
-		<ul class="dropdown-menu" role="menu">
-			<li><a href="/"><i class="fa fa-home"></i>Home</a></li>
-			<li><a href="/categories.html"><i class="fa fa-folder"></i>Categories</a></li>
-			<li><a href="/tags.html"><i class="fa fa-tags"></i>Tags</a></li>
-			<li class="divider"></li>
-			<li><a href="#"><i class="fa fa-arrow-up"></i>Top of Page</a></li>
-		</ul>
-	</div>
-        <div class="col-sm-3 sidebar hidden-xs">
+	<div class="col-sm-3 sidebar hidden-xs">
 		<!-- sidebar.html -->
 <style>
 #focusbutton {
@@ -140,26 +128,17 @@
 	<ul>
 		<li><a href="/about">Who I am</a></li>
 		<li>
-			<div id="workexpand"><a href="/work">The work I do</a>
+			<div id="workexpand"><a href="/work">Publications</a>
 			<div id="subitem">
 			<ul>
 				<li>
-					<a href="/work/#research">Research</a>
-				</li>
-				<li>
-					<a href="/work/#industry">Industry</a>
-				</li>
-				<li>
-					<a href="/work/#pub">Publications</a>
+					<a href="/work/#pub">Papers</a>
 				</li>
 				<li>
 					<a href="/work/#talk">Talks</a>
 				</li>
 				<li>
 					<a href="/work/#releases">Releases</a>
-				</li>
-				<li>
-					<a href="/work/#ta">Teaching</a>
 				</li>
 			</ul>
 			</div>
@@ -268,7 +247,123 @@ $(function() {
 <article class="home">
 
   <h2>
-    <a href="/general/setup/demo/2015/04/22/Build-your-first-Rest-API-with-Python.html">Building your first REST API with Python</a>
+    <a href="/post/web-scaling-using-redis-as-cache">Web Scaling - using Redis as Cache</a>
+  </h2>
+
+  <div class="post-date" style="margin-bottom:15px; margin-top:-15px;">
+    
+    May
+    25th,
+    
+    2015
+  </div>
+
+
+  <div>
+    
+    <p><strong>Redis is such a great technology.</strong> Unfortunately, there’s still people who don’t know Redis or don’t know that Redis can be used as a Cache System to improve the speed of responses.</p>
+
+<h2 id="why-redis">Why Redis</h2>
+
+<p>Well, let’s start this discussion remembering how a common Relational Database basically works: Suppose we’re using a MySQL, every time your app sends a request to the MySQL client, the MySQL client gotta make a trip to the hard drive to get the data asked in the request, this can become a problem if the data asked in request is big… and if there are many requests at the same time, this can generate a huge latency, annoying users or worse.</p>
+
+<p>This is where Redis comes into play, Redis is a key-value database that will be running and storing data inside your memory, if you remember the basic of computers architecture:</p>
+
+<p><img src="/content/images/2015/06/memchart.jpg" alt="" /></p>
+
+<p>It’s way faster to access data in memory (Physical RAM, main memory) than to access data in the Hard Drive, so it’s easy to notice that if the data that the application wants to access is inside the main memory, it’s way easier to reach to that data than if it was stored in the Hard Drive.</p>
+
+<p>So, like I said, Redis will be storing its data inside the memory, but you may ask yourself: “but what if I turn off the machine?? isn’t the ram memory volatile? “ Yes, that’s why Redis will be flushing the data to the hard drive from time to time, it’s up to you to choose this time between flushes, it’s all about Performance vs. Security.</p>
+
+<p>So, What we’ll be doing is just:</p>
+
+<p><img src="/content/images/2015/06/atv1.png" width="350" height="400" /></p>
+
+<p><em>note that this print is taken from a talk I gave in my country, so it’s in portuguese. aplicação = application, Não acha key = key don’t found, retorna dados = return data</em></p>
+
+<p><strong>As you can see: So much win. We avoided redundant trips to the disk.</strong></p>
+
+<p>Now that we understand the concept of what we’ll be doing, the code becomes very easy to implement, here’s a simple idea <em>(thougt it can be improved and extended in many ways, but it can demonstrate the idea we’re working here)</em></p>
+
+<pre>
+<code class="python hljs">
+    from flask import Flask
+    from flask.ext.sqlalchemy import SQLAlchemy
+    from sqlalchemy import create_engine
+    import redis
+
+    app = Flask(__name__)
+    url = 'mysql+pymysql://username:password@ip/dbname'
+    app.config['SQLALCHEMY_DATABASE_URI'] = url
+    db = SQLAlchemy(app)
+    cache = redis.StrictRedis(host='localhost', port=6379, db=0)
+
+    #improvement: model could stay in a different file
+    class User(db.Model):
+        id = db.Column(db.Integer, primary_key=True)
+        username = db.Column(db.String(80))
+        email = db.Column(db.String(120))
+
+        def __init__(self, username, email):
+            self.username = username
+            self.email = email
+
+        def __repr__(self):
+            return '' % self.username
+
+    def createUsers():
+            for x in xrange(0,100000):
+                user = User('test', 'test')
+                db.session.add(user)
+            db.session.commit()
+
+    def getUsers():
+            users = cache.get('users')
+            if not users:
+                users = User.query.all()
+                cache.set('users', users)
+
+    # improvement: views/routing should stay in a different file
+    @app.route('/')
+    def hello_world():
+        getUsers()
+        return 'Hello Worldd!'
+
+    if __name__ == '__main__':
+        app.debug=True
+        app.run(host='0.0.0.0')
+</code>
+</pre>
+
+<p>So, after you create the correct database, populate the database (there’s a function in the code for that) and change username/password/dbname in the code, we’ll run the app.py and go to localhost:port-you-exposed.</p>
+
+<h2 id="what-will-happen"><em>What will happen?</em></h2>
+
+<p>1. The first time you access it, it will take a few seconds to get the data from the MySQL</p>
+
+<p>2. The second time you access it, it will take just a few milliseconds to get the same data from redis</p>
+
+<p>In my computer the result was:</p>
+
+<p>first access: 45861 milliseconds</p>
+
+<p><strong>second access: 5ms</strong></p>
+
+<p><strong>I know, right? That’s just blazing fast!</strong></p>
+
+<p>And it can save a lot of computational resources and human time. Now, with this logic applied to one method (the method to get users), we can apply it to whichever method we want, or we can even create a generic decorator and annotate the methods that we want do the caching!!</p>
+
+    
+  </div>
+
+</article>
+<hr/>
+
+
+<article class="home">
+
+  <h2>
+    <a href="/post/build-your-first-rest-api-python">Building your first REST API with Python</a>
   </h2>
 
   <div class="post-date" style="margin-bottom:15px; margin-top:-15px;">
@@ -415,7 +510,7 @@ if __name__ == '__main__':
 <article class="home">
 
   <h2>
-    <a href="/general/setup/demo/2015/03/31/using-python-and-AI-to-predict-types-of-wine.html">Using Python and AI to predict types of wine</a>
+    <a href="/post/using-python-and-ai-to-predict-wine">Using Python and AI to predict types of wine</a>
   </h2>
 
   <div class="post-date" style="margin-bottom:15px; margin-top:-15px;">
@@ -976,7 +1071,7 @@ Now, the <strong>Gradient Descent Algorithm</strong> <em>per se</em>, making use
 <article class="home">
 
   <h2>
-    <a href="/general/setup/demo/2015/01/06/Why-How-and-Where-To-Learn-Design-Patterns.html">Why, how and where to Learn Design Patterns</a>
+    <a href="/post/learn-design-patterns">Why, how and where to Learn Design Patterns</a>
   </h2>
 
   <div class="post-date" style="margin-bottom:15px; margin-top:-15px;">
@@ -1049,114 +1144,6 @@ Now, the <strong>Gradient Descent Algorithm</strong> <em>per se</em>, making use
 <p>I believe this is a good start to learn Design Pattern and I hope this helps someone, mainly if they’re struggling with the same doubts I had when trying to learn it.</p>
 
 <p>Oh, one more thing: <strong>Do not ever go Extreme Go Horse, really.</strong></p>
-
-    
-  </div>
-
-</article>
-<hr/>
-
-
-<article class="home">
-
-  <h2>
-    <a href="/general/setup/demo/2014/10/31/Thoughts-on-Automata-Theory.html">Thoughts on Automata Theory</a>
-  </h2>
-
-  <div class="post-date" style="margin-bottom:15px; margin-top:-15px;">
-    
-    October
-    31st,
-    
-    2014
-  </div>
-
-
-  <div>
-    
-    <p>I’ve been reading many texts on automata theory these times, and let me tell you, that’s such a wonderful thing. It pretty much explain how computers can…. compute! Simply put, Automata Theory deals with the logic of computation with respect to simple machines, referred to as Automata.</p>
-
-<p>From the mathematical models to represent it to the fun programming implementations, it’s really great and exciting to study it!</p>
-
-<p>Automatons are abstract models of machines that perform computations on an input by moving through a series of states or configurations. At each state of the computation, a transition function determines the next configuration on the basis of a finite portion of the present configuration. As a result, once the computation reaches an accepting configuration, it accepts that input. The most general and powerful automata is the <a href="http://en.wikipedia.org/wiki/Turing_machine">Turing machine</a>.</p>
-
-<p>In layman’s terms, FSM <em>(Finite State Machine)</em> or Automaton is a device <em>(hardware or software)</em> that responds to external events and produces actions. The actions generated depend on the past history of the system, i.e. its state.</p>
-
-<p>This can go from a simple reserved word analyzer</p>
-
-<p><img src="/content/images/2015/06/thenautomata2.png" alt="" /></p>
-
-<p>To big Regular Expressions:</p>
-
-<p><img src="/content/images/2015/06/bigdfa.jpg" alt="" /></p>
-
-<p>Automatons are also essentials to understand the <strong>limits of the computation</strong>, thus, we have now two important problems coming out from this thought:</p>
-
-<p>1. What computers can do?</p>
-
-<p>2. What computers can do efficiently?</p>
-
-<p>The first one is called <a href="http://courses.cs.washington.edu/courses/cse322/08sp/lec20.pdf">Decidability</a> and the second one is called <a href="http://en.wikipedia.org/wiki/Computers_and_Intractability">intractability</a></p>
-
-<p>And it brings our minds to the very beginning of the Computing Science, where many scientist were thinking about the limits of computation, not that today there aren’t many scientists working on it, but today many programmers, sadly, ignore this kind of knowledge.</p>
-
-<p>But, returning to our automatons, they’re represented by a bunch of states that we represent formally as \( Q \), a finite set of symbols ( \( \sum \) ), a transition function ( \( \delta \) ) that has two parameters: a state \( Q \) and a symbol, this function is responsible for the change of states in the automaton. An initial State from \( Q \) and a acceptance state also from \( Q \).</p>
-
-<p>So we can say that a generic automaton can be represented formally as</p>
-
-<script type="math/tex; mode=display">
-A = \left ( Q, \sum, \delta, q0, F \right ) 
-</script>
-
-<p>The automatons fall into two classifications, they can be:</p>
-
-<h2 id="deterministic">Deterministic</h2>
-
-<p>Where they can’t be at more than one state at the same time, it’s the real world way to represent abstracts machines, because this kind of automaton has no ambiguity . Here’s a simple example of an DFA <em>(Deterministic Finite Automaton)</em> that only accepts string having 001 as substring.</p>
-
-<p><img src="/content/images/2015/06/dfaex1.png" alt="" /></p>
-
-<p>Informally speaking, if you put a string of 0s and 1s such as 10011 and process it number by number, following the states changes you will see that it will end the processing and your current state will be the acceptance state, so, this string is acceptable! So a string such as 11101010, if you try the same process, won’t end at an acceptable state, so we say that this string is not acceptable by this automaton.</p>
-
-<h2 id="non-deterministic">Non Deterministic</h2>
-
-<p>In this case, the automaton can change to multiple states at the same time, which means, it’s not so deterministic and precise as the deterministic automaton. So why one would use this non deterministic automaton? Simply put, it’s way easier to design a NFA (Non deterministic Finite Automaton) to solve a determined problem than to design a precise DFA to solve this same problem.</p>
-
-<p><strong>But! We’ve a problem here!</strong></p>
-
-<p><em>How can a computer, which is an unambiguous machine, process something that is not deterministic?</em></p>
-
-<p><strong>It can’t. And it won’t!</strong></p>
-
-<p><img src="/content/images/2015/06/pergunta.jpg" alt="" /></p>
-
-<p><em>So why in the seven hells would i want to use this NFA if the machine can’t understand?</em></p>
-
-<p>The answer is, every NFA has an equivalent DFA, which means, if a language is recognized by the NFA and by the DFA, they’re equivalent. All you have to do is <a href="http://web.cecs.pdx.edu/~harry/compilers/slides/LexicalPart3.pdf">translate</a> the NFA into a DFA so the machine can use it!</p>
-
-<h3 id="talking-about-language-what-is-it-in-this-context">Talking about Language, what is it in this context?</h3>
-
-<p>Well, this is what we call <strong>Regular Language</strong> which is a Language L accepted by an Automaton, <strong>so the language of an Automaton is the set of all string that it accepts.</strong></p>
-
-<p>We can define the language of a DFA as</p>
-
-<script type="math/tex; mode=display"> 
-L(A) = \{ \omega \,|\, \delta(q0, \omega)\, is\, in\, F \}
-</script>
-
-<p>Which means, an Automaton processing a string, from its initial state, being computed by its transition function, if the processing ends in the acceptance state, this means that this is the language of this DFA.</p>
-
-<h2 id="conclusion-next-steps-and-further-readings">Conclusion, next steps and further readings</h2>
-
-<p>As you may have noticed, there are unimaginable ways to use Automatons, it wasn’t even created to apply directly in the Computer Science, two neurophysiologists, were the first to present a description of finite Automata in 1943. Their paper, entitled, “A Logical Calculus Immanent in Nervous Activity”, had a huge impact in the computer science.</p>
-
-<p>For anyone who’s trying to dive deeper in this field, I strongly advice the <a href="http://www.amazon.com/Introduction-Automata-Languages-Computation-Edition/dp/0321455363">Ullman’s book on Automata and Complexity Theory</a></p>
-
-<p>And soon I pretend to write few more thing on Automata, such as techniques to translate a NFA to a DFA using the algorithm of subset construction.</p>
-
-<p>For now my main goal was to simply introduce this beautiful branch of the Computer Science and Mathematics and show its applications.</p>
-
-<p>If something isn’t clear to you, drop me an email and let’s talk about it! :)</p>
 
     
   </div>
