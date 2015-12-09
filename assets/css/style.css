@@ -40,7 +40,7 @@ src: url('/assets/fonts/proximanova/proximanovaregular.otf');
 
 
 #archivetitle{
-	font-family: "Gotham";
+	font-family: "Merriweather";
 }
 
 .pages{
@@ -124,12 +124,12 @@ list-style: none;
 
 body{
 	color: #2c3e50;
-	font-family: "Gotham";
+	font-family: "Merriweather";
 	font-size: 16px;
 }
 
 p{
-	font-family: "Gotham";
+	font-family: "Merriweather";
 	line-height: 1.7em !important;
 	color: black;
 }
