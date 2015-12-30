@@ -695,6 +695,7 @@ p{
 	font-family: "Open Sans";
 	/*line-height: 1.5em !important;*/
 	color: #333332;
+    margin-bottom: 20px;
 }
 .sidebar {
 	text-align:center;
