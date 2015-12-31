@@ -603,7 +603,7 @@ src: url('/assets/fonts/proximanova/proximanovaregular.otf');
 
 
 #archivetitle{
-	font-family: "Open Sans";
+	font-family: Georgia;
 }
 
 .pages{
@@ -687,12 +687,12 @@ list-style: none;
 
 body{
 	color: #2c3e50;
-	font-family: "Open Sans";
-	font-size: 16px;
+	font-family: Georgia;
+	font-size: 17px;
 }
 
 p{
-	font-family: "Open Sans";
+	font-family: Georgia;
 	/*line-height: 1.5em !important;*/
 	color: #333332;
     margin-bottom: 20px;
@@ -877,7 +877,7 @@ article.home h6 {
         text-align:left;
         font-weight: 900;
 	color: #333333;
-        text-align:center;
+        text-align:left;
 }
 
 article_body h1, h2, h3, h4{
@@ -904,7 +904,7 @@ article.home h4 a:hover {
 
 footer {
 	padding-top: 15px;
-	font-family: 'Open Sans';
+	font-family: Georgia;
         text-align: center;
 }
 
