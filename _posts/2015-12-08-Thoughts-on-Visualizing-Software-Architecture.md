@@ -1,9 +1,8 @@
 ---
 layout: post
 title: "Thoughts on Visualizing Software Architecture" 
-categories: [general, setup, demo]
-keywords: "machine learning, artificial intelligence, engineering, tutorial, sentiment analysis, nlp, python, scikit learn, sklearn"
-tags: [machine learning, artificial intelligence, engineering, tutorial, text classification, NLP, Sentiment Analysis]
+keywords: "architecture, software, visualization, thoughts"
+tags: [architecture, software, visualization, thoughts]
 fullview: true
 permalink: post/thoughts-visualizing-software-arch
 ---

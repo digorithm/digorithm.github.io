@@ -1,7 +1,6 @@
 ---
 layout: post
 title: CRUD with Java, JSP and MySQL
-categories: [general, setup, demo]
 keywords: "java, tutorial, programming, engineering, design, architecture, jsp, crud"
 tags: [java, tutorial, programming, engineering, design, architecture, jsp, crud]
 fullview: true

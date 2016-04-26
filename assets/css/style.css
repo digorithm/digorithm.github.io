@@ -603,7 +603,7 @@ src: url('/assets/fonts/proximanova/proximanovaregular.otf');
 
 
 #archivetitle{
-	font-family: Georgia;
+	font-family: "Gentium Book Basic";
 }
 
 .pages{
@@ -686,13 +686,13 @@ list-style: none;
 }
 
 body{
-	color: #2c3e50;
-	font-family: Georgia;
-	font-size: 17px;
+	color: #474747;
+	font-family: "Gentium Book Basic";
+	font-size: 20px;
 }
 
 p{
-	font-family: Georgia;
+	font-family: "Gentium Book Basic";
 	/*line-height: 1.5em !important;*/
 	color: #333332;
     margin-bottom: 20px;
@@ -904,7 +904,7 @@ article.home h4 a:hover {
 
 footer {
 	padding-top: 15px;
-	font-family: Georgia;
+	font-family: "Gentium Book Basic";
         text-align: center;
 }
 
@@ -950,7 +950,7 @@ ul.dropdown-menu>li>a>i.fa {
 
 @media (min-width: 768px){
 .col-sm-9 {
-width:710px !important;
+width:800px !important;
 margin-left: 28% !important;
 }
 }

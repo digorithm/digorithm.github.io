@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+  
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>Building your first REST API with Python</title>
+
+  <meta name="author" content="Rodrigo Araújo" />
+  
+  
+
+  <link rel="alternate" type="application/rss+xml" title="Rodrigo Araújo - Stories and thoughts on Computer Science" href="/feed.xml" />
+  
+ <!-- everything has to be repeated twice because on 2016-02-01 GitHub pages migrated to jekyll 3; see bug https://github.com/jekyll/jekyll/issues/4439 -->
+
+    
+  
+    
+      <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />
+    
+      
+  
+  
+  
+    
+      <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    
+      <link rel="stylesheet" href="/css/main.css" />
+    
+    
+  
+  
+  
+    
+      <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+    
+      <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+    
+  
+
+    
+    
+  
+  
+  
+  
+  
+     
+  
+  <!-- Facebook OpenGraph tags -->
+  <meta property="og:title" content="Building your first REST API with Python" />
+  <meta property="og:type" content="website" />
+  
+  
+  <meta property="og:url" content="http://digorithm.github.io/post/build-your-first-rest-api-python/" />
+  
+  
+  
+  <meta property="og:image" content="http://digorithm.github.io/img/pic.jpg" />
+  
+  
+</head>
+
+
+  <body>
+  
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="http://digorithm.github.io">Rodrigo Araújo</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+      
+        
+          <li>
+            
+            
+
+
+
+
+
+<a href="/aboutme">About Me</a>
+
+          </li>
+        
+        
+        
+          <li>
+            
+            
+
+
+
+
+
+<a href="/publications">Publications</a>
+
+          </li>
+        
+        
+        
+          <li>
+            
+            
+
+
+
+
+
+<a href="/archive">Archive</a>
+
+          </li>
+        
+        
+        
+          <li>
+            
+            
+
+
+
+
+
+<a href="/readings">Recommended Readings</a>
+
+          </li>
+        
+        
+      </ul>
+    </div>
+
+	
+	<div class="avatar-container">
+	  <div class="avatar-img-border">
+	    <a href="http://digorithm.github.io ">
+	      <img class="avatar-img" src="/img/pic.jpg" />
+		</a>
+	  </div>
+	</div>
+	
+
+  </div>
+</nav>
+
+
+    <!-- TODO this file has become a mess, refactor it -->
+
+
+
+
+
+<header class="header-section ">
+
+<div class="intro-header no-img">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-heading">
+          <h1>Building your first REST API with Python</h1>
+		  
+		  
+		  
+		  <span class="post-meta">Posted on April 22, 2015</span>
+		  
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</header>
+
+
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+	      <p>Are you total lost in this world full of jargons like: API, Rest API, microservices and stuffs? Come here, sit, grab a cup of coffee, and let’s talk briefly about it.</p>
+
+<p>Today a lot is said about APIs. Everything has an API, every programmer (newbie to expert) uses tons of API. Also, today we can see a lot of people talking about microservices and the idea of total separation of backend, frontend, web services or <em>whatever</em>. So we can <em>(and we do)</em> hear a lot about REST/RESTful APIs. We have 3 current problems with it:</p>
+
+<p>1. Many new programmers don’t have a single clue of what a Rest API is.</p>
+
+<p>2. It’s probable that they’re using Rest APIs and don’t know about it.</p>
+
+<p>3. When they feel that they should learn more about it, there’s hardly any good and accessible material to learn it.</p>
+
+<h3 id="so-heres-a-extremely-simplistic-approach-to-try-to-explain-what-is-a-rest-api">So here’s a extremely simplistic approach to try to explain what is a Rest API</h3>
+
+<p>Starting with the concept of API, which stands for <strong>A</strong>pplication <strong>P</strong>rogramming <strong>I</strong>nterface, it’s just an interface which you, <em>dear programmer</em>, will be dealing with to extract whatever you <em>(or your program)</em> want.</p>
+
+<p>Suppose your program needs to create a connection with a given database, normally you do:</p>
+
+<p>1. You import the <em>library</em> that will abstract the connection with the database</p>
+
+<p>2. You create an object to represent a Connection with the database</p>
+
+<p>3. You call functions that this object provide to you, so you can do whatever you want (and whatever they provide)</p>
+
+<p>Here’s a silly example:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>from database_library import Connection
+
+connection = Connection()
+connection.OpenConnection()
+… do whatever you want
+connection.CloseConnection()
+</code></pre>
+</div>
+
+<p>When you called those function, you were dealing with the interface that the object provided to you, sure the object may be doing thousand of things at the moment you call its functions, but, it doesn’t matter to you, does it? You just want the <em>damn</em> connection open and then closed.</p>
+
+<p>So the library that you imported is giving you something you want, offering a service or a resource. That’s the sole purpose of an API. It’s a layer that you can use to get things from other(s) component(s).</p>
+
+<p>So, it’s easy to deduct that, the better the engineer planned the API, the easier it will be to deal with and extract what you want, and the contrary is true.</p>
+
+<p>But still, you’re processing the core of this API in your own machine, which isn’t that great, here’s when the API evolves to whole web hosted services, so you can request this API something, and this API can give you something, through the WEB, via HTTP request. And that’s amazing.</p>
+
+<p>And the community, recently, decided that the request and response that happen between applications and APIs, should be done with JSON, so this communication can become uniform and APIs can talk to other APIs effortlessly.</p>
+
+<p>So, basically, what’s going on is:</p>
+
+<p><img src="/content/images/2015/06/json-rest3.png" alt="" /></p>
+
+<p>So… yes, you make your function calls, now, with just a simple URL + HTTP methods, wanna see a real example? We can just send a request to the Facebook’s API by accessing this URL: <a href="http://graph.facebook.com/contatodigo">http://graph.facebook.com/contatodigo</a></p>
+
+<p>Which will request my profile’s data, and the Facebook’s API will return:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+   </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"100001638888259"</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rodrigo"</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"gender"</span><span class="p">:</span><span class="w"> </span><span class="s2">"male"</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Ara\u00fajo"</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.facebook.com/contatodigo"</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"locale"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pt_BR"</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rodrigo Ara\u00fajo"</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"contatodigo"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<p>As simple as that.</p>
+
+<p>Now with this basic idea explained, we can do a simple Rest API using Python and Flask. (I’m assuming you’re already familiar with both technologies).</p>
+
+<p>All we’re gonna do is, using the flask routing, create routes to the users so they can interact with the resources of our API. Let’s suppose our API will serve and receive only Books. So this is the resource we’re dealing with, users may use our API to get Books and insert new Books, so our only URIs will be:</p>
+
+<p>1. <em>/bookapi/v1.0/books</em> with a GET method, which will just return the list of books</p>
+
+<p>2. <em>/bookapi/v1.0/books</em> with a POST method, which will insert a book</p>
+
+<p>So after the API is built, you or you program can get books or insert books by sending HTTP request to the API’s URIs, simple as that. I’ll be very straight forward, here’s the code:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="c">#!flask/bin/python</span>
+<span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">jsonify</span><span class="p">,</span> <span class="n">request</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
+
+<span class="n">books</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span>
+        <span class="s">'id'</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s">'title'</span><span class="p">:</span> <span class="s">u'Game of Thrones'</span><span class="p">,</span>
+        <span class="s">'description'</span><span class="p">:</span> <span class="s">u'Cool dragons'</span><span class="p">,</span> 
+        <span class="s">'finished'</span><span class="p">:</span> <span class="bp">False</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+        <span class="s">'id'</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+        <span class="s">'title'</span><span class="p">:</span> <span class="s">u'50 shadows of grey'</span><span class="p">,</span>
+        <span class="s">'description'</span><span class="p">:</span> <span class="s">u'It start as bullshit, end as a huge bullshit'</span><span class="p">,</span> 
+        <span class="s">'finished'</span><span class="p">:</span> <span class="bp">True</span>
+    <span class="p">}</span>
+<span class="p">]</span>
+
+<span class="nd">@app.route</span><span class="p">(</span><span class="s">'/bookapi/v1.0/books/'</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s">'GET'</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">get_books</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span><span class="s">'books'</span><span class="p">:</span> <span class="n">books</span><span class="p">})</span>
+
+<span class="nd">@app.route</span><span class="p">(</span><span class="s">'/bookapi/v1.0/books'</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s">'POST'</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">create_book</span><span class="p">():</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">request</span><span class="o">.</span><span class="n">json</span> <span class="ow">or</span> <span class="ow">not</span> <span class="s">'title'</span> <span class="ow">in</span> <span class="n">request</span><span class="o">.</span><span class="n">json</span><span class="p">:</span>
+        <span class="n">abort</span><span class="p">(</span><span class="mi">404</span><span class="p">)</span>
+
+    <span class="n">book</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s">'id'</span><span class="p">:</span> <span class="n">books</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="s">'id'</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="s">'title'</span><span class="p">:</span> <span class="n">request</span><span class="o">.</span><span class="n">json</span><span class="p">[</span><span class="s">'title'</span><span class="p">],</span>
+            <span class="s">'description'</span><span class="p">:</span> <span class="n">request</span><span class="o">.</span><span class="n">json</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'description'</span><span class="p">,</span> <span class="s">""</span><span class="p">),</span>
+            <span class="s">'finished'</span><span class="p">:</span> <span class="bp">False</span>
+            <span class="p">}</span>
+
+    <span class="n">books</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">book</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span><span class="s">'book'</span><span class="p">:</span> <span class="n">book</span><span class="p">}),</span> <span class="mi">201</span> 
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">debug</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</code></pre>
+</div>
+
+<p>Note that we’re creating a simple in-memory <em>database</em>, which is a simple python’s dict. This could be a database. But for the sake of simplicity, I’m using just a dict.</p>
+
+<p>When the requests come, it verifies the route that the user is asking for, which is: what resources is he/she wanting? and then, the code do whatever it must do (<em>remember the API idea of hiding the complexity, the user requesting just want the result</em>), and then it put everything in a JSON and returns it. That simple!</p>
+
+<p>Of course, many improvements and extensions (<em>there are infinity possibilities</em>) can be made to this code, but, here’s a skeleton of the idea of an API, it’s just a start. One good practice it’s to <em>not</em> return the ID of the resource, but return just its URI, which is surely a great idea. Another good practice is to ask authentication in every HTTP request, so your API won’t be exposed to everybody. There are, indeed, endless improvements, but in this code, you, that are completely beginner to the API’s concept, can now understand what’s going on underneath and start planning and building your own API using Flask.</p>
+
+	    </article>
+	  	  
+      <ul class="pager blog-pager">
+        
+        <li class="previous">
+          <a href="/post/using-python-and-ai-to-predict-wine" data-toggle="tooltip" data-placement="top" title="Using Python and AI to predict types of wine">&larr; Previous Post</a>
+        </li>
+        
+        
+        <li class="next">
+          <a href="/post/web-scaling-using-redis-as-cache" data-toggle="tooltip" data-placement="top" title="Web Scaling - using Redis as Cache">Next Post &rarr;</a>
+        </li>
+        
+      </ul>
+      
+	    
+        <div class="disqus-comments">
+	        
+
+        </div>
+	    
+    </div>
+  </div>
+</div>
+
+
+    <footer>
+  <div class="container beautiful-jekyll-footer">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+          <li>
+            <a href="https://www.facebook.com/contatodigo" title="Facebook">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+          
+          <li>
+            <a href="https://github.com/digorithm" title="GitHub">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+		  
+          <li>
+            <a href="https://twitter.com/digorithm" title="Twitter">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+		  
+          <li>
+            <a href="mailto:rod.dearaujo@gmail.com" title="Email me">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+		  
+		  
+		  		  
+        </ul>
+        <p class="copyright text-muted">
+		  Rodrigo Araújo
+		  &nbsp;&bull;&nbsp;
+		  2016
+		  
+		  
+		  &nbsp;&bull;&nbsp;
+		  <a href="http://digorithm.github.io">rodrigoaraujo.me</a>
+		  
+	    </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+  
+    <!-- everything has to be repeated twice because on 2016-02-01 GitHub pages migrated to jekyll 3; see bug https://github.com/jekyll/jekyll/issues/4439 -->
+
+
+
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+
+<link rel="stylesheet" href="/assets/css/styles/hybrid.css">
+	<script src="/assets/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+
+  
+    <!-- doing something a bit funky here because I want to be careful not to include JQuery twice! -->
+    
+      <script>
+      	if (typeof jQuery == 'undefined') {
+      	  document.write('<script src="/js/jquery-1.11.2.min.js"></scr' + 'ipt>');
+      	}
+      </script>
+    
+  
+    <!-- doing something a bit funky here because I want to be careful not to include JQuery twice! -->
+    
+	<script src="/js/bootstrap.min.js"></script>
+    
+  
+    <!-- doing something a bit funky here because I want to be careful not to include JQuery twice! -->
+    
+	<script src="/js/main.js"></script>
+    
+  
+
+
+
+
+
+  
+  </body>
+</html>

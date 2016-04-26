@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+  
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>Case Study: Sentiment Analysis On Movie Reviews</title>
+
+  <meta name="author" content="Rodrigo Araújo" />
+  
+  
+
+  <link rel="alternate" type="application/rss+xml" title="Rodrigo Araújo - Stories and thoughts on Computer Science" href="/feed.xml" />
+  
+ <!-- everything has to be repeated twice because on 2016-02-01 GitHub pages migrated to jekyll 3; see bug https://github.com/jekyll/jekyll/issues/4439 -->
+
+    
+  
+    
+      <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />
+    
+      
+  
+  
+  
+    
+      <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    
+      <link rel="stylesheet" href="/css/main.css" />
+    
+    
+  
+  
+  
+    
+      <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+    
+      <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+    
+  
+
+    
+    
+  
+  
+  
+  
+  
+     
+  
+  <!-- Facebook OpenGraph tags -->
+  <meta property="og:title" content="Case Study: Sentiment Analysis On Movie Reviews" />
+  <meta property="og:type" content="website" />
+  
+  
+  <meta property="og:url" content="http://digorithm.github.io/post/case-study-sentiment-analysis-movie-reviews/" />
+  
+  
+  
+  <meta property="og:image" content="http://digorithm.github.io/img/pic.jpg" />
+  
+  
+</head>
+
+
+  <body>
+  
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="http://digorithm.github.io">Rodrigo Araújo</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+      
+        
+          <li>
+            
+            
+
+
+
+
+
+<a href="/aboutme">About Me</a>
+
+          </li>
+        
+        
+        
+          <li>
+            
+            
+
+
+
+
+
+<a href="/publications">Publications</a>
+
+          </li>
+        
+        
+        
+          <li>
+            
+            
+
+
+
+
+
+<a href="/archive">Archive</a>
+
+          </li>
+        
+        
+        
+          <li>
+            
+            
+
+
+
+
+
+<a href="/readings">Recommended Readings</a>
+
+          </li>
+        
+        
+      </ul>
+    </div>
+
+	
+	<div class="avatar-container">
+	  <div class="avatar-img-border">
+	    <a href="http://digorithm.github.io ">
+	      <img class="avatar-img" src="/img/pic.jpg" />
+		</a>
+	  </div>
+	</div>
+	
+
+  </div>
+</nav>
+
+
+    <!-- TODO this file has become a mess, refactor it -->
+
+
+
+
+
+<header class="header-section ">
+
+<div class="intro-header no-img">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-heading">
+          <h1>Case Study: Sentiment Analysis On Movie Reviews</h1>
+		  
+		  
+		  
+		  <span class="post-meta">Posted on July 2, 2015</span>
+		  
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</header>
+
+
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+	      <p>Well, this case was a fun one, sentiment analysis is a sub type of NLP <em>(natural language processing)</em> in which you have to train a model to analyze a text, and classify it was a negative sentiment or a positive sentiment. In this case, I wanted to apply it on movies reviews, to see if a review is a negative one or a positive one. So, basically, teaching this kind of sentiment to the machine.</p>
+
+<p>There’s a lot of challenges in doing this kind of NLP, experience has told me that when the text is big, it is usually hard to predict things about it… and most of the times, movie reviews are big chunk of text.</p>
+
+<p>That’s the case where I needed to learn and use a few <em>extremely</em> useful things:</p>
+
+<ol>
+  <li>Pipeline</li>
+  <li>Grid Search</li>
+</ol>
+
+<p>These two techniques made total difference in my results. Let’s go through the concept of these two:</p>
+
+<h3 id="pipeline">Pipeline</h3>
+
+<p>In a <a href="http://rodrigoaraujo.me/general/setup/demo/2015/06/30/A-Generic-Architecture-for-Text-Classification.html" target="_blank">previous post</a> I talked about a generic Architecture or Flow to achieve basic text classification tasks, so, Pipeline is a way to automate all those tasks, so, instead of explicitly and separately select features, extract features, train the learning algorithms, you can do all of these things inside the pipeline, and, the amazing scikit learn API gives you an awesome Pipeline interface, pretty similar to a basic estimator’s interface, so you can call methods such as <em>fit, fit_transform, predict</em>, etc…</p>
+
+<p>So you can do even more inside a pipeline, such as new methods for feature extraction/selection, FeatureUnion, use other estimators to select better features for your estimator <em>(do you even neural netception? LOL).</em></p>
+
+<p>Here’s an example of a simple pipeline that does PCA to reduce the dimension of the features and creates a SVC:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>    from sklearn.pipeline import Pipeline
+    from sklearn.svm import SVC
+    from sklearn.decomposition import PCA
+    estimators = [('reduce_dim', PCA()), ('svm', SVC())]
+    clf = Pipeline(estimators)
+</code></pre>
+</div>
+
+<h3 id="grid-search">Grid Search</h3>
+
+<p>This was the answer for many hours of pure pain tweaking gazillions of parameters to improve the algorithm’s performance. Grid Search is a way to automate parameters changes, so it can run many times with many different parameters… and choose the best for you, magical, right?</p>
+
+<p>And, once again, the Grid Search object has an interface similar to the basic estimator’s interface, so you can call all the same methods. But, when you create the object grid search, you gotta pass a estimator as parameter… and here’s when things get interesting:</p>
+
+<p>You can pass a pipeline to the grid search. <strong>so much win!</strong></p>
+
+<div class="imgcenter">
+	<img src="http://cdn.meme.am/instances2/500x/581044.jpg" />
+</div>
+
+<p> </p>
+
+<p>But, the truth is: this operation is <em>extremely</em> expensive, and it’s recommended to use it only on the few first tries, where you don’t know exactly the best parameters values for the task.</p>
+
+<p>Another interesting thing is, after the model inside the grid search is trained, methods like <em>predict</em> are computed using the best features. If we look inside the SKlearn’s grid search’s code, we can see how easily and elegant it’s done:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">[</span><span class="o">...</span><span class="p">]</span>
+<span class="n">scores</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+<span class="n">grid_scores</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">grid_start</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n_fits</span><span class="p">,</span> <span class="n">n_folds</span><span class="p">):</span>
+    <span class="n">n_test_samples</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">score</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">all_scores</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">this_score</span><span class="p">,</span> <span class="n">this_n_test_samples</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">parameters</span> <span class="ow">in</span> \
+            <span class="n">out</span><span class="p">[</span><span class="n">grid_start</span><span class="p">:</span><span class="n">grid_start</span> <span class="o">+</span> <span class="n">n_folds</span><span class="p">]:</span>
+        <span class="n">all_scores</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">this_score</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">iid</span><span class="p">:</span>
+            <span class="n">this_score</span> <span class="o">*=</span> <span class="n">this_n_test_samples</span>
+            <span class="n">n_test_samples</span> <span class="o">+=</span> <span class="n">this_n_test_samples</span>
+        <span class="n">score</span> <span class="o">+=</span> <span class="n">this_score</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">iid</span><span class="p">:</span>
+        <span class="n">score</span> <span class="o">/=</span> <span class="nb">float</span><span class="p">(</span><span class="n">n_test_samples</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">score</span> <span class="o">/=</span> <span class="nb">float</span><span class="p">(</span><span class="n">n_folds</span><span class="p">)</span>
+    <span class="n">scores</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">score</span><span class="p">,</span> <span class="n">parameters</span><span class="p">))</span>
+    <span class="c"># TODO: shall we also store the test_fold_sizes?</span>
+    <span class="n">grid_scores</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_CVScoreTuple</span><span class="p">(</span>
+        <span class="n">parameters</span><span class="p">,</span>
+        <span class="n">score</span><span class="p">,</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">all_scores</span><span class="p">)))</span>
+<span class="c"># Store the computed scores</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">grid_scores_</span> <span class="o">=</span> <span class="n">grid_scores</span>
+
+<span class="c"># Find the best parameters by comparing on the mean validation score:</span>
+<span class="c"># note that `sorted` is deterministic in the way it breaks ties</span>
+<span class="n">best</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">grid_scores</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">mean_validation_score</span><span class="p">,</span>
+              <span class="n">reverse</span><span class="o">=</span><span class="bp">True</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">best_params_</span> <span class="o">=</span> <span class="n">best</span><span class="o">.</span><span class="n">parameters</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">best_score_</span> <span class="o">=</span> <span class="n">best</span><span class="o">.</span><span class="n">mean_validation_score</span>
+</code></pre>
+</div>
+
+<p>As you can see, in the end it keeps the best parameters and scores, so it can be used when it needs to predict or output its <em>predict_proba</em> or <em>decision_function</em></p>
+
+<h3 id="correctly-mixing-pipeline-grid-search-and-cross-validation-correctly-the-hidden-wizardry">Correctly mixing Pipeline, Grid Search and Cross Validation correctly: the hidden wizardry</h3>
+
+<p>It’s tricky to mix all these things up, the most dangerous mistake that everybody does sometime is: <strong>using the same dataset to the grid search AND the cross validation</strong></p>
+
+<p>So, here’s a nice technique to avoid this: Split the initial dataset into Development Dataset, which will be used to train the algorithm and to execute the grid search, and the Validation Dataset, which will be passed to the cross_val_score and internally splitted again to avoid bias (CV parameter can configure this).</p>
+
+<p>So, in the end, you train the grid search with a subset of the dataset, and validate it with another subset, avoiding many kind of undesired effects.</p>
+
+<h3 id="the-movie-review-problem">The Movie Review Problem</h3>
+
+<p>Ok, so now let’s head to the real problem. The dataset can be downloaded with:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>wget http://www.cs.cornell.edu/people/pabo/movie-review-data/review_polarity.tar.gz
+tar xzf review_polarity.tar.gz
+</code></pre>
+</div>
+
+<p>What I did to solve it was: I used grid search to search a few parameters, such as <em>TfidfVectorizer’s max_features</em>, that in the end I kept with max_features=10000, also its ngram_range, searching between (1,1) and (1,2) and <em>the LinearSVC()’s C parameter</em>.</p>
+
+<p>I used a few other algorithms, but I found the best performance with LinearSVC, though I did not try all the other possibilities <em>(I could create many pipelines to test many algorithms, but my computer would be unusable during many hours, probably, which I couldn’t afford)</em>.</p>
+
+<p>Why Linear SVC?</p>
+
+<p>The Linear SVC is very similar to the SVC object but using the <em>kernel = “linear”</em>. LinearSVC is a type of <em>Support Vector Machines</em>, it’s known that SVMs are effective in <strong>high dimensional spaces</strong>, which is our case here. Also, it can give weights to classes, helping to go through unbalanced datasets
+<img src="http://scikit-learn.org/stable/_images/plot_separating_hyperplane_unbalanced_0011.png" alt="" /></p>
+
+<p>And, basically, what the SVMs does is create a hyper-plane (or a set of it) in a high or even infinite dimensional space. And it solves the primal problem:</p>
+
+<div class="imgcenter">
+<img src="http://scikit-learn.org/stable/_images/math/396704acdf11cc18d2d02b32275c0ee42d76b95e.png" />
+</div>
+<p> </p>
+
+<p>Where Xi are the training vectors and Y is a vector in {1,-1}^n.</p>
+
+<p>So, here’s the code where I built the pipeline, the gridsearch, use a subset of the dataset to develop the grid search and another subset to validate using the <em>cross_val_scores</em>, then, I call <em>predict</em> to get the vector of predictions to build a report <em>(or, with this, I can start to build a ROC curve, confusion matrix and other statistics debug tools)</em></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>from sklearn.datasets import load_files
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.grid_search import GridSearchCV
+from sklearn.pipeline import make_pipeline
+from sklearn.svm import LinearSVC
+from sklearn.cross_validation import train_test_split
+from sklearn.cross_validation import cross_val_score
+from sklearn.metrics import classification_report
+
+data = load_files('../txt_sentoken/')
+
+X_train, X_test, y_train, y_test = train_test_split(data.data, data.target, test_size=0.5, random_state=0)
+
+pipeline = make_pipeline(TfidfVectorizer(sublinear_tf=True, max_features=10000), LinearSVC())
+
+parameters = {
+        'tfidfvectorizer__ngram_range': [(1,1), (1,2)],
+        'linearsvc__C':(.01,.1,1),
+        }
+
+grid_search = GridSearchCV(pipeline, parameters, n_jobs=-1) 
+
+grid_search.fit(X_train, y_train)
+
+print("Best score: %0.3f" % grid_search.best_score_)
+print("Best parameters iset:")
+best_parameters = grid_search.best_estimator_.get_params()
+for param_name in sorted(parameters.keys()):
+    print("\t%s: %r" % (param_name, best_parameters[param_name]))
+
+print "The model was trained on the full development set"
+print "the scores are going to be computed with the evaluation set"
+scores = cross_val_score(grid_search, X_test, y_test, cv=5)
+
+print scores.mean(), scores.std()
+
+y_pred = grid_search.predict(X_test)
+
+print classification_report(y_test, y_pred)
+</code></pre>
+</div>
+
+<p>and the output:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>Best score: 0.849
+
+Best parameters iset:
+	linearsvc__C: 1
+	tfidfvectorizer__ngram_range: (1, 2)
+
+The model was trained on the full development set
+the scores are going to be computed with the evaluation set
+0.865933623341 0.0281523948704
+
+Classification report:
+             precision    recall  f1-score   support
+
+          0       0.88      0.86      0.87       496
+          1       0.87      0.88      0.87       504
+
+avg / total       0.87      0.87      0.87      1000
+</code></pre>
+</div>
+
+<p>So, around 86%~87% of precision/f1-score, not <em>that</em> bad.</p>
+
+<h3 id="further-improvements">Further Improvements</h3>
+
+<p>There are many things I could to do elevate this performance, but due the lack of time to play with this dataset, those improvements will be in a next post.</p>
+
+<p>Possible improvements could be: find and extracting new features, to do this, we gotta understand better this data, extract more information about it. Trying new algorithms and techniques such as Ensemble, Classifiers Combination or Fusion. Stemming and Stop Words could improve it too. If you solved this problem and got a better result, share it with me, I’m very curious about how to improve this!</p>
+
+	    </article>
+	  	  
+      <ul class="pager blog-pager">
+        
+        <li class="previous">
+          <a href="/post/generic-architecture-text-classification" data-toggle="tooltip" data-placement="top" title="A Generic Architecture for Text Classification with Machine Learning">&larr; Previous Post</a>
+        </li>
+        
+        
+        <li class="next">
+          <a href="/post/neural-computation-pt1" data-toggle="tooltip" data-placement="top" title="Neural Computation: Toward an Intuitive Understanding of the Perceptron">Next Post &rarr;</a>
+        </li>
+        
+      </ul>
+      
+	    
+        <div class="disqus-comments">
+	        
+
+        </div>
+	    
+    </div>
+  </div>
+</div>
+
+
+    <footer>
+  <div class="container beautiful-jekyll-footer">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+          <li>
+            <a href="https://www.facebook.com/contatodigo" title="Facebook">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+          
+          <li>
+            <a href="https://github.com/digorithm" title="GitHub">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+		  
+          <li>
+            <a href="https://twitter.com/digorithm" title="Twitter">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+		  
+          <li>
+            <a href="mailto:rod.dearaujo@gmail.com" title="Email me">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+		  
+		  
+		  		  
+        </ul>
+        <p class="copyright text-muted">
+		  Rodrigo Araújo
+		  &nbsp;&bull;&nbsp;
+		  2016
+		  
+		  
+		  &nbsp;&bull;&nbsp;
+		  <a href="http://digorithm.github.io">rodrigoaraujo.me</a>
+		  
+	    </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+  
+    <!-- everything has to be repeated twice because on 2016-02-01 GitHub pages migrated to jekyll 3; see bug https://github.com/jekyll/jekyll/issues/4439 -->
+
+
+
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+
+<link rel="stylesheet" href="/assets/css/styles/hybrid.css">
+	<script src="/assets/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+
+  
+    <!-- doing something a bit funky here because I want to be careful not to include JQuery twice! -->
+    
+      <script>
+      	if (typeof jQuery == 'undefined') {
+      	  document.write('<script src="/js/jquery-1.11.2.min.js"></scr' + 'ipt>');
+      	}
+      </script>
+    
+  
+    <!-- doing something a bit funky here because I want to be careful not to include JQuery twice! -->
+    
+	<script src="/js/bootstrap.min.js"></script>
+    
+  
+    <!-- doing something a bit funky here because I want to be careful not to include JQuery twice! -->
+    
+	<script src="/js/main.js"></script>
+    
+  
+
+
+
+
+
+  
+  </body>
+</html>

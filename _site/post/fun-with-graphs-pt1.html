@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="en">
+  
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>Fun with graphs pt1</title>
+
+  <meta name="author" content="Rodrigo Araújo" />
+  
+  
+
+  <link rel="alternate" type="application/rss+xml" title="Rodrigo Araújo - Stories and thoughts on Computer Science" href="/feed.xml" />
+  
+ <!-- everything has to be repeated twice because on 2016-02-01 GitHub pages migrated to jekyll 3; see bug https://github.com/jekyll/jekyll/issues/4439 -->
+
+    
+  
+    
+      <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />
+    
+      
+  
+  
+  
+    
+      <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    
+      <link rel="stylesheet" href="/css/main.css" />
+    
+    
+  
+  
+  
+    
+      <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+    
+      <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+    
+  
+
+    
+    
+  
+  
+  
+  
+  
+     
+  
+  <!-- Facebook OpenGraph tags -->
+  <meta property="og:title" content="Fun with graphs pt1" />
+  <meta property="og:type" content="website" />
+  
+  
+  <meta property="og:url" content="http://digorithm.github.io/post/fun-with-graphs-pt1/" />
+  
+  
+  
+  <meta property="og:image" content="http://digorithm.github.io/img/pic.jpg" />
+  
+  
+</head>
+
+
+  <body>
+  
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="http://digorithm.github.io">Rodrigo Araújo</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+      
+        
+          <li>
+            
+            
+
+
+
+
+
+<a href="/aboutme">About Me</a>
+
+          </li>
+        
+        
+        
+          <li>
+            
+            
+
+
+
+
+
+<a href="/publications">Publications</a>
+
+          </li>
+        
+        
+        
+          <li>
+            
+            
+
+
+
+
+
+<a href="/archive">Archive</a>
+
+          </li>
+        
+        
+        
+          <li>
+            
+            
+
+
+
+
+
+<a href="/readings">Recommended Readings</a>
+
+          </li>
+        
+        
+      </ul>
+    </div>
+
+	
+	<div class="avatar-container">
+	  <div class="avatar-img-border">
+	    <a href="http://digorithm.github.io ">
+	      <img class="avatar-img" src="/img/pic.jpg" />
+		</a>
+	  </div>
+	</div>
+	
+
+  </div>
+</nav>
+
+
+    <!-- TODO this file has become a mess, refactor it -->
+
+
+
+
+
+<header class="header-section ">
+
+<div class="intro-header no-img">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-heading">
+          <h1>Fun with graphs pt1</h1>
+		  
+		  
+		  
+		  <span class="post-meta">Posted on October 10, 2014</span>
+		  
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</header>
+
+
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+	      <p>Graph Theory is definitely one of my favorite branches of the Mathematics &amp; Computer Science, mostly because of its nearest infinity applications, in both real world problems and pure theoretical problems.</p>
+
+<p>These days I’ve been working (with my buddy Daniel Almeida) in a framework to create and manipulate graphs. Which means, creating a data structure to represent graphs, edges, vertexes and creating algorithms to work on this structure. All this is being made with Java and I’ll expose this code here, as I saw a terrible lack of good readable codes about it on the internet.</p>
+
+<p>So, before we start coding the graph’s structure… we must clarify what a graph is and why it’s so important to the Computer Science (and many other sciences).</p>
+
+<p>A graph is a ordered pair (G = (V,E)) , where (V) is a set of Vertices/Nodes and (E) is a set of Edges, an extremely mple example of a complete <a href="http://mathworld.wolfram.com/SimpleGraph.html">simple</a>, <a href="http://mathworld.wolfram.com/ConnectedGraph.html">connected</a> and <a href="http://mathworld.wolfram.com/CompleteGraph.html">complete</a> graph is:</p>
+
+<p><img src="/content/images/2015/06/graph1.png" alt="alt" /></p>
+
+<p><em>So, what’s the huge deal with this graph theory thing?</em></p>
+
+<p>Well, not only theoretical computer science problems lay on the graph theory but also in many other distinct fields, from particle physics, chemistry to <a href="http://en.wikipedia.org/wiki/Mathematical_sociology">sociology</a>.</p>
+
+<p>All this because every little thing in our universe is linked, and when this set of things became a “web of things”, we need to study its properties. And that’s where graph theory get in.</p>
+
+<p>So when a graph gets bigger, we need to represent this structure in a computational way, so we can compute things like shortest path between two nodes, connectivity and thousand of other properties and techniques.</p>
+
+<p>The most common ways to represent graph mathematically are:</p>
+
+<h2 id="adjacency-matrix">Adjacency Matrix</h2>
+
+<p>It’s a matrix that represent the adjacency of every node in a graph, it’s an excellent way to work computationally with graphs. The same graph that I presented previously in a visual way can be represented by the following adjacency matrix:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{bmatrix}
+0 & 1 & 1 \\\ 
+1 & 0 & 1 \\\ 
+1 & 1 & 0
+\end{bmatrix} %]]></script>
+
+<h2 id="adjacency-list">Adjacency List</h2>
+
+<p>This is another common way to represent graph mathematically, it’s a simple list of lists, each node in the main list points to a list of their adjacent nodes.</p>
+
+<p>Here’s an example:</p>
+
+<p><img src="/content/images/2015/06/graph2.png" alt="" /></p>
+
+<p><img src="/content/images/2015/06/adjaceny-list.gif" alt="" /></p>
+
+<h2 id="data-structures-to-represent-graphs">Data Structures to represent Graphs</h2>
+
+<p>Ok, so, how do we represent graphs, edges and vertexes in terms of data structures? Before we dig deeper in the algorithms and the mathematical properties of the graphs, we need to create our Data Structure to work with.</p>
+
+<h3 id="the-vertex">The vertex</h3>
+<pre>
+<code class="java hljs">
+package GraphModels;
+
+public class Vertex {
+    /* This Data Structure will be capable to represent a Vertex,
+    * which is a Node that will be used on a graph
+    */
+    
+    public String id;
+    public String name;
+    public boolean visited = false;
+    
+    public Vertex(String id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+    public String getId() {
+        return id;
+    }
+    
+    public String getName() {
+        return name;
+    }
+    
+  @Override
+  public String toString() {
+    return name;
+  }
+    
+}
+
+</code>
+</pre>
+
+<p>For now you may be asking yourself why do we need a variable called “Visited”. Well, we’ll be using it in algorithms to walk through the graph, so we must need to know which nodes were visited. It will became more clear soon!</p>
+
+<h3 id="the-edge">The Edge</h3>
+
+<p>Yes, the edge must be represented computationally! That’s our way to figure out paths through the vertexes, the edge may or may not have a weight, the edge must know its source vertex and its destination vertex</p>
+<pre>
+<code class="java hljs">
+    package GraphModels;
+
+    public class Edge {
+
+         /* This Data Structure will be capable to represent a Edge,
+        *    that will be used on a graph
+        */
+
+        public String id;
+        public Vertex source;
+        public Vertex destination;
+        private final int weight;
+
+        public Edge(String id, Vertex source, Vertex destination, int weight) {
+            this.id = id;
+            this.source = source;
+            this.destination = destination;
+            this.weight = weight;
+        }
+
+        public String getId() {
+            return id;
+        }
+        public Vertex getDestination() {
+            return destination;
+        }
+
+        public Vertex getSource() {
+            return source;
+        }
+        public int getWeight() {
+            return weight;
+        }
+
+        @Override
+        public String toString() {
+            return source + " " + destination;
+        }
+    } 
+</code>
+</pre>
+
+<h3 id="the-graph">The Graph</h3>
+
+<p>That’s for sure the biggest and most complex part, don’t panic with the many algorithms already implemented in this code. I’ll be explaining one by one.</p>
+
+<p>We’re reading a text file containing the text file, if you want to test by yourself, make sure to create a .txt in the correct way and to pass the correct file path! You can find the instructions to write the .txt graph in the comments of this code</p>
+
+<pre>
+<code class="java hljs">
+    package GraphModels;
+
+    import java.io.BufferedReader;
+    import java.io.FileNotFoundException;
+    import java.io.FileReader;
+    import java.io.IOException;
+    import java.util.ArrayList;
+    import java.util.HashMap;
+    import java.util.LinkedList;
+    import java.util.List;
+    import java.util.Map;
+    import java.util.Queue;
+
+    public class Graph {
+
+        /* This Data Structure will be capable to represent a Graph,
+        *   where G = (V, E)
+        */
+
+       private  List nodes;
+       private  List edges;
+       public Vertex node;
+       public Edge edge;
+       private String path;
+       private int [][] adjacencyMatrix;
+       private Map nodesMatrixMap;
+       private List adjacentNodes;
+       public int degree;
+       public int minDegree;
+       public int maxDegree;
+       public int avgDegree;
+
+       public Graph() {
+
+      }
+
+      public List getNodes() {
+        return nodes;
+      }
+
+      public List getEdges() {
+        return edges;
+      }
+
+      public void setNodes(List vertex){
+          this.nodes = vertex;
+      }
+
+      public void setEdges(List edges){
+          this.edges = edges;
+      }
+
+      // Find an edge
+      // TO-DO: Change == to equals
+      public Edge getEdge(Vertex source, Vertex destination) {
+          for (Edge edge : this.getEdges()) {
+              if ((edge.getSource().getId() == source.getId() &amp;&amp; edge.getDestination().getId() == destination.getId()) || (edge.getSource().getId() == destination.getId() &amp;&amp; edge.getDestination().getId() == source.getId())) {
+                  return edge;
+              }
+          }
+          return null;
+      }
+
+      // Check if there is an edge for two given vertices
+      public boolean hasEdge(Vertex source, Vertex destination) {
+          Edge result = this.getEdge(source, destination);
+          if (result != null) {
+            return true;
+          } else {
+            return false;
+          }
+      }
+
+      public List getAdjacentNodes(Vertex node){
+          adjacentNodes = new ArrayList();
+
+          for (Vertex currentNode : nodes){
+              if (hasEdge(node, currentNode)){
+                  adjacentNodes.add(currentNode);
+              }
+          }
+
+          return adjacentNodes;
+      }
+
+      public int getMinDegree(){
+          minDegree = 99999999;
+
+          for (Vertex node : nodes){
+              if (this.getDegree(node)maxDegree){
+                  maxDegree = this.getDegree(node);
+              }
+          }
+
+          return maxDegree;
+      }
+      public int getAvgDegree(){
+          avgDegree = 0;
+
+          for (Vertex node : nodes){
+              avgDegree += this.getDegree(node);
+          }
+          avgDegree = avgDegree/nodes.size();
+
+          return avgDegree;
+      }
+
+      //modified for our needs   
+      public int breadthFirstSearch(Vertex rootNode){
+
+          int visitedNodes = 0;
+          Queue q = new LinkedList();
+          q.add(rootNode);
+
+          while (!q.isEmpty()){
+              Vertex currentNode = (Vertex) q.peek();
+              for (Vertex node : this.getAdjacentNodes(currentNode)){
+                  if (!node.visited){   
+                      node.visited = true;
+                      q.add(node);
+                      visitedNodes++;
+                  }
+              }
+              q.remove();   
+          }
+          //reseting all flags
+          for (Vertex node : nodes){
+              node.visited = false;
+          }
+
+          return visitedNodes;
+
+      }
+
+      public boolean isConnected(){
+          int numberOfNodes = nodes.size();
+
+          for (Vertex node : nodes){
+              if (!(this.breadthFirstSearch(node) == numberOfNodes)){
+                  return false;
+              }
+          }
+          return true;
+      }
+
+      //TO-DO: error treatment. 
+      // while this treatment doesn't exist: BE EXTREMELY CAREFUL WITH GRAPH.TXT
+      // the right syntax is:
+      //line (1) :1,2,...,n 
+      //line (2) :1-2
+      //line (3) : weight of the previous connection
+      //line (n) :2-n
+      //line (n+1) : weight of the previous connection
+      //line (n+2) :-1
+      //where the first line you must declare the nodes, each one separated by comma
+      //the second til the n-th line you must declare the connections between the nodes declared 
+      //in the first line
+      //after every connection, in the next line, you must declare the weight of the connection
+      // leave everything zero to create a unweighted graph
+      //after the last connection, you must end with a -1
+      // if you don't do this your computer may explode lol
+      //...
+      //...
+      //...
+      // i don't know, i did never try that.
+      public void createGraph(String path) throws FileNotFoundException, IOException{
+          this.path = path;
+
+          nodes = new ArrayList();
+          edges = new ArrayList();
+
+          FileReader fr = new FileReader(path);
+          BufferedReader textReader = new BufferedReader(fr);
+
+          //gets the first line, which are the nodes that must be created
+          String TextData = textReader.readLine();
+
+          //separate the string with numbers
+          String[] nodesInString = TextData.split("\\s*,\\s*");
+
+          //create the list of nodes
+          for (String nodeInString : nodesInString){
+
+              node = new Vertex(nodeInString, "node " + nodeInString);
+              nodes.add(node);
+
+          }
+
+          //create the list of edges
+          String edgeIntoString;
+          Vertex vertex_aux1 = new Vertex("-1","-1");
+          Vertex vertex_aux2 = new Vertex("-1","-1");;
+          int n = 0;
+          //varre a linha que tem x-y
+          while (!(edgeIntoString = textReader.readLine()).equals("-1")){
+
+              String[] nodesConnected = edgeIntoString.split("\\s*-\\s*");
+              //varre os dois nodes
+
+              int peso = Integer.parseInt(textReader.readLine());
+
+                  //verifica se x e y passados no txt estão instanciados em nodes 
+                  for (Vertex node : nodes){
+
+                      if (nodesConnected[0].equals(node.getId())){
+                          //se o node do txt foi achado em nodes
+
+                          vertex_aux1 = new Vertex(node.getId(), node.getName());
+                      }
+                  }
+                  for (Vertex node : nodes){
+
+                      if (nodesConnected[1].equals(node.getId())){
+
+                          vertex_aux2 = new Vertex(node.getId(), node.getName());
+                      }
+                  }
+
+              edge = new Edge(Integer.toString(n),vertex_aux1, vertex_aux2, peso);
+              edges.add(edge);
+          }
+
+      }
+      // Add a new edge
+      public boolean addEdge(Vertex source, Vertex destination) {
+          Edge newEdge = new Edge("id", source, destination, 0);
+          return this.edges.add(newEdge);
+      }
+
+      // Remove an edge
+      public boolean removeEdge(Vertex source, Vertex destination) {
+
+          Edge result = this.getEdge(source, destination);
+
+          if (result != null) {
+              return this.edges.remove(result);
+          } else {
+              System.out.println("Couldn't find edge");
+              return false;
+          }
+      }
+
+      public int getDegree(Vertex node){
+
+          degree = 0;
+
+          for (Vertex CurrentNode : nodes){
+              if (hasEdge(node, CurrentNode)){
+                  degree++;
+              }
+          }
+
+          return degree;
+      }
+
+      public void printGraph() {
+
+          for (Vertex node: this.getNodes()){
+              System.out.println(node.getName());
+              System.out.print("Adjacent nodes: ");
+              adjacentNodes = getAdjacentNodes(node);
+              for (Vertex adjacentNode : adjacentNodes){
+                  System.out.print(adjacentNode.getName() + " ");
+              }
+
+              System.out.println(" ");
+              System.out.println("Degree of this node: " + getDegree(node));
+              System.out.println(" "); 
+          }
+          System.out.println("- - - - - - - - - - - - - - - - ");
+          System.out.println(" ");
+          System.out.println("Min Degree of this Graph: " + getMinDegree());
+          System.out.println(" ");
+          System.out.println("Max Degree of this Graph: " + getMaxDegree());
+          System.out.println(" ");
+          System.out.println("Average Degree of this Graph: " + getAvgDegree());
+          System.out.println(" ");
+          System.out.println("Graph is connected: " + this.isConnected());
+          System.out.println(" ");
+          System.out.println("- - - - - - - - - - - - - - - - ");
+          System.out.println("Connections: ");
+          System.out.println(" ");
+          for (Edge edge : this.getEdges() ){
+              System.out.print(edge.getSource().getId() +"&lt;-&gt;"+edge.getDestination().getId()+" ");
+              System.out.println("weight: " + edge.getWeight());
+          }
+          System.out.println(" ");
+          System.out.println("- - - - - - - - - - - - - - - - ");
+        }
+
+      public void setAdjacencyMatrix() {
+
+        initializeAdjacencyMatrix();
+        int weigth;
+        int source;
+        int destination;
+        for (Edge currentEdge : this.getEdges() ){
+            weigth = currentEdge.getWeight();
+            source = (int) nodesMatrixMap.get(currentEdge.getSource().getName());
+            destination = (int) nodesMatrixMap.get(currentEdge.getDestination().getName());
+
+            adjacencyMatrix[source][destination] = weigth; 
+            //must be symmetric
+            adjacencyMatrix[destination][source] = weigth; 
+        }
+      }
+
+      public void initializeAdjacencyMatrix(){
+          int numNodes = this.nodes.size();
+          adjacencyMatrix = new int[numNodes][numNodes];
+          nodesMatrixMap = new HashMap();
+          for (int i = 0; i &lt; numNodes; i++) {
+              nodesMatrixMap.put(this.nodes.get(i).getName(), i);
+              for (int j = 0; j &lt; numNodes; j++) {
+                  adjacencyMatrix[i][j] = -1;
+              }
+          }
+      }
+
+      public void printAdjacencyMatrix() {
+
+          String sourceName;
+          String destName;
+          int source;
+          int dest;
+
+          System.out.println(" ");
+          System.out.println("Adjacency Matrix: ");
+          System.out.println(" ");
+
+          for (int i = 0; i &lt; this.nodes.size(); i++) {
+              sourceName = this.nodes.get(i).getName();
+              source = (int) nodesMatrixMap.get(sourceName);
+              for (int j = 0; j &lt; this.nodes.size(); j++) {
+                  destName = this.nodes.get(j).getName();
+                  dest = (int) nodesMatrixMap.get(destName);
+                  if (adjacencyMatrix[source][dest] == -1) {
+                      System.out.print("- ");
+                  } else {
+                      System.out.print(adjacencyMatrix[source][dest] + " ");
+                  }
+              }
+              System.out.print("\n");
+          }
+      }
+
+    }
+</code>
+</pre>
+
+<h3 id="the-test-file">The test file</h3>
+
+<p>Here’s the file containing the main, if you want to test, remember to change the path file!</p>
+
+<pre>
+<code class="java hljs">
+    package graphproject;
+    import GraphModels.*;
+    import java.io.IOException;
+    import java.util.ArrayList;
+    import java.util.List;
+
+    public class GraphProject {
+
+        //graph creation procedure
+        private List nodes;
+        private List edges;
+        private Graph graph;
+        public Vertex node;
+        public Edge edge;
+
+        public void printGraph(Graph graph) {
+          for (Vertex node: graph.getNodes()){
+                 System.out.println(node.toString());
+          }
+
+          for (Edge edge : graph.getEdges() ){
+                 System.out.println(edge.toString());
+                 System.out.println(" ");
+          }
+
+        }
+
+        public void test() throws IOException{
+
+            Graph graph = new Graph();
+            graph.createGraph("/Users/daniel/Documents/workspace_java/GraphProject/src/graphproject/graph.txt");
+
+            graph.printGraph();
+            graph.setAdjacencyMatrix();
+            graph.printAdjacencyMatrix();
+        }
+        //end of graph creation procedure
+
+        public static void main(String[] args) throws IOException {
+           GraphProject gp = new GraphProject();
+
+           gp.test();
+        }
+    }
+</code>
+</pre>
+
+<h2 id="conclusion-and-next-steps">Conclusion and next steps</h2>
+
+<p>At this moment, you’re perfectly able to create a graph (via .txt file) and run all those algorithms to extract information about your graph. Just make sure to import the right libraries and to put the files in the right package. Doing these little things right, I’m pretty sure this will work perfectly.</p>
+
+<p>But I’m sure you may be a little lost about a few algorithms and techniques we’ve implemented in the Graph.java. But, don’t worry, i’ll be explaining each method one by one in the next parts of this post!</p>
+
+	    </article>
+	  	  
+      <ul class="pager blog-pager">
+        
+        <li class="previous">
+          <a href="/post/crud-with-java-jsp" data-toggle="tooltip" data-placement="top" title="CRUD with Java, JSP and MySQL">&larr; Previous Post</a>
+        </li>
+        
+        
+        <li class="next">
+          <a href="/post/thoughts-on-automata-theory" data-toggle="tooltip" data-placement="top" title="Thoughts on Automata Theory">Next Post &rarr;</a>
+        </li>
+        
+      </ul>
+      
+	    
+        <div class="disqus-comments">
+	        
+
+        </div>
+	    
+    </div>
+  </div>
+</div>
+
+
+    <footer>
+  <div class="container beautiful-jekyll-footer">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+          <li>
+            <a href="https://www.facebook.com/contatodigo" title="Facebook">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+          
+          <li>
+            <a href="https://github.com/digorithm" title="GitHub">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+		  
+          <li>
+            <a href="https://twitter.com/digorithm" title="Twitter">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+		  
+          <li>
+            <a href="mailto:rod.dearaujo@gmail.com" title="Email me">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+		  
+		  
+		  		  
+        </ul>
+        <p class="copyright text-muted">
+		  Rodrigo Araújo
+		  &nbsp;&bull;&nbsp;
+		  2016
+		  
+		  
+		  &nbsp;&bull;&nbsp;
+		  <a href="http://digorithm.github.io">rodrigoaraujo.me</a>
+		  
+	    </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+  
+    <!-- everything has to be repeated twice because on 2016-02-01 GitHub pages migrated to jekyll 3; see bug https://github.com/jekyll/jekyll/issues/4439 -->
+
+
+
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+
+<link rel="stylesheet" href="/assets/css/styles/hybrid.css">
+	<script src="/assets/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+
+  
+    <!-- doing something a bit funky here because I want to be careful not to include JQuery twice! -->
+    
+      <script>
+      	if (typeof jQuery == 'undefined') {
+      	  document.write('<script src="/js/jquery-1.11.2.min.js"></scr' + 'ipt>');
+      	}
+      </script>
+    
+  
+    <!-- doing something a bit funky here because I want to be careful not to include JQuery twice! -->
+    
+	<script src="/js/bootstrap.min.js"></script>
+    
+  
+    <!-- doing something a bit funky here because I want to be careful not to include JQuery twice! -->
+    
+	<script src="/js/main.js"></script>
+    
+  
+
+
+
+
+
+  
+  </body>
+</html>

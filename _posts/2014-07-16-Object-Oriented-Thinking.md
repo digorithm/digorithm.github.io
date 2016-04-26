@@ -1,9 +1,8 @@
 ---
 layout: post
 title: Object Oriented Thinking
-categories: [general, setup, demo]
-keywords: "thoughts, object oriented, programming, engineering, architecture"
-tags: [thoughts, object oriented, programming, engineering, architecture]
+keywords: "thoughts, programming, engineering, architecture"
+tags: [thoughts, programming, engineering, architecture]
 fullview: true
 permalink: post/object-oriented-thinking
 ---

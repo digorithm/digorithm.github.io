@@ -51,8 +51,7 @@ But, the truth is: this operation is *extremely* expensive, and it's recommended
 
 Another interesting thing is, after the model inside the grid search is trained, methods like *predict* are computed using the best features. If we look inside the SKlearn's grid search's code, we can see how easily and elegant it's done:
 
-<pre>
-<code class="python hljs">
+```python
 [...]
 scores = list()
 grid_scores = list()
@@ -86,8 +85,7 @@ best = sorted(grid_scores, key=lambda x: x.mean_validation_score,
               reverse=True)[0]
 self.best_params_ = best.parameters
 self.best_score_ = best.mean_validation_score
-</code>
-</pre>
+```
 
 As you can see, in the end it keeps the best parameters and scores, so it can be used when it needs to predict or output its *predict_proba* or *decision_function*
 

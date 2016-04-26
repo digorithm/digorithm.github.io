@@ -1,1178 +1,428 @@
 <!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8">
-	<title>Rodrigo Araújo</title>
-	
-	<meta name="author" content="Rodrigo Araújo">
+<html lang="en">
+  
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-	<!-- Enable responsive viewport -->
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rodrigo Araújo</title>
 
-	<!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
-	<!--[if lt IE 9]>
-	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-	<![endif]-->
+  <meta name="author" content="Rodrigo Araújo" />
+  
+  
+  <meta name="description" content="Thoughts and stories on Computer Science, Mathematics and Technnology">
+  
 
-	
-	<meta name="description" content="I'm a Computer Scientist and Software Engineer, I enjoy Artificial Intelligence, Programming, Software Engineering."/>
-	
-	
-	<meta name="keywords" content="Software, Engineering, Computer Science, Science, Artificial Intelligence, Machine Learning, Programming"/>
-	
+  <link rel="alternate" type="application/rss+xml" title="Rodrigo Araújo - Stories and thoughts on Computer Science" href="/feed.xml" />
+  
+ <!-- everything has to be repeated twice because on 2016-02-01 GitHub pages migrated to jekyll 3; see bug https://github.com/jekyll/jekyll/issues/4439 -->
 
-	<!-- Le styles -->
-	<link href="/assets/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-	<link href="/assets/resources/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-	<link href="/assets/resources/syntax/syntax.css" rel="stylesheet">
-	<link href="/assets/css/style.css" rel="stylesheet">
-        <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    
+  
+    
+      <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />
+    
+      
+  
+  
+  
+    
+      <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    
+      <link rel="stylesheet" href="/css/main.css" />
+    
+    
+  
+  
+  
+    
+      <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+    
+      <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+    
+  
 
-	<!-- Le fav and touch icons -->
-	<!-- Update these with your own images
-	<link rel="shortcut icon" href="images/favicon.ico">
-	<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
-	<link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
-	<link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
-	-->
-
-	<link rel="alternate" type="application/rss+xml" title="" href="/feed.xml">
-	<link rel="stylesheet" href="/assets/css/styles/hybrid.css">
-	<script src="/assets/js/highlight.pack.js"></script>
-<script>hljs.initHighlightingOnLoad();</script>
+    
+    
+  
+  
+  
+  
+  
+     
+  
+  <!-- Facebook OpenGraph tags -->
+  <meta property="og:title" content="Rodrigo Araújo" />
+  <meta property="og:type" content="website" />
+  
+  
+  <meta property="og:url" content="http://digorithm.github.io/" />
+  
+  
+  
+  <meta property="og:image" content="http://digorithm.github.io/img/pic.jpg" />
+  
+  
 </head>
 
-<body>
-	<nav class="navbar navbar-default visible-xs" role="navigation">
-		<!-- Brand and toggle get grouped for better mobile display -->
-		<div class="navbar-header">
-			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-				<span class="sr-only">Toggle navigation</span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-			</button>
-			
-			<a type="button" class="navbar-toggle nav-link" href="http://github.com/digorithm">
-				<i class="fa fa-github"></i>
-			</a>
-			
-			
-			<a type="button" class="navbar-toggle nav-link" href="http://twitter.com/digorithm">
-				<i class="fa fa-twitter"></i>
-			</a>
-			
-			
-			<a type="button" class="navbar-toggle nav-link" href="mailto:rod.dearaujo@gmail.com">
-				<i class="fa fa-envelope"></i>
-			</a>
-			
-			<a class="navbar-brand" href="/">
-				<img src="http://www.gravatar.com/avatar/?s=35" class="img-circle" />
-				
-			</a>
-		</div>
 
-		<!-- Collect the nav links, forms, and other content for toggling -->
-		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-			<ul class="nav navbar-nav">
-				<li class="active"><a href="/">Home</a></li>
-				<li><a href="/categories.html">Categories</a></li>
-				<li><a href="/tags.html">Tags</a></li>
-			</ul>
-		</div><!-- /.navbar-collapse -->
-	</nav>
+  <body>
+  
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="http://digorithm.github.io">Rodrigo Araújo</a>
+    </div>
 
-	<!-- nav-menu-dropdown -->
-	<div class="col-sm-3 sidebar hidden-xs">
-		<!-- sidebar.html -->
-<style>
-#focusbutton {
-        position: absolute;
-        top: 0;
-        right:0;
-        cursor: pointer;
-        padding-right: 5px;
-        padding-top:5px;
-}
-
-.fa-2x {
-        color:#00ccd6;
-}
-
-#focusoff {
-        display:none;
-}
-</style>
-
-<header class="sidebar-header" role="banner">
-	<a href="">
-		<img src="/content/images/images/pic5.jpg" width="180" height="180" class="img-circle" />
-	</a>
-	<h3 class="title">
-        <a href="/">Rodrigo Araújo</a>
-    </h3>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-</header>
-        <div id='focusbutton'>
-        <i id="focus" class="fa fa-minus-circle fa-2x"></i>
-        <i id="focusoff" class="fa fa-plus-circle fa-2x"></i>
-        </div>
-
-<div id="bio" class="text-center">
-	Stories, Thoughts and Ideas on Computer Science, Mathematics and Technology
-</div>
-
-<div class="pages">
-	<ul>
-		<li><a href="/about">Who I am</a></li>
-		<li>
-			<div id="workexpand"><a href="/work">Publications</a>
-			<div id="subitem">
-			<ul>
-				<li>
-					<a href="/work/#pub">Papers</a>
-				</li>
-				<li>
-					<a href="/work/#talk">Talks</a>
-				</li>
-				<li>
-					<a href="/work/#releases">Releases</a>
-				</li>
-			</ul>
-			</div>
-			</div>
-			
-			
-		</li>
-		<li><a href="/archives">Archives</a></li>
-		<li><a href="/readings">Recommended Readings</a></li>
-	</ul>
-</div>
-<div id="contact-list" class="text-center">
-	<ul class="list-unstyled list-inline">
-		
-		<li>
-			<a class="btn btn-default btn-sm" href="https://github.com/digorithm">
-				<i class="fa fa-github-alt fa-lg"></i>
-			</a>
-		</li>
-		
-		
-		<li>
-			<a class="btn btn-default btn-sm" href="https://twitter.com/digorithm">
-				<i class="fa fa-twitter fa-lg"></i>
-			</a>
-		</li>
-		
-		
-		<li>
-			<a class="btn btn-default btn-sm" href="mailto:rod.dearaujo@gmail.com">
-				<i class="fa fa-envelope fa-lg"></i>
-			</a>
-		</li>
-		
-	</ul>
-	<ul id="contact-list-secondary" class="list-unstyled list-inline">
-		
-		
-		<li>
-			<a class="btn btn-default btn-sm" href="/feed.xml">
-				<i class="fa fa-rss fa-lg"></i>
-			</a>
-		</li>
-	</ul>
-</div>
-<!-- sidebar.html end -->
-<script>
-
-$('#focus').on("click", function(){
-    $('.sidebar-header').css('display', 'none');
-    $('#bio').css('display', 'none');
-    $('.pages').css('display', 'none');
-    $('#contact-list').css('display', 'none');
-    $('.col-sm-3').css('width', '3%');
-    $('#focusoff').css('display', 'block');
-    $('#focus').css('display', 'none');
-
-});
-
-$('#focusoff').on("click", function(){
-    $('.sidebar-header').css('display', 'block');
-    $('#bio').css('display', 'block');
-    $('.pages').css('display', 'block');
-    $('#contact-list').css('display', 'block');
-    $('.col-sm-3').css('width', '25%');
-    $('#focusbutton').css('display', 'block');
-    $('#focusoff').css('display', 'none');
-    $('#focus').css('display', 'block');
-
-});
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+      
+        
+          <li>
+            
+            
 
 
-	$(function () {
 
-	var pathname = window.location.pathname;
-	console.log(pathname);
-	if (pathname == "/work/"){
-		$("#subitem").fadeIn();
-	} else {
-		$("#subitem").fadeOut();
-	}
-});
 
-$(function() {
-  $('a[href*=#]:not([href=#])').click(function() {
-    if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
-      var target = $(this.hash);
-      target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
-      if (target.length) {
-        $('html,body').animate({
-          scrollTop: target.offset().top
-        }, 1000);
-        return false;
-      }
-    }
-  });
-});
-</script>
 
+<a href="/aboutme">About Me</a>
+
+          </li>
+        
+        
+        
+          <li>
+            
+            
+
+
+
+
+
+<a href="/publications">Publications</a>
+
+          </li>
+        
+        
+        
+          <li>
+            
+            
+
+
+
+
+
+<a href="/archive">Archive</a>
+
+          </li>
+        
+        
+        
+          <li>
+            
+            
+
+
+
+
+
+<a href="/readings">Recommended Readings</a>
+
+          </li>
+        
+        
+      </ul>
+    </div>
+
+	
+	<div class="avatar-container">
+	  <div class="avatar-img-border">
+	    <a href="http://digorithm.github.io ">
+	      <img class="avatar-img" src="/img/pic.jpg" />
+		</a>
+	  </div>
 	</div>
+	
 
-	<div class="col-sm-9 col-sm-offset-3">
-		
-
-
-<article class="home">
-
-  <h2>
-    <a href="/post/thoughts-visualizing-software-arch">Thoughts on Visualizing Software Architecture</a>
-  </h2>
-
-  <div class="post-date" style="margin-bottom:15px; margin-top:-15px;">
-    
-    December
-    8th,
-    
-    2015
   </div>
+</nav>
 
 
-  <div>
-    
-    <p>The more I think about the advantages and disadvantages of upfront design, the more I find it a really complex subject, I mean, the whole Software architecture diagramming in general. I’ve been following the development of the <a href="http://www.codingthearchitecture.com/2014/08/24/c4_model_poster.html">C4 model</a> for a considerable time, I find it interesting, but it still brings me the old struggles about how much detail we should put into the diagrams and whether we should do it while planning the Software, while developing it, or after <em>(by doing reverse engineering)</em>…. or even more extreme, doing these 3 options, developing the architecture diagrams and evolving them over time.</p>
+    <!-- TODO this file has become a mess, refactor it -->
 
-<p>I think that, when drawing architecture diagrams, we should focus on getting the right purpose and the right level of abstraction. Two of the most important purposes to me, when designing a diagram, is:</p>
 
-<ol>
-  <li>
-    <p>tech stack architecture and how each container and component relate to each other</p>
-  </li>
-  <li>
-    <p>deployment architecture</p>
-  </li>
-</ol>
 
-<p>I do think that the diagram should reflect the code in certain level of abstraction and that this could be really useful for a new engineer in a large project. Tackling a huge codebase is not an easy task, and the diagrams should act as a map of the code, saying how things communicate with each other.</p>
 
-<p>What I think is, we need certain kinds of architecture diagram, each one for a specific development phase. What comes to my mind is:</p>
 
-<p><strong>Project planning phase</strong>, We can’t code without any plan, at this level I feel necessary to draw the most ‘visible’ containers and components, this way we can plan what to do next, how to split up teams to each part of the system. It’s when a deployment architecture can be written as well</p>
+<header class="header-section ">
 
-<p><strong>Project evolution and maintenance</strong>, as we reach this phase of the project, it’s interesting to see the Big Picture, the Not-So-Big Picture and the Small Picture. I can see many cases where this could be helpful, for instance: new engineers coming to the project, debugging something that crosses many components or even containers <em>(visualizing the flow can be helpful)</em>, finding bottlenecks, and I’m sure there are many more.</p>
-
-<p>Given this task, I’d prefer taking a top-down approach, going from a more “Big Picture” architecture to a more detailed one. As an example, I’m going to use a side project I was working on, which is a simple webapp to search for simple food recipes <em>(the difference, though, is that it crawls the recipes from other websites)</em>.</p>
-
-<p>I took a backend&amp;api + ClientApp approach, which means, in the backend is where the main logic happens, the core business classes and everything, in addition to exposing a HTTP API <em>(I would say REST API, but I’m scared of a few rest purist coming here and saying that this is not restful because of this and that, so let’s say it’s a simple api that talks over http)</em>.</p>
-
-<p>Each of these 2 parts will be a different application, which can be dockerized and run in different plataforms <em>(two separate amazon EC2, for example)</em>. So, if we’re planning it, we could start by saying:</p>
-
-<p><img src="/content/images/images/gdd20overview.png" alt="" /></p>
-
-<p>So, yea, the webclient will talk to the backend’s api over HTTP, the backend will communicate to the webclient and to a database instance. Ok, that’s a start. We can easily separate a team for the backend and its api and another team for the webclient.</p>
-
-<p>Still, it doesn’t say much about the inner details of each container, and now we need something more detailed. So we detail it a bit more:</p>
-
-<p><img src="/content/images/images/gdd20arch.png" alt="" /></p>
-
-<p>As we can see now, it’s the same structur<em>e, **but with way more details now, which makes it clearer to everybody *(I hope so)</em> how we can tackle the problem with code. An extra level of detail would be going down one more level of abstraction and describe the classes through a class diagram, explaining how the core backend would be implemented, for example.</p>
-
-<p>Now, this diagram, plus all requirements gathered can be a nice start for the coding phase. We can add now how we would deploy it:</p>
-
-<p><img src="/content/images/images/gdd20deploy.png" alt="" /></p>
-
-<p>So, in the end, I believe those 3 diagrams + the codebase could be helpful for a new engineer or to someone that is debugging the system or trying to improve it.</p>
-
-<p>Though, I still have many questions and doubts about this, I can’t stop overthinking it, so I’m extremely open to any discussion about this.</p>
-
-    
+<div class="intro-header no-img">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-heading">
+          <h1>Rodrigo Araújo</h1>
+		  
+		    
+            <hr class="small">
+            <span class="page-subheading">Thoughts and stories on Computer Science, Mathematics and Technnology</span>
+			
+		  
+		  
+		  
+        </div>
+      </div>
+    </div>
   </div>
-
-</article>
-<hr/>
-
-
-<article class="home">
-
-  <h2>
-    <a href="/post/neural-computation-pt1">Neural Computation: Toward an Intuitive Understanding of the Perceptron</a>
-  </h2>
-
-  <div class="post-date" style="margin-bottom:15px; margin-top:-15px;">
-    
-    July
-    16th,
-    
-    2015
-  </div>
-
-
-  <div>
-    
-    <p>Artificial Neurons is one of the most beautiful ways to simulate a biological behavior through computation, despite the fact that it’s not very close to the level of details of a real neuron. But it captured the core of what a neuron is doing. </p>
-
-<p>And I find that trying to understand this mathematical method by first understanding the concept through a metaphor <em>(which, in this case, I think that the metaphor is our mathematical side, and not the biological one, the biological is just, you know, the real thing)</em> is really valuable to gain an intuition on this topic. </p>
-
-<p>If you were about to make a decision, given many variables, how would you make this decision? It may not look obvious, due the fact that, on normal occasions, we’re not thinking about our thinking process, but the truth is, we are collecting those variables that affect the future decision, and we’re giving weights to them. Weights? how? Simple, some variables are more crucial than other while making decision, isn’t it? the word <em>‘crucial’</em>, in this case, means a huge weight on this variable, and it will strongly affect the final decision. </p>
-
-<p>Suppose a scenario: we’re deciding whether we should go to beach or not. Let’s put a few binary variables on table:</p>
-
-<ol>
-  <li>Are we in the mood to go to the beach?</li>
-  <li>Is it raining?</li>
-  <li>Our other friends are going?</li>
-  <li>Do we have money?</li>
-</ol>
-
-<p>So, depending on those variables, it will be more likely that we will go to the beach… or not. Let’s think about the variable <em>‘is it raining?’</em>, if it’s raining, we can say that it’s a deal breaker, so we can conclude that this variable has more weights than the other. The fact is that we already trained those weights inside our brain, long time ago. </p>
-
-<p>That’s what an Artificial Neuron try to do, the AN try to learn the weights of things so it can make decisions. So, drawing back to the mathematical and computational aspect of it, the perceptron is a single unit that will receive external inputs<em>(variables)</em>, it will have a weight for each input, it will do some computation, send this result to a decision function, and, finally, output the final decision. </p>
-
-<p>Those inputs are the variables we’re talking before, and like our process to make a decision, the Perceptron will weight each input to make a decision. </p>
-
-<p>Now, how the Perceptron knows how the weights should be for each input? Well… it doesn’t. At least, not from the beginning of the learning process, just like you and me, when trying to learn something new. </p>
-
-<p>That’s why this case is a case of supervised learning, what the Perceptron will do is: start with a random small weights, take one previously trained example <em>(e.g: (1) yes to mood to beach, (2) not raining, (3) yes to friends going to beach and (4) yes to money, the output: 1 - yes, we shall go to the beach)</em> do some computation taking in consideration the random weights we defined before, send it to a decision function, output something <em>(1 - yes, 0 - no)</em> and check if this output is equal to the expected <em>(we’re using a trained example, remember?)</em>, of course that at the first try, it won’t be equal. So the Perceptron calculate the error rate and update its weights… after this, guess what? it repeat the process of trying to predict, but now, with the updated weights, after a few tries, the error rate tends to reduce and it starts predicting correctly. So it learned to predict a behavior, by training with previously trained examples.</p>
-
-<p>So, a nice learning behavior would be something like this:</p>
-
-<div class="imgcenter">
-	<img src="/content/images/images/perceptron_0.1.gif" />
 </div>
+</header>
 
-<p>Which means, at every iteration <em>(we call it epochs)</em>, the error rate tend to decrease and, as consequence, the Perceptron starts to predict correctly!</p>
 
-<p>As you may have noted, I omitted a few details of the process so you could see the whole picture of the process: we take an example, we practice on it, we see what we missed, we try again, we learn. That’s the core process. </p>
 
-<p>Now, to the details:</p>
 
-<h3 id="the-computation">The computation</h3>
-
-<p>The first step that the Perceptron does it’s a computation that I referred as <em>“some computation”</em>, this is a simple computation, it’s just a simple Linear Combination of the feature vector <em>(the variables)</em> and the weight vector, which is just the sum of the products between feature/input and its respective weight:</p>
-
-<script type="math/tex; mode=display">
-x_{1}w_{1}+x_{2}w_{2}+x_{3}w_{3}+ \cdots +x_{n}w_{n}
-</script>
-
-<p> </p>
-
-<h3 id="the-decision-function">The Decision Function</h3>
-<p>So, after the Linear Combination, we send the result of it to a decision function, which will, somehow, based on some threshold <em>(or without a threshold as we’re going to see)</em>, give us the output, that will be checked with the correct output, in case if it’s correct, fine, keep the weights like this, otherwise, it will calculate the error rate, adjust the weights and restart the process.</p>
-
-<p> </p>
-
-<h4 id="binary-output-with-threshold">Binary output with threshold</h4>
-
-<p>This technique is very simple, after the linear combination, if the output is bigger than some threshold, it outputs 1 and we say that the neuron was activated, otherwise, output 0.</p>
-
-<script type="math/tex; mode=display">% <![CDATA[
-
-\begin{equation}
-    X=
-    \begin{cases}
-      1, & \text{if}\ Linear\,Combination>0 \\
-      0, & \text{otherwise}
-    \end{cases}
-  \end{equation}
- %]]></script>
-
-<p> </p>
-
-<h4 id="using-sigmoid-function">Using sigmoid function</h4>
-
-<p>Now, that a interesting one, it won’t use a threshold anymore, we’ll send the output of the Linear Combination to a sigmoid function</p>
-
-<script type="math/tex; mode=display">
-S(\vec{w}\vec{x}) = \dfrac{1}{1+e^{-\vec{w}\vec{x}}}
-</script>
-
-<p>which will, then, smooth the output, making it in the range of 0 and 1. Which is the most used in many Machine Learning Algorithms.</p>
-
-<div class="imgcenter">
-	<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Logistic-curve.svg/600px-Logistic-curve.svg.png" />
-</div>
-
-<h3 id="adjusting-the-weights-and-learning">Adjusting the weights and learning</h3>
-
-<p>After the perceptron fails to predict correctly, it’s time to adjust the weight, using some rule, the classic perceptron has 2 rules:</p>
-
-<p> </p>
-
-<h4 id="perceptron-learning-rule">Perceptron Learning Rule</h4>
-<p>This is very simple, when the perceptron has the incorrect output, it update its weights following this:</p>
-
-<script type="math/tex; mode=display">
-w_{i} = w_{i} + \eta (t_{i} - o_{i})x_{i}
-</script>
-
-<p>Which is simply multiplying a learning rate <em>(usually 0.001)</em> by the difference between the correct output and the wrong output and then multiplying it by its original input, after this, we add this value to the previous weight and then we have the value of the new weight. 
-It’s fair simple, isn’t it? The problem arises when the data isn’t linearly separable, like this:</p>
-
-<div class="imgcenter">
-	<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/DBSCAN-density-data.svg/2000px-DBSCAN-density-data.svg.png" width="400" />
-</div>
-
-<p> </p>
-
-<p>With this scenario, the result just won’t converge. So we adopt another rule!</p>
-
-<p> </p>
-
-<h4 id="delta-rule">Delta Rule</h4>
-
-<p>Now we must find a way to have a non-linear output, and what’s the best for this if not the classic Gradient Descent algorithm? GD will simply search through hypothesis spaces and try to minimize the cost function, I wrote about this <a href="http://rodrigoaraujo.me/general/setup/demo/2015/01/09/Making-Your-Machine-Think-Learn-And-Predict--Gradient-Descent-Algorithm-in-Java.html">here</a>. </p>
-
-<div class="imgcenter">
-	<img src="http://www.yaldex.com/game-development/FILES/17fig06.gif" />
-</div>
-
-<p>So, it’s just a technique to solve our previous problem, but still, the weights will be updated <em>(now, using the GD)</em> and then the process start over!</p>
-
-<p> </p>
-
-<h3 id="code-of-a-perceptron">Code of a Perceptron</h3>
-
-<p>Now, here’s a code of a Perceptron that will behave like a simple Boolean function. I didn’t use the Delta Dule (Gradient Descent) to optimize the weights, as this problem (binary Boolean functions) is linearly separable.</p>
-
-<pre>
-<code class="python hljs">
-
-import math
-from numpy import random, array
-from random import choice
-import matplotlib.pyplot as plt
-
-class Perceptron():
-    
-        """
-    this is the thereshold to activate the unit 
-    """
-    def activation(self,x):
-        return 1/(1 + math.exp(-x))
-
-    def linear_combination(self, X):
-        total = 0
-        for i in xrange(len(self.weights)):
-            total += self.weights[i] * X[i]
-        return total
-    
-    def unit_output(self, X):
-        return self.activation(self.linear_combination(X))
-
-    def train(self, training_data, epochs):
-        
-        self.learning_rate = 0.5
-        self.errors = []
-
-        # initializing weights
-        self.weights = random.rand(len(training_data[1][0]))
-        
-        for i in xrange(epochs):
-            X, y = choice(training_data)
-            # &gt; calculate output with current weight
-            output = self.unit_output(X)
-            # &gt; calculate error rate (t - o)
-            error_rate = y - output
-            self.errors.append(error_rate)
-            print 'the X: ', X
-            print 'output: ',output
-            print 'correct target: ', y
-            # &gt; apply learning rule which will update weights
-            self.weights += self.learning_rate * error_rate * X
-
-    def predict(self,X):
-        y = self.unit_output(X)
-        return y
-                
-
-        training_data = [
-                (array([0,0,1]), 0),
-                (array([0,1,1]), 0),
-                (array([1,0,1]), 0),
-                (array([1,1,1]), 1),
-                
-        ]
-
-p = Perceptron()
-
-p.train(training_data, 2000)
-print p.predict([1,0,1])
-plt.plot(p.errors)
-plt.ylabel('errors')
-plt.xlabel('epochs')
-plt.show()
-</code>
-</pre>
-
-<h3 id="conclusion-and-next-steps">Conclusion and next steps</h3>
-
-<p>With this we conclude what a simple single Perceptron is doing! Of course there are many improvements on it and we can connect many of these Artificial Neurons in many layers… that’s what is called Artificial Neural Network, I’ll be writing about it soon!</p>
-
-
-    
-  </div>
-
-</article>
-<hr/>
-
-
-<article class="home">
-
-  <h2>
-    <a href="/post/case-study-sentiment-analysis-movie-reviews">Case Study: Sentiment Analysis On Movie Reviews</a>
-  </h2>
-
-  <div class="post-date" style="margin-bottom:15px; margin-top:-15px;">
-    
-    July
-    2nd,
-    
-    2015
-  </div>
-
-
-  <div>
-    
-    <p>Well, this case was a fun one, sentiment analysis is a sub type of NLP <em>(natural language processing)</em> in which you have to train a model to analyze a text, and classify it was a negative sentiment or a positive sentiment. In this case, I wanted to apply it on movies reviews, to see if a review is a negative one or a positive one. So, basically, teaching this kind of sentiment to the machine.</p>
-
-<p>There’s a lot of challenges in doing this kind of NLP, experience has told me that when the text is big, it is usually hard to predict things about it… and most of the times, movie reviews are big chunk of text.</p>
-
-<p>That’s the case where I needed to learn and use a few <em>extremely</em> useful things:</p>
-
-<ol>
-  <li>Pipeline</li>
-  <li>Grid Search</li>
-</ol>
-
-<p>These two techniques made total difference in my results. Let’s go through the concept of these two:</p>
-
-<h3 id="pipeline">Pipeline</h3>
-
-<p>In a <a href="http://rodrigoaraujo.me/general/setup/demo/2015/06/30/A-Generic-Architecture-for-Text-Classification.html" target="_blank">previous post</a> I talked about a generic Architecture or Flow to achieve basic text classification tasks, so, Pipeline is a way to automate all those tasks, so, instead of explicitly and separately select features, extract features, train the learning algorithms, you can do all of these things inside the pipeline, and, the amazing scikit learn API gives you an awesome Pipeline interface, pretty similar to a basic estimator’s interface, so you can call methods such as <em>fit, fit_transform, predict</em>, etc…</p>
-
-<p>So you can do even more inside a pipeline, such as new methods for feature extraction/selection, FeatureUnion, use other estimators to select better features for your estimator <em>(do you even neural netception? LOL).</em></p>
-
-<p>Here’s an example of a simple pipeline that does PCA to reduce the dimension of the features and creates a SVC:</p>
-
-<pre><code>    from sklearn.pipeline import Pipeline
-    from sklearn.svm import SVC
-    from sklearn.decomposition import PCA
-    estimators = [('reduce_dim', PCA()), ('svm', SVC())]
-    clf = Pipeline(estimators)
-</code></pre>
-
-<h3 id="grid-search">Grid Search</h3>
-
-<p>This was the answer for many hours of pure pain tweaking gazillions of parameters to improve the algorithm’s performance. Grid Search is a way to automate parameters changes, so it can run many times with many different parameters… and choose the best for you, magical, right?</p>
-
-<p>And, once again, the Grid Search object has an interface similar to the basic estimator’s interface, so you can call all the same methods. But, when you create the object grid search, you gotta pass a estimator as parameter… and here’s when things get interesting:</p>
-
-<p>You can pass a pipeline to the grid search. <strong>so much win!</strong></p>
-
-<div class="imgcenter">
-	<img src="http://cdn.meme.am/instances2/500x/581044.jpg" />
-</div>
-
-<p> </p>
-
-<p>But, the truth is: this operation is <em>extremely</em> expensive, and it’s recommended to use it only on the few first tries, where you don’t know exactly the best parameters values for the task.</p>
-
-<p>Another interesting thing is, after the model inside the grid search is trained, methods like <em>predict</em> are computed using the best features. If we look inside the SKlearn’s grid search’s code, we can see how easily and elegant it’s done:</p>
-
-<pre>
-<code class="python hljs">
-[...]
-scores = list()
-grid_scores = list()
-for grid_start in range(0, n_fits, n_folds):
-    n_test_samples = 0
-    score = 0
-    all_scores = []
-    for this_score, this_n_test_samples, _, parameters in \
-            out[grid_start:grid_start + n_folds]:
-        all_scores.append(this_score)
-        if self.iid:
-            this_score *= this_n_test_samples
-            n_test_samples += this_n_test_samples
-        score += this_score
-    if self.iid:
-        score /= float(n_test_samples)
-    else:
-        score /= float(n_folds)
-    scores.append((score, parameters))
-    # TODO: shall we also store the test_fold_sizes?
-    grid_scores.append(_CVScoreTuple(
-        parameters,
-        score,
-        np.array(all_scores)))
-# Store the computed scores
-self.grid_scores_ = grid_scores
-
-# Find the best parameters by comparing on the mean validation score:
-# note that `sorted` is deterministic in the way it breaks ties
-best = sorted(grid_scores, key=lambda x: x.mean_validation_score,
-              reverse=True)[0]
-self.best_params_ = best.parameters
-self.best_score_ = best.mean_validation_score
-</code>
-</pre>
-
-<p>As you can see, in the end it keeps the best parameters and scores, so it can be used when it needs to predict or output its <em>predict_proba</em> or <em>decision_function</em></p>
-
-<h3 id="correctly-mixing-pipeline-grid-search-and-cross-validation-correctly-the-hidden-wizardry">Correctly mixing Pipeline, Grid Search and Cross Validation correctly: the hidden wizardry</h3>
-
-<p>It’s tricky to mix all these things up, the most dangerous mistake that everybody does sometime is: <strong>using the same dataset to the grid search AND the cross validation</strong></p>
-
-<p>So, here’s a nice technique to avoid this: Split the initial dataset into Development Dataset, which will be used to train the algorithm and to execute the grid search, and the Validation Dataset, which will be passed to the cross_val_score and internally splitted again to avoid bias (CV parameter can configure this).</p>
-
-<p>So, in the end, you train the grid search with a subset of the dataset, and validate it with another subset, avoiding many kind of undesired effects.</p>
-
-<h3 id="the-movie-review-problem">The Movie Review Problem</h3>
-
-<p>Ok, so now let’s head to the real problem. The dataset can be downloaded with:</p>
-
-<pre><code>wget http://www.cs.cornell.edu/people/pabo/movie-review-data/review_polarity.tar.gz
-tar xzf review_polarity.tar.gz
-</code></pre>
-
-<p>What I did to solve it was: I used grid search to search a few parameters, such as <em>TfidfVectorizer’s max_features</em>, that in the end I kept with max_features=10000, also its ngram_range, searching between (1,1) and (1,2) and <em>the LinearSVC()’s C parameter</em>.</p>
-
-<p>I used a few other algorithms, but I found the best performance with LinearSVC, though I did not try all the other possibilities <em>(I could create many pipelines to test many algorithms, but my computer would be unusable during many hours, probably, which I couldn’t afford)</em>.</p>
-
-<p>Why Linear SVC?</p>
-
-<p>The Linear SVC is very similar to the SVC object but using the <em>kernel = “linear”</em>. LinearSVC is a type of <em>Support Vector Machines</em>, it’s known that SVMs are effective in <strong>high dimensional spaces</strong>, which is our case here. Also, it can give weights to classes, helping to go through unbalanced datasets
-<img src="http://scikit-learn.org/stable/_images/plot_separating_hyperplane_unbalanced_0011.png" alt="" /></p>
-
-<p>And, basically, what the SVMs does is create a hyper-plane (or a set of it) in a high or even infinite dimensional space. And it solves the primal problem:</p>
-
-<div class="imgcenter">
-<img src="http://scikit-learn.org/stable/_images/math/396704acdf11cc18d2d02b32275c0ee42d76b95e.png" />
-</div>
-<p> </p>
-
-<p>Where Xi are the training vectors and Y is a vector in {1,-1}^n.</p>
-
-<p>So, here’s the code where I built the pipeline, the gridsearch, use a subset of the dataset to develop the grid search and another subset to validate using the <em>cross_val_scores</em>, then, I call <em>predict</em> to get the vector of predictions to build a report <em>(or, with this, I can start to build a ROC curve, confusion matrix and other statistics debug tools)</em></p>
-
-<pre><code>from sklearn.datasets import load_files
-from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.grid_search import GridSearchCV
-from sklearn.pipeline import make_pipeline
-from sklearn.svm import LinearSVC
-from sklearn.cross_validation import train_test_split
-from sklearn.cross_validation import cross_val_score
-from sklearn.metrics import classification_report
-
-data = load_files('../txt_sentoken/')
-
-X_train, X_test, y_train, y_test = train_test_split(data.data, data.target, test_size=0.5, random_state=0)
-
-pipeline = make_pipeline(TfidfVectorizer(sublinear_tf=True, max_features=10000), LinearSVC())
-
-parameters = {
-        'tfidfvectorizer__ngram_range': [(1,1), (1,2)],
-        'linearsvc__C':(.01,.1,1),
-        }
-
-grid_search = GridSearchCV(pipeline, parameters, n_jobs=-1) 
-
-grid_search.fit(X_train, y_train)
-
-print("Best score: %0.3f" % grid_search.best_score_)
-print("Best parameters iset:")
-best_parameters = grid_search.best_estimator_.get_params()
-for param_name in sorted(parameters.keys()):
-    print("\t%s: %r" % (param_name, best_parameters[param_name]))
-
-print "The model was trained on the full development set"
-print "the scores are going to be computed with the evaluation set"
-scores = cross_val_score(grid_search, X_test, y_test, cv=5)
-
-print scores.mean(), scores.std()
-
-y_pred = grid_search.predict(X_test)
-
-print classification_report(y_test, y_pred)
-</code></pre>
-
-<p>and the output:</p>
-
-<pre><code>Best score: 0.849
-
-Best parameters iset:
-	linearsvc__C: 1
-	tfidfvectorizer__ngram_range: (1, 2)
-
-The model was trained on the full development set
-the scores are going to be computed with the evaluation set
-0.865933623341 0.0281523948704
-
-Classification report:
-             precision    recall  f1-score   support
-
-          0       0.88      0.86      0.87       496
-          1       0.87      0.88      0.87       504
-
-avg / total       0.87      0.87      0.87      1000
-</code></pre>
-
-<p>So, around 86%~87% of precision/f1-score, not <em>that</em> bad.</p>
-
-<h3 id="further-improvements">Further Improvements</h3>
-
-<p>There are many things I could to do elevate this performance, but due the lack of time to play with this dataset, those improvements will be in a next post.</p>
-
-<p>Possible improvements could be: find and extracting new features, to do this, we gotta understand better this data, extract more information about it. Trying new algorithms and techniques such as Ensemble, Classifiers Combination or Fusion. Stemming and Stop Words could improve it too. If you solved this problem and got a better result, share it with me, I’m very curious about how to improve this!</p>
-
-    
-  </div>
-
-</article>
-<hr/>
-
-
-<article class="home">
-
-  <h2>
-    <a href="/post/generic-architecture-text-classification">A Generic Architecture for Text Classification with Machine Learning</a>
-  </h2>
-
-  <div class="post-date" style="margin-bottom:15px; margin-top:-15px;">
-    
-    June
-    30th,
-    
-    2015
-  </div>
-
-
-  <div>
-    
-    <p>One of the most commons tasks in Machine Learning is text classification, which is simply teaching your machine how to read and interpret a text and predict what kind of text it is. </p>
-
-<p>The purpose of this essay is to talk about a simple and generic enough Architecture to a supervised learning text classification. The interesting point of this Architecture is that you can use it as a basic/initial model for many classifications tasks. </p>
-
-<h2 id="supervised-learning">Supervised Learning</h2>
-
-<p>If you’re already familiar with this concept, just jump this step, but I feel it’s important to beginners to know. </p>
-
-<p>Supervised Learning is when you have to first train your model with already existing labeled dataset, just like teaching a kid how to differentiate between a car and a motorcycle, you have to expose its differences, similarities and such. Whereas unsupervised learning is about learning and predicting without a pre-labeled dataset.</p>
-
-<h2 id="starting-to-sketch-the-architecture">Starting to sketch the Architecture</h2>
-
-<p>With the dataset in hands, we start to think about how is going to be our architecture to achieve the given goal, we can resume the steps in:</p>
-
-<ol>
-  <li>Cleaning the dataset</li>
-  <li>Partitioning the dataset</li>
-  <li>Feature Engineering</li>
-  <li>Chosing the right Algorithms, Mathematical Models and Methods</li>
-  <li>Wrapping everything up</li>
-</ol>
-
-<h2 id="cleaning-the-dataset">Cleaning the dataset</h2>
-
-<p>Cleaning the dataset is a crucial initial step in Machine Learning, many Toy Datasets don’t need to be cleaned, because it’s already clean, peer-reviewed and published in a way you can use it exactly to work on the learning algorithms.</p>
-
-<p>The problem is: </p>
-
-<h4 id="the-real-world-is-full-of-painful-and-noisy-datasets">The real world is full of painful and noisy datasets</h4>
-
-<p>If there’s one thing I learned while working with Machine Learning is, there’s no such thing as shiny and perfect dataset in the real world, so we have to deal with this beforehand. Situations where there are many empty fields, wrong and non-homogeneous formats, broken characters, is very common. I won’t talk about such techniques now, but I will write something about it in another post.</p>
-
-<h2 id="partitioning-the-dataset">Partitioning the Dataset</h2>
-
-<p>We always need to partition the dataset in, at least, 2 partitions: the training dataset and the test/validation dataset. Why?</p>
-
-<p>Suppose we fed the learning algorithm with a training data X and it already known the output Y (because it’s a training data pair (X,Y)), which is, for given text X, Y is its classification, the algorithm will learn it. </p>
-
-<p>Great, the algorithm learned this. But now, we’re going to validate the learning, so we use the same data X, I mean, we pass X to the model and ask what’s its classification… </p>
-
-<p>Do you see the problem here?</p>
-
-<p>Of course the algorithm will output Y, the same Y we passed to its training. So, if we pass the complete dataset D in the training phase, then we validate the model using the SAME D dataset, we will be steping onto this very same situation. It’s like cheating, it’s like we point to a car and say “this is a car”, then, at the same time and with the same car, we ask to the kid “is this a car?”, it will be highly probable that the kid will answer correctly, though it may not learned correctly. What we must do is, point to a car and say “this is a car”, and then, point to a different car and ask “is this a car?”.</p>
-
-<p>Stepping out of the metaphor, we must check if the machine learned correctly by using a diferent portion of the dataset.</p>
-
-<p>So, at the end of this step, we’ll have the training dataset and the test dataset, both are subset of the same initial dataset. </p>
-
-<p>With Python’s Scikit Learn you can do this easily using <a href="http://scikit-learn.org/stable/modules/generated/sklearn.cross_validation.train_test_split.html" target="_blank">Train Test Split</a> <em>(read the docs, it’s very simple to use it.)</em>.</p>
-
-<p> </p>
-
-<div class="imgcenter">
-<img src="/content/images/images/ml1.png" />
-</div>
-<p> </p>
-
-<h2 id="feature-engineering">Feature Engineering</h2>
-
-<p>This is one of the most important steps when doing Machine Learning. Briefly, Features are the data that the learning algorithm will use as the “X”, which will be used to compute and understand the patterns. A simpler example would be a non-text classification or a regression, e.g: house pricing predictions, where our Features could be: number of rooms, size in squared meters, location and more. As you can see, these feature will describe the patterns of each data point and will affect how the house will be priced. </p>
-
-<p>The crucial point is, features can vary, you can identify new features that can level up your model’s predictions in huge proportions, a simple example would be, in a text classification you count the frequency of each word, this is one feature… you feed your learning algorithm with it… and the result isn’t enough: 50% of precision. But then you see that, in this case, the length of the whole data point (the text) plays a huge role determining a pattern for each class. Now that you <strong>identified</strong> this feature, you do something to <strong>extract</strong> that feature and then add this new feature and feed your learning algorithm with it, then, the result: 95% of precision. </p>
-
-<p>Ok, so you know the importance of the feature engineering phase, now it’s time to understand the most common technique to extract feature in texts: <strong>TF-IDF</strong></p>
-
-<p> </p>
-
-<h4 id="tf-idf">TF-IDF</h4>
-
-<p>Though the most intuitive way to look for patterns in texts is to count each word in the text (and use it as a Feature), it may not be the best way to do it. A few reasons for it is, larger texts will have higher averages than the shorter texts, these discrepancies can hurt the learning algorithm, and this Feature <strong>doesn’t say much about the importance of the words</strong>, which is very important to find patterns.</p>
-
-<p>So, instead of computing the occurrence, it’s better to compute the importance of the words. to accomplish this we can use 2 statistic’s techniques:</p>
-
-<p><strong>TF</strong> - which is basically the raw frequency of the word given the document, raw frequency of t by f(t,d), then the simple tf scheme is tf(t,d) = f(t,d).</p>
-
-<p><strong>IDF</strong> - Inverse Document Frequency, which is a technique to give emphasis to words that <em>don’t appear with high frequency</em>, because these are the words that can differentiate the texts, which means, in this case, these are the most important words, so we inverse its frequencies. So, an example, if the word <em>“the”</em> happens to appear very often in a text, it will weight <strong>less</strong>, because it’s a common word, thus, don’t cause very impact when fiding patterns to differentiate the texts.</p>
-
-<p>So the whole TF-IDF can be computed by</p>
-
-<p><img src="https://upload.wikimedia.org/math/e/8/1/e81492e44713270fd230d821ccebd100.png" alt="" /></p>
-
-<p>Scikit Learn gives us a great API to use the TF-IDF method, it’s really simple. </p>
-
-<pre><code>    from sklearn.feature_extraction.text import TfidfVectorizer
-
-    vectorizer = TfidfVectorizer()
-    vectorized_x = vectorizer.fit_transform(X)
-</code></pre>
-
-<p>Which will do the TF-IDF on the X data, and then vectorize this data, in other words, transform the whole thing into an array of inverse frequencies.
-So, extracting those features, <strong>this</strong> will be our training and test data, that will feed the algorithm (along with the Y, which is the output, the class of each training data).</p>
-
-<p>Re-thinking our Architecture, now we have:</p>
-
-<p> </p>
-
-<div class="imgcenter">
-<img src="/content/images/images/ml2.svg" />
-</div>
-<p> </p>
-
-<p>Remembering that X is the set of features (e.g: vector with the TF-IDF of each data point) and Y is the output, which is, the labels/class (e.g: Spam or not-spam).</p>
-
-<h2 id="chosing-the-right-algorithms-mathematical-models-and-methods">Chosing the right Algorithms, Mathematical Models and Methods</h2>
-
-<p>With the data prepared, features selected and extracted, it’s time to feed the algorithm with this data, this topic <em>per se</em> could go pages and pages, as learning algorithms is such a huge fields, with many publications and ideas to solve every kind of problem.</p>
-
-<p>To not extend it very much, and as the purpose of this essay is to discuss the architecture, I’ll use a few commons algorithms, such as Logistic Regression, Decision Trees, SVM and Neural Networks.</p>
-
-<p>So, at this point, we’ll treat the learning algorithm as a black-box algorithm, where it:</p>
-
-<ol>
-  <li>receive a training data X which is a vector of features, and training data Y, which is the label/class/output (we can binarize it, such as spam=1, ham=0)</li>
-  <li>return a model, where given an text X, can output its predicted class Y.</li>
-</ol>
-
-<p>After generating this model, we will test it with our test dataset and check its performance, if it can predict correctly <em>(the test dataset has output values (Y) so we can check them)</em>, it is ready to predict new data <em>(data completely outside our initial dataset)</em>, so we say that the machine learned the task. </p>
-
-<p>Our architecure now:</p>
-
-<p> </p>
-
-<div class="imgcenter">
-<img src="/content/images/images/ml3.svg" height="800" />
-</div>
-<p> </p>
-
-<h2 id="wrapping-everything-up">Wrapping everything up</h2>
-
-<p>With this architecture, we should be able to do most of the simple text classification tasks, as the main flow is: get data, clean data, identify and extract features, train your algorithm/mathematical model of choice, validate it and then, use the generated model to do the estimations.</p>
-
-<p>Of course there are many improvements that can be made on this architecture and many, many, many lower level details, but you can see this architecture as a <em>“boilerplate code”</em> to get you started with the machine learning engineering task.</p>
-
-<p>A few tips:</p>
-
-<p>Learn the underlying mathematical models of the most commons learning algorithms, this will teach you the trade offs of each one, so you can apply the correct algorithms to the given dataset and scenario. For example, SVM can be good for unbalanced dataset, but why? You gotta know this. Neural Networks can be slow to be trained, but, if training time is not critical, it’s okay to use Neural Networks.</p>
-
-<p>Master the skills to clean data, if using Python, learn to use Pandas. This will be an extremely important skill.</p>
-
-<p>Master the skills to understand data, this will be crucial to make you see what algorithm to use, you can’t make something learn if you don’t know about what you are teaching.</p>
-
-
-    
-  </div>
-
-</article>
-<hr/>
-
-
-<article class="home">
-
-  <h2>
-    <a href="/post/case-study-python-performance-rotating-vector">Case Study: Python Performance on rotating one-dimensional vectors</a>
-  </h2>
-
-  <div class="post-date" style="margin-bottom:15px; margin-top:-15px;">
-    
-    June
-    19th,
-    
-    2015
-  </div>
-
-
-  <div>
-    
-    <p>I’m a big fan of a nice challenge, therefore, I like books like Programming Pearls, I like to dive into many kinds of solutions to the same problem and try to differentiate them by novelty, performance, elegance, etc… </p>
-
-<p>This time I was playing with a fun problem, from the column 2:</p>
-
-<blockquote>
-  <p>“rotate a one dimensional array of <em>N</em> elements left by <em>I</em> positions”. </p>
-</blockquote>
-
-<p>The author says it should consume little space and time, so, there are many solutions, obviously. The fun thing is that I was doing it in Python, so you can solve it in many ways, but you can decrease the performance a lot if you choose poorly. In C we could just swap pointers in a doubly linked list, which is what happens in the real implementation of CPython.</p>
-
-<p>The idea that the Author exposed is pretty clever, which is based in reversing the vector only 3 times:</p>
-
-<ol>
-  <li>Reverse the vector, from the first position to the <em>I</em>-th position, where <em>I</em> is the number of position that is wanted to move to the left</li>
-  <li>Reverse the vector, from <em>I</em>-th + 1 position to <em>N</em>, where <em>N</em> is the size of this vector</li>
-  <li>Reverse the whole vector, again. </li>
-</ol>
-
-<p>In other words, we have the vector <em>AB</em> (Where <em>A</em> is the first part, <em>B</em> is the second), we reverse <em>A</em> so we have <em>Ar</em>, reverse <em>B</em> so we have <em>Br</em>, now we have <em>ArBr</em>, then we reverse the whole thing <em>(ArBr)r</em>, after that, we have the rotated vector. It’s quite beautiful. A picture can help the visualization:</p>
-
-<div class="imgcenter">
-<img src="/content/images/images/img1.jpeg" height="450" />
-</div>
-
-<p>here’s an example with a simple vector:</p>
-
-<div class="imgcenter">
-<img src="/content/images/images/img2.jpeg" height="350" />
-</div>
-
-<p>Now, searching for other approaches, I looked inside the code from CPython, and there’s a nice comment: </p>
-
-<pre><code> "Conceptually, a rotate by one is equivalent to a pop on one side and an append on the other"
-</code></pre>
-
-<p>Quite elegant solution as well. So, an example:</p>
-
-<div class="imgcenter">
-<img src="/content/images/images/img4.jpeg" height="350" />
-</div>
-
-<p>And the last example I found while searching through Pythonic ways to solve this problem (Even though may not be very fast)</p>
-
-<pre>
-<code class="python hljs">
-def rotate_pythonic_way(arr, i):
-         return arr[i:] + arr[:i] 
-</code>
-</pre>
-<p>Which is super simple and elegant, what it’s doing is the following:</p>
-
-<div class="imgcenter">
-<img src="/content/images/images/img3.jpeg" height="350" />
-</div>
-
-<p>At first I thought this solution would be the slowest, but we’ll get to that.</p>
-
-<p>One thing that took my attention was the internal method to reverse a list that Python offers, there are two of them, one returns a reversed iterator and you can cast it into a list and the other reverse the exactly same list that is passed as parameter, it shouldn’t take you long to realize which is faster. So I wrote a code with the many solutions to it and I profiled the functions, which gave us a interesting result when ran over a vector with 10 millions integers.</p>
-
-<p>First, the original idea (<em>reverse the vector 3 times</em>), but using the reversed(array) method:</p>
-
-<pre>
-<code class="python hljs">
-def rotate_original_solution_with_reversed(arr, i):
-    n = len(arr)
-    array_A_reversed = list(reversed(arr[0:i]))
-    array_B_reversed = list(reversed(arr[i:n]))
-    ArBr = array_A_reversed + array_B_reversed
-    rotated_array = list(reversed(ArBr))
-    return rotated_array
-</code>
-</pre>
-
-<p>and the result:</p>
-
-<pre><code>    Original Idea using reversed(arr): 
-
-    4 function calls in 0.611 seconds
-
-    Ordered by: standard name
-
-    ncalls tottime percall cumtime percall filename:lineno(function)
-    1 0.440 0.440 0.440 0.440 2_1b.py:21(rotate_original_solution_with_reversed)
-    1 0.171 0.171 0.611 0.611 string:1 module
-    1 0.000 0.000 0.000 0.000 {len}
-</code></pre>
-
-<h4 id="damn-06s-thats-too-slow">Damn, 0.6s, that’s too slow!</h4>
-
-<p>After this one, I changed the way I was reversing the vector, using the other internal method from Python:</p>
-
-<pre>
-<code class="python hljs">
-def rotate_original_solution_with_reverse(arr, i):
-    n = len(arr)
-    
-    array_A = arr[0:i]
-    array_B = arr[i:n]
-    
-    array_A.reverse()
-    array_B.reverse()
-
-    ArBr = array_A + array_B
-    ArBr.reverse()
-    return ArBr
-</code>
-</pre>
-
-<p>And the result:</p>
-
-<pre><code>    Original Idea using arr.reversed(): 
-    7 function calls in 0.322 seconds
-
-    Ordered by: standard name
-
-    ncalls tottime percall cumtime percall filename:lineno(function)
-    1 0.187 0.187 0.210 0.210 2_1b.py:30(rotate_original_solution_with_reverse)
-    1 0.113 0.113 0.322 0.322 string:1 module
-    1 0.000 0.000 0.000 0.000 {len}
-    1 0.000 0.000 0.000 0.000 {method 'disable' of '_lsprof.Profiler' objects}
-    3 0.023 0.008 0.023 0.008 {method 'reverse' of 'list' objects}
-</code></pre>
-
-<h4 id="from-06s-to-03s-thats-a-great-improvement-lesson-choose-your-built-insdata-structuresalgorithms-carefully">From 0.6s to 0.3s, that’s a great improvement. lesson: choose your built-ins/Data Structures/Algorithms carefully.</h4>
-
-<p>And now, using the Pythonic Way, which I was thinking that would be the slowest:</p>
-
-<p>And the result:</p>
-
-<pre>
-<code class="bash hljs">
-Pythonic Way: 
-
-3 function calls in 0.295 seconds
-
-Ordered by: standard name
-
-ncalls tottime percall cumtime percall filename:lineno(function)
-1 0.238 0.238 0.238 0.238 2_1b.py:45(rotate_pythonic_way)
-1 0.056 0.056 0.295 0.295 string:1(module)
-1 0.000 0.000 0.000 0.000 {method 'disable' of '_lsprof.Profiler' objects}
-
-</code>
-</pre>
-
-<p>It was faster than the other methods! Well played, Python. </p>
-
-<p>And the last one, using the pop/append technique, repeated i times:</p>
-
-<p>And the result:</p>
-<pre>
-<code class="bash hljs">
-
-Pop and append way: 
-
-5 function calls in 0.013 seconds
-
-Ordered by: standard name
-
-ncalls tottime percall cumtime percall filename:lineno(function)
-1 0.000 0.000 0.013 0.013 2_1b.py:49(rotate_pop_append)
-1 0.000 0.000 0.013 0.013 string:1(module)
-1 0.000 0.000 0.000 0.000 {method 'append' of 'list' objects}
-1 0.000 0.000 0.000 0.000 {method 'disable' of '_lsprof.Profiler' objects}
-1 0.013 0.013 0.013 0.013 {method 'pop' of 'list' objects}
-</code>
-</pre>
-
-<p>Ok. That was weird. 0.013 seconds?  13 milliseconds? Crazy, right? I thought the fact of repeating it many times would make it go way slower, but I guess I was wrong!</p>
-
-<p>So, as you can see, an interesting problem can have many solutions, one more elegant, others faster. In the end you may pick the simplest and most intuitive solution, this may be the best for the situation. Some times you gotta go with the strangest and most non-intuitive solution (which reminds me the first time I saw the Quick Sort and all its non-intuitive way to think)</p>
-
-<p>So, if you’re willing to reverse a list with Python, go with List.reverse() method (unless you want the iterators to do something), and if you want to rotate a vector, go with pop/append, it looks faster.</p>
-
-    
-  </div>
-
-</article>
-<hr/>
-
-<hr/>
-
-<ul class="pager"> 
-
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <div class="posts-list">
   
-  <li class="previous disabled">
-    <a>&larr; Newer</a>
-  </li>
-  
-  
-  <li>
-    <span class="page_number">Page: 1 of 3</span>
-  </li>
+  <article class="post-preview">
+    <a href="/post/thoughts-visualizing-software-arch">
+	  <h2 class="post-title">Thoughts on Visualizing Software Architecture</h2>
+	
+	    
+    </a>
 
+    <p class="post-meta">
+      Posted on December 8, 2015
+    </p>
+  
+    <div class="post-entry">
+      The more I think about the advantages and disadvantages of upfront design, the more I find it a really complex subject, I mean, the whole Software architecture diagramming in general. I’ve been following the development of the C4 model for a considerable time, I find it interesting, but it...
+	  <a href="/post/thoughts-visualizing-software-arch" class="post-read-more">[Read&nbsp;More]</a>
+    </div>
+  
+   </article>
+  
+  <article class="post-preview">
+    <a href="/post/neural-computation-pt1">
+	  <h2 class="post-title">Neural Computation: Toward an Intuitive Understanding of the Perceptron</h2>
+	
+	    
+    </a>
+
+    <p class="post-meta">
+      Posted on July 16, 2015
+    </p>
+  
+    <div class="post-entry">
+      Artificial Neurons is one of the most beautiful ways to simulate a biological behavior through computation, despite the fact that it’s not very close to the level of details of a real neuron. But it captured the core of what a neuron is doing. And I find that trying to...
+	  <a href="/post/neural-computation-pt1" class="post-read-more">[Read&nbsp;More]</a>
+    </div>
+  
+   </article>
+  
+  <article class="post-preview">
+    <a href="/post/case-study-sentiment-analysis-movie-reviews">
+	  <h2 class="post-title">Case Study: Sentiment Analysis On Movie Reviews</h2>
+	
+	    
+    </a>
+
+    <p class="post-meta">
+      Posted on July 2, 2015
+    </p>
+  
+    <div class="post-entry">
+      Well, this case was a fun one, sentiment analysis is a sub type of NLP (natural language processing) in which you have to train a model to analyze a text, and classify it was a negative sentiment or a positive sentiment. In this case, I wanted to apply it on...
+	  <a href="/post/case-study-sentiment-analysis-movie-reviews" class="post-read-more">[Read&nbsp;More]</a>
+    </div>
+  
+   </article>
+  
+  <article class="post-preview">
+    <a href="/post/generic-architecture-text-classification">
+	  <h2 class="post-title">A Generic Architecture for Text Classification with Machine Learning</h2>
+	
+	    
+    </a>
+
+    <p class="post-meta">
+      Posted on June 30, 2015
+    </p>
+  
+    <div class="post-entry">
+      One of the most commons tasks in Machine Learning is text classification, which is simply teaching your machine how to read and interpret a text and predict what kind of text it is. The purpose of this essay is to talk about a simple and generic enough Architecture to a...
+	  <a href="/post/generic-architecture-text-classification" class="post-read-more">[Read&nbsp;More]</a>
+    </div>
+  
+   </article>
+  
+  <article class="post-preview">
+    <a href="/post/case-study-python-performance-rotating-vector">
+	  <h2 class="post-title">Case Study: Python Performance on rotating one-dimensional vectors</h2>
+	
+	    
+    </a>
+
+    <p class="post-meta">
+      Posted on June 19, 2015
+    </p>
+  
+    <div class="post-entry">
+      I’m a big fan of a nice challenge, therefore, I like books like Programming Pearls, I like to dive into many kinds of solutions to the same problem and try to differentiate them by novelty, performance, elegance, etc… This time I was playing with a fun problem, from the column...
+	  <a href="/post/case-study-python-performance-rotating-vector" class="post-read-more">[Read&nbsp;More]</a>
+    </div>
+  
+   </article>
+  
+</div>
+
+
+<ul class="pager main-pager">
+  
   
   <li class="next">
-    <a href="/blog/posts/2">Older &rarr;</a>
+    <a href="/page2">Older Posts &rarr;</a>
   </li>
   
-
 </ul>
 
 
+	    
+    </div>
+  </div>
+</div>
 
 
-		<footer>
-			<hr/>
-			<p>
-				&copy; 2015 Rodrigo Araújo with Jekyll.</a>
-			</p>
-		</footer>
-	</div>
+    <footer>
+  <div class="container beautiful-jekyll-footer">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+          <li>
+            <a href="https://www.facebook.com/contatodigo" title="Facebook">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+          
+          <li>
+            <a href="https://github.com/digorithm" title="GitHub">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+		  
+          <li>
+            <a href="https://twitter.com/digorithm" title="Twitter">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+		  
+          <li>
+            <a href="mailto:rod.dearaujo@gmail.com" title="Email me">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+		  
+		  
+		  		  
+        </ul>
+        <p class="copyright text-muted">
+		  Rodrigo Araújo
+		  &nbsp;&bull;&nbsp;
+		  2016
+		  
+		  
+		  &nbsp;&bull;&nbsp;
+		  <a href="http://digorithm.github.io">rodrigoaraujo.me</a>
+		  
+	    </p>
+      </div>
+    </div>
+  </div>
+</footer>
 
-	<script type="text/javascript" src="/assets/resources/jquery/jquery.min.js"></script>
-	<script type="text/javascript" src="/assets/resources/bootstrap/js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="/assets/js/app.js"></script>
+  
+    <!-- everything has to be repeated twice because on 2016-02-01 GitHub pages migrated to jekyll 3; see bug https://github.com/jekyll/jekyll/issues/4439 -->
 
-	<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-<script type="text/x-mathjax-config">  
-MathJax.Hub.Config({  
+
+
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
     tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
 });
-
-
 </script>
 
-
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-38327934-3', 'auto');
-  ga('send', 'pageview');
-
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
 </script>
-</body>
+
+<link rel="stylesheet" href="/assets/css/styles/hybrid.css">
+	<script src="/assets/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+
+  
+    <!-- doing something a bit funky here because I want to be careful not to include JQuery twice! -->
+    
+      <script>
+      	if (typeof jQuery == 'undefined') {
+      	  document.write('<script src="/js/jquery-1.11.2.min.js"></scr' + 'ipt>');
+      	}
+      </script>
+    
+  
+    <!-- doing something a bit funky here because I want to be careful not to include JQuery twice! -->
+    
+	<script src="/js/bootstrap.min.js"></script>
+    
+  
+    <!-- doing something a bit funky here because I want to be careful not to include JQuery twice! -->
+    
+	<script src="/js/main.js"></script>
+    
+  
+
+
+
+
+
+  
+  </body>
 </html>
-

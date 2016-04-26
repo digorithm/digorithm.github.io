@@ -43,7 +43,7 @@ As you may have noted, I omitted a few details of the process so you could see t
 
 Now, to the details:
 
-###The computation
+### The computation
 
 The first step that the Perceptron does it's a computation that I referred as *"some computation"*, this is a simple computation, it's just a simple Linear Combination of the feature vector *(the variables)* and the weight vector, which is just the sum of the products between feature/input and its respective weight:
 
@@ -54,7 +54,7 @@ $$
 
 &nbsp;
 
-###The Decision Function
+### The Decision Function
 So, after the Linear Combination, we send the result of it to a decision function, which will, somehow, based on some threshold *(or without a threshold as we're going to see)*, give us the output, that will be checked with the correct output, in case if it's correct, fine, keep the weights like this, otherwise, it will calculate the error rate, adjust the weights and restart the process.
 
 &nbsp;
@@ -146,7 +146,7 @@ import matplotlib.pyplot as plt
 
 class Perceptron():
     
-        """
+    """
     this is the thereshold to activate the unit 
     """
     def activation(self,x):

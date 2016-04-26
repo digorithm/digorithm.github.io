@@ -1,7 +1,6 @@
 ---
 layout: post
 title: Fun with graphs pt1
-categories: [general, setup, demo]
 keywords: "graph theory, computer science, java, programming, tutorial, engineering"
 tags: [graph theory, computer science, java, programming, tutorial, engineering]
 fullview: true

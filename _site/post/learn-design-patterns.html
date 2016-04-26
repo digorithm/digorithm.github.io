@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+  
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>Why, how and where to Learn Design Patterns</title>
+
+  <meta name="author" content="Rodrigo Araújo" />
+  
+  
+
+  <link rel="alternate" type="application/rss+xml" title="Rodrigo Araújo - Stories and thoughts on Computer Science" href="/feed.xml" />
+  
+ <!-- everything has to be repeated twice because on 2016-02-01 GitHub pages migrated to jekyll 3; see bug https://github.com/jekyll/jekyll/issues/4439 -->
+
+    
+  
+    
+      <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />
+    
+      
+  
+  
+  
+    
+      <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    
+      <link rel="stylesheet" href="/css/main.css" />
+    
+    
+  
+  
+  
+    
+      <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+    
+      <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+    
+  
+
+    
+    
+  
+  
+  
+  
+  
+     
+  
+  <!-- Facebook OpenGraph tags -->
+  <meta property="og:title" content="Why, how and where to Learn Design Patterns" />
+  <meta property="og:type" content="website" />
+  
+  
+  <meta property="og:url" content="http://digorithm.github.io/post/learn-design-patterns/" />
+  
+  
+  
+  <meta property="og:image" content="http://digorithm.github.io/img/pic.jpg" />
+  
+  
+</head>
+
+
+  <body>
+  
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="http://digorithm.github.io">Rodrigo Araújo</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+      
+        
+          <li>
+            
+            
+
+
+
+
+
+<a href="/aboutme">About Me</a>
+
+          </li>
+        
+        
+        
+          <li>
+            
+            
+
+
+
+
+
+<a href="/publications">Publications</a>
+
+          </li>
+        
+        
+        
+          <li>
+            
+            
+
+
+
+
+
+<a href="/archive">Archive</a>
+
+          </li>
+        
+        
+        
+          <li>
+            
+            
+
+
+
+
+
+<a href="/readings">Recommended Readings</a>
+
+          </li>
+        
+        
+      </ul>
+    </div>
+
+	
+	<div class="avatar-container">
+	  <div class="avatar-img-border">
+	    <a href="http://digorithm.github.io ">
+	      <img class="avatar-img" src="/img/pic.jpg" />
+		</a>
+	  </div>
+	</div>
+	
+
+  </div>
+</nav>
+
+
+    <!-- TODO this file has become a mess, refactor it -->
+
+
+
+
+
+<header class="header-section ">
+
+<div class="intro-header no-img">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-heading">
+          <h1>Why, how and where to Learn Design Patterns</h1>
+		  
+		  
+		  
+		  <span class="post-meta">Posted on January 6, 2015</span>
+		  
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</header>
+
+
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+	      <p>The first thought I had when I started to study <a href="http://en.wikipedia.org/wiki/Software_design_pattern">Design Patterns</a> was:</p>
+
+<blockquote>
+  <p><em>- “damn, is all this really necessary?”</em></p>
+</blockquote>
+
+<p>I mean, so many patterns, so many details to do things that look simple to do without any further detailed thoughts. And I started to question myself if this was really a productive thing. The first answer I gave was:</p>
+
+<blockquote>
+  <p><em>-”no, *wonderful not-bad-word* this, I’m losing too much time trying to wrap my head around this”</em></p>
+</blockquote>
+
+<p>So I forgot it and kept developing my software using something like <a href="https://gist.github.com/banaslee/4147370#file-xgh-en-txt">Extreme Go Horse</a>. (i was younger at that time). Then, I saw a pattern being formed:</p>
+
+<p>###Every time I came back to my old codes I couldn’t extend nor debbug it in a easy way. It was always extremely hard to work on it.</p>
+
+<p>And then I realized why: <strong>lack of good architectural decisions.</strong></p>
+
+<p>So I decided to give another chance to learning Design Patterns and finally I understood its beauty.</p>
+
+<h2 id="few-things-to-keep-in-mind">Few things to keep in mind:</h2>
+
+<p>1. It’s not about trying to fit every problem in every Design Pattern. That’s just a waste of time</p>
+
+<p>2. It may be not very productive at start, the process of applying a DP in a determined problem takes time.</p>
+
+<p>3. On the other hand, it will be extremely productive when you try to debug your code or try to extend it. Everything starts to make more sense and it’s way easier to change things when you’ve followed some patterns</p>
+
+<p>4. When studying a Design Pattern, try hard to implement that solution in a problem. This will make total difference</p>
+
+<h2 id="now-to-the-materials">Now, to the materials!</h2>
+
+<p>Start with the classics:</p>
+
+<h4 id="design-patternshttpwwwamazoncomdesign-patterns-object-oriented-professional-computingdp0201634988-aka-gang-of-four"><a href="http://www.amazon.com/Design-Patterns-Object-Oriented-Professional-Computing/dp/0201634988">Design Patterns</a> (a.k.a Gang of Four)</h4>
+
+<p>This is the all times classic. These four gentlemen were the firsts to formalized and compile all patterns found on Object Oriented Systems. Here my advice is to go one by one, pick a pattern, read it, understand it, implement it and ,finally, really understand it.</p>
+
+<p> </p>
+
+<h4 id="head-first-design-patternshttpwwwamazoncomhead-first-design-patterns-freemandp0596007124"><a href="http://www.amazon.com/Head-First-Design-Patterns-Freeman/dp/0596007124">Head First Design Patterns</a></h4>
+
+<p>This one I’ve used when I didn’t understand a concept from the Gang of Four, it is easier to grasp the concepts, the approach is way less hardcore than the original GoF, but it still is a great book.</p>
+
+<h3 id="code-samples">Code Samples</h3>
+
+<p>That said, it’s always good to have examples of each Design Pattern by your side, so you can study the DP and check other examples, so real world examples are perfect for it:</p>
+
+<p><a href="http://stackoverflow.com/questions/1673841/examples-of-gof-design-patterns/2707195#2707195">List with Examples of Patterns implemented in the Java SE and EE API</a></p>
+
+<p><a href="http://www.dofactory.com/net/design-patterns">List with Examples of patterns demonstrated with C#</a></p>
+
+<p><a href="http://sourcemaking.com/design_patterns">Excellent examples and explanations of each Design Pattern</a></p>
+
+<p><a href="http://c2.com/cgi/wiki?PeopleProjectsAndPatterns">Another great material on Design Patterns, with lots of great thoughts on it</a></p>
+
+<p>I believe this is a good start to learn Design Pattern and I hope this helps someone, mainly if they’re struggling with the same doubts I had when trying to learn it.</p>
+
+<p>Oh, one more thing: <strong>Do not ever go Extreme Go Horse, really.</strong></p>
+
+	    </article>
+	  	  
+      <ul class="pager blog-pager">
+        
+        <li class="previous">
+          <a href="/post/thoughts-on-automata-theory" data-toggle="tooltip" data-placement="top" title="Thoughts on Automata Theory">&larr; Previous Post</a>
+        </li>
+        
+        
+        <li class="next">
+          <a href="/2015-01-09-Making-Your-Machine-Think-Learn-And-Predict-Gradient-Descent-Algorithm-in-Java/" data-toggle="tooltip" data-placement="top" title="Making your machine think, learn and predict - Gradient Descent Algorithm in Java">Next Post &rarr;</a>
+        </li>
+        
+      </ul>
+      
+	    
+        <div class="disqus-comments">
+	        
+
+        </div>
+	    
+    </div>
+  </div>
+</div>
+
+
+    <footer>
+  <div class="container beautiful-jekyll-footer">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+          <li>
+            <a href="https://www.facebook.com/contatodigo" title="Facebook">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+          
+          <li>
+            <a href="https://github.com/digorithm" title="GitHub">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+		  
+          <li>
+            <a href="https://twitter.com/digorithm" title="Twitter">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+		  
+          <li>
+            <a href="mailto:rod.dearaujo@gmail.com" title="Email me">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+		  
+		  
+		  		  
+        </ul>
+        <p class="copyright text-muted">
+		  Rodrigo Araújo
+		  &nbsp;&bull;&nbsp;
+		  2016
+		  
+		  
+		  &nbsp;&bull;&nbsp;
+		  <a href="http://digorithm.github.io">rodrigoaraujo.me</a>
+		  
+	    </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+  
+    <!-- everything has to be repeated twice because on 2016-02-01 GitHub pages migrated to jekyll 3; see bug https://github.com/jekyll/jekyll/issues/4439 -->
+
+
+
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+
+<link rel="stylesheet" href="/assets/css/styles/hybrid.css">
+	<script src="/assets/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+
+  
+    <!-- doing something a bit funky here because I want to be careful not to include JQuery twice! -->
+    
+      <script>
+      	if (typeof jQuery == 'undefined') {
+      	  document.write('<script src="/js/jquery-1.11.2.min.js"></scr' + 'ipt>');
+      	}
+      </script>
+    
+  
+    <!-- doing something a bit funky here because I want to be careful not to include JQuery twice! -->
+    
+	<script src="/js/bootstrap.min.js"></script>
+    
+  
+    <!-- doing something a bit funky here because I want to be careful not to include JQuery twice! -->
+    
+	<script src="/js/main.js"></script>
+    
+  
+
+
+
+
+
+  
+  </body>
+</html>

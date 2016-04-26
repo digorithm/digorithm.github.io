@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+  
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>Thoughts on Visualizing Software Architecture</title>
+
+  <meta name="author" content="Rodrigo Araújo" />
+  
+  
+
+  <link rel="alternate" type="application/rss+xml" title="Rodrigo Araújo - Stories and thoughts on Computer Science" href="/feed.xml" />
+  
+ <!-- everything has to be repeated twice because on 2016-02-01 GitHub pages migrated to jekyll 3; see bug https://github.com/jekyll/jekyll/issues/4439 -->
+
+    
+  
+    
+      <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />
+    
+      
+  
+  
+  
+    
+      <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    
+      <link rel="stylesheet" href="/css/main.css" />
+    
+    
+  
+  
+  
+    
+      <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+    
+      <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+    
+  
+
+    
+    
+  
+  
+  
+  
+  
+     
+  
+  <!-- Facebook OpenGraph tags -->
+  <meta property="og:title" content="Thoughts on Visualizing Software Architecture" />
+  <meta property="og:type" content="website" />
+  
+  
+  <meta property="og:url" content="http://digorithm.github.io/post/thoughts-visualizing-software-arch/" />
+  
+  
+  
+  <meta property="og:image" content="http://digorithm.github.io/img/pic.jpg" />
+  
+  
+</head>
+
+
+  <body>
+  
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="http://digorithm.github.io">Rodrigo Araújo</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+      
+        
+          <li>
+            
+            
+
+
+
+
+
+<a href="/aboutme">About Me</a>
+
+          </li>
+        
+        
+        
+          <li>
+            
+            
+
+
+
+
+
+<a href="/publications">Publications</a>
+
+          </li>
+        
+        
+        
+          <li>
+            
+            
+
+
+
+
+
+<a href="/archive">Archive</a>
+
+          </li>
+        
+        
+        
+          <li>
+            
+            
+
+
+
+
+
+<a href="/readings">Recommended Readings</a>
+
+          </li>
+        
+        
+      </ul>
+    </div>
+
+	
+	<div class="avatar-container">
+	  <div class="avatar-img-border">
+	    <a href="http://digorithm.github.io ">
+	      <img class="avatar-img" src="/img/pic.jpg" />
+		</a>
+	  </div>
+	</div>
+	
+
+  </div>
+</nav>
+
+
+    <!-- TODO this file has become a mess, refactor it -->
+
+
+
+
+
+<header class="header-section ">
+
+<div class="intro-header no-img">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-heading">
+          <h1>Thoughts on Visualizing Software Architecture</h1>
+		  
+		  
+		  
+		  <span class="post-meta">Posted on December 8, 2015</span>
+		  
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</header>
+
+
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+	      <p>The more I think about the advantages and disadvantages of upfront design, the more I find it a really complex subject, I mean, the whole Software architecture diagramming in general. I’ve been following the development of the <a href="http://www.codingthearchitecture.com/2014/08/24/c4_model_poster.html">C4 model</a> for a considerable time, I find it interesting, but it still brings me the old struggles about how much detail we should put into the diagrams and whether we should do it while planning the Software, while developing it, or after <em>(by doing reverse engineering)</em>…. or even more extreme, doing these 3 options, developing the architecture diagrams and evolving them over time.</p>
+
+<p>I think that, when drawing architecture diagrams, we should focus on getting the right purpose and the right level of abstraction. Two of the most important purposes to me, when designing a diagram, is:</p>
+
+<ol>
+  <li>
+    <p>tech stack architecture and how each container and component relate to each other</p>
+  </li>
+  <li>
+    <p>deployment architecture</p>
+  </li>
+</ol>
+
+<p>I do think that the diagram should reflect the code in certain level of abstraction and that this could be really useful for a new engineer in a large project. Tackling a huge codebase is not an easy task, and the diagrams should act as a map of the code, saying how things communicate with each other.</p>
+
+<p>What I think is, we need certain kinds of architecture diagram, each one for a specific development phase. What comes to my mind is:</p>
+
+<p><strong>Project planning phase</strong>, We can’t code without any plan, at this level I feel necessary to draw the most ‘visible’ containers and components, this way we can plan what to do next, how to split up teams to each part of the system. It’s when a deployment architecture can be written as well</p>
+
+<p><strong>Project evolution and maintenance</strong>, as we reach this phase of the project, it’s interesting to see the Big Picture, the Not-So-Big Picture and the Small Picture. I can see many cases where this could be helpful, for instance: new engineers coming to the project, debugging something that crosses many components or even containers <em>(visualizing the flow can be helpful)</em>, finding bottlenecks, and I’m sure there are many more.</p>
+
+<p>Given this task, I’d prefer taking a top-down approach, going from a more “Big Picture” architecture to a more detailed one. As an example, I’m going to use a side project I was working on, which is a simple webapp to search for simple food recipes <em>(the difference, though, is that it crawls the recipes from other websites)</em>.</p>
+
+<p>I took a backend&amp;api + ClientApp approach, which means, in the backend is where the main logic happens, the core business classes and everything, in addition to exposing a HTTP API <em>(I would say REST API, but I’m scared of a few rest purist coming here and saying that this is not restful because of this and that, so let’s say it’s a simple api that talks over http)</em>.</p>
+
+<p>Each of these 2 parts will be a different application, which can be dockerized and run in different plataforms <em>(two separate amazon EC2, for example)</em>. So, if we’re planning it, we could start by saying:</p>
+
+<p><img src="/content/images/images/gdd20overview.png" alt="" /></p>
+
+<p>So, yea, the webclient will talk to the backend’s api over HTTP, the backend will communicate to the webclient and to a database instance. Ok, that’s a start. We can easily separate a team for the backend and its api and another team for the webclient.</p>
+
+<p>Still, it doesn’t say much about the inner details of each container, and now we need something more detailed. So we detail it a bit more:</p>
+
+<p><img src="/content/images/images/gdd20arch.png" alt="" /></p>
+
+<p>As we can see now, it’s the same structur<em>e, **but with way more details now, which makes it clearer to everybody *(I hope so)</em> how we can tackle the problem with code. An extra level of detail would be going down one more level of abstraction and describe the classes through a class diagram, explaining how the core backend would be implemented, for example.</p>
+
+<p>Now, this diagram, plus all requirements gathered can be a nice start for the coding phase. We can add now how we would deploy it:</p>
+
+<p><img src="/content/images/images/gdd20deploy.png" alt="" /></p>
+
+<p>So, in the end, I believe those 3 diagrams + the codebase could be helpful for a new engineer or to someone that is debugging the system or trying to improve it.</p>
+
+<p>Though, I still have many questions and doubts about this, I can’t stop overthinking it, so I’m extremely open to any discussion about this.</p>
+
+	    </article>
+	  	  
+      <ul class="pager blog-pager">
+        
+        <li class="previous">
+          <a href="/post/neural-computation-pt1" data-toggle="tooltip" data-placement="top" title="Neural Computation: Toward an Intuitive Understanding of the Perceptron">&larr; Previous Post</a>
+        </li>
+        
+        
+      </ul>
+      
+	    
+        <div class="disqus-comments">
+	        
+
+        </div>
+	    
+    </div>
+  </div>
+</div>
+
+
+    <footer>
+  <div class="container beautiful-jekyll-footer">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+          <li>
+            <a href="https://www.facebook.com/contatodigo" title="Facebook">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+          
+          <li>
+            <a href="https://github.com/digorithm" title="GitHub">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+		  
+          <li>
+            <a href="https://twitter.com/digorithm" title="Twitter">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+		  
+          <li>
+            <a href="mailto:rod.dearaujo@gmail.com" title="Email me">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+		  
+		  
+		  		  
+        </ul>
+        <p class="copyright text-muted">
+		  Rodrigo Araújo
+		  &nbsp;&bull;&nbsp;
+		  2016
+		  
+		  
+		  &nbsp;&bull;&nbsp;
+		  <a href="http://digorithm.github.io">rodrigoaraujo.me</a>
+		  
+	    </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+  
+    <!-- everything has to be repeated twice because on 2016-02-01 GitHub pages migrated to jekyll 3; see bug https://github.com/jekyll/jekyll/issues/4439 -->
+
+
+
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+
+<link rel="stylesheet" href="/assets/css/styles/hybrid.css">
+	<script src="/assets/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+
+  
+    <!-- doing something a bit funky here because I want to be careful not to include JQuery twice! -->
+    
+      <script>
+      	if (typeof jQuery == 'undefined') {
+      	  document.write('<script src="/js/jquery-1.11.2.min.js"></scr' + 'ipt>');
+      	}
+      </script>
+    
+  
+    <!-- doing something a bit funky here because I want to be careful not to include JQuery twice! -->
+    
+	<script src="/js/bootstrap.min.js"></script>
+    
+  
+    <!-- doing something a bit funky here because I want to be careful not to include JQuery twice! -->
+    
+	<script src="/js/main.js"></script>
+    
+  
+
+
+
+
+
+  
+  </body>
+</html>

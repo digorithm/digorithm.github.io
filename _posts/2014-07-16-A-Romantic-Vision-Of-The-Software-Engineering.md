@@ -1,9 +1,8 @@
 ---
 layout: post
 title: A Romantic Vision Of The Software Engineering
-categories: [general, setup, demo]
-keywords: "engineering, software, thoughts, story"
-tags: [engineering, software, thoughts, story]
+keywords: "engineering, software, thoughts"
+tags: [engineering, software, thoughts]
 fullview: true
 permalink: post/a-romantic-vision-of-the-software-engineering
 ---
