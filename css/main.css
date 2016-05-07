@@ -2,15 +2,21 @@
 @import url(https://fonts.googleapis.com/css?family=Gentium+Book+Basic:400,400italic,700,700italic);
 /* --- General --- */
 
+@font-face {
+font-family: "avenir";
+src: url('/assets/font/AvenirLTStd-Book.otf');
+}
+
+
 body {
-  font-family: 'Gentium Book Basic', 'Times New Roman', serif;
-  font-size: 20px;
+  font-family: "avenir", 'Times New Roman', serif;
+  font-size: 18px;
   color: #404040;
   position: relative;
-  background: #FFF;
+  background: #F3F3F3;
 }
 p {
-  line-height: 1.5;
+  line-height: 1.8;
   margin: 30px 0;
 }
 p a {
@@ -314,7 +320,7 @@ footer .theme-by {
   margin: 0 0 10px;
 }
 .post-preview .post-entry {
-  font-family: 'Gentium Book Basic', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: "avenir", 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 .post-preview .post-read-more {
   font-weight: 800;

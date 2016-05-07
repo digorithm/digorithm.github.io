@@ -7,36 +7,6 @@
 @import url(https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic);
 @import url(https://fonts.googleapis.com/css?family=Merriweather:400,300italic,300,400italic,700,700italic,900,900italic);
 
-@font-face{
-	font-family: 'gotham';
-	src: url('/assets/fonts/GothamHTF-Book.otf');
-}
-
-@font-face {
-font-family: 'archerpro';
-src: url('/assets/fonts/ArcherPro-Bold.otf');  
-}
-
-@font-face {
-font-family: 'archerprolight';
-src: url('/assets/fonts/ArcherPro-Light.otf');  
-}
-
-
-@font-face {
-font-family: 'archerprobookitalic';
-src: url('/assets/fonts/ArcherPro-BookIta.otf');  
-}
-
-@font-face {
-font-family: 'sofiaprolight';
-src: url('/assets/fonts/SofiaPro/SofiaProLight.otf');  
-}
-
-@font-face {
-font-family: 'proximanovalight';
-src: url('/assets/fonts/proximanova/proximanovaregular.otf');  
-}
 
 
 /* cyrillic-ext */
@@ -603,7 +573,7 @@ src: url('/assets/fonts/proximanova/proximanovaregular.otf');
 
 
 #archivetitle{
-	font-family: "Gentium Book Basic";
+	font-family: "avenir";
 }
 
 .pages{
@@ -687,12 +657,12 @@ list-style: none;
 
 body{
 	color: #474747;
-	font-family: "Gentium Book Basic";
+	font-family: "avenir";
 	font-size: 20px;
 }
 
 p{
-	font-family: "Gentium Book Basic";
+	font-family: "avenir";
 	/*line-height: 1.5em !important;*/
 	color: #333332;
     margin-bottom: 20px;
@@ -904,7 +874,7 @@ article.home h4 a:hover {
 
 footer {
 	padding-top: 15px;
-	font-family: "Gentium Book Basic";
+	font-family: "avenir";
         text-align: center;
 }
 
