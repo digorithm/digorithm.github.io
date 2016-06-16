@@ -2,15 +2,21 @@
 @import url(https://fonts.googleapis.com/css?family=Gentium+Book+Basic:400,400italic,700,700italic);
 /* --- General --- */
 
+/* I'm extremely divided by these two fonts \/  */
+
 @font-face {
 font-family: "avenir";
 src: url('/assets/font/AvenirLTStd-Book.otf');
 }
 
+@font-face {
+  font-family: "harmony";
+  src: url('/assets/font/HarmoniaSansProCyr-Regular.otf')
+}
 
 body {
-  font-family: "avenir", 'Times New Roman', serif;
-  font-size: 18px;
+  font-family: "harmony", 'Times New Roman', serif;
+  font-size: 19px;
   color: #404040;
   position: relative;
   background: #F3F3F3;
@@ -175,14 +181,14 @@ img {
     width: 100px;
     margin-top: -50px;
   }
-  
+
   .navbar-custom .avatar-container  .avatar-img-border {
     width: 100%;
     box-shadow: 1px 1px 2px rgba(0, 0, 0, .8);
     -webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, .8);
     -moz-box-shadow: 1px 1px 2px rgba(0, 0, 0, .8);
   }
-  
+
   .navbar-custom .avatar-container  .avatar-img {
     width: 100%;
   }
@@ -274,7 +280,7 @@ footer .theme-by {
     font-size: 16px;
   }
 }
- 
+
 /* --- Post preview --- */
 
 .post-preview {
@@ -320,7 +326,7 @@ footer .theme-by {
   margin: 0 0 10px;
 }
 .post-preview .post-entry {
-  font-family: "avenir", 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: "harmony", 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 .post-preview .post-read-more {
   font-weight: 800;
@@ -424,11 +430,11 @@ footer .theme-by {
   }
   .intro-header.big-img {
     margin-top: 91px;  /* Full navbar is small navbar + 20px padding on each side when expanded */
-  }	
+  }
   .intro-header.big-img .page-heading,
   .intro-header.big-img .post-heading  {
     padding: 150px 0;
-  }  
+  }
   .intro-header .page-heading h1 {
     font-size: 80px;
   }
@@ -465,9 +471,9 @@ footer .theme-by {
   }
   .header-section.has-img .big-img {
     margin-bottom: 0;
-  }  
-} 
-@media only screen and (max-width: 325px) { 
+  }
+}
+@media only screen and (max-width: 325px) {
   .intro-header.big-img {
     height: 200px;
   }
