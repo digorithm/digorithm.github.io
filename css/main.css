@@ -1,5 +1,6 @@
 @import url("pygment_highlights.css");
 @import url(https://fonts.googleapis.com/css?family=Gentium+Book+Basic:400,400italic,700,700italic);
+@import url(https://fonts.googleapis.com/css?family=Lato:400,400italic,700,700italic,900,900italic);
 /* --- General --- */
 
 /* I'm extremely divided by these two fonts \/  */
@@ -14,15 +15,20 @@ src: url('/assets/font/AvenirLTStd-Book.otf');
   src: url('/assets/font/HarmoniaSansProCyr-Regular.otf')
 }
 
+@font-face {
+  font-family: "bookerly";
+  src: url('/assets/font/bookerly.ttf')
+}
+
 body {
-  font-family: "harmony", 'Times New Roman', serif;
+  font-family: "bookerly", 'Times New Roman', serif;
   font-size: 19px;
   color: #404040;
   position: relative;
   background: #fff;
 }
 p {
-  line-height: 1.6;
+  line-height: 1.7;
   margin: 30px 0;
 }
 p a {
@@ -326,7 +332,7 @@ footer .theme-by {
   margin: 0 0 10px;
 }
 .post-preview .post-entry {
-  font-family: "harmony", 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: "bookerly", 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 .post-preview .post-read-more {
   font-weight: 800;
