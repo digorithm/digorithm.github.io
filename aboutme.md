@@ -4,23 +4,26 @@ title: About me
 ---
 ## Overview
 
-Hey, guys! I'm a Computer Scientist and Software Engineer, I'm extremely interested in Software Engineering, Artificial Intelligence and Security. Since I was young I have a passion for Mathematics and Technology, so I, undoubtedly, took this path and never looked back *(still happy about it, by the way)*.
+Hey, guys! I'm a Computer Scientist and Software Engineer, I'm extremely interested in Software Engineering, Artificial Intelligence and Security. Since I was young I have a passion for Mathematics and Technology, so I undoubtedly took this path and never looked back *(still happy about it, by the way)*.
 
-Currently I'm an Engineer at [JusBrasil](www.jusbrasil.com.br), working with Artificial Intelligence/Machine Learning.
+Currently I'm a Graduate Student at University of British Columbia, working on my Masters in Computer Science and working as a Research Software Engineer at [SPL](https://www.cs.ubc.ca/cs-research/software-practices-lab).
+
+Before that I was working with Artificial Intelligence and Machine Learning at [Jusbrasil](www.jusbrasil.com.br)
+
+You can find further details of my work on my [resume](/content/rodrigo_araujo.pdf).
+
 
 ## Why I write on this blog
 
-I constantly advocate that the only way to really learn something is to teach it. That's why I used to be a Teacher Assistant in a few classes, such as Discrete Mathematics, Programming and Algorithms, but due to the lack of time, I'm not teaching for now *(I'll be back soon, I hope)*, that's why I try to maintain this blog, so I can keep passing forward some knowledge, helping someone or at least, learn more about a topic.
+I constantly advocate that the only way to really learn something is to teach it. That's why I used to be a Teacher Assistant in a few classes, such as Discrete Mathematics, Programming and Algorithms. That's why I try to maintain this blog, so I can spread some knowledge and also solidify my own knowledge.
 
 ## Interests
 
-Currently my main work/research field is Artificial Intelligence and Machine Learning, but I'm also interested in:
+Currently my main work/research field is Artificial Intelligence/Machine Learning and Software Engineering, but I'm also interested in:
 
 1. Distributed Systems and Scalability
 
-2. Software Architecture and Engineering
-
-3. Security
+2. Security
 
 
 ## Hobbies
