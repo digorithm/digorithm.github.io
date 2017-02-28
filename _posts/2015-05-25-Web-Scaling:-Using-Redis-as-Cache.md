@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Web Scaling - using Redis as Cache
-categories: [general, setup, demo]
+categories: [python, software-architecture, software-scalability, caching]
 keywords: "redis, web, scalability, programming, python, programming, engineering"
 tags: [redis, web, scalability, programming, python, programming, engineering]
 fullview: true
@@ -9,9 +9,11 @@ permalink: post/web-scaling-using-redis-as-cache
 ---
 **Redis is such a great technology.** Unfortunately, there's still people who don't know Redis or don't know that Redis can be used as a Cache System to improve the speed of responses.
 
-## Why Redis
+### Why Redis
 
 Well, let's start this discussion remembering how a common Relational Database basically works: Suppose we're using a MySQL, every time your app sends a request to the MySQL client, the MySQL client gotta make a trip to the hard drive to get the data asked in the request, this can become a problem if the data asked in request is big... and if there are many requests at the same time, this can generate a huge latency, annoying users or worse.
+
+<!--more-->
 
 This is where Redis comes into play, Redis is a key-value database that will be running and storing data inside your memory, if you remember the basic of computers architecture:
 
@@ -83,7 +85,7 @@ Now that we understand the concept of what we'll be doing, the code becomes very
 
 So, after you create the correct database, populate the database (there's a function in the code for that) and change username/password/dbname in the code, we'll run the app.py and go to localhost:port-you-exposed.
 
-## _What will happen?_
+### _What will happen?_
 
 1\. The first time you access it, it will take a few seconds to get the data from the MySQL
 

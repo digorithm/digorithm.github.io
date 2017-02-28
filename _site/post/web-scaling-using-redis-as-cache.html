@@ -71,13 +71,6 @@
           <span>/</span>
         
       </li>
-        
-      <li class="nav-item">
-        <a href="/tags/">Tags</a>
-        
-          <span>/</span>
-        
-      </li>
                
     </ul>
   </nav>
@@ -135,9 +128,11 @@
         <h1 style="max-width: 45%;">Web Scaling - using Redis as Cache</h1>
         <p><strong>Redis is such a great technology.</strong> Unfortunately, there’s still people who don’t know Redis or don’t know that Redis can be used as a Cache System to improve the speed of responses.</p>
 
-<h2 id="why-redis">Why Redis</h2>
+<h3 id="why-redis">Why Redis</h3>
 
 <p>Well, let’s start this discussion remembering how a common Relational Database basically works: Suppose we’re using a MySQL, every time your app sends a request to the MySQL client, the MySQL client gotta make a trip to the hard drive to get the data asked in the request, this can become a problem if the data asked in request is big… and if there are many requests at the same time, this can generate a huge latency, annoying users or worse.</p>
+
+<!--more-->
 
 <p>This is where Redis comes into play, Redis is a key-value database that will be running and storing data inside your memory, if you remember the basic of computers architecture:</p>
 
@@ -209,7 +204,7 @@
 
 <p>So, after you create the correct database, populate the database (there’s a function in the code for that) and change username/password/dbname in the code, we’ll run the app.py and go to localhost:port-you-exposed.</p>
 
-<h2 id="what-will-happen"><em>What will happen?</em></h2>
+<h3 id="what-will-happen"><em>What will happen?</em></h3>
 
 <p>1. The first time you access it, it will take a few seconds to get the data from the MySQL</p>
 

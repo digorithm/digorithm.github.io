@@ -2,6 +2,7 @@
 title: A Romantic Vision Of The Software Engineering
 keywords: "engineering, software, thoughts"
 tags: [engineering, software, thoughts]
+categories: [software-engineering, advice, industry]
 fullview: true
 permalink: post/a-romantic-vision-of-the-software-engineering
 layout: default
@@ -16,6 +17,8 @@ Well, it all will start with your first steps on studying programming, a very in
     }
 
 The time will pass, you’ll start to understand logic better, and get impressed with your first program written with 150 lines of pure java code, and this will be you amazed about it
+
+<!--more-->
 
 ![images](/content/images/2015/06/amazed.png)
 

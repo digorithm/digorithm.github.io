@@ -1,19 +1,18 @@
 ---
 layout: default
 title: "Case Study: Python Performance on rotating one-dimensional vectors"  
-categories: [general, setup, demo]
+categories: [algorithms, case-study, python, profiling]
 keywords: "machine learning, artificial intelligence, java, programming, engineering, tutorial"
-tags: [machine learning, artificial intelligence, java, programming, engineering, tutorial]
 fullview: true
 permalink: post/case-study-python-performance-rotating-vector
 ---
 
 
-
-
 I'm a big fan of a nice challenge, therefore, I like books like Programming Pearls, I like to dive into many kinds of solutions to the same problem and try to differentiate them by novelty, performance, elegance, etc... 
 
 This time I was playing with a fun problem, from the column 2:
+
+<!--more-->
 
 > "rotate a one dimensional array of *N* elements left by *I* positions". 
 

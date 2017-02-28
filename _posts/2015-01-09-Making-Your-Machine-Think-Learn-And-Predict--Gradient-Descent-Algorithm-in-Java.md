@@ -1,21 +1,23 @@
 ---
 layout: default
 title: Making your machine think, learn and predict - Gradient Descent Algorithm in Java
-categories: [general, setup, demo]
+categories: [machine-learning, java, algorithm]
 keywords: "machine learning, artificial intelligence, java, programming, engineering, tutorial"
 tags: [machine learning, artificial intelligence, java, programming, engineering, tutorial]
 fullview: true
 ---
 
-## How can we make a machine learn from data?
+### How can we make a machine learn from data?
 
 Then, how can we make the machine predicts things based on that learned data? Those are the question answered by one of the most classic Machine Learning Algorithms, the **Gradient Descent Algorithm**, from a Mathematical-Statistical side it’s called **Univariate Linear Regression**.
 
 This is one of the tools of the Machine Learning toolbox, and what it tries to do is to model a relationship between a scalar dependent variable Y and a explanatory variable X.
 
-## In Layman’s term…
+### In Layman’s term…
 
 Let’s suppose you have a few points distributed in a Graph, so you already know that in a point A you have a well defined X and Y, which means, if you input X, your output will be Y, and in a point B you have a well defined X’ and Y’ as well. But, thing is, if a point emerge between A and B, and you only have the X… what will be the Y _(the output)_?
+
+<!--more-->
 
 What this algorithm does is: **It tries to predict this Y value, based on the previous data**! Amazing, right?
 
@@ -23,7 +25,7 @@ At the end of the execution, you’ll have a full trend line that you can use to
 
 ![](/content/images/2015/06/linearRegression.png)
 
-## The Theory Behind It
+### The Theory Behind It
 
 I’ll cover a few theories about this algorithm here, but, it won’t be complete, as this demand a great coverage of mathematical material that if I would write it all here, It would be a _long, long_, **very** _long_ post. So I’m assuming that you’re already familiar with Calculus _(Sums, Partial Derivatives)_, Statistics and Discrete Mathematics.
 
@@ -339,7 +341,7 @@ Now, executing the code, the output will be, at first, the initial data:
 
 ![](/content/images/2015/06/example-plot-line-e1420763780646.png)
 
-## Magical, right?
+### Magical, right?
 
 And then, we can see the **convergence**:
 
@@ -349,7 +351,7 @@ And you can see in the terminal the final values of \\( \\Theta\_{0} \\) and \\(
 
 _If it wasn’t Science, probably would be black magic. heh._
 
-## A few considerations
+### A few considerations
 
 You can download the complete code [here](https://github.com/digorithm/ArtificialIntelligenceAlgorithms).
 

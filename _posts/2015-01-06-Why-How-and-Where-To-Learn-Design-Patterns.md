@@ -1,7 +1,7 @@
 ---
-title: Why, how and where to Learn Design Patterns
+title: Why, how and where to learn Design Patterns
 layout: default
-categories: [general, setup, demo]
+categories: [software-architecture, software-engineering]
 tags: [design patterns, tips, thoughts, software engineering, programming]
 keywords: "design patterns, tips, thoughts, software engineering, programming"
 fullview: true
@@ -15,6 +15,8 @@ The first thought I had when I started to study [Design Patterns](http://en.wiki
 I mean, so many patterns, so many details to do things that look simple to do without any further detailed thoughts. And I started to question myself if this was really a productive thing. The first answer I gave was:
 
 >_-”no, *wonderful not-bad-word* this, I’m losing too much time trying to wrap my head around this”_
+
+<!--more-->
 
 So I forgot it and kept developing my software using something like [Extreme Go Horse](https://gist.github.com/banaslee/4147370#file-xgh-en-txt). (i was younger at that time). Then, I saw a pattern being formed:
 

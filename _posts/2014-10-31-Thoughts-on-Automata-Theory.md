@@ -1,6 +1,6 @@
 ---
 title: Thoughts on Automata Theory
-categories: [general, setup, demo]
+categories: [theory, computer-science]
 keywords: "theory, computer science, thoughts, automata, compilers, dfa, nfa"
 tags: [theory, computer science, thoughts, automata, compilers, dfa, nfa]
 fullview: true
@@ -11,6 +11,9 @@ permalink: post/thoughts-on-automata-theory
 I’ve been reading many texts on automata theory these times, and let me tell you, that’s such a wonderful thing. It pretty much explain how computers can…. compute! Simply put, Automata Theory deals with the logic of computation with respect to simple machines, referred to as Automata.
 
 From the mathematical models to represent it to the fun programming implementations, it’s really great and exciting to study it!
+
+<!--more-->
+
 
 Automatons are abstract models of machines that perform computations on an input by moving through a series of states or configurations. At each state of the computation, a transition function determines the next configuration on the basis of a finite portion of the present configuration. As a result, once the computation reaches an accepting configuration, it accepts that input. The most general and powerful automata is the [Turing machine](http://en.wikipedia.org/wiki/Turing_machine).
 

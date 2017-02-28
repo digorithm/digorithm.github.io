@@ -1,15 +1,18 @@
 ---
 layout: default
-title: Thoughts on Visualizing Software Architecture 
+title: Thoughts on Visualizing Software Architecture
 keywords: "architecture, software, visualization, thoughts"
 tags: [architecture, software, visualization, thoughts]
 fullview: true
 permalink: post/thoughts-visualizing-software-arch
+categories: [software-architecture]
 ---
 
 The more I think about the advantages and disadvantages of upfront design, the more I find it a really complex subject, I mean, the whole Software architecture diagramming in general. I've been following the development of the [C4 model](http://www.codingthearchitecture.com/2014/08/24/c4_model_poster.html) for a considerable time, I find it interesting, but it still brings me the old struggles about how much detail we should put into the diagrams and whether we should do it while planning the Software, while developing it, or after *(by doing reverse engineering)*.... or even more extreme, doing these 3 options, developing the architecture diagrams and evolving them over time.
 
 I think that, when drawing architecture diagrams, we should focus on getting the right purpose and the right level of abstraction. Two of the most important purposes to me, when designing a diagram, is:
+
+<!--more-->
 
 1. tech stack architecture and how each container and component relate to each other
 

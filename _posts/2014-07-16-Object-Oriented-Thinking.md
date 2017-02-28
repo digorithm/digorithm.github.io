@@ -2,6 +2,7 @@
 title: Object Oriented Thinking
 keywords: "thoughts, programming, engineering, architecture"
 tags: [thoughts, programming, engineering, architecture]
+categories: [software-engineering, software-architecture]
 fullview: true
 permalink: post/object-oriented-thinking
 layout: default
@@ -18,6 +19,8 @@ _1\. Abstraction, yes, i had to put this in the first place, in my point of view
 4\. Modularity
 
 5\. Readability
+
+<!--more-->
 
 Let’s say that OO programming did **never** exist, so, i can say that any procedural programmer _(C, fortran, cobol, etc..)_ who has a little notion about how to build organized codes, would, naturally, evolve to an organization that would look like the actual concept of OO programming.
 

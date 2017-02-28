@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Using Python and AI to predict types of wine
-categories: [general, setup, demo]
+categories: [python, case-study, machine-learning]
 keywords: "machine learning, artificial intelligence, python, sklearn, programming, engineering, tutorial"
 tags: [machine learning, artificial intelligence, python, sklearn, programming, engineering, tutorial]
 fullview: true
@@ -11,6 +11,8 @@ permalink: post/using-python-and-ai-to-predict-wine
 I've been working with AI/Machine Learning at [Jusbrasil](http://www.jusbrasil.com.br/) recently, and it's being pretty challenging due to the _huge_ amount of data that we have to deal with, so cleaning this data and making predictions and classifications in an acceptable time demands a nice AI architecture.
 
 That said I can say that I'm extremely thankful for a few technologies that are helping me go through this challenge _(and the pain of cleaning this amount of data)_: Python, Scikit Learn, Pandas, and the whole stack that the Scikit Learn use, such as NumPy, SciPy, matplotlib and few others.
+
+<!--more-->
 
 So, this inspired me to _spread the word_, so I'll be showing here a simple example of Machine Learning using Python, Pandas and Scikit Learn to predict, given a great amount of data/features about wines, if a wine is white or red.
 

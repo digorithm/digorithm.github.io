@@ -2,6 +2,7 @@
 title: CRUD with Java, JSP and MySQL
 keywords: "java, tutorial, programming, engineering, design, architecture, jsp, crud"
 tags: [java, tutorial, programming, engineering, design, architecture, jsp, crud]
+categories: [java, software-architecture, case-study]
 fullview: true
 permalink: post/crud-with-java-jsp
 layout: default
@@ -9,6 +10,7 @@ layout: default
 
 <p>One of the most common kind of applications in today's tech/business world is the CRUD system, that is the idea of the user interacting with a database, so the user can Create, Retrieve, Update and Delete <em>(yep, that awful name came from this)</em> data from this database. Also, <strong>learning how to create a CRUD with a language is a great way to understand the basics of this language, the basics of software design, engineering and architecture.</strong> In layman's term, a CRUD page is just a page where you can insert a thing, edit that thing, search that thing and delete that thing, just that!</p>
 &nbsp;
+<!--more-->
 <h3>Our goal</h3>
 <p>Well, our scenario will be the simplest possible, so we can understand how to communicate with our database, so, it will be a simple contact book web app where we can do our CRUD with persons. This person will have <!--more--> a name, a phone number and a profession. We'll have a button to add a new person, a form to enter this new person's information, a page where will be loaded all persons from the database and buttons to edit and remove each person</p>
 

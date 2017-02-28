@@ -1,6 +1,7 @@
 ---
-title: Fun with graphs pt1
+title: Fun with graphs 
 keywords: "graph theory, computer science, java, programming, tutorial, engineering"
+categories: [theory, computer-science, java]
 tags: [graph theory, computer science, java, programming, tutorial, engineering]
 fullview: true
 permalink: post/fun-with-graphs-pt1
@@ -10,6 +11,8 @@ layout: default
 Graph Theory is definitely one of my favorite branches of the Mathematics & Computer Science, mostly because of its nearest infinity applications, in both real world problems and pure theoretical problems.
 
 These days I’ve been working (with my buddy Daniel Almeida) in a framework to create and manipulate graphs. Which means, creating a data structure to represent graphs, edges, vertexes and creating algorithms to work on this structure. All this is being made with Java and I’ll expose this code here, as I saw a terrible lack of good readable codes about it on the internet.
+
+<!--more-->
 
 So, before we start coding the graph’s structure… we must clarify what a graph is and why it’s so important to the Computer Science (and many other sciences).
 

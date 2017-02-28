@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Building your first REST API with Python
-categories: [general, setup, demo]
+categories: [python, software-architecture, api]
 keywords: "api, python, programming, engineering, rest, flask"
 tags: [api, python, programming, engineering, rest, flask]
 fullview: true
@@ -11,6 +11,8 @@ permalink: post/build-your-first-rest-api-python
 Are you total lost in this world full of jargons like: API, Rest API, microservices and stuffs? Come here, sit, grab a cup of coffee, and let's talk briefly about it.
 
 Today a lot is said about APIs. Everything has an API, every programmer (newbie to expert) uses tons of API. Also, today we can see a lot of people talking about microservices and the idea of total separation of backend, frontend, web services or _whatever_. So we can _(and we do)_ hear a lot about REST/RESTful APIs. We have 3 current problems with it:
+
+<!--more-->
 
 1\. Many new programmers don’t have a single clue of what a Rest API is.
 

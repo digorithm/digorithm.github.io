@@ -1,6 +1,6 @@
 ---
 title: "Neural Computation: Toward an Intuitive Understanding of the Perceptron"  
-categories: [general, setup, demo]
+categories: [machine-learning]
 keywords: "machine learning, artificial intelligence, engineering, tutorial, sentiment analysis, nlp, python, scikit learn, sklearn"
 tags: [machine learning, artificial intelligence, engineering, tutorial, text classification, NLP, Sentiment Analysis]
 fullview: true
@@ -11,6 +11,8 @@ layout: default
 Artificial Neurons is one of the most beautiful ways to simulate a biological behavior through computation, despite the fact that it's not very close to the level of details of a real neuron. But it captured the core of what a neuron is doing. 
 
 And I find that trying to understand this mathematical method by first understanding the concept through a metaphor *(which, in this case, I think that the metaphor is our mathematical side, and not the biological one, the biological is just, you know, the real thing)* is really valuable to gain an intuition on this topic. 
+
+<!--more-->
 
 If you were about to make a decision, given many variables, how would you make this decision? It may not look obvious, due the fact that, on normal occasions, we're not thinking about our thinking process, but the truth is, we are collecting those variables that affect the future decision, and we're giving weights to them. Weights? how? Simple, some variables are more crucial than other while making decision, isn't it? the word *'crucial'*, in this case, means a huge weight on this variable, and it will strongly affect the final decision. 
 

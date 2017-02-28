@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "A Generic Architecture for Text Classification with Machine Learning"  
-categories: [general, setup, demo]
+categories: [machine-learning, software-architecture]
 keywords: "machine learning, artificial intelligence, engineering, tips, architecture, text classification"
 tags: [machine learning, artificial intelligence, engineering, tips, architecture, text classification]
 fullview: true
@@ -11,6 +11,8 @@ permalink: post/generic-architecture-text-classification
 One of the most commons tasks in Machine Learning is text classification, which is simply teaching your machine how to read and interpret a text and predict what kind of text it is. 
 
 The purpose of this essay is to talk about a simple and generic enough Architecture to a supervised learning text classification. The interesting point of this Architecture is that you can use it as a basic/initial model for many classifications tasks. 
+
+<!--more-->
 
 ## Supervised Learning
 
