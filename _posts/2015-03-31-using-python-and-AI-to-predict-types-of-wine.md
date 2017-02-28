@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: default
 title: Using Python and AI to predict types of wine
 categories: [general, setup, demo]
 keywords: "machine learning, artificial intelligence, python, sklearn, programming, engineering, tutorial"

@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: default
 title: Web Scaling - using Redis as Cache
 categories: [general, setup, demo]
 keywords: "redis, web, scalability, programming, python, programming, engineering"

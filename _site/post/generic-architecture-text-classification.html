@@ -1,194 +1,139 @@
 <!DOCTYPE html>
 <html lang="en">
-  
-  <head>
-  <meta charset="utf-8" />
+
+<head>
+  <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <title>A Generic Architecture for Text Classification with Machine Learning</title>
+  <meta name="description" content="One of the most commons tasks in Machine Learning is text classification, which is simply teaching your machine how to read and interpret a text and predict ...">
 
-  <meta name="author" content="Rodrigo Araújo" />
-  <meta name="keywords" content="computer science, mathematics, technology, machine learning, artificial intelligence, software, engineering, programming, code, hack"/>  
-  
+  <!-- CSS files -->
+  <link rel="stylesheet" href="/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/css/main.css">
 
-  <link rel="alternate" type="application/rss+xml" title="Rodrigo Araújo - Stories and thoughts on Computer Science" href="/feed.xml" />
-  
- <!-- everything has to be repeated twice because on 2016-02-01 GitHub pages migrated to jekyll 3; see bug https://github.com/jekyll/jekyll/issues/4439 -->
+  <link rel="canonical" href="/post/generic-architecture-text-classification">
+  <link rel="alternate" type="application/rss+xml" title="Rodrigo Araujo" href="/feed.xml" />
 
-    
-  
-    
-      <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />
-    
-      
-  
-  
-  
-    
-      <link rel="stylesheet" href="/css/bootstrap.min.css" />
-    
-      <link rel="stylesheet" href="/css/main.css" />
-    
-    
-  
-  
-  
-    
-      <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
-    
-      <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
-    
-  
-
-    
-    
-  
-  
-  
-  
-  
-     
-  
-  <!-- Facebook OpenGraph tags -->
-  <meta property="og:title" content="A Generic Architecture for Text Classification with Machine Learning" />
-  <meta property="og:type" content="website" />
-  
-  
-  <meta property="og:url" content="http://digorithm.github.io/post/generic-architecture-text-classification/" />
-  
-  
-  
-  <meta property="og:image" content="http://digorithm.github.io/img/pic.jpg" />
-  
-  
+  <!-- Icons -->
+  <!-- 16x16 -->
+  <link rel="shortcut icon" href="/favicon.ico">
+  <!-- 32x32 -->
+  <link rel="shortcut icon" href="/favicon.png">
 </head>
 
 
-  <body>
-  
-    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="http://digorithm.github.io">Rodrigo Araújo</a>
-    </div>
-
-    <div class="collapse navbar-collapse" id="main-navbar">
-      <ul class="nav navbar-nav navbar-right">
-      
+<body>
+  <div class="row">
+    <div class="col s12 m3">
+      <div class="table cover">
         
-          <li>
+
+<div class="sidebar cover-card table-cell table-middle">
+  <a href="/" class="author_name">Rodrigo Araujo</a>
+  <span class="author_job">Computer scientist and SW Engineer</span>
+  <span class="author_bio mbm">Thoughts and stories on computer science, software engineering and mathematics</span>
+  <nav class="nav">
+    <ul class="nav-list">
+       
+      <li class="nav-item">
+        <a href="/about/">About</a>
+        
+          <span>/</span>
+        
+      </li>
+        
+      <li class="nav-item">
+        <a href="/archive/">Archive</a>
+        
+          <span>/</span>
+        
+      </li>
+          
+      <li class="nav-item">
+        <a href="/categories/">Categories</a>
+        
+          <span>/</span>
+        
+      </li>
             
-            
-
-
-
-
-
-<a href="/aboutme">About Me</a>
-
-          </li>
+      <li class="nav-item">
+        <a href="/publications/">publications</a>
         
+          <span>/</span>
         
+      </li>
         
-          <li>
-            
-            
-
-
-
-
-
-<a href="/publications">Publications</a>
-
-          </li>
+      <li class="nav-item">
+        <a href="/readings/">Readings</a>
         
+          <span>/</span>
         
+      </li>
         
-          <li>
-            
-            
-
-
-
-
-
-<a href="/archive">Archive</a>
-
-          </li>
+      <li class="nav-item">
+        <a href="/tags/">Tags</a>
         
+          <span>/</span>
         
-        
-          <li>
-            
-            
+      </li>
+               
+    </ul>
+  </nav>
+  <script type="text/javascript">
+  // based on http://stackoverflow.com/a/10300743/280842
+  function gen_mail_to_link(hs, subject) {
+    var lhs,rhs;
+    var p = hs.split('@');
+    lhs = p[0];
+    rhs = p[1];
+    document.write("<a class=\"social-link-item\" target=\"_blank\" href=\"mailto");
+    document.write(":" + lhs + "@");
+    document.write(rhs + "?subject=" + subject + "\"><i class=\"fa fa-fw fa-envelope\"></i><\/a>");
+  }
+</script>
+<div class="social-links">
+  <ul>
+    
+      <li>
+      <script>gen_mail_to_link('rod.dearaujo@gmail.com', 'Hello from website');</script>
+      </li>
+    
+    <li><a href="http://twitter.com/digorithm" class="social-link-item" target="_blank"><i class="fa fa-fw fa-twitter"></i></a></li>
+    
+    
+    
+    
+    
+    
+    
+    <li><a href="http://github.com/digorithm" class="social-link-item" target="_blank"><i class="fa fa-fw fa-github"></i></a></li>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  </ul>
+</div>
 
+</div>
 
-
-
-
-<a href="/readings">Recommended Readings</a>
-
-          </li>
-        
-        
-      </ul>
-    </div>
-
-	
-	<div class="avatar-container">
-	  <div class="avatar-img-border">
-	    <a href="http://digorithm.github.io ">
-	      <img class="avatar-img" src="/img/pic.jpg" />
-		</a>
-	  </div>
-	</div>
-	
-
-  </div>
-</nav>
-
-
-    <!-- TODO this file has become a mess, refactor it -->
-
-
-
-
-
-<header class="header-section ">
-
-<div class="intro-header no-img">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-        <div class="post-heading">
-          <h1>A Generic Architecture for Text Classification with Machine Learning</h1>
-		  
-		  
-		  
-		  <span class="post-meta">Posted on June 30, 2015</span>
-		  
-        </div>
       </div>
     </div>
-  </div>
-</div>
-</header>
-
-
-
-
-<div class="container">
-  <div class="row">
-    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-      <article role="main" class="blog-post">
-	      <p>One of the most commons tasks in Machine Learning is text classification, which is simply teaching your machine how to read and interpret a text and predict what kind of text it is.</p>
+    <div class="col s12 m9">
+      <div class="post-listing">
+        <div class="post-content">
+        <h1 style="max-width: 45%;">A Generic Architecture for Text Classification with Machine Learning</h1>
+        <p>One of the most commons tasks in Machine Learning is text classification, which is simply teaching your machine how to read and interpret a text and predict what kind of text it is.</p>
 
 <p>The purpose of this essay is to talk about a simple and generic enough Architecture to a supervised learning text classification. The interesting point of this Architecture is that you can use it as a basic/initial model for many classifications tasks.</p>
 
@@ -331,102 +276,16 @@ So, extracting those features, <strong>this</strong> will be our training and te
 <p>Master the skills to understand data, this will be crucial to make you see what algorithm to use, you can’t make something learn if you don’t know about what you are teaching.</p>
 
 
-	    </article>
-	  	  
-      <ul class="pager blog-pager">
-        
-        <li class="previous">
-          <a href="/post/case-study-python-performance-rotating-vector" data-toggle="tooltip" data-placement="top" title="Case Study: Python Performance on rotating one-dimensional vectors">&larr; Previous Post</a>
-        </li>
-        
-        
-        <li class="next">
-          <a href="/post/case-study-sentiment-analysis-movie-reviews" data-toggle="tooltip" data-placement="top" title="Case Study: Sentiment Analysis On Movie Reviews">Next Post &rarr;</a>
-        </li>
-        
-      </ul>
-      
-	    
-        <div class="disqus-comments">
-	        
+        <footer>
+  &copy; 2017 Rodrigo Araujo 
+</footer>
 
         </div>
-	    
-    </div>
-  </div>
-</div>
-
-
-    <footer>
-  <div class="container beautiful-jekyll-footer">
-    <div class="row">
-      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-        <ul class="list-inline text-center footer-links">
-          
-          <li>
-            <a href="https://www.facebook.com/contatodigo" title="Facebook">
-              <span class="fa-stack fa-lg">
-                <i class="fa fa-circle fa-stack-2x"></i>
-                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
-              </span>
-            </a>
-          </li>
-          
-          
-          <li>
-            <a href="https://github.com/digorithm" title="GitHub">
-              <span class="fa-stack fa-lg">
-                <i class="fa fa-circle fa-stack-2x"></i>
-                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-              </span>
-            </a>
-          </li>
-          
-		  
-          <li>
-            <a href="https://twitter.com/digorithm" title="Twitter">
-              <span class="fa-stack fa-lg">
-                <i class="fa fa-circle fa-stack-2x"></i>
-                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
-              </span>
-            </a>
-          </li>
-          
-		  
-          <li>
-            <a href="mailto:rod.dearaujo@gmail.com" title="Email me">
-              <span class="fa-stack fa-lg">
-                <i class="fa fa-circle fa-stack-2x"></i>
-                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
-              </span>
-            </a>
-          </li>
-          
-		  
-		  
-		  		  
-        </ul>
-        <p class="copyright text-muted">
-		  Rodrigo Araújo
-		  &nbsp;&bull;&nbsp;
-		  2016
-		  
-		  
-		  &nbsp;&bull;&nbsp;
-		  <a href="http://digorithm.github.io">rodrigoaraujo.me</a>
-		  
-	    </p>
       </div>
     </div>
   </div>
-</footer>
-
-  
-    <!-- everything has to be repeated twice because on 2016-02-01 GitHub pages migrated to jekyll 3; see bug https://github.com/jekyll/jekyll/issues/4439 -->
-
-
-
-
+  <script type="text/javascript" src="/js/jquery-2.1.4.min.js"></script>
+<script type="text/javascript" src="/js/main.js"></script>
 <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -434,61 +293,6 @@ MathJax.Hub.Config({
 });
 </script>
 
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-    tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
-});
-</script>
 
-<link rel="stylesheet" href="/assets/css/styles/hybrid.css">
-	<script src="/assets/js/highlight.pack.js"></script>
-<script>hljs.initHighlightingOnLoad();</script>
-
-
-
-
-
-
-
-
-  
-    <!-- doing something a bit funky here because I want to be careful not to include JQuery twice! -->
-    
-      <script>
-      	if (typeof jQuery == 'undefined') {
-      	  document.write('<script src="/js/jquery-1.11.2.min.js"></scr' + 'ipt>');
-      	}
-      </script>
-    
-  
-    <!-- doing something a bit funky here because I want to be careful not to include JQuery twice! -->
-    
-	<script src="/js/bootstrap.min.js"></script>
-    
-  
-    <!-- doing something a bit funky here because I want to be careful not to include JQuery twice! -->
-    
-	<script src="/js/main.js"></script>
-    
-  
-
-
-
-
-  <!-- Google Analytics -->
-  <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-    ga('create', 'UA-38327934-3', 'auto');
-    ga('send', 'pageview');
-  </script>
-  <!-- End Google Analytics -->
-
-
-
-  
-  </body>
+</body>
 </html>

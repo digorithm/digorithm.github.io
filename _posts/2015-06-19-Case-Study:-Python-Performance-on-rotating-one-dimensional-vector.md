@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: default
 title: "Case Study: Python Performance on rotating one-dimensional vectors"  
 categories: [general, setup, demo]
 keywords: "machine learning, artificial intelligence, java, programming, engineering, tutorial"

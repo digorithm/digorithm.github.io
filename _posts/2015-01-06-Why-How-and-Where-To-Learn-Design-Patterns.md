@@ -1,6 +1,6 @@
 ---
-layout: post
 title: Why, how and where to Learn Design Patterns
+layout: default
 categories: [general, setup, demo]
 tags: [design patterns, tips, thoughts, software engineering, programming]
 keywords: "design patterns, tips, thoughts, software engineering, programming"

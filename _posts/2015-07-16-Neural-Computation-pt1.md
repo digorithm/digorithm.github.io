@@ -1,11 +1,11 @@
 ---
-layout: post
 title: "Neural Computation: Toward an Intuitive Understanding of the Perceptron"  
 categories: [general, setup, demo]
 keywords: "machine learning, artificial intelligence, engineering, tutorial, sentiment analysis, nlp, python, scikit learn, sklearn"
 tags: [machine learning, artificial intelligence, engineering, tutorial, text classification, NLP, Sentiment Analysis]
 fullview: true
 permalink: post/neural-computation-pt1
+layout: default
 ---
 
 Artificial Neurons is one of the most beautiful ways to simulate a biological behavior through computation, despite the fact that it's not very close to the level of details of a real neuron. But it captured the core of what a neuron is doing. 
@@ -136,77 +136,73 @@ So, it's just a technique to solve our previous problem, but still, the weights 
 Now, here's a code of a Perceptron that will behave like a simple Boolean function. I didn't use the Delta Dule (Gradient Descent) to optimize the weights, as this problem (binary Boolean functions) is linearly separable.
 
 
-<pre>
-<code class="python hljs">
+```python
+  import math
+  from numpy import random, array
+  from random import choice
+  import matplotlib.pyplot as plt
 
-import math
-from numpy import random, array
-from random import choice
-import matplotlib.pyplot as plt
+  class Perceptron():
+      
+      """
+      this is the thereshold to activate the unit 
+      """
+      def activation(self,x):
+          return 1/(1 + math.exp(-x))
 
-class Perceptron():
-    
-    """
-    this is the thereshold to activate the unit 
-    """
-    def activation(self,x):
-        return 1/(1 + math.exp(-x))
+      def linear_combination(self, X):
+          total = 0
+          for i in xrange(len(self.weights)):
+              total += self.weights[i] * X[i]
+          return total
+      
+      def unit_output(self, X):
+          return self.activation(self.linear_combination(X))
 
-    def linear_combination(self, X):
-        total = 0
-        for i in xrange(len(self.weights)):
-            total += self.weights[i] * X[i]
-        return total
-    
-    def unit_output(self, X):
-        return self.activation(self.linear_combination(X))
+      def train(self, training_data, epochs):
+          
+          self.learning_rate = 0.5
+          self.errors = []
 
-    def train(self, training_data, epochs):
-        
-        self.learning_rate = 0.5
-        self.errors = []
+          # initializing weights
+          self.weights = random.rand(len(training_data[1][0]))
+          
+          for i in xrange(epochs):
+              X, y = choice(training_data)
+              # > calculate output with current weight
+              output = self.unit_output(X)
+              # > calculate error rate (t - o)
+              error_rate = y - output
+              self.errors.append(error_rate)
+              print 'the X: ', X
+              print 'output: ',output
+              print 'correct target: ', y
+              # > apply learning rule which will update weights
+              self.weights += self.learning_rate * error_rate * X
 
-        # initializing weights
-        self.weights = random.rand(len(training_data[1][0]))
-        
-        for i in xrange(epochs):
-            X, y = choice(training_data)
-            # > calculate output with current weight
-            output = self.unit_output(X)
-            # > calculate error rate (t - o)
-            error_rate = y - output
-            self.errors.append(error_rate)
-            print 'the X: ', X
-            print 'output: ',output
-            print 'correct target: ', y
-            # > apply learning rule which will update weights
-            self.weights += self.learning_rate * error_rate * X
+      def predict(self,X):
+          y = self.unit_output(X)
+          return y
+                  
 
-    def predict(self,X):
-        y = self.unit_output(X)
-        return y
-                
+          training_data = [
+                  (array([0,0,1]), 0),
+                  (array([0,1,1]), 0),
+                  (array([1,0,1]), 0),
+                  (array([1,1,1]), 1),
+                  
+          ]
 
-        training_data = [
-                (array([0,0,1]), 0),
-                (array([0,1,1]), 0),
-                (array([1,0,1]), 0),
-                (array([1,1,1]), 1),
-                
-        ]
+  p = Perceptron()
 
-p = Perceptron()
+  p.train(training_data, 2000)
+  print p.predict([1,0,1])
+  plt.plot(p.errors)
+  plt.ylabel('errors')
+  plt.xlabel('epochs')
+  plt.show()
 
-p.train(training_data, 2000)
-print p.predict([1,0,1])
-plt.plot(p.errors)
-plt.ylabel('errors')
-plt.xlabel('epochs')
-plt.show()
-</code>
-</pre>
-
-
+```
 
 ### Conclusion and next steps
 

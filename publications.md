@@ -1,7 +1,9 @@
 ---
 layout: page
-title: Publications
+title:  publications
+permalink: /publications/
 ---
+
 ## Peer-reviewed papers
 
 [1] ALVES, N. S. R.; ARAÚJO, RODRIGO. S.; SPÍNOLA, RODRIGO O. . A Collaborative Computational Infrastructure for Supporting Technical Debt Knowledge Sharing and Evolution. In: Americas Conference on Information Systems, 2015, Puerto Rico. 2015 Americas Conference on Information Systems, 2015.
@@ -23,4 +25,5 @@ title: Publications
 
 [TDWiki - The Technical Debt Wiki](http://www.tdwiki.com/)
 
-TDWiki is a collaborative computational infrastructure for supporting technical debt knowledge sharing and evolution. It was built to be an autonomous system to extract data about researches being made on Technical Debt field and provide Intelligence over this data and visualizations of this information, also it has a social/collaborative aspect, where Researchers/Engineers/Managers can help to grow the knowledge on it. There's a paper published in a conference[1] that explain more about this infrastructure and its engineering process. 
+TDWiki is a collaborative computational infrastructure for supporting technical debt knowledge sharing and evolution. It was built to be an autonomous system to extract data about researches being made on Technical Debt field and provide Intelligence over this data and visualizations of this information, also it has a social/collaborative aspect, where Researchers/Engineers/Managers can help to grow the knowledge
+

@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: default
 title: "Case Study: Sentiment Analysis On Movie Reviews"  
 categories: [general, setup, demo]
 keywords: "machine learning, artificial intelligence, engineering, tutorial, sentiment analysis, nlp, python, scikit learn, sklearn"

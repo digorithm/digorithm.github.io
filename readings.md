@@ -1,5 +1,7 @@
 ---
 layout: page
-title: Recommended readings
+title:  Readings
+permalink: /readings/
 ---
 
+TODO

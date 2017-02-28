@@ -1,10 +1,10 @@
 ---
-layout: post
 title: Fun with graphs pt1
 keywords: "graph theory, computer science, java, programming, tutorial, engineering"
 tags: [graph theory, computer science, java, programming, tutorial, engineering]
 fullview: true
 permalink: post/fun-with-graphs-pt1
+layout: default
 ---
 
 Graph Theory is definitely one of my favorite branches of the Mathematics & Computer Science, mostly because of its nearest infinity applications, in both real world problems and pure theoretical problems.

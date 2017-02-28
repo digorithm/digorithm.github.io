@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Making your machine think, learn and predict - Gradient Descent Algorithm in Java</title>
+  <meta name="description" content="How can we make a machine learn from data?Then, how can we make the machine predicts things based on that learned data? Those are the question answered by on...">
+
+  <!-- CSS files -->
+  <link rel="stylesheet" href="/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/css/main.css">
+
+  <link rel="canonical" href="/articles/2015-01/Making-Your-Machine-Think-Learn-And-Predict-Gradient-Descent-Algorithm-in-Java">
+  <link rel="alternate" type="application/rss+xml" title="Rodrigo Araujo" href="/feed.xml" />
+
+  <!-- Icons -->
+  <!-- 16x16 -->
+  <link rel="shortcut icon" href="/favicon.ico">
+  <!-- 32x32 -->
+  <link rel="shortcut icon" href="/favicon.png">
+</head>
+
+
+<body>
+  <div class="row">
+    <div class="col s12 m3">
+      <div class="table cover">
+        
+
+<div class="sidebar cover-card table-cell table-middle">
+  <a href="/" class="author_name">Rodrigo Araujo</a>
+  <span class="author_job">Computer scientist and SW Engineer</span>
+  <span class="author_bio mbm">Thoughts and stories on computer science, software engineering and mathematics</span>
+  <nav class="nav">
+    <ul class="nav-list">
+       
+      <li class="nav-item">
+        <a href="/about/">About</a>
+        
+          <span>/</span>
+        
+      </li>
+        
+      <li class="nav-item">
+        <a href="/archive/">Archive</a>
+        
+          <span>/</span>
+        
+      </li>
+          
+      <li class="nav-item">
+        <a href="/categories/">Categories</a>
+        
+          <span>/</span>
+        
+      </li>
+            
+      <li class="nav-item">
+        <a href="/publications/">publications</a>
+        
+          <span>/</span>
+        
+      </li>
+        
+      <li class="nav-item">
+        <a href="/readings/">Readings</a>
+        
+          <span>/</span>
+        
+      </li>
+        
+      <li class="nav-item">
+        <a href="/tags/">Tags</a>
+        
+          <span>/</span>
+        
+      </li>
+               
+    </ul>
+  </nav>
+  <script type="text/javascript">
+  // based on http://stackoverflow.com/a/10300743/280842
+  function gen_mail_to_link(hs, subject) {
+    var lhs,rhs;
+    var p = hs.split('@');
+    lhs = p[0];
+    rhs = p[1];
+    document.write("<a class=\"social-link-item\" target=\"_blank\" href=\"mailto");
+    document.write(":" + lhs + "@");
+    document.write(rhs + "?subject=" + subject + "\"><i class=\"fa fa-fw fa-envelope\"></i><\/a>");
+  }
+</script>
+<div class="social-links">
+  <ul>
+    
+      <li>
+      <script>gen_mail_to_link('rod.dearaujo@gmail.com', 'Hello from website');</script>
+      </li>
+    
+    <li><a href="http://twitter.com/digorithm" class="social-link-item" target="_blank"><i class="fa fa-fw fa-twitter"></i></a></li>
+    
+    
+    
+    
+    
+    
+    
+    <li><a href="http://github.com/digorithm" class="social-link-item" target="_blank"><i class="fa fa-fw fa-github"></i></a></li>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  </ul>
+</div>
+
+</div>
+
+      </div>
+    </div>
+    <div class="col s12 m9">
+      <div class="post-listing">
+        <div class="post-content">
+        <h1 style="max-width: 45%;">Making your machine think, learn and predict - Gradient Descent Algorithm in Java</h1>
+        <h2 id="how-can-we-make-a-machine-learn-from-data">How can we make a machine learn from data?</h2>
+
+<p>Then, how can we make the machine predicts things based on that learned data? Those are the question answered by one of the most classic Machine Learning Algorithms, the <strong>Gradient Descent Algorithm</strong>, from a Mathematical-Statistical side it’s called <strong>Univariate Linear Regression</strong>.</p>
+
+<p>This is one of the tools of the Machine Learning toolbox, and what it tries to do is to model a relationship between a scalar dependent variable Y and a explanatory variable X.</p>
+
+<h2 id="in-laymans-term">In Layman’s term…</h2>
+
+<p>Let’s suppose you have a few points distributed in a Graph, so you already know that in a point A you have a well defined X and Y, which means, if you input X, your output will be Y, and in a point B you have a well defined X’ and Y’ as well. But, thing is, if a point emerge between A and B, and you only have the X… what will be the Y <em>(the output)</em>?</p>
+
+<p>What this algorithm does is: <strong>It tries to predict this Y value, based on the previous data</strong>! Amazing, right?</p>
+
+<p>At the end of the execution, you’ll have a full trend line that you can use to predict values! just like the image below.</p>
+
+<p><img src="/content/images/2015/06/linearRegression.png" alt="" /></p>
+
+<h2 id="the-theory-behind-it">The Theory Behind It</h2>
+
+<p>I’ll cover a few theories about this algorithm here, but, it won’t be complete, as this demand a great coverage of mathematical material that if I would write it all here, It would be a <em>long, long</em>, <strong>very</strong> <em>long</em> post. So I’m assuming that you’re already familiar with Calculus <em>(Sums, Partial Derivatives)</em>, Statistics and Discrete Mathematics.</p>
+
+<p>So, our goal here is to <strong>fit the best straight line in our initial data</strong>, right?</p>
+
+<p>Thus, we need something to represent this straight line, which will be our hypothesis function:</p>
+
+<div id="math"> 
+$ h_{\Theta}(x) = \Theta_{0} + \Theta_{1}x $ 
+</div>
+
+<p>Where this \( \Theta_{0} \) and \( \Theta_{1} \) are the parameters of the function, and <strong>finding the best parameters for this function is what is going to give us the correct straight line to plot on our data</strong>.</p>
+
+<p>Here’s an example of what we’re trying to do, which is, fit the best straight line in the data:</p>
+
+<p><img src="/content/images/2015/06/Linear-regression.svg" alt="" /></p>
+
+<p>So what we want to do is to find a \( \Theta_{0} \) and \( \Theta_{1} \) so our Hypothesis outputs can be very close to the real Y output.</p>
+
+<p>Formally we want:</p>
+
+<div id="math">$ \underset{\Theta_{0}\Theta_{1}}{min}(h_{\Theta}(x) - y)^2 $</div>
+
+<p>So we want <strong>minimize</strong> \( \Theta_{0} \) and \( \Theta_{1} \) so the difference between the <strong>Hypothesis</strong> and the <strong>real output</strong> is minimal.</p>
+
+<p><strong>But we want it for every point in our data</strong>, which is \(x(i)\) <em>(which is the i-th x of our data)</em>, so we want the <strong>sum of this average</strong>, which is, formally:</p>
+
+<div id="math"> 
+$ \underset{\Theta_{0}\Theta_{1}}{min}\,\frac{1}{2m} \sum_{i=1}^{m} (h_{0}(x^{(i)}) - y^{(i)})^2 $
+</div>
+<p><br /></p>
+
+<p>And we’re going to call this function <strong>Cost Function</strong>, with the following notation:</p>
+
+<div id="math"> 
+$ J(\Theta_{0}, \Theta_{1}) = \,\frac{1}{2m} \sum_{i=1}^{m} (h_{0}(x^{(i)}) - y^{(i)})^2 $
+</div>
+<p><br /></p>
+
+<p>So, our goals is to <strong>minimize this cost function</strong>:</p>
+
+<div id="math"> 
+$ \underset{\Theta_{0}\Theta_{1}}{min}\,\, J(\Theta_{0}, \Theta_{1}) $
+</div>
+<p><br /></p>
+
+<p>This cost function is also called <a href="http://en.wikipedia.org/wiki/Mean_squared_error">Square Error Function</a>.</p>
+
+<h3 id="now-the-gradient-descent-algorithm">Now, the gradient descent algorithm</h3>
+
+<p>With our cost function built, we need to “keep” finding values for \( \Theta_{0} \) and \( \Theta_{1} \) so we can reach our ideal trend line. So, basically:</p>
+
+<p>1. We start with some \( \Theta_{0} \) and \( \Theta_{1} \)</p>
+
+<p>2. keep changing \( \Theta_{0} \) and \( \Theta_{1} \) to reduce our cost function \( J(\Theta_{0}, \Theta_{1}) \), until we find the minimum.</p>
+
+<p>That’s quite simple and intuitive, right? There’s a lot of intuitive explanation and more visual examples of what this algorithm is doing in the <a href="https://class.coursera.org/ml-007/">machine learning course taught by Andrews Ng (From Stanford)</a>.</p>
+
+<p>What this algorithm will be doing is: partially derive our cost function for \( \Theta_{0} \) and \( \Theta_{1} \) simultaneously, so we can find the minimum value for them, with every iteration updating our \( \Theta_{0} \) and \( \Theta_{1} \) with their new value!</p>
+
+<blockquote>
+  <p><em>- Meh, talk is cheap show me the math!</em></p>
+</blockquote>
+
+<p>Formally, the algorithm is:</p>
+
+<div id="math">
+$ repeat \, until \, convergence\,\{ \\ \,\,\,\,\,\,\,\,\,\,\,\, \Theta_{j} := \Theta_{j} - \alpha \frac{\partial }{\partial \Theta_{j}} \,\, J(\Theta_{0}, \Theta_{1}) \\ \} \,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\, $
+</div>
+<p><br /></p>
+
+<p><em><strong>Make sure that this will run for j = 0 and j = 1.</strong></em></p>
+
+<p>But, pay attention, this is the generic version, the \( \Theta_{j} \) represent both \( \Theta_{0} \) and \( \Theta_{1} \).</p>
+
+<p>What the algorithm is saying is that we’ll be doing this procedure to \( \Theta_{0} \) and \( \Theta_{1} \) at the same time! So, we can put it in this way:</p>
+
+<div id="math">
+$ repeat \, until \, convergence\,\{ \\ \Theta_{0} := \Theta_{0} - \alpha \frac{\partial }{\partial \Theta_{0}} \,\, J(\Theta_{0}, \Theta_{1}) \\ \Theta_{1} := \Theta_{1} - \alpha \frac{\partial }{\partial \Theta_{1}} \,\, J(\Theta_{0}, \Theta_{1}) \\ \} \,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\ $
+</div>
+<p><br /></p>
+
+<p>Also, we can expand the <strong>Cost Function</strong> that is being derived, doing this, it will be exactly what I’ll be putting into code soon, so, our <strong>final algorithm</strong> is:</p>
+
+<div id="math">
+$ repeat \, until \, convergence\,\{ \\ \Theta_{0} := \Theta_{0} - \alpha \frac{\partial }{\partial \Theta_{0}} \,\, \Big (\frac{1}{2m} \sum_{i=1}^{m} (h_{\Theta}(x^{(i)}) - y^{(i)})^2 \Big) \\ \Theta_{1} := \Theta_{1} - \alpha \frac{\partial }{\partial \Theta_{1}} \,\, \Big (\frac{1}{2m} \sum_{i=1}^{m} (h_{\Theta}(x^{(i)}) - y^{(i)})^2 \Big) \\ \}
+\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\ $
+</div>
+<p><br /></p>
+
+<p><strong>Now it’s time to code all of it!</strong></p>
+
+<p>First things first, we’ll be using <a href="http://code.google.com/p/jmathplot/">Google’s JMathPlot</a> to plot graphs using Java and Swing to use its JFrame, we shall start with our class to represent our <strong>Initial Data</strong>, which will be the <strong>Training Set</strong>.</p>
+<pre>
+<code class="java hljs">
+    import javax.swing.JFrame;
+    import org.math.plot.*;
+
+    public class InitialData{
+            public static double[] x = {2, 4, 6, 8};
+            public static double[] y = {2, 5, 5, 8};
+
+            public void plotData(){
+                    Plot2DPanel plot = new Plot2DPanel();
+                    plot.addScatterPlot("X-Y", this.x, this.y);
+                    JFrame frame = new JFrame("Original X-Y Data");
+                    frame.setContentPane(plot);
+                    frame.setSize(600, 600);
+                    frame.setVisible(true);
+            }
+    }
+</code>
+</pre>
+
+<p><br />
+To try out the data plotting, create a main class and call <em>plotData()</em> from <strong>InitialData.java</strong>, so we can have this:</p>
+
+<p><img src="/content/images/2015/06/example-plot.png" alt="" /></p>
+
+<p>Now we’re going to take our first steps on writing the <strong>GradientDescent.java</strong>, we must be very careful here. Let’s start with the main settings and parameters of it:</p>
+
+<pre>
+<code class="java hljs">
+    import javax.swing.JFrame;
+    import org.math.plot.*;
+
+    public class GradientDescent{
+            private double theta0;
+            private double theta1;
+
+            private int trendline;
+
+            // Algorithm settings
+        double alpha = 0.01;  // learning rate
+        double tol = 1e-11;   // tolerance to determine convergence
+        int maxiter = 9000;   // maximum number of iterations in case convergence is not reached
+        int dispiter = 100;   // interval for displaying results during iterations
+        int iters = 0;
+
+        //track of results
+        double[] theta0plot = new double[maxiter+1];
+        double[] theta1plot = new double[maxiter+1];
+        double[] tplot = new double[maxiter+1];
+
+        InitialData initial_data;
+
+        Plot2DPanel plot;
+
+        public GradientDescent(InitialData id){
+                    //initial guesses
+            this.theta0 = 0;
+            this.theta1 = 0;
+            this.initial_data = id;
+
+            plot = new Plot2DPanel();
+            plot.addScatterPlot("X-Y", initial_data.x, initial_data.y);
+            JFrame frame = new JFrame("Final X-Y Data");
+            frame.setContentPane(plot);
+            frame.setSize(600, 600);
+            frame.setVisible(true);
+        }
+    [...]
+</code>
+</pre>
+
+<p>Now let me explain a few details of this part:</p>
+
+<p><strong>Alpha</strong> is the <strong>Learning Rate</strong>, it’s a <em>dangerous variable</em>, it’s used to set the size of the step that the algorithm will take while trying to find the \( \Theta_{0} \) and \( \Theta_{1} \), that’s the learning rate of the algorithm. If Alpha is <strong>too low</strong>, the algorithm can be very slow, although very precise, if Alpha is <strong>higher</strong>, it will be taking <strong>larger steps</strong>, which can be <strong>faster</strong>, or <strong>dangerous</strong>, causing the algorithm to <strong>DIVERGE</strong>, which, <em>trust me</em>, you don’t want this! <em>(Andrew Ng explain this part very well in its course)</em></p>
+
+<p>The variable <strong>TrendLine</strong> is what we’ll use to plot the straight line which is our main goal.</p>
+
+<p>The <strong>tol</strong> variable is our safe move in case of a dangerous convergence, which means, in case of convergence, it will stop the execution.</p>
+
+<p>The other variables and objects in this part are very intuitive to understand, it’s auto explainable! <em>(forgive if i’m wrong, just say something and I’ll put more detail on that)</em>.</p>
+
+<p>About the Constructor, we’re saying that our initial guesses for \( \Theta_{0} \) and \( \Theta_{1} \) is 0. The rest is just data plotting.</p>
+
+<p><strong>next: our Hypothesis Function</strong> <em>(that will be doing exactly as the model that I did show above)</em></p>
+<pre>
+<code class="java hljs">
+    public double hypothesisFunction(double x){
+            return this.theta1*x + theta0;
+        }
+</code>
+</pre>
+
+<p>Now, our two function to derive our \( \Theta \), again, it will be doing exactly the same as the mathematical model, there’s no magic!</p>
+
+<pre>
+<code class="java hljs">
+    public double deriveTheta1(){
+            double sum = 0;
+
+            for (int j=0; j&lt;initial_data.x.length; j++){
+                    sum += (initial_data.y[j] - hypothesisFunction(initial_data.x[j])) * initial_data.x[j];
+            }
+            return -2 * sum / initial_data.x.length;
+        }
+
+        public double deriveTheta0(){
+            double sum = 0;
+
+            for (int j=0; j&lt;initial_data.x.length; j++) {
+                    sum += initial_data.y[j] - hypothesisFunction(initial_data.x[j]);
+            }
+            return -2 * sum / initial_data.x.length;
+
+        }
+</code>
+</pre>
+
+<p><br />
+Now, the <strong>Gradient Descent Algorithm</strong> <em>per se</em>, making use of the functions above:</p>
+
+<pre>
+<code class="java hljs">
+    public void execute(){
+            do {
+
+                    this.theta1 -= alpha * deriveTheta1();
+                    this.theta0 -= alpha * deriveTheta0();
+
+                    //used for plotting
+                    tplot[iters] = iters;
+                    theta0plot[iters] = theta0;
+                    theta1plot[iters] = theta1;
+                    iters++;
+
+                    if (iters % dispiter == 0){
+                            addTrendLine(plot, true);
+
+                    }
+
+                    if (iters &gt; maxiter) break;
+            } while (Math.abs(theta1) &gt; tol || Math.abs(theta0) &gt; tol);
+            plot.addScatterPlot("X-Y", initial_data.x, initial_data.y);
+            System.out.println("theta0 = " + this.theta0 + " and theta1 = " + this.theta1);
+        }
+</code>
+</pre>
+
+<p>Note that it does <em>almost</em> exactly the same as the mathematical model of the Gradient Descent demonstrated above, the difference is only a few details, such as the <em>if</em> and <em>while</em> to verify convergence or divergence <em>(which is, if it reached the iteration’s limit)</em></p>
+
+<p>Next we have the <strong>addTrendLine</strong> function, used to keep plotting our straight line as it will become more updated.</p>
+
+<pre>
+<code class="java hljs">
+    public void addTrendLine(Plot2DPanel plot, boolean removePrev){
+            if (removePrev){
+                    plot.removePlot(trendline);
+            }
+            double[] yEnd = new double[initial_data.x.length];
+            for (int i=0; i&lt;initial_data.x.length; i++)
+                    yEnd[i] = hypothesisFunction(initial_data.x[i]);
+            trendline = plot.addLinePlot("final", initial_data.x, yEnd);
+        }
+</code>
+</pre>
+
+<p>And now we have an extra, it’s a function to store and plot the convergence history of both \( \Theta_{0} \) and \( \Theta_{1} \), so we can see how it happened.</p>
+
+<pre>
+<code class="java hljs">
+    public void printConvergence(){
+
+          double[] theta0plot2 = new double[iters];
+          double[] theta1plot2 = new double[iters];
+          double[] tplot2 = new double[iters];
+          System.arraycopy(theta0plot, 0, theta0plot2, 0, iters);
+          System.arraycopy(theta1plot, 0, theta1plot2, 0, iters);
+          System.arraycopy(tplot, 0, tplot2, 0, iters);
+
+          // Plot the convergence of data
+          Plot2DPanel convPlot = new Plot2DPanel();
+
+          // add a line plot to the PlotPanel
+          convPlot.addLinePlot("theta0", tplot2, theta0plot2);
+          convPlot.addLinePlot("theta1", tplot2, theta1plot2);
+
+          // put the PlotPanel in a JFrame, as a JPanel
+          JFrame frame2 = new JFrame("Convergence of parameters over time");
+          frame2.setContentPane(convPlot);
+          frame2.setSize(600, 600);
+          frame2.setVisible(true);
+        }
+</code>
+</pre>
+
+<p>Finally, we have our <strong>Test Class</strong>, that will execute everything:</p>
+
+<pre>
+<code class="java hljs">
+    import javax.swing.JFrame;
+
+    import org.math.plot.*;
+
+    public class TestGradDescent {
+            public static void main(String[] args ){
+                    InitialData id = new InitialData();
+                    id.plotData();
+                    GradientDescent gd = new GradientDescent(id);
+                    gd.execute();
+                    gd.printConvergence();
+
+            }
+    }
+</code>
+</pre>
+
+<p>Now, executing the code, the output will be, at first, the initial data:</p>
+
+<p><img src="/content/images/2015/06/example-plot-2.png" alt="" /></p>
+
+<p><strong>Executing the algorithm, it learns and generate its prediction based on its initial data:</strong></p>
+
+<p><img src="/content/images/2015/06/example-plot-line-e1420763780646.png" alt="" /></p>
+
+<h2 id="magical-right">Magical, right?</h2>
+
+<p>And then, we can see the <strong>convergence</strong>:</p>
+
+<p><img src="/content/images/2015/06/example-convergence.png" alt="" /></p>
+
+<p>And you can see in the terminal the final values of \( \Theta_{0} \) and \( \Theta_{1} \) that minimized the Cost Function.</p>
+
+<p><em>If it wasn’t Science, probably would be black magic. heh.</em></p>
+
+<h2 id="a-few-considerations">A few considerations</h2>
+
+<p>You can download the complete code <a href="https://github.com/digorithm/ArtificialIntelligenceAlgorithms">here</a>.</p>
+
+<p>If you have any questions/suggestion, drop me an email so we can talk!</p>
+
+<p>If you need further details of the mathematical model, I ultra advice to watch Andrew’s Ng Videos at Stanford@Coursera. <strong>His skills to teach it is something unbelievable awesome</strong>.</p>
+
+<p><em>Thanks for reading!</em></p>
+
+        <footer>
+  &copy; 2017 Rodrigo Araujo 
+</footer>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript" src="/js/jquery-2.1.4.min.js"></script>
+<script type="text/javascript" src="/js/main.js"></script>
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+
+
+</body>
+</html>

@@ -1,10 +1,10 @@
 ---
-layout: post
 title: Object Oriented Thinking
 keywords: "thoughts, programming, engineering, architecture"
 tags: [thoughts, programming, engineering, architecture]
 fullview: true
 permalink: post/object-oriented-thinking
+layout: default
 ---
 
 ###What are the main goals of the object-oriented programming?###

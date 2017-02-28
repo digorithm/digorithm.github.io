@@ -1,6 +1,6 @@
 ---
-layout: post
-title: "Thoughts on Visualizing Software Architecture" 
+layout: default
+title: Thoughts on Visualizing Software Architecture 
 keywords: "architecture, software, visualization, thoughts"
 tags: [architecture, software, visualization, thoughts]
 fullview: true

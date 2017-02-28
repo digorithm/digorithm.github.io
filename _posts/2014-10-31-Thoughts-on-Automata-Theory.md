@@ -1,10 +1,10 @@
 ---
-layout: post
 title: Thoughts on Automata Theory
 categories: [general, setup, demo]
 keywords: "theory, computer science, thoughts, automata, compilers, dfa, nfa"
 tags: [theory, computer science, thoughts, automata, compilers, dfa, nfa]
 fullview: true
+layout: default
 permalink: post/thoughts-on-automata-theory
 ---
 
