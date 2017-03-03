@@ -8,84 +8,84 @@ permalink: post/a-romantic-vision-of-the-software-engineering
 layout: default
 ---
 
-Well, it all will start with your first steps on studying programming, a very innocent and and naive programming, i mean, your very first “Hello World” and the classics “Read 3 inputs and print the sum of them”, where your concerns will happen because of some missing commas, whitespaces and some misplaced IF’s… things that at first sight may cause a little confusion, you’ll start to think that’s even something hard.
 
-    #include
-    int main(){
+Well, it all starts with your first attempt to write a program; a very innocent and and naive program - I mean, your very first “Hello World” and the classic“Read 3 inputs and print the sum of them”. Your only concerns will be  some missing commas, whitespaces and some misplaced IF’s - things that  may cause a little confusion first. You’ll eve think that it is hard.
+
+```c
+#include
+int main() {
     printf("Hello World");
     return (0);
-    }
+}
+```
 
-The time will pass, you’ll start to understand logic better, and get impressed with your first program written with 150 lines of pure java code, and this will be you amazed about it
+Then time will pass, you’ll understand the logic better and get impressed with your first program; 150 lines of pure java code, and you will be amazed by it
 
 <!--more-->
 
 ![images](/content/images/2015/06/amazed.png)
 
-### **Now you’ve become a programmer, or even better, a _software engineer_, right?! we shall answer that soon, let’s continue our timeline…**
+### Now you have become a programmer - or even better -  a software engineer, right?! We shall answer that soon, let’s continue with our timeline…
 
-You’ll commit yourself to do your first not-so-trivial software project, maybe a stock management system, using some sort of web technology and data persistence with some cool database system. After a few days and some effort, you’ll finish your project and get even more amazed…1500 lines of code!!
+You’ll commit yourself to build your first not-so-trivial software project; maybe a stock management system built with some sort of web technology and data persistence with some cool database system. After a few days and some effort, you’ll finish your project and be even more amazed…1500 lines of code!
 
-Until happen the first problem with your system and you gotta fix it, and you will have to come back to it after 1 month without looking at its code and your first reaction, probably, will be this:
+That is, until the first problem comes up with your system and you have to fix it. You’ll probably be coming to your code without having looked at it for a month, and your first reaction, probably, will be this:
 
 ![images](/content/images/2015/06/scared.jpeg)
 
-And you start to suspect _“Well…maybe i’m not this Software Engineer thing yet”_
+And you’ll think “Well…maybe i’m not this Software Engineer thing yet”
 
-From this point, you start to study some software development principles, design patterns and how to write reusable and maintainable code and all this stuff. Uff…finally, now you’ll think _“i feel more professional now”_ and that finally you can deal with the industrial world, so you’ll come to a important step:
+From this point on, you will start to study some software developing principles, design patterns and writing reusable and maintainable code. Uff…finally, now you’ll think “I am more professional” and that finally you can deal with the industry, so you’ll come to an important conclusion:
 
-### **“it’s time to get a software engineering internship”**
+> "It’s time to get a software engineering internship"
 
-Well, I will tell you the consequences from this important decision in 3 phases:
+Well, I will tell you the consequences of this important decision in 3 phases:
 
 ### Phase 1 — New technologies to study
 
-After a short search for a internship opportunity, a software company finally will hire you as an intern, and you, with all your experience dealing with code bases that you created by yourself _(getting the mark of even 2 thousand lines of code, wow!)_ will _think_ that you’re prepared… So your manager says some new stuff to study, so you can understand the technologies of the company: J2EE, JPA, Hibernate, JSF, HTTP, FTP, JavaScript, Jquery, AJAX among others, well, you’ll be a little shocked at first, that’s normal, but anyway, you, **strong programmer**, affirms _“it’s okay, i can learn it quickly”_
-
-what bring us to the big shock that is the phase 2…
+After a short search for internship opportunities, a software company will eventually hire you as an intern and you, with all your experience dealing with code bases that you created (after all, you hit that 2 thousand lines of code mark, wow!) will think that you’re prepared… Your manager will give you new technologies to study, so you can understand the technologies the company uses: J2EE, JPA, Hibernate, JSF, HTTP, FTP, JavaScript, Jquery, AJAX among others. Well, you’ll be a little shocked at first, that’s normal, but anyway, you, the strong programmer, thinks “it’s okay, i can learn it quickly”
+which brings us to the big shock that is phase 2.
 
 ### Phase 2— The company show to you their legacy systems
 
-Ok, then you studied every concept that were indicated to you to learn on **phase 1**, so, you, with all experience that you have _(because you wrote 2 thousand lines of code, right?)_, affirms _“ I’m ready to work with the company’s systems ”_, then, your manager shows to you their system that was written in java, **_10 years ago, with a total of 700 thousand lines of code without documentation_** and he says:
+Ok,so now you studied every concept that were given to in phase 1, and you think *"I’m ready to work with the company's systems"*. Then, your manager shows to you their system that was written with java, 10 years ago, with a total of 700,000 lines of code without documentation and he says:
 
-_— “You will be responsible by the maintenance of this system, here’s the code, study it, good luck!”_
+> "You will be responsible for the maintenance of this system, here’s the code, study it, good luck!"
 
-And you, _programmer_, looks to the code, runs the system, looks to the code again…and your _only_ reaction is:
+And you, the programmer, looks at the code, runs the system, looks at the code again... and your only reaction is:
 
 ![images](/content/images/2015/06/depressive.png)
 
-And this is the time that you’ll start to doubt about the universe’s laws. You’ll start to think that nothing makes sense anymore and all your knowledge was a lie…after all…
+And this is the moment when you question everything, even the laws of the universe... Nothing makes sense anymore and all you know is a lie:
 
-_“seriously, what the fuck is this? there’s no way to understand this code, it’s giant, messy, old and nothing makes sense” _— you think.
+> "seriously, what the **** is this? there’s no way that I can understand this code, it's giant, messy, old and nothing makes sense" — you think.
 
 ![This is what the code looks like to you](/content/images/2015/06/matrix.gif)
 
-And then, the desperation takes over your thoughts, you realize that everything you learnt on your classes and on _codecademy_ was very different of the real world systems, you don’t know where to start…but after read the code 10000000 times…you, in a **magic** way, gets to the **phase 3**.
+And then, the desperation takes over, you realize that everything you've learnt on your classes and on codecademy was very different from the real world systems and you don’t know where to start. But after reading the code 10000000 times, you, in a magical way, get to phase 3.
 
 ### Phase 3— The discovery
 
-After much effort and lost nights, you, magically, starts to see patterns in these many lines of code, you start to see a logical flow and the most important thing:
+After much effort and many sleepless nights, you, start  to see the patterns in this many lines of code; you start to see the logical flow and the most important thing:
 
-### You start to realize that even a uncommented code has the power to tell you a story
+**You start to realize that even a code base without documentation has the power to tell you a story.**
 
-_“A story? how is that possible?”_
+> "A story? how is that possible?"
 
-Exactly, the more time you spent there trying to understand the code, more you started to see **patterns**, it’s like the code could talk by itself, telling what problems they were trying to solve, it’s like you were present at that time when the old engineers were doing a _brainstorm_ to find the solution to certain problem
+Exactly; the more time you spend there trying to understand the code, more you start to see patterns.  You feel like the code could talk and  tell what problems it is trying to solve; like you were present while the old engineers were brainstorming to find the solution to these problems.
 
-And you, young future engineer, start to see the logical flow inside those 700 thousand lines of code, and strange as it may sound, you start to mentally talk with the code, and the most amazing, the code starts to answer to you, and it gives you tips and paths to follow so you can understand it better.
+So you, the  young prospective engineer, start to see the logical flow in those 700,000 lines of code, and as strange as it may sound, you start to talk with the code in your head. And the most amazing part of it is that the code answers to you, gives you tips and paths to follow so you can understand it better.
 
-And suddenly you reached a state of mental ecstasy, so all your powers got back to your hands and all this messy and dirty code starts to make sense and gain shape:
+Suddenly you are in a state of ecstasy; you have the power over this messy and dirty code, because it makes sense and gains shape:
 
 ![images](/content/images/2015/06/matrix2.jpeg)
 
-And then, the following quote from _Eric Filson_ makes a huge sense in your life:
+And then, this quote from Eric Filson makes a lot of sense:
 
-### _“The art of programming is finding patterns where others see only chaos”_
+> *The art of programming is finding patterns where others see only chaos*
 
-Yes, this is where you really start your love story with the art of software writing, is where you create your extreme connection between your mind and the code, is where you, temporarily, disconnect from the real world and connect yourself to new others universes: **Your systems**.
+Yes, this is where your true love story with the art and science of software engineering begins, this is when you build your connection between your mind and code, it’s when you disconnect from the real world and connect yourself to new other universes: **your systems**.
 
-Where new laws are created and you understand all of them, yes, all of them. Universes which you have total control and you like it. At this moment is created an emotional bond between you and the system, you created it, you own your own universe, use it with responsability, after all, thousand people depend on it.
-
-**No matter what happen, don’t give up to understand the logical flow of your new universe, the key to this comprehension is to stay mentally connected to the system, feel it, live it, walk inside it just like the processor, step by step, line by line, command by command, trust me**
+No matter what happens, don't give up your attempt to understand the logical flow of your new universe. The key for this comprehension is to stay mentally connected to the system, feel it, live it, walk inside it just like the processor, step by step, line by line, command by command,  and trust me:
 
 ## **You will find the pattern inside the chaos.**
