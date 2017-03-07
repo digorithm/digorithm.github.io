@@ -30,7 +30,8 @@
 
 @include media-query($medium-screen){
 .post-content {
-  max-width:55%;
+  max-width:57%;
+  padding-left: 5%;
 }
 }
 
