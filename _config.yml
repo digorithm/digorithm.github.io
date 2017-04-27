@@ -24,7 +24,12 @@ excerpt_separator: <!--more-->
 permalink:         /articles/:year-:month/:title
 
 gems: [jekyll-paginate]
-
+pages_list:
+  About: '/about'
+  Archive: '/archive'
+  Categories: '/categories'
+  Projects: '/projects'
+  Publications: '/publications'
 kramdown:
   auto_ids: true
   footnote_nr: 1

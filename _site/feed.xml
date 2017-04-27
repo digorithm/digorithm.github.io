@@ -3,11 +3,11 @@
   <channel>
     <title>Rodrigo Araujo</title>
     <description>Thoughts and stories on computer science, software engineering and mathematics</description>
-    <link>/</link>
-    <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 27 Apr 2017 01:15:26 +0000</pubDate>
-    <lastBuildDate>Thu, 27 Apr 2017 01:15:26 +0000</lastBuildDate>
-    <generator>Jekyll v3.1.3</generator>
+    <link>http://localhost:4000/</link>
+    <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Thu, 27 Apr 2017 17:32:04 +0000</pubDate>
+    <lastBuildDate>Thu, 27 Apr 2017 17:32:04 +0000</lastBuildDate>
+    <generator>Jekyll v3.4.3</generator>
     
       <item>
         <title>Thoughts on Visualizing Software Architecture</title>
@@ -59,8 +59,8 @@
 &lt;p&gt;Though, I still have many questions and doubts about this, I can’t stop overthinking it, so I’m extremely open to any discussion about this.&lt;/p&gt;
 </description>
         <pubDate>Tue, 08 Dec 2015 00:00:00 +0000</pubDate>
-        <link>/post/thoughts-visualizing-software-arch</link>
-        <guid isPermaLink="true">/post/thoughts-visualizing-software-arch</guid>
+        <link>http://localhost:4000/post/thoughts-visualizing-software-arch</link>
+        <guid isPermaLink="true">http://localhost:4000/post/thoughts-visualizing-software-arch</guid>
         
         <category>architecture</category>
         
@@ -233,9 +233,9 @@ It’s fair simple, isn’t it? The problem arises when the data isn’t linearl
               &lt;span class=&quot;c&quot;&gt;# &amp;gt; calculate error rate (t - o)&lt;/span&gt;
               &lt;span class=&quot;n&quot;&gt;error_rate&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;output&lt;/span&gt;
               &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;errors&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;append&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;error_rate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-              &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&#39;the X: &#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;X&lt;/span&gt;
-              &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&#39;output: &#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;output&lt;/span&gt;
-              &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&#39;correct target: &#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;
+              &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'the X: '&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;X&lt;/span&gt;
+              &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'output: '&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;output&lt;/span&gt;
+              &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'correct target: '&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;
               &lt;span class=&quot;c&quot;&gt;# &amp;gt; apply learning rule which will update weights&lt;/span&gt;
               &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;weights&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;learning_rate&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;error_rate&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;X&lt;/span&gt;
 
@@ -257,8 +257,8 @@ It’s fair simple, isn’t it? The problem arises when the data isn’t linearl
   &lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;train&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;training_data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
   &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;predict&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
   &lt;span class=&quot;n&quot;&gt;plt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;plot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;errors&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;plt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ylabel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&#39;errors&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;plt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;xlabel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&#39;epochs&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;plt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ylabel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'errors'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;plt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;xlabel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'epochs'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
   &lt;span class=&quot;n&quot;&gt;plt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;show&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
 
 &lt;/code&gt;&lt;/pre&gt;
@@ -270,8 +270,8 @@ It’s fair simple, isn’t it? The problem arises when the data isn’t linearl
 
 </description>
         <pubDate>Thu, 16 Jul 2015 00:00:00 +0000</pubDate>
-        <link>/post/neural-computation-pt1</link>
-        <guid isPermaLink="true">/post/neural-computation-pt1</guid>
+        <link>http://localhost:4000/post/neural-computation-pt1</link>
+        <guid isPermaLink="true">http://localhost:4000/post/neural-computation-pt1</guid>
         
         <category>machine learning</category>
         
@@ -320,7 +320,7 @@ It’s fair simple, isn’t it? The problem arises when the data isn’t linearl
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    from sklearn.pipeline import Pipeline
     from sklearn.svm import SVC
     from sklearn.decomposition import PCA
-    estimators = [(&#39;reduce_dim&#39;, PCA()), (&#39;svm&#39;, SVC())]
+    estimators = [('reduce_dim', PCA()), ('svm', SVC())]
     clf = Pipeline(estimators)
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
@@ -427,15 +427,15 @@ from sklearn.cross_validation import train_test_split
 from sklearn.cross_validation import cross_val_score
 from sklearn.metrics import classification_report
 
-data = load_files(&#39;../txt_sentoken/&#39;)
+data = load_files('../txt_sentoken/')
 
 X_train, X_test, y_train, y_test = train_test_split(data.data, data.target, test_size=0.5, random_state=0)
 
 pipeline = make_pipeline(TfidfVectorizer(sublinear_tf=True, max_features=10000), LinearSVC())
 
 parameters = {
-        &#39;tfidfvectorizer__ngram_range&#39;: [(1,1), (1,2)],
-        &#39;linearsvc__C&#39;:(.01,.1,1),
+        'tfidfvectorizer__ngram_range': [(1,1), (1,2)],
+        'linearsvc__C':(.01,.1,1),
         }
 
 grid_search = GridSearchCV(pipeline, parameters, n_jobs=-1) 
@@ -491,8 +491,8 @@ avg / total       0.87      0.87      0.87      1000
 &lt;p&gt;Possible improvements could be: find and extracting new features, to do this, we gotta understand better this data, extract more information about it. Trying new algorithms and techniques such as Ensemble, Classifiers Combination or Fusion. Stemming and Stop Words could improve it too. If you solved this problem and got a better result, share it with me, I’m very curious about how to improve this!&lt;/p&gt;
 </description>
         <pubDate>Thu, 02 Jul 2015 00:00:00 +0000</pubDate>
-        <link>/post/case-study-sentiment-analysis-movie-reviews</link>
-        <guid isPermaLink="true">/post/case-study-sentiment-analysis-movie-reviews</guid>
+        <link>http://localhost:4000/post/case-study-sentiment-analysis-movie-reviews</link>
+        <guid isPermaLink="true">http://localhost:4000/post/case-study-sentiment-analysis-movie-reviews</guid>
         
         <category>machine learning</category>
         
@@ -663,8 +663,8 @@ So, extracting those features, &lt;strong&gt;this&lt;/strong&gt; will be our tra
 
 </description>
         <pubDate>Tue, 30 Jun 2015 00:00:00 +0000</pubDate>
-        <link>/post/generic-architecture-text-classification</link>
-        <guid isPermaLink="true">/post/generic-architecture-text-classification</guid>
+        <link>http://localhost:4000/post/generic-architecture-text-classification</link>
+        <guid isPermaLink="true">http://localhost:4000/post/generic-architecture-text-classification</guid>
         
         <category>machine learning</category>
         
@@ -810,8 +810,8 @@ def rotate_original_solution_with_reverse(arr, i):
     1 0.187 0.187 0.210 0.210 2_1b.py:30(rotate_original_solution_with_reverse)
     1 0.113 0.113 0.322 0.322 string:1 module
     1 0.000 0.000 0.000 0.000 {len}
-    1 0.000 0.000 0.000 0.000 {method &#39;disable&#39; of &#39;_lsprof.Profiler&#39; objects}
-    3 0.023 0.008 0.023 0.008 {method &#39;reverse&#39; of &#39;list&#39; objects}
+    1 0.000 0.000 0.000 0.000 {method 'disable' of '_lsprof.Profiler' objects}
+    3 0.023 0.008 0.023 0.008 {method 'reverse' of 'list' objects}
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
@@ -832,7 +832,7 @@ Ordered by: standard name
 ncalls tottime percall cumtime percall filename:lineno(function)
 1 0.238 0.238 0.238 0.238 2_1b.py:45(rotate_pythonic_way)
 1 0.056 0.056 0.295 0.295 string:1(module)
-1 0.000 0.000 0.000 0.000 {method &#39;disable&#39; of &#39;_lsprof.Profiler&#39; objects}
+1 0.000 0.000 0.000 0.000 {method 'disable' of '_lsprof.Profiler' objects}
 
 &lt;/code&gt;
 &lt;/pre&gt;
@@ -854,9 +854,9 @@ Ordered by: standard name
 ncalls tottime percall cumtime percall filename:lineno(function)
 1 0.000 0.000 0.013 0.013 2_1b.py:49(rotate_pop_append)
 1 0.000 0.000 0.013 0.013 string:1(module)
-1 0.000 0.000 0.000 0.000 {method &#39;append&#39; of &#39;list&#39; objects}
-1 0.000 0.000 0.000 0.000 {method &#39;disable&#39; of &#39;_lsprof.Profiler&#39; objects}
-1 0.013 0.013 0.013 0.013 {method &#39;pop&#39; of &#39;list&#39; objects}
+1 0.000 0.000 0.000 0.000 {method 'append' of 'list' objects}
+1 0.000 0.000 0.000 0.000 {method 'disable' of '_lsprof.Profiler' objects}
+1 0.013 0.013 0.013 0.013 {method 'pop' of 'list' objects}
 &lt;/code&gt;
 &lt;/pre&gt;
 
@@ -867,8 +867,8 @@ ncalls tottime percall cumtime percall filename:lineno(function)
 &lt;p&gt;So, if you’re willing to reverse a list with Python, go with List.reverse() method (unless you want the iterators to do something), and if you want to rotate a vector, go with pop/append, it looks faster.&lt;/p&gt;
 </description>
         <pubDate>Fri, 19 Jun 2015 00:00:00 +0000</pubDate>
-        <link>/post/case-study-python-performance-rotating-vector</link>
-        <guid isPermaLink="true">/post/case-study-python-performance-rotating-vector</guid>
+        <link>http://localhost:4000/post/case-study-python-performance-rotating-vector</link>
+        <guid isPermaLink="true">http://localhost:4000/post/case-study-python-performance-rotating-vector</guid>
         
         
         <category>algorithms</category>
@@ -917,10 +917,10 @@ ncalls tottime percall cumtime percall filename:lineno(function)
     import redis
 
     app = Flask(__name__)
-    url = &#39;mysql+pymysql://username:password@ip/dbname&#39;
-    app.config[&#39;SQLALCHEMY_DATABASE_URI&#39;] = url
+    url = 'mysql+pymysql://username:password@ip/dbname'
+    app.config['SQLALCHEMY_DATABASE_URI'] = url
     db = SQLAlchemy(app)
-    cache = redis.StrictRedis(host=&#39;localhost&#39;, port=6379, db=0)
+    cache = redis.StrictRedis(host='localhost', port=6379, db=0)
 
     #improvement: model could stay in a different file
     class User(db.Model):
@@ -933,29 +933,29 @@ ncalls tottime percall cumtime percall filename:lineno(function)
             self.email = email
 
         def __repr__(self):
-            return &#39;&#39; % self.username
+            return '' % self.username
 
     def createUsers():
             for x in xrange(0,100000):
-                user = User(&#39;test&#39;, &#39;test&#39;)
+                user = User('test', 'test')
                 db.session.add(user)
             db.session.commit()
 
     def getUsers():
-            users = cache.get(&#39;users&#39;)
+            users = cache.get('users')
             if not users:
                 users = User.query.all()
-                cache.set(&#39;users&#39;, users)
+                cache.set('users', users)
 
     # improvement: views/routing should stay in a different file
-    @app.route(&#39;/&#39;)
+    @app.route('/')
     def hello_world():
         getUsers()
-        return &#39;Hello Worldd!&#39;
+        return 'Hello Worldd!'
 
-    if __name__ == &#39;__main__&#39;:
+    if __name__ == '__main__':
         app.debug=True
-        app.run(host=&#39;0.0.0.0&#39;)
+        app.run(host='0.0.0.0')
 &lt;/code&gt;
 &lt;/pre&gt;
 
@@ -978,8 +978,8 @@ ncalls tottime percall cumtime percall filename:lineno(function)
 &lt;p&gt;And it can save a lot of computational resources and human time. Now, with this logic applied to one method (the method to get users), we can apply it to whichever method we want, or we can even create a generic decorator and annotate the methods that we want do the caching!!&lt;/p&gt;
 </description>
         <pubDate>Mon, 25 May 2015 00:00:00 +0000</pubDate>
-        <link>/post/web-scaling-using-redis-as-cache</link>
-        <guid isPermaLink="true">/post/web-scaling-using-redis-as-cache</guid>
+        <link>http://localhost:4000/post/web-scaling-using-redis-as-cache</link>
+        <guid isPermaLink="true">http://localhost:4000/post/web-scaling-using-redis-as-cache</guid>
         
         <category>redis</category>
         
@@ -1093,39 +1093,39 @@ connection.CloseConnection()
 
 &lt;span class=&quot;n&quot;&gt;books&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
     &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;s&quot;&gt;&#39;id&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-        &lt;span class=&quot;s&quot;&gt;&#39;title&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;u&#39;Game of Thrones&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-        &lt;span class=&quot;s&quot;&gt;&#39;description&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;u&#39;Cool dragons&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; 
-        &lt;span class=&quot;s&quot;&gt;&#39;finished&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;False&lt;/span&gt;
+        &lt;span class=&quot;s&quot;&gt;'id'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;s&quot;&gt;'title'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;u'Game of Thrones'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;s&quot;&gt;'description'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;u'Cool dragons'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; 
+        &lt;span class=&quot;s&quot;&gt;'finished'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;False&lt;/span&gt;
     &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
     &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;s&quot;&gt;&#39;id&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-        &lt;span class=&quot;s&quot;&gt;&#39;title&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;u&#39;50 shadows of grey&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-        &lt;span class=&quot;s&quot;&gt;&#39;description&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;u&#39;It start as bullshit, end as a huge bullshit&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; 
-        &lt;span class=&quot;s&quot;&gt;&#39;finished&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;
+        &lt;span class=&quot;s&quot;&gt;'id'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;s&quot;&gt;'title'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;u'50 shadows of grey'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;s&quot;&gt;'description'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;u'It start as bullshit, end as a huge bullshit'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; 
+        &lt;span class=&quot;s&quot;&gt;'finished'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;
     &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
 
-&lt;span class=&quot;nd&quot;&gt;@app.route&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&#39;/bookapi/v1.0/books/&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;methods&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&#39;GET&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
+&lt;span class=&quot;nd&quot;&gt;@app.route&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'/bookapi/v1.0/books/'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;methods&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'GET'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;get_books&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;():&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;jsonify&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&#39;books&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;books&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;jsonify&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'books'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;books&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
 
-&lt;span class=&quot;nd&quot;&gt;@app.route&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&#39;/bookapi/v1.0/books&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;methods&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&#39;POST&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
+&lt;span class=&quot;nd&quot;&gt;@app.route&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'/bookapi/v1.0/books'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;methods&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'POST'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;create_book&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;():&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;not&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;request&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;json&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;or&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;not&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&#39;title&#39;&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;request&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;json&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;not&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;request&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;json&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;or&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;not&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'title'&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;request&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;json&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
         &lt;span class=&quot;n&quot;&gt;abort&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;404&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 
     &lt;span class=&quot;n&quot;&gt;book&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;s&quot;&gt;&#39;id&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;books&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&#39;id&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-            &lt;span class=&quot;s&quot;&gt;&#39;title&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;request&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;json&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&#39;title&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
-            &lt;span class=&quot;s&quot;&gt;&#39;description&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;request&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;json&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&#39;description&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
-            &lt;span class=&quot;s&quot;&gt;&#39;finished&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;False&lt;/span&gt;
+            &lt;span class=&quot;s&quot;&gt;'id'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;books&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'id'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+            &lt;span class=&quot;s&quot;&gt;'title'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;request&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;json&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'title'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+            &lt;span class=&quot;s&quot;&gt;'description'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;request&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;json&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'description'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+            &lt;span class=&quot;s&quot;&gt;'finished'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;False&lt;/span&gt;
             &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 
     &lt;span class=&quot;n&quot;&gt;books&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;append&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;book&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;jsonify&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&#39;book&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;book&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}),&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;201&lt;/span&gt; 
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;jsonify&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'book'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;book&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}),&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;201&lt;/span&gt; 
 
-&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;__name__&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&#39;__main__&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;__name__&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'__main__'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
     &lt;span class=&quot;n&quot;&gt;app&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;debug&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
@@ -1137,8 +1137,8 @@ connection.CloseConnection()
 &lt;p&gt;Of course, many improvements and extensions (&lt;em&gt;there are infinity possibilities&lt;/em&gt;) can be made to this code, but, here’s a skeleton of the idea of an API, it’s just a start. One good practice it’s to &lt;em&gt;not&lt;/em&gt; return the ID of the resource, but return just its URI, which is surely a great idea. Another good practice is to ask authentication in every HTTP request, so your API won’t be exposed to everybody. There are, indeed, endless improvements, but in this code, you, that are completely beginner to the API’s concept, can now understand what’s going on underneath and start planning and building your own API using Flask.&lt;/p&gt;
 </description>
         <pubDate>Wed, 22 Apr 2015 00:00:00 +0000</pubDate>
-        <link>/post/build-your-first-rest-api-python</link>
-        <guid isPermaLink="true">/post/build-your-first-rest-api-python</guid>
+        <link>http://localhost:4000/post/build-your-first-rest-api-python</link>
+        <guid isPermaLink="true">http://localhost:4000/post/build-your-first-rest-api-python</guid>
         
         <category>api</category>
         
@@ -1184,8 +1184,8 @@ connection.CloseConnection()
 &lt;pre&gt;
 &lt;code class=&quot;python hljs&quot;&gt;
 import pandas as pd
-reds = pd.read_csv(&#39;winequality-red.csv&#39;, sep=&#39;;&#39;)
-whites = pd.read_csv(&#39;winequality-white.csv&#39;, sep=&#39;;&#39;)
+reds = pd.read_csv('winequality-red.csv', sep=';')
+whites = pd.read_csv('winequality-white.csv', sep=';')
 &lt;/code&gt;
 &lt;/pre&gt;
 
@@ -1222,7 +1222,7 @@ reds.head()
 &lt;pre&gt;
 &lt;code class=&quot;python hljs&quot;&gt;
 
-&amp;lt;class &#39;pandas.core.frame.dataframe&#39;=&quot;&quot;&amp;gt;Int64Index: 5 entries, 0 to 4
+&amp;lt;class 'pandas.core.frame.dataframe'=&quot;&quot;&amp;gt;Int64Index: 5 entries, 0 to 4
 Data columns:
 fixed acidity           5  non-null values
 volatile acidity        5  non-null values
@@ -1249,10 +1249,10 @@ dtypes: float64(11), int64(1), object(1)&amp;lt;/class&amp;gt;
 &lt;pre&gt;
 &lt;code class=&quot;python hljs&quot;&gt;
 x = plt.subplots(figsize=(10, 5))
-plt.plot(reds.index, reds.get(&quot;fixed acidity&quot;), &#39;ro&#39;)
-ax.set_title(&#39;Wines vs fixed acidity&#39;)
-ax.set_xlabel(&#39;red wine index&#39;)
-ax.set_ylabel(&#39;Fixed Acidity&#39;)
+plt.plot(reds.index, reds.get(&quot;fixed acidity&quot;), 'ro')
+ax.set_title('Wines vs fixed acidity')
+ax.set_xlabel('red wine index')
+ax.set_ylabel('Fixed Acidity')
 plt.show()
 &lt;/code&gt;
 &lt;/pre&gt;
@@ -1265,8 +1265,8 @@ plt.show()
 
 &lt;pre&gt;
 &lt;code class=&quot;python hljs&quot;&gt;
-reds[&#39;kind&#39;] = &#39;red&#39;
-whites[&#39;kind&#39;] = &#39;white&#39;
+reds['kind'] = 'red'
+whites['kind'] = 'white'
 &lt;/code&gt;
 &lt;/pre&gt;
 
@@ -1284,7 +1284,7 @@ y = wines.kind
 
 &lt;pre&gt;
 &lt;code class=&quot;python hljs&quot;&gt;
-y = y.apply(lambda val: 0 if val == &#39;white&#39; else 1)
+y = y.apply(lambda val: 0 if val == 'white' else 1)
 &lt;/code&gt;
 &lt;/pre&gt;
 
@@ -1319,8 +1319,8 @@ print scores.mean(), scores.std()
 &lt;p&gt;And that’s the exactly the precision of the algorithm over the given dataset, &lt;strong&gt;98% of precision&lt;/strong&gt;, which is quite good! Now, for example, we can save this trained classifier and use it for future classifications of incoming data about wines that need to be classified as white or red, to do so, we just call the method &lt;em&gt;clf.predict(X)&lt;/em&gt; where this X will be the new wine’s data. simplicity at its best!&lt;/p&gt;
 </description>
         <pubDate>Tue, 31 Mar 2015 00:00:00 +0000</pubDate>
-        <link>/post/using-python-and-ai-to-predict-wine</link>
-        <guid isPermaLink="true">/post/using-python-and-ai-to-predict-wine</guid>
+        <link>http://localhost:4000/post/using-python-and-ai-to-predict-wine</link>
+        <guid isPermaLink="true">http://localhost:4000/post/using-python-and-ai-to-predict-wine</guid>
         
         <category>machine learning</category>
         
@@ -1704,8 +1704,8 @@ Now, the &lt;strong&gt;Gradient Descent Algorithm&lt;/strong&gt; &lt;em&gt;per s
 &lt;p&gt;&lt;em&gt;Thanks for reading!&lt;/em&gt;&lt;/p&gt;
 </description>
         <pubDate>Fri, 09 Jan 2015 00:00:00 +0000</pubDate>
-        <link>/articles/2015-01/Making-Your-Machine-Think-Learn-And-Predict-Gradient-Descent-Algorithm-in-Java</link>
-        <guid isPermaLink="true">/articles/2015-01/Making-Your-Machine-Think-Learn-And-Predict-Gradient-Descent-Algorithm-in-Java</guid>
+        <link>http://localhost:4000/articles/2015-01/Making-Your-Machine-Think-Learn-And-Predict-Gradient-Descent-Algorithm-in-Java</link>
+        <guid isPermaLink="true">http://localhost:4000/articles/2015-01/Making-Your-Machine-Think-Learn-And-Predict-Gradient-Descent-Algorithm-in-Java</guid>
         
         <category>machine learning</category>
         
@@ -1793,8 +1793,8 @@ Now, the &lt;strong&gt;Gradient Descent Algorithm&lt;/strong&gt; &lt;em&gt;per s
 &lt;p&gt;Oh, one more thing: &lt;strong&gt;Do not ever go Extreme Go Horse, really.&lt;/strong&gt;&lt;/p&gt;
 </description>
         <pubDate>Tue, 06 Jan 2015 00:00:00 +0000</pubDate>
-        <link>/post/learn-design-patterns</link>
-        <guid isPermaLink="true">/post/learn-design-patterns</guid>
+        <link>http://localhost:4000/post/learn-design-patterns</link>
+        <guid isPermaLink="true">http://localhost:4000/post/learn-design-patterns</guid>
         
         <category>design patterns</category>
         

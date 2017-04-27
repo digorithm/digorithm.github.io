@@ -1135,7 +1135,7 @@ p {
 .btn {
   display: inline-block;
   margin-bottom: 20px;
-  padding: 8px 20px;
+  padding: 2px 8px;
   font-size: 0.875em;
   font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: 700;
