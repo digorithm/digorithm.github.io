@@ -1,17 +1,27 @@
 ---
 layout: page
-title:  publications
+title: Publications
 permalink: /publications/
 ---
 
-## Peer-reviewed papers
+---
+### Peer-reviewed papers
 
 [1] ALVES, N. S. R.; ARAÚJO, RODRIGO. S.; SPÍNOLA, RODRIGO O. . A Collaborative Computational Infrastructure for Supporting Technical Debt Knowledge Sharing and Evolution. In: Americas Conference on Information Systems, 2015, Puerto Rico. 2015 Americas Conference on Information Systems, 2015.
 
 
-## Talks
+---
+### Talks
 
-[Redis - Escalando sua aplicação para suportar milhões (portuguese)](http://slides.com/rodrigoaraujo-1/redis#/)
+[Theories, tools and research methods in program comprehension: past, present and future](http://slides.com/rodrigoaraujo-1/theories-tools-and-research-methods-in-program-comprehension-past-present-and-future)
+
+[Rest API in Practice: What, Why and how](http://slides.com/rodrigoaraujo-1/rest-api-in-practice-what-why-and-how)
+
+[NetKat: Semantic Foundation for Networks](/content/netkat.pdf)
+
+[I SECOMTEC - Construindo sistemas inteligentes no maior site juridico do mundo (portuguese)](http://slides.com/rodrigoaraujo-1/secomtectalk)
+
+[Redis: Escalando sua aplicação para suportar milhões (portuguese)](http://slides.com/rodrigoaraujo-1/redis#/)
 
 [Why Functional Programming Matters (portuguese)](https://speakerdeck.com/digorithm/why-functional-programming-matters-portuguese-version)
 
@@ -21,9 +31,4 @@ permalink: /publications/
 
 [TEDx - Jusbrasil's Machine Learning Architecture To Predict Document's Labels (English)](http://slides.com/rodrigoaraujo-1/deck)
 
-## Released Products/Codes/Projects
-
-[TDWiki - The Technical Debt Wiki](http://www.tdwiki.com/)
-
-TDWiki is a collaborative computational infrastructure for supporting technical debt knowledge sharing and evolution. It was built to be an autonomous system to extract data about researches being made on Technical Debt field and provide Intelligence over this data and visualizations of this information, also it has a social/collaborative aspect, where Researchers/Engineers/Managers can help to grow the knowledge
 

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{% include head.html %}
+
+<body>
+  <div class="row">
+    <div id="sidebar" class="col s12 m3">
+      <div class="table cover">
+        {% include sidebar.html %}
+      </div>
+    </div>
+    <div class="col s12 m6">
+      <div class="post-listing">
+        <div class="post-content">
+        <h1 style="max-width: 45%;">{{ page.title }}</h1>
+        {{ content }}
+        {% include footer.html %}
+        </div>
+
+      </div>
+    </div>
+    <div class="col s12 m3">
+    <div id="portfolionav">
+        hi
+      </div>
+    </div>
+  </div>
+  {% include js.html %}
+  <script>
+ $(function() {
+    var $sidebar   = $("#sidebar"),
+        $window    = $(window),
+        offset     = $sidebar.offset(),
+        topPadding = 0;
+
+    $window.scroll(function() {
+        if ($window.scrollTop() > offset.top) {
+            $("#sidebar").css("margin-top", $window.scrollTop() - offset.top + topPadding);
+        } else {
+            $sidebar.stop().animate({
+                marginTop: 0
+            });
+        }
+    });
+});
+  </script>
+</body>
+</html>
