@@ -81,7 +81,24 @@
   src: url("/fonts/AvenirLTStd-Book.otf"); }
 @font-face {
   font-family: "lora";
-  src: url("/fonts/Lora-Regular.ttf"); }
+  src: url("/fonts/Lora-Regular.ttf");
+  font-weight: normal;
+  font-style: normal; }
+@font-face {
+  font-family: "lora";
+  src: url("/fonts/Lora-Bold.ttf");
+  font-weight: bold;
+  font-style: normal; }
+@font-face {
+  font-family: "lora";
+  src: url("/fonts/Lora-Italic.ttf");
+  font-weight: normal;
+  font-style: italic; }
+@font-face {
+  font-family: "lora";
+  src: url("/fonts/Lora-BoldItalic.ttf");
+  font-weight: bold;
+  font-style: italic; }
 @font-face {
   font-family: "proximanova";
   src: url("/fonts/proximanova.otf"); }
@@ -556,11 +573,19 @@ footer {
 .related-articles {
   margin-top: 2em; }
   .related-articles h4 {
-    font-family: "lora", "Helvetica Neue", Helvetica, Arial, sans-serif; }
+    font-family: "avenir", "Helvetica Neue", Helvetica, Arial, sans-serif; }
   .related-articles ul {
     margin: 0;
     padding: 0;
     list-style: none; }
+
+sup {
+  vertical-align: super;
+  font-size: smaller; }
+
+.footnote {
+  font-size: 13px;
+  font-style: italic; }
 
 /**
   * Helpers
@@ -1050,12 +1075,12 @@ footer {
    ========================================================================== */
 html {
   line-height: 1.5;
-  font-family: "lora", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "avenir", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: normal;
   color: #512906;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
-  font-size: 17px; }
+  font-size: 16px; }
 
 blockquote {
   display: block;
@@ -1119,7 +1144,7 @@ em {
   font-style: italic; }
 
 strong {
-  font-weight: 600; }
+  font-weight: bold; }
 
 small,
 .small {
@@ -1141,7 +1166,7 @@ p {
   margin-bottom: 20px;
   padding: 2px 8px;
   font-size: 0.875em;
-  font-family: "lora", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "avenir", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: 700;
   background-color: #99673A;
   color: #fff;
@@ -1209,7 +1234,7 @@ p {
 pre, code {
   font-family: "Roboto Mono", "Courier New", monospace;
   font-size: 0.9em;
-  font-size: 14px; }
+  font-size: 13px; }
 
 code {
   border-radius: 2px;
