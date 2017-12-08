@@ -5,7 +5,7 @@
 #
 title: Rodrigo Araujo
 email: rod.dearaujo@gmail.com
-description: Thoughts and stories on computer science, software engineering and mathematics
+description: Thoughts on computer science, software engineering, distributed systems, and machine learning
 url: # the base hostname & protocol for your site
 
 
@@ -46,7 +46,7 @@ owner:
   name: Rodrigo Araujo
   avatar: leonids-logo.png
   job: "Computer scientist and SW Engineer"
-  bio: "Thoughts and stories on computer science, software engineering and mathematics"
+  bio: "Thoughts on computer science, software engineering, distributed systems, and machine learning"
   email: rod.dearaujo@gmail.com
   disqus-shortname:
   twitter: digorithm
