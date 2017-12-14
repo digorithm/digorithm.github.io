@@ -76,9 +76,23 @@
 @import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:600,400,400italic|Roboto+Mono);
 @import url("https://fonts.googleapis.com/css?family=Inconsolata");
 @import url("https://fonts.googleapis.com/css?family=Work+Sans");
+@import url("https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700");
 @font-face {
   font-family: "avenir";
   src: url("/fonts/AvenirLTStd-Book.otf"); }
+@font-face {
+  font-family: "avenir";
+  src: url("/fonts/AvenirLTStd-Heavy.otf");
+  font-weight: bold; }
+@font-face {
+  font-family: "avenir";
+  src: url("/fonts/AvenirLTStd-BookOblique.otf");
+  font-style: italic; }
+@font-face {
+  font-family: "avenir";
+  src: url("/fonts/AvenirLTStd-HeavyOblique.otf");
+  font-style: italic;
+  font-weight: bold; }
 @font-face {
   font-family: "lora";
   src: url("/fonts/Lora-Regular.ttf");
@@ -1080,7 +1094,7 @@ html {
   color: #512906;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
-  font-size: 16px; }
+  font-size: 18px; }
 
 blockquote {
   display: block;
@@ -1114,12 +1128,12 @@ h1 {
   margin: 1.25rem 0 1rem 0; }
 
 h2 {
-  font-size: 1.75rem;
-  margin: 0.875rem 0 0.7rem 0; }
-
-h3 {
   font-size: 1.5rem;
   margin: 0.75rem 0 0.6rem 0; }
+
+h3 {
+  font-size: 1.2rem;
+  margin: 0.6rem 0 0.48rem 0; }
 
 h4 {
   font-size: 1.2rem;
@@ -1234,7 +1248,7 @@ p {
 pre, code {
   font-family: "Roboto Mono", "Courier New", monospace;
   font-size: 0.9em;
-  font-size: 13px; }
+  font-size: 15px; }
 
 code {
   border-radius: 2px;
@@ -1384,12 +1398,12 @@ p {
   .cover-card .author_job {
     display: block;
     color: #BC8A5E;
-    font-size: 0.8em;
-    font-weight: 700;
+    font-size: 0.7em;
+    font-weight: 500;
     text-transform: uppercase;
     margin: -5px auto 10px; }
   .cover-card .author_bio {
-    font-size: 90%;
+    font-size: 80%;
     display: block; }
   @media only screen and (min-width: 992px) {
     .cover-card {
@@ -1422,7 +1436,7 @@ p {
     .nav-list .nav-item a {
       margin-top: 1em;
       text-transform: lowercase;
-      font-size: 85%;
+      font-size: 80%;
       color: #BC8A5E; }
       .nav-list .nav-item a:hover, .nav-list .nav-item a:focus {
         color: #d1af90; }
@@ -1528,7 +1542,10 @@ ul.tag-cloud {
     max-width: 50%;
     padding-left: 5%; } }
 .post-content h1 {
-  max-width: 100% !important; }
+  max-width: 100% !important;
+  line-height: 1.2em;
+  font-size: 32px;
+  font-family: "Libre Baskerville", Georgia; }
 
 .back-home a {
   font-size: 13px;
@@ -1699,3 +1716,6 @@ a.read-more {
     background-color: #fff;
     color: #5f99cf;
     border-color: #5f99cf; }
+
+ol {
+  color: black; }

@@ -37,6 +37,9 @@
 
 .post-content h1 {
   max-width: 100% !important;
+  line-height: 1.2em;
+  font-size: 32px;
+  font-family: "Libre Baskerville", Georgia;
 }
 
 // Post Section
@@ -255,4 +258,8 @@ a.read-more {
     color: #5f99cf;
     border-color: #5f99cf;
   }
+}
+
+ol {
+  color: black;
 }
