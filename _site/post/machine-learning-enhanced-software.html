@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <title>On machine learning enhanced software systems</title>
-  <meta name="description" content="I have been brewing up the idea of, somehow, using machine learning to improve software systems since 2016. It was pretty vague and broad, without an actiona...">
+  <meta name="description" content="I have been brewing the idea of using machine learning to improve software systems since 2016. It was pretty vague and broad, without an actionable plan. I j...">
 
   <!-- CSS files -->
   <link rel="stylesheet" href="http://localhost:4000/css/font-awesome.min.css">
@@ -126,83 +126,102 @@
         <h1 style="max-width: 45%;">On machine learning enhanced software systems</h1>
         <p style="max-width: 45%; font-size: 14px; font-style:italic;">December 13, 2017</p>
         <hr>
-        <p>I have been brewing up the idea of, somehow, using machine learning to improve software systems since 2016. It was pretty vague and broad, without an actionable plan. I just had the intuition; software configuration and tuning, especially after the adoption of microservices, was getting too complex.</p>
+        <p>I have been brewing the idea of using machine learning to improve software systems since 2016. It was pretty vague and broad, without an actionable plan. I just had the intuition — the software configuration and tuning, especially after the adoption of microservices, was getting too complex.</p>
 
-<p>This was not a recent concern, dating back to 2003, when Ganek and Corbi discussed the need for autonomic computing to handle the complexity of managing software systems. They noted that managing complex systems became too costly, labor-intensive, and prone to error due to the pressure engineers felt while maintaining them. This increased the potential of system outages with a concurrent impact on business [1].</p>
+<h3 id="the-increasing-complexity-of-configuring-and-tuning-systems">The increasing complexity of configuring and tuning systems</h3>
+<p>If you have enough experience in the software industry, then it’s very likely that you’ve struggled with either a configuration problem or a tuning problem.</p>
 
-<p>Even nowadays, most of the configurations and tuning of the systems are performed manually, often in run-time, which is known to be a very time consuming and risky practice. [1, 2, 3]</p>
+<p>Configuration and tuning problems are pretty common and can lead to really bad outages. They often occur when:</p>
 
-<p>The need for autonomic computing isn’t a new thing.</p>
+<ol>
+  <li>
+    <p>Some parts of the system are poorly or wrongly configured, or</p>
+  </li>
+  <li>
+    <p>A configuration that worked before now doesn’t work because the context of the system has changed.</p>
+  </li>
+</ol>
 
-<p>If most of these decisions to configure and tune the system are made based on the context – many different variables such as workload, number of instances of some services, resources usage, and more – why not delegate these tasks to something that excels at exactly that?</p>
+<p>Think of a number of database replicas and their writing schemes. Or in Postgresql, think of the number of shared buffers, effective cache size, and the min and max wal size.</p>
 
-<p>Machine learning sounds like a feasible tool for the job.</p>
+<p>If wrongly configured from the start, it won’t work in the given context, plain and simple. What’s more interesting, though, is if it’s <em>correctly</em> configured, it might work at a given time. But as the context changes — system workload, system resources usage, overall system architecture — the system will behave poorly. Or, even worse, an outage might happen.</p>
 
-<p>Since I started my Masters at the University of British Columbia I kept working on this idea, which seemed interesting although quite weird and, sometimes, unpractical and impossible to implement.</p>
+<p>This will, inevitably, lead to manually-performed operations and the creation of heuristics. In other words, it will lead to:</p>
+<blockquote>
+  <p>Oh, we should set X to A, when workload is T, but it should be A+10 when workload is T+100 and we have system resources usage above 80%… I guess. Or maybe let’s just up a queue in front of this component, queues solve everything, right?</p>
+</blockquote>
 
-<p>To my surprise, I realized I wasn’t alone and some very interesting people were working on these ideas, meaning that it might not be that weird, unpractical, and impossible.</p>
+<p>Now multiply this scenario by tens or hundreds of services. Think for a second about the cognitive burden resulting from these configurations.</p>
 
-<p>A few day ago, Jeff Dean – a man that I admire a lot – <a href="https://news.ycombinator.com/item?id=15892956">gave a talk at NIPS 2017 talking about machine learning for systems</a>, where he stated:</p>
+<p>This is not a new concern. In 2003, Ganek and Corbi <a href="http://ieeexplore.ieee.org/document/5386835/?reload=true">discussed</a> the need for autonomic computing to handle the complexity of managing software systems. They noted that managing complex systems became too costly, labor-intensive, and prone to error due to the pressure engineers felt while maintaining them. This increased the potential of system outages with a concurrent impact on business.</p>
 
+<p>Even nowadays, most of the configurations and tuning of the systems are performed manually, often in run-time, which is known to be a very time-consuming and risky practice. Check out these two links (<a href="https://link.springer.com/book/10.1007/978-3-642-35813-5">here</a> and <a href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.90.8651&amp;rep=rep1&amp;type=pdf">here</a>) to read more about it.</p>
+
+<p><img src="https://cdn-images-1.medium.com/max/2000/1*6Kh0EXVHQ9zmau8kLs4pzQ.jpeg" alt="" /></p>
+
+<h3 id="the-need-for-autonomic-computing">The need for autonomic computing</h3>
+
+<p>Most decisions to configure and tune the system are made based on the context — there are many different variables such as workload, number of instances of some services, resources usage, and more. So why not delegate these tasks to something that excels at exactly that? <em>Machine learning sounds like a feasible tool for the job.</em></p>
+
+<p>After starting my Masters at the University of British Columbia, I kept working on this idea. It seemed interesting although quite weird, and, sometimes, unpractical and impossible to implement.</p>
+
+<p>To my surprise, I realized I wasn’t alone. Some very interesting people were working on these ideas — so it might not be that weird, unpractical, and impossible.</p>
+
+<p>Recently, Jeff Dean — a man that I admire a lot — <a href="https://news.ycombinator.com/item?id=15892956">gave a talk at NIPS 2017 talking about machine learning for systems</a>, where he stated:</p>
 <blockquote>
   <p>Learning should be used throughout our computing systems. Traditional low-level systems code (operating systems, compilers, storage systems) does not make extensive use of machine learning today. This should change!</p>
 </blockquote>
 
 <blockquote>
-  <p>Computer systems are filled with heuristics: Compilers, networking code, operating systems. Heuristics have to work well “in general case”. [They] generally don’t adapt to actual pattern of usage and  don’t take into account available context.</p>
-</blockquote>
-
-<blockquote>
-  <p>Meta-learn everything: learning placement decisions, learning fast kernel implementations, learning optimization update rules, learning input, preprocessing pipeline steps, learning activation functions.</p>
-</blockquote>
-
-<blockquote>
-  <p>Keys for success in these settings: (1) Having a numeric metric to measure and optimize; (2) Having a clean interface to easily integrate learning into all of these kinds of systems.</p>
+  <p>Computer Systems are filled with heuristics: compilers, networking code, operating systems. Heuristics have to work well “in general case”. [They] generally don’t adapt to actual pattern of usage and don’t take into account available context</p>
 </blockquote>
 
 <blockquote>
   <p>Learning in the core of all of our computer systems will make them better/more adaptive.</p>
 </blockquote>
 
-<p>I was in complete awe when I read this. One of the engineers I admire the most was talking about the very same ideas I’ve been thinking and working on.</p>
+<p>I was in complete awe when I read this. One of the engineers I admire the most was talking about the very same ideas I’ve been thinking about and working on.</p>
 
-<p>This led me to think that it’s not only interesting but natural to think about enhancing software systems with machine learning. Throughout the whole software stack we have many heuristics that, although they work well, could be improved by machine learning.</p>
+<p>This led me to think that it’s not only interesting but <strong>natural to think about enhancing software systems with machine learning.</strong> Throughout the whole software stack, we have many heuristics that, although they work well, could be improved by machine learning.</p>
 
 <p>Is it challenging and potentially risky? Yes, most definitely. Especially given that interpretability, apparently, has become a secondary goal in the machine learning community. How can we interpret and explain the decisions made by neural nets?</p>
 
-<p>However, with that said, these obstacles shouldn’t hinder scientific and technological progress. <a href="https://arxiv.org/pdf/1712.01208.pdf">Yes, we should question old paradigms</a> and try to improve things.</p>
+<p>However, with that said, these obstacles shouldn’t hinder scientific and technological progress. <a href="https://arxiv.org/pdf/1712.01208.pdf">Yes, we should question old paradigms </a>and try to improve things.</p>
 
-<p>As Jeff Dean pointed out: we need to find <em>practical</em> ways to make systems data-aware, as in systems that collect metrics and metadata about themselves, to achieve this we could learn a thing a two from the ideas in systems observability and instrumentation: We have been instrumenting systems for decades, the data is already there.</p>
+<p><img src="https://cdn-images-1.medium.com/max/2000/1*puiL2EVDE6Ztlocw3JD1uQ.png" alt="" /></p>
 
-<p>We also need to find <em>practical</em> and <em>clean</em> ways to <em>integrate</em> machine learning components into software systems, making learning a first-class citizen in the system. Leading to <em>systems that learn how to improve themselves;</em> beating heuristics and manually-performed operations. Think about this for a second, it does sound cool <em>and</em> feasible; I’m not talking about AGI or anything dystopian.</p>
+<h3 id="towards-machine-learning-enhanced-software-systems">Towards machine learning-enhanced software systems</h3>
 
-<p>I would also add that we need <em>practical</em> and <em>clean</em>  ways to propagate the decisions made by the learned models to the rest of the system, allowing the system to have self-adaptive capabilities. Here, we could learn something from the control theory community.</p>
+<p>As Jeff Dean pointed out: we need to find <strong>practical</strong> ways to make systems data-aware. We need systems that collect metrics and metadata about themselves. To achieve this, we could learn a thing a two from the ideas in systems observability and instrumentation. We have been instrumenting systems for decades, and the data is already there.</p>
 
-<p><strong>The general idea is fairly simple</strong>: make a system learn about its behaviour by training a model on its context – its workload, overall system usage, and organization/architecture – then allow it to change its structures and configurations in order to optimize for a certain scenario. Now implement this idea in such a way that it could be possible to integrate it into many kinds of systems.</p>
+<p>We also need to find <strong>practical</strong> and <strong>clean</strong> ways to <strong>integrate</strong> machine learning components into software systems, making learning a first-class citizen in the system. This will lead to <strong>systems that learn how to improve themselves,</strong> beating heuristics and manually-performed operations. Think about this for a second. It does sound cool <em>and</em> feasible.</p>
+
+<p>I would also add that we need <strong>practical</strong> and <strong>clean</strong> ways to propagate the decisions made by the learned models to the rest of the system. This would allow the system to have self-adaptive capabilities. Here, we could learn something from the control theory community.</p>
+
+<p>The general idea is fairly simple: make a system learn about its behavior by training a model on its context. Then allow it to change its structures and configurations in order to optimize for a certain scenario. Now implement this idea in such a way that it could be possible to integrate it into many kinds of systems.</p>
+
+<h3 id="summary">Summary</h3>
 
 <p>The most interesting questions I have in mind are:</p>
 
 <ol>
-  <li>Can self-adaptation by learned models lead to more stable, faster, safer software systems?</li>
-  <li>Can self-adaptation by learned models reduce the need for manually configuring and tuning systems, allowing engineers to focus on more important tasks?</li>
-  <li>Can this be easily integrated into software systems, requiring only small changes to the codebase?</li>
-  <li>Can this work with low overhead?</li>
+  <li>
+    <p>Can self-adaptation by learned models lead to more stable, faster, safer software systems? Can it reduce the need for manually configuring and tuning systems, allowing engineers to focus on more important tasks?</p>
+  </li>
+  <li>
+    <p>Can this be easily integrated into software systems, requiring only small changes to the codebase?</p>
+  </li>
+  <li>
+    <p>Can this work with low overhead?</p>
+  </li>
 </ol>
 
-<p>It is worth noting that this would <em>not</em> replace good engineers, but rather free the engineers’ cognitive abilities to focus on what matters.</p>
+<p>It is worth noting that this <strong>would not</strong> replace good engineers, but would rather free the engineers’ cognitive abilities to focus on what matters.</p>
 
-<p>Can you imagine living in a world, where you don’t have to be dragged onsite at 3 AM every time an outage happens due to misconfiguration?</p>
-
-<hr />
-
-<p>[1] <a href="https://pdfs.semanticscholar.org/9e58/7266bfb13e39a9f722ae240a7a78ae7380ea.pdf">The Dawning of the Autonomic Computing Era</a></p>
-
-<p>[2] <a href="https://link.springer.com/book/10.1007%2F978-3-642-35813-5">Software Engineering for Self-Adaptive Systems II</a></p>
-
-<p>[3] <a href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.90.8651&amp;rep=rep1&amp;type=pdf">Using Probabilistic Reasoning to Automate Software Tuning</a></p>
+<p><a href="http://www.sysml.cc/">I genuinely believe that this will become a trend in the next few years</a>. I myself am working on these ideas as part of my graduate studies, and I will be posting the results of my research, so <a href="https://twitter.com/digorithm">stay tuned</a>.</p>
 
         <footer>
-  &copy; 2017 Rodrigo Araujo 
+  &copy; 2018 Rodrigo Araujo 
 </footer>
 
         </div>

@@ -76,6 +76,7 @@
 @import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:600,400,400italic|Roboto+Mono);
 @import url("https://fonts.googleapis.com/css?family=Inconsolata");
 @import url("https://fonts.googleapis.com/css?family=Work+Sans");
+@import url("https://fonts.googleapis.com/css?family=Merriweather:400,400i,700,700i,900,900i");
 @import url("https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700");
 @font-face {
   font-family: "avenir";
@@ -1101,7 +1102,8 @@ blockquote {
   position: relative;
   padding-left: 20px;
   font-style: italic;
-  border-left: 5px solid #BC8A5E; }
+  margin-left: 0px;
+  border-left: 3px solid #BC8A5E; }
 
 a {
   text-decoration: none;
@@ -1133,11 +1135,11 @@ h2 {
 
 h3 {
   font-size: 1.2rem;
-  margin: 0.6rem 0 0.48rem 0; }
+  margin: 0.6rem 0 -15px 0; }
 
 h4 {
   font-size: 1.2rem;
-  margin: 0.6rem 0 0.48rem 0; }
+  margin: 0.6rem 0 -15px 0; }
 
 h5 {
   font-size: 1.15rem;
