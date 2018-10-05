@@ -245,10 +245,10 @@ It’s fair simple, isn’t it? The problem arises when the data isn’t linearl
 
 <p>Now, here’s a code of a Perceptron that will behave like a simple Boolean function. I didn’t use the Delta Dule (Gradient Descent) to optimize the weights, as this problem (binary Boolean functions) is linearly separable.</p>
 
-<div class="language-python highlighter-rouge"><pre class="highlight"><code>  <span class="kn">import</span> <span class="nn">math</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="kn">import</span> <span class="nn">math</span>
   <span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">random</span><span class="p">,</span> <span class="n">array</span>
   <span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">choice</span>
-  <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+  <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
 
   <span class="k">class</span> <span class="nc">Perceptron</span><span class="p">():</span>
       
@@ -272,21 +272,21 @@ It’s fair simple, isn’t it? The problem arises when the data isn’t linearl
           <span class="bp">self</span><span class="o">.</span><span class="n">learning_rate</span> <span class="o">=</span> <span class="mf">0.5</span>
           <span class="bp">self</span><span class="o">.</span><span class="n">errors</span> <span class="o">=</span> <span class="p">[]</span>
 
-          <span class="c"># initializing weights</span>
-          <span class="bp">self</span><span class="o">.</span><span class="n">weights</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">training_data</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]))</span>
+          <span class="c1"># initializing weights
+</span>          <span class="bp">self</span><span class="o">.</span><span class="n">weights</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">training_data</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]))</span>
           
           <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="n">epochs</span><span class="p">):</span>
               <span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">choice</span><span class="p">(</span><span class="n">training_data</span><span class="p">)</span>
-              <span class="c"># &gt; calculate output with current weight</span>
-              <span class="n">output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">unit_output</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
-              <span class="c"># &gt; calculate error rate (t - o)</span>
-              <span class="n">error_rate</span> <span class="o">=</span> <span class="n">y</span> <span class="o">-</span> <span class="n">output</span>
+              <span class="c1"># &gt; calculate output with current weight
+</span>              <span class="n">output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">unit_output</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+              <span class="c1"># &gt; calculate error rate (t - o)
+</span>              <span class="n">error_rate</span> <span class="o">=</span> <span class="n">y</span> <span class="o">-</span> <span class="n">output</span>
               <span class="bp">self</span><span class="o">.</span><span class="n">errors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">error_rate</span><span class="p">)</span>
               <span class="k">print</span> <span class="s">'the X: '</span><span class="p">,</span> <span class="n">X</span>
               <span class="k">print</span> <span class="s">'output: '</span><span class="p">,</span><span class="n">output</span>
               <span class="k">print</span> <span class="s">'correct target: '</span><span class="p">,</span> <span class="n">y</span>
-              <span class="c"># &gt; apply learning rule which will update weights</span>
-              <span class="bp">self</span><span class="o">.</span><span class="n">weights</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">learning_rate</span> <span class="o">*</span> <span class="n">error_rate</span> <span class="o">*</span> <span class="n">X</span>
+              <span class="c1"># &gt; apply learning rule which will update weights
+</span>              <span class="bp">self</span><span class="o">.</span><span class="n">weights</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">learning_rate</span> <span class="o">*</span> <span class="n">error_rate</span> <span class="o">*</span> <span class="n">X</span>
 
       <span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">X</span><span class="p">):</span>
           <span class="n">y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">unit_output</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
@@ -310,8 +310,7 @@ It’s fair simple, isn’t it? The problem arises when the data isn’t linearl
   <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">'epochs'</span><span class="p">)</span>
   <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="conclusion-and-next-steps">Conclusion and next steps</h3>
 

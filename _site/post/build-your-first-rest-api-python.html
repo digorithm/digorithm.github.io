@@ -152,14 +152,13 @@
 
 <p>Here’s a silly example:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>from database_library import Connection
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>from database_library import Connection
 
 connection = Connection()
 connection.OpenConnection()
 … do whatever you want
 connection.CloseConnection()
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>When you called those function, you were dealing with the interface that the object provided to you, sure the object may be doing thousand of things at the moment you call its functions, but, it doesn’t matter to you, does it? You just want the <em>damn</em> connection open and then closed.</p>
 
@@ -179,18 +178,17 @@ connection.CloseConnection()
 
 <p>Which will request my profile’s data, and the Facebook’s API will return:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
-   </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"100001638888259"</span><span class="p">,</span><span class="w">
-   </span><span class="nt">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rodrigo"</span><span class="p">,</span><span class="w">
-   </span><span class="nt">"gender"</span><span class="p">:</span><span class="w"> </span><span class="s2">"male"</span><span class="p">,</span><span class="w">
-   </span><span class="nt">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Ara\u00fajo"</span><span class="p">,</span><span class="w">
-   </span><span class="nt">"link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.facebook.com/contatodigo"</span><span class="p">,</span><span class="w">
-   </span><span class="nt">"locale"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pt_BR"</span><span class="p">,</span><span class="w">
-   </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rodrigo Ara\u00fajo"</span><span class="p">,</span><span class="w">
-   </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"contatodigo"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
+   "id": "100001638888259",
+   "first_name": "Rodrigo",
+   "gender": "male",
+   "last_name": "Ara\u00fajo",
+   "link": "https://www.facebook.com/contatodigo",
+   "locale": "pt_BR",
+   "name": "Rodrigo Ara\u00fajo",
+   "username": "contatodigo"
+}
+</code></pre></div></div>
 
 <p>As simple as that.</p>
 
@@ -204,8 +202,8 @@ connection.CloseConnection()
 
 <p>So after the API is built, you or you program can get books or insert books by sending HTTP request to the API’s URIs, simple as that. I’ll be very straight forward, here’s the code:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="c">#!flask/bin/python</span>
-<span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">jsonify</span><span class="p">,</span> <span class="n">request</span>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#!flask/bin/python
+</span><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">jsonify</span><span class="p">,</span> <span class="n">request</span>
 
 <span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
 
@@ -224,11 +222,11 @@ connection.CloseConnection()
     <span class="p">}</span>
 <span class="p">]</span>
 
-<span class="nd">@app.route</span><span class="p">(</span><span class="s">'/bookapi/v1.0/books/'</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s">'GET'</span><span class="p">])</span>
+<span class="o">@</span><span class="n">app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s">'/bookapi/v1.0/books/'</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s">'GET'</span><span class="p">])</span>
 <span class="k">def</span> <span class="nf">get_books</span><span class="p">():</span>
     <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span><span class="s">'books'</span><span class="p">:</span> <span class="n">books</span><span class="p">})</span>
 
-<span class="nd">@app.route</span><span class="p">(</span><span class="s">'/bookapi/v1.0/books'</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s">'POST'</span><span class="p">])</span>
+<span class="o">@</span><span class="n">app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s">'/bookapi/v1.0/books'</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s">'POST'</span><span class="p">])</span>
 <span class="k">def</span> <span class="nf">create_book</span><span class="p">():</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">request</span><span class="o">.</span><span class="n">json</span> <span class="ow">or</span> <span class="ow">not</span> <span class="s">'title'</span> <span class="ow">in</span> <span class="n">request</span><span class="o">.</span><span class="n">json</span><span class="p">:</span>
         <span class="n">abort</span><span class="p">(</span><span class="mi">404</span><span class="p">)</span>
@@ -245,8 +243,7 @@ connection.CloseConnection()
 
 <span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
     <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">debug</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Note that we’re creating a simple in-memory <em>database</em>, which is a simple python’s dict. This could be a database. But for the sake of simplicity, I’m using just a dict.</p>
 

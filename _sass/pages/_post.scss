@@ -28,9 +28,16 @@
   padding-right: 20px;
 }
 
-@include media-query($medium-screen){
+@include media-query($large-screen){
 .post-content {
   max-width:50%;
+  padding-left: 5%;
+}
+}
+
+@include media-query($medium-screen){
+.post-content {
+  max-width:70%;
   padding-left: 5%;
 }
 }

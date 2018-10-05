@@ -160,9 +160,8 @@
 
 <p>Now, searching for other approaches, I looked inside the code from CPython, and there’s a nice comment:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code> "Conceptually, a rotate by one is equivalent to a pop on one side and an append on the other"
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> "Conceptually, a rotate by one is equivalent to a pop on one side and an append on the other"
+</code></pre></div></div>
 
 <p>Quite elegant solution as well. So, an example:</p>
 
@@ -204,7 +203,7 @@ def rotate_original_solution_with_reversed(arr, i):
 
 <p>and the result:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>    Original Idea using reversed(arr): 
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    Original Idea using reversed(arr): 
 
     4 function calls in 0.611 seconds
 
@@ -214,8 +213,7 @@ def rotate_original_solution_with_reversed(arr, i):
     1 0.440 0.440 0.440 0.440 2_1b.py:21(rotate_original_solution_with_reversed)
     1 0.171 0.171 0.611 0.611 string:1 module
     1 0.000 0.000 0.000 0.000 {len}
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>####Damn, 0.6s, that’s too slow!</p>
 
@@ -240,7 +238,7 @@ def rotate_original_solution_with_reverse(arr, i):
 
 <p>And the result:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>    Original Idea using arr.reversed(): 
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    Original Idea using arr.reversed(): 
     7 function calls in 0.322 seconds
 
     Ordered by: standard name
@@ -251,8 +249,7 @@ def rotate_original_solution_with_reverse(arr, i):
     1 0.000 0.000 0.000 0.000 {len}
     1 0.000 0.000 0.000 0.000 {method 'disable' of '_lsprof.Profiler' objects}
     3 0.023 0.008 0.023 0.008 {method 'reverse' of 'list' objects}
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>####From 0.6s to 0.3s, that’s a great improvement. lesson: choose your built-ins/Data Structures/Algorithms carefully.</p>
 

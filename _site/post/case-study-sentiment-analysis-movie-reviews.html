@@ -149,13 +149,12 @@
 
 <p>Here’s an example of a simple pipeline that does PCA to reduce the dimension of the features and creates a SVC:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>    from sklearn.pipeline import Pipeline
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    from sklearn.pipeline import Pipeline
     from sklearn.svm import SVC
     from sklearn.decomposition import PCA
     estimators = [('reduce_dim', PCA()), ('svm', SVC())]
     clf = Pipeline(estimators)
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="grid-search">Grid Search</h3>
 
@@ -175,7 +174,7 @@
 
 <p>Another interesting thing is, after the model inside the grid search is trained, methods like <em>predict</em> are computed using the best features. If we look inside the SKlearn’s grid search’s code, we can see how easily and elegant it’s done:</p>
 
-<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="p">[</span><span class="o">...</span><span class="p">]</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="o">...</span><span class="p">]</span>
 <span class="n">scores</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
 <span class="n">grid_scores</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
 <span class="k">for</span> <span class="n">grid_start</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n_fits</span><span class="p">,</span> <span class="n">n_folds</span><span class="p">):</span>
@@ -194,22 +193,21 @@
     <span class="k">else</span><span class="p">:</span>
         <span class="n">score</span> <span class="o">/=</span> <span class="nb">float</span><span class="p">(</span><span class="n">n_folds</span><span class="p">)</span>
     <span class="n">scores</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">score</span><span class="p">,</span> <span class="n">parameters</span><span class="p">))</span>
-    <span class="c"># TODO: shall we also store the test_fold_sizes?</span>
-    <span class="n">grid_scores</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_CVScoreTuple</span><span class="p">(</span>
+    <span class="c1"># TODO: shall we also store the test_fold_sizes?
+</span>    <span class="n">grid_scores</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_CVScoreTuple</span><span class="p">(</span>
         <span class="n">parameters</span><span class="p">,</span>
         <span class="n">score</span><span class="p">,</span>
         <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">all_scores</span><span class="p">)))</span>
-<span class="c"># Store the computed scores</span>
-<span class="bp">self</span><span class="o">.</span><span class="n">grid_scores_</span> <span class="o">=</span> <span class="n">grid_scores</span>
+<span class="c1"># Store the computed scores
+</span><span class="bp">self</span><span class="o">.</span><span class="n">grid_scores_</span> <span class="o">=</span> <span class="n">grid_scores</span>
 
-<span class="c"># Find the best parameters by comparing on the mean validation score:</span>
-<span class="c"># note that `sorted` is deterministic in the way it breaks ties</span>
-<span class="n">best</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">grid_scores</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">mean_validation_score</span><span class="p">,</span>
+<span class="c1"># Find the best parameters by comparing on the mean validation score:
+# note that `sorted` is deterministic in the way it breaks ties
+</span><span class="n">best</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">grid_scores</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">mean_validation_score</span><span class="p">,</span>
               <span class="n">reverse</span><span class="o">=</span><span class="bp">True</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
 <span class="bp">self</span><span class="o">.</span><span class="n">best_params_</span> <span class="o">=</span> <span class="n">best</span><span class="o">.</span><span class="n">parameters</span>
 <span class="bp">self</span><span class="o">.</span><span class="n">best_score_</span> <span class="o">=</span> <span class="n">best</span><span class="o">.</span><span class="n">mean_validation_score</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>As you can see, in the end it keeps the best parameters and scores, so it can be used when it needs to predict or output its <em>predict_proba</em> or <em>decision_function</em></p>
 
@@ -225,10 +223,9 @@
 
 <p>Ok, so now let’s head to the real problem. The dataset can be downloaded with:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>wget http://www.cs.cornell.edu/people/pabo/movie-review-data/review_polarity.tar.gz
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wget http://www.cs.cornell.edu/people/pabo/movie-review-data/review_polarity.tar.gz
 tar xzf review_polarity.tar.gz
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>What I did to solve it was: I used grid search to search a few parameters, such as <em>TfidfVectorizer’s max_features</em>, that in the end I kept with max_features=10000, also its ngram_range, searching between (1,1) and (1,2) and <em>the LinearSVC()’s C parameter</em>.</p>
 
@@ -250,7 +247,7 @@ tar xzf review_polarity.tar.gz
 
 <p>So, here’s the code where I built the pipeline, the gridsearch, use a subset of the dataset to develop the grid search and another subset to validate using the <em>cross_val_scores</em>, then, I call <em>predict</em> to get the vector of predictions to build a report <em>(or, with this, I can start to build a ROC curve, confusion matrix and other statistics debug tools)</em></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>from sklearn.datasets import load_files
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>from sklearn.datasets import load_files
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.grid_search import GridSearchCV
 from sklearn.pipeline import make_pipeline
@@ -289,12 +286,11 @@ print scores.mean(), scores.std()
 y_pred = grid_search.predict(X_test)
 
 print classification_report(y_test, y_pred)
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>and the output:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>Best score: 0.849
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Best score: 0.849
 
 Best parameters iset:
 	linearsvc__C: 1
@@ -311,8 +307,7 @@ Classification report:
           1       0.87      0.88      0.87       504
 
 avg / total       0.87      0.87      0.87      1000
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>So, around 86%~87% of precision/f1-score, not <em>that</em> bad.</p>
 
