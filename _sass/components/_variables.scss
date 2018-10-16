@@ -8,6 +8,7 @@
 @import url('https://fonts.googleapis.com/css?family=Work+Sans');
 @import url('https://fonts.googleapis.com/css?family=Merriweather:400,400i,700,700i,900,900i');
 @import url('https://fonts.googleapis.com/css?family=Lora');
+@import url('https://fonts.googleapis.com/css?family=Lusitana');
 
 @font-face {
 font-family: "avenir";
@@ -94,7 +95,7 @@ $border-width:               .0625rem !default;
 //
 // Font, line-height, and color for body text, headings, and more.
 
-$font-family-sans-serif:     "Lora", "Helvetica Neue", Helvetica, Arial, sans-serif !default;
+$font-family-sans-serif:     "Lusitana", "Helvetica Neue", Helvetica, Arial, sans-serif !default;
 $font-family-serif:          "Libre Baskerville", Georgia, "Times New Roman", Times, serif !default;
 $font-family-monospace:      "Roboto Mono", "Courier New", monospace !default;
 $font-family-base:           $font-family-sans-serif !default;
@@ -103,7 +104,7 @@ $font-family-sidebar:        "avenir" !default;
 // Pixel value used to responsively scale all typography. Applied to the `<html>` element.
 $font-size-root:             18px !default;
 
-$font-size-base:             $font-size-root !default;
+$font-size-base:             $font-size-root * 1.05 !default;
 $font-size-lg:               $font-size-root * 1.25 !default;
 $font-size-sm:               $font-size-root * 0.875 !default;
 $font-size-xs:               $font-size-root * 0.75 !default;
