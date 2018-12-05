@@ -79,10 +79,14 @@
 @import url("https://fonts.googleapis.com/css?family=Merriweather:400,400i,700,700i,900,900i");
 @import url("https://fonts.googleapis.com/css?family=Lora");
 @import url("https://fonts.googleapis.com/css?family=Lusitana");
+@import url("https://fonts.googleapis.com/css?family=PT+Serif");
 @import url("https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700");
 @font-face {
   font-family: "avenir";
   src: url("/fonts/AvenirLTStd-Book.otf"); }
+@font-face {
+  font-family: "Caslon";
+  src: url("/fonts/Adobe Caslon Pro Regular.ttf"); }
 @font-face {
   font-family: "avenir";
   src: url("/fonts/AvenirLTStd-Heavy.otf");
@@ -590,7 +594,7 @@ footer {
 .related-articles {
   margin-top: 2em; }
   .related-articles h4 {
-    font-family: "Lusitana", "Helvetica Neue", Helvetica, Arial, sans-serif; }
+    font-family: "Caslon", "Helvetica Neue", Helvetica, Arial, sans-serif; }
   .related-articles ul {
     margin: 0;
     padding: 0;
@@ -1092,12 +1096,12 @@ sup {
    ========================================================================== */
 html {
   line-height: 1.5;
-  font-family: "Lusitana", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Caslon", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: normal;
   color: #512906;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
-  font-size: 18.9px; }
+  font-size: 21px; }
 
 blockquote {
   display: block;
@@ -1136,8 +1140,8 @@ h2 {
   margin: 0.75rem 0 0.6rem 0; }
 
 h3 {
-  font-size: 1.2rem;
-  margin: 0.6rem 0 -15px 0; }
+  font-size: 1.9rem;
+  margin: 0.95rem 0 -15px 0; }
 
 h4 {
   font-size: 1.2rem;
@@ -1172,7 +1176,7 @@ small,
 p {
   margin: 1.2em 0;
   word-spacing: 0.05em;
-  line-height: 1.6em; }
+  line-height: 1.4em; }
 
 .abstract p {
   font-size: 0.9em; }
@@ -1184,7 +1188,7 @@ p {
   margin-bottom: 20px;
   padding: 2px 8px;
   font-size: 0.875em;
-  font-family: "Lusitana", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Caslon", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: 700;
   background-color: #99673A;
   color: #fff;
@@ -1252,7 +1256,7 @@ p {
 pre, code {
   font-family: "Roboto Mono", "Courier New", monospace;
   font-size: 0.9em;
-  font-size: 15.9px; }
+  font-size: 18px; }
 
 code {
   border-radius: 2px;
