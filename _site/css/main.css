@@ -1402,16 +1402,16 @@ p {
   .cover-card .author_name {
     display: block;
     color: #99673A;
-    font-size: 1.75em; }
+    font-size: 1.6em; }
   .cover-card .author_job {
     display: block;
     color: #BC8A5E;
-    font-size: 0.7em;
+    font-size: 0.5em;
     font-weight: 500;
     text-transform: uppercase;
     margin: -5px auto 10px; }
   .cover-card .author_bio {
-    font-size: 80%;
+    font-size: 70%;
     display: block; }
   @media only screen and (min-width: 992px) {
     .cover-card {
@@ -1444,7 +1444,7 @@ p {
     .nav-list .nav-item a {
       margin-top: 1em;
       text-transform: lowercase;
-      font-size: 80%;
+      font-size: 55%;
       color: #BC8A5E; }
       .nav-list .nav-item a:hover, .nav-list .nav-item a:focus {
         color: #d1af90; }
