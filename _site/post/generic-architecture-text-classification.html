@@ -211,11 +211,11 @@
 
 <p>Scikit Learn gives us a great API to use the TF-IDF method, it’s really simple.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    from sklearn.feature_extraction.text import TfidfVectorizer
+<pre><code>    from sklearn.feature_extraction.text import TfidfVectorizer
 
     vectorizer = TfidfVectorizer()
     vectorized_x = vectorizer.fit_transform(X)
-</code></pre></div></div>
+</code></pre>
 
 <p>Which will do the TF-IDF on the X data, and then vectorize this data, in other words, transform the whole thing into an array of inverse frequencies.
 So, extracting those features, <strong>this</strong> will be our training and test data, that will feed the algorithm (along with the Y, which is the output, the class of each training data).</p>

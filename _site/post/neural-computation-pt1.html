@@ -245,72 +245,72 @@ It’s fair simple, isn’t it? The problem arises when the data isn’t linearl
 
 <p>Now, here’s a code of a Perceptron that will behave like a simple Boolean function. I didn’t use the Delta Dule (Gradient Descent) to optimize the weights, as this problem (binary Boolean functions) is linearly separable.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="kn">import</span> <span class="nn">math</span>
-  <span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">random</span><span class="p">,</span> <span class="n">array</span>
-  <span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">choice</span>
-  <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<pre><code class="language-python">  import math
+  from numpy import random, array
+  from random import choice
+  import matplotlib.pyplot as plt
 
-  <span class="k">class</span> <span class="nc">Perceptron</span><span class="p">():</span>
+  class Perceptron():
       
-      <span class="s">"""
+      """
       this is the thereshold to activate the unit 
-      """</span>
-      <span class="k">def</span> <span class="nf">activation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">x</span><span class="p">):</span>
-          <span class="k">return</span> <span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="p">))</span>
+      """
+      def activation(self,x):
+          return 1/(1 + math.exp(-x))
 
-      <span class="k">def</span> <span class="nf">linear_combination</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
-          <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
-          <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">weights</span><span class="p">)):</span>
-              <span class="n">total</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">weights</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-          <span class="k">return</span> <span class="n">total</span>
+      def linear_combination(self, X):
+          total = 0
+          for i in xrange(len(self.weights)):
+              total += self.weights[i] * X[i]
+          return total
       
-      <span class="k">def</span> <span class="nf">unit_output</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
-          <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">activation</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">linear_combination</span><span class="p">(</span><span class="n">X</span><span class="p">))</span>
+      def unit_output(self, X):
+          return self.activation(self.linear_combination(X))
 
-      <span class="k">def</span> <span class="nf">train</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">training_data</span><span class="p">,</span> <span class="n">epochs</span><span class="p">):</span>
+      def train(self, training_data, epochs):
           
-          <span class="bp">self</span><span class="o">.</span><span class="n">learning_rate</span> <span class="o">=</span> <span class="mf">0.5</span>
-          <span class="bp">self</span><span class="o">.</span><span class="n">errors</span> <span class="o">=</span> <span class="p">[]</span>
+          self.learning_rate = 0.5
+          self.errors = []
 
-          <span class="c1"># initializing weights
-</span>          <span class="bp">self</span><span class="o">.</span><span class="n">weights</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">training_data</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]))</span>
+          # initializing weights
+          self.weights = random.rand(len(training_data[1][0]))
           
-          <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="n">epochs</span><span class="p">):</span>
-              <span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">choice</span><span class="p">(</span><span class="n">training_data</span><span class="p">)</span>
-              <span class="c1"># &gt; calculate output with current weight
-</span>              <span class="n">output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">unit_output</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
-              <span class="c1"># &gt; calculate error rate (t - o)
-</span>              <span class="n">error_rate</span> <span class="o">=</span> <span class="n">y</span> <span class="o">-</span> <span class="n">output</span>
-              <span class="bp">self</span><span class="o">.</span><span class="n">errors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">error_rate</span><span class="p">)</span>
-              <span class="k">print</span> <span class="s">'the X: '</span><span class="p">,</span> <span class="n">X</span>
-              <span class="k">print</span> <span class="s">'output: '</span><span class="p">,</span><span class="n">output</span>
-              <span class="k">print</span> <span class="s">'correct target: '</span><span class="p">,</span> <span class="n">y</span>
-              <span class="c1"># &gt; apply learning rule which will update weights
-</span>              <span class="bp">self</span><span class="o">.</span><span class="n">weights</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">learning_rate</span> <span class="o">*</span> <span class="n">error_rate</span> <span class="o">*</span> <span class="n">X</span>
+          for i in xrange(epochs):
+              X, y = choice(training_data)
+              # &gt; calculate output with current weight
+              output = self.unit_output(X)
+              # &gt; calculate error rate (t - o)
+              error_rate = y - output
+              self.errors.append(error_rate)
+              print 'the X: ', X
+              print 'output: ',output
+              print 'correct target: ', y
+              # &gt; apply learning rule which will update weights
+              self.weights += self.learning_rate * error_rate * X
 
-      <span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">X</span><span class="p">):</span>
-          <span class="n">y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">unit_output</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
-          <span class="k">return</span> <span class="n">y</span>
+      def predict(self,X):
+          y = self.unit_output(X)
+          return y
                   
 
-          <span class="n">training_data</span> <span class="o">=</span> <span class="p">[</span>
-                  <span class="p">(</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]),</span> <span class="mi">0</span><span class="p">),</span>
-                  <span class="p">(</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]),</span> <span class="mi">0</span><span class="p">),</span>
-                  <span class="p">(</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]),</span> <span class="mi">0</span><span class="p">),</span>
-                  <span class="p">(</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]),</span> <span class="mi">1</span><span class="p">),</span>
+          training_data = [
+                  (array([0,0,1]), 0),
+                  (array([0,1,1]), 0),
+                  (array([1,0,1]), 0),
+                  (array([1,1,1]), 1),
                   
-          <span class="p">]</span>
+          ]
 
-  <span class="n">p</span> <span class="o">=</span> <span class="n">Perceptron</span><span class="p">()</span>
+  p = Perceptron()
 
-  <span class="n">p</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">training_data</span><span class="p">,</span> <span class="mi">2000</span><span class="p">)</span>
-  <span class="k">print</span> <span class="n">p</span><span class="o">.</span><span class="n">predict</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
-  <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">errors</span><span class="p">)</span>
-  <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">'errors'</span><span class="p">)</span>
-  <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">'epochs'</span><span class="p">)</span>
-  <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+  p.train(training_data, 2000)
+  print p.predict([1,0,1])
+  plt.plot(p.errors)
+  plt.ylabel('errors')
+  plt.xlabel('epochs')
+  plt.show()
 
-</code></pre></div></div>
+</code></pre>
 
 <h3 id="conclusion-and-next-steps">Conclusion and next steps</h3>
 
