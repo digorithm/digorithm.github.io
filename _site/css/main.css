@@ -1444,7 +1444,7 @@ p {
     .nav-list .nav-item a {
       margin-top: 1em;
       text-transform: lowercase;
-      font-size: 55%;
+      font-size: 65%;
       color: #BC8A5E; }
       .nav-list .nav-item a:hover, .nav-list .nav-item a:focus {
         color: #d1af90; }

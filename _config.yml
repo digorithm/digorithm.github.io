@@ -25,7 +25,6 @@ permalink:         /articles/:year-:month/:title
 
 gems: [jekyll-paginate]
 pages_list:
-  Home: '/'
   Blog: '/blog'
   Categories: '/categories'
   Projects: '/projects'
