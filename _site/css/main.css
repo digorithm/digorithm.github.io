@@ -594,7 +594,7 @@ footer {
 .related-articles {
   margin-top: 2em; }
   .related-articles h4 {
-    font-family: "Lusitana", "Helvetica Neue", Helvetica, Arial, sans-serif; }
+    font-family: "avenir", "Helvetica Neue", Helvetica, Arial, sans-serif; }
   .related-articles ul {
     margin: 0;
     padding: 0;
@@ -1096,7 +1096,7 @@ sup {
    ========================================================================== */
 html {
   line-height: 1.5;
-  font-family: "Lusitana", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "avenir", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: normal;
   color: #512906;
   -webkit-font-smoothing: antialiased;
@@ -1188,7 +1188,7 @@ p {
   margin-bottom: 20px;
   padding: 2px 8px;
   font-size: 0.875em;
-  font-family: "Lusitana", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "avenir", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: 700;
   background-color: #99673A;
   color: #fff;

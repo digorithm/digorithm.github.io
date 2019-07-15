@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>From synchronous service calls to message-passing dataflow systems</title>
+  <meta name="description" content="In this past year I have been working on a big system that is fundamentally an ETL to process real estate data across the US and Canada. I can’t talk much ab...">
+
+  <!-- CSS files -->
+  <link rel="stylesheet" href="http://localhost:4000/css/font-awesome.min.css">
+  <link rel="stylesheet" href="http://localhost:4000/css/main.css">
+
+  <link rel="canonical" href="http://localhost:4000/post/message-passing-dataflow">
+  <link rel="alternate" type="application/rss+xml" title="Rodrigo Araujo" href="http://localhost:4000/feed.xml" />
+
+  <!-- Icons -->
+  <!-- 16x16 -->
+  <link rel="shortcut icon" href="http://localhost:4000/favicon.ico">
+  <!-- 32x32 -->
+  <link rel="shortcut icon" href="http://localhost:4000/favicon.png">
+</head>
+
+
+<body>
+  <div class="row">
+    <div class="col s12 m3">
+      <div class="table cover">
+        
+
+<div class="sidebar cover-card table-cell table-middle">
+  <a href="http://localhost:4000/" class="author_name">Rodrigo Araujo</a>
+  <span class="author_job">Computer scientist and SW Engineer</span>
+  <span class="author_bio mbm">Thoughts on computer science, software engineering, distributed systems, and machine learning</span>
+  <nav class="nav">
+    <ul class="nav-list">
+      
+      <li class="nav-item">
+        <a href="http://localhost:4000/blog">Blog</a>
+        
+          <span style="font-size:10px;">/</span>
+        
+      </li>
+      
+      <li class="nav-item">
+        <a href="http://localhost:4000/categories">Categories</a>
+        
+          <span style="font-size:10px;">/</span>
+        
+      </li>
+      
+      <li class="nav-item">
+        <a href="http://localhost:4000/projects">Projects</a>
+        
+          <span style="font-size:10px;">/</span>
+        
+      </li>
+      
+      <li class="nav-item">
+        <a href="http://localhost:4000/publications">Publications</a>
+        
+      </li>
+      
+    </ul>
+  </nav>
+  <script type="text/javascript">
+  // based on http://stackoverflow.com/a/10300743/280842
+  function gen_mail_to_link(hs, subject) {
+    var lhs,rhs;
+    var p = hs.split('@');
+    lhs = p[0];
+    rhs = p[1];
+    document.write("<a class=\"social-link-item\" target=\"_blank\" href=\"mailto");
+    document.write(":" + lhs + "@");
+    document.write(rhs + "?subject=" + subject + "\"><i class=\"fa fa-fw fa-envelope\"></i><\/a>");
+  }
+</script>
+<div class="social-links">
+  <ul>
+    
+      <li>
+      <script>gen_mail_to_link('rod.dearaujo@gmail.com', 'Hello from website');</script>
+      </li>
+    
+    <li><a href="http://twitter.com/digorithm" class="social-link-item" target="_blank"><i class="fa fa-fw fa-twitter"></i></a></li>
+    
+    
+    
+    
+    
+    
+    
+    <li><a href="http://github.com/digorithm" class="social-link-item" target="_blank"><i class="fa fa-fw fa-github"></i></a></li>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  </ul>
+</div>
+
+</div>
+
+      </div>
+    </div>
+    <div class="col s12 m9">
+      <div class="post-listing">
+        <div class="post-content">
+        <h1 style="max-width: 45%;">From synchronous service calls to message-passing dataflow systems</h1>
+        <p style="max-width: 45%; font-size: 14px; font-style:italic;">July 15, 2019</p>
+        <hr>
+        <p>In this past year I have been working on a <em>big</em> system that is fundamentally an ETL to process real estate data across the US and Canada. I can’t talk much about the business details, but let’s say that if you’re browsing for real estate properties, it’s very likely you’re using this system. You’re welcome. Or I’m sorry, who knows?</p>
+
+<p>I joined this project from the very beginning. When I joined, a couple of technical decisions had been made. Initially, before I’d arrived on this project, the microservices would talk to each other directly, REST/gRPC style. Nothing new here.</p>
+
+<p><img src="/content/images/images/2019-07-11_19-154e43ee-0c5f-4866-9efc-7af7ac54e7f4.22.05.png" alt="" /></p>
+
+<p>The great majority of these services communicated with each other through synchronous calls. In most scenarios, this would be 100% fine. In an ETL constantly streaming copious amounts of data that need fast processing though? Not so much.</p>
+
+<p>One big problem with this architecture is that this application isn’t an “user-triggered” application and the events happens in a streaming fashion, i.e this is a streaming system, synchronous calls then quickly become a bottleneck. For instance: to process property X we’d need to wait for all other services to do their jobs before moving onto the property X + 1.</p>
+
+<p>And because of that property (streaming system), it means we can go full asynchronous here; we want to stream data in a constant flow and each service will do its job independently.</p>
+
+<p><img src="/content/images/images/2019-07-12_15-15a5f630-c173-4a14-ab93-ee1bf2ca5092.07.25.png" alt="" /></p>
+
+<p>However, an unfortunate bad technical decision had been made before I arrived on this project: yes, they would go from sync requests to async requests, but they would do it through a service developed internally called <code>Queuer</code>, which, in hindsight, was nothing like a queue. Queuer would just take the request coming from one service, buffer it, and route it to another service (again, not a queue), which sounded more like what you’d get from a service mesh, but without all the reliability that you’d get from battle-tested robust tools. We had something like this:</p>
+
+<p><img src="/content/images/images/2019-07-11_19-9c20194e-2150-4c4a-b12b-89bd5224e801.28.54.png" alt="" /></p>
+
+<p>We had many problems with this:</p>
+
+<ol>
+  <li>Maintaining a “queueing” system built internally was terrible.</li>
+  <li><code>Queuer</code> wasn’t service-agnostic; we had to encode domain knowledge about other services inside <code>Queuer</code>.</li>
+  <li>My favourite: Queuer had a buffer, which was simply a in-memory variable. It would buffer thousands of jobs there. If queuer died, well, the jobs were lost. Oh and forget about deliver-once guarantees and/or other goodies you can get by using a battle-tested queueing system such as RabbitMQ or Kafka.</li>
+</ol>
+
+<p>About 3 months into the project I convinced people to move away from Queuer, it had become too much of a hassle to maintain and evolve it. Godspeed <code>Queuer</code>.</p>
+
+<p>Also around that time I had been reading <code>designing high intensive data applications</code> and it advocates – with very good arguments – for what’s called Message-Passing Dataflow, I have seen this somewhere else with the name event-centric architecture or something like that; but I believe the philosophies between them are very similar. I link the simple way the author explains it, so here it is:</p>
+
+<ul>
+  <li>Composing stream operators into dataflow systems has a lot of similar characteristics
+to the microservices approach. However, the underlying communication mechanism is very different: one-directional, asynchronous message streams rather than
+synchronous request/response interactions.</li>
+</ul>
+
+<p>I then decided to experiment with Message-Passing Dataflow; after all, we’re talking about a never-ending stream processing system. Therefore, I didn’t want much synchronous communication between the services and wanted something that’s closer streaming system.</p>
+
+<p>To achieve this, we need a central component that would act as a communication bus, streaming messages between the services. And the services, instead of being just HTTP rest APIs, would be active consumers, consuming messages from this bus.</p>
+
+<p><img src="/content/images/images/2019-07-12_15-542f22e7-5cae-4f21-aabe-d232f4f56360.27.22.png" alt="" /></p>
+
+<p>Not surprisingly, I decided to use Kafka as our communication bus. Most services around it are Kafka consumers and producers. All communication between the services happen through <em>message passing</em>.</p>
+
+<p>Here are some observations after adopting this paradigm:</p>
+
+<ol>
+  <li>This approach is faster, a service does one thing and does it as fast as it can and don’t have to wait for the next steps. Then, it might produce a message to Kafka, which will be a job being performed by other services, and that’s it.</li>
+  <li>This approach is much, much more robust. All services are completely stateless and they don’t hold jobs in memory. The service died? All good, the job can be easily recovered from Kafka, Kafka only moves its offsets when the offsets are commited, i.e when the service actually finishes the job.</li>
+  <li>Even though it’s robust, consumers must be smart about it. Consuming offsets from topics (think of it as jobs in a queue) and failing to commit the new offset properly can be catastrophic. For instance, if we have a Kafka producer’s <code>auto.commit</code> enabled, the service reads a message from a topic, the auto commit mechanism commits after a few milliseconds, but then the process fail. That means we marked that offset as consumed, but we didn’t finished the job, so it’s… well, lost. Manually committing the offsets is much more reliable in high risk cases.</li>
+  <li>It’s a very different computational model. Instead of proactively querying things from other services, we <em>subscribe</em> to channels of messages (called topics) and work our way through the messages in there.</li>
+  <li>It’s closer to Alan Kay’s view of object-oriented programming (<a href="https://ovid.github.io/articles/alan-kay-and-oo-programming.html">https://ovid.github.io/articles/alan-kay-and-oo-programming.html</a>). Not <em>that</em> OOP created by the C++/Java community, but the core ideas of OOP thought by Kay and colleagues back in the 60s grounded in Biology. The idea of passing messages to objects in order to better scale systems (like biological cells do!). Kafka is nothing but a (very reliable) communication bus, and the objects (services, microservices, whatever) attach themselves to it and listen to messages, responding accordingly and sending other kinds of messages back to kafka which will be consumed by other services. Once you have well-defined messages and protocols, things flow beautifully.</li>
+  <li>Be careful with idle consumers, that means you gotta think about your partitions carefully. What’s worked for us is to set 1:1 partition-to-consumer ratio. For instance, we have an image processing service that fetches jobs from kafka. If we have more instances of that services than partitions, that means some of those instances will be idle, preventing us from achieving a higher throughput than we could.</li>
+</ol>
+
+<p>I am, now, a big fan of this architectural style I can totally recommend <em>if it fits your problems</em>. Which in most cases it does. I believe we’ve been going with the flow that was set in the early 00s when it comes to architecting systems; we’ve been using the request-response paradigm without really questioning its efficacy.</p>
+
+<p>To close, the author has some really cool insights on it:</p>
+
+<ul>
+  <li>It would be very natural to extend this programming model to also allow a server to
+push state-change events into this client-side event pipeline. Thus, state changes
+could flow through an end-to-end write path: from the interaction on one device that
+triggers a state change, via event logs and through several derived data systems and
+stream processors, all the way to the user interface of a person observing the state on
+another device. These state changes could be propagated with fairly low delay—say,
+under one second end to end.</li>
+  <li>Some applications, such as instant messaging and online games, already have such a
+“real-time” architecture (in the sense of interactions with low delay, not in the sense
+of “Response time guarantees” on page 298). But why don’t we build all applications
+this way?</li>
+  <li>The challenge is that the assumption of stateless clients and request/response interac‐
+tions is very deeply ingrained in our databases, libraries, frameworks, and protocols.
+Many datastores support read and write operations where a request returns one
+response, but much fewer provide an ability to subscribe to changes—i.e., a request
+that returns a stream of responses over time (see “API support for change streams”
+on page 456).</li>
+  <li>In order to extend the write path all the way to the end user, we would need to funda‐
+mentally rethink the way we build many of these systems: moving away from request/
+response interaction and toward publish/subscribe dataflow. I think that the
+advantages of more responsive user interfaces and better offline support would make
+it worth the effort. If you are designing data systems, I hope that you will keep in
+mind the option of subscribing to changes, not just querying the current state.</li>
+</ul>
+
+<p>My next steps? Experimenting with this architecture for applications where the events <em>are</em> user-triggered and the results are near real-time and user-facing.</p>
+
+        <footer>
+  &copy; 2019 Rodrigo Araujo 
+</footer>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript" src="http://localhost:4000/js/jquery-2.1.4.min.js"></script>
+<script type="text/javascript" src="http://localhost:4000/js/main.js"></script>
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+
+<!-- Asynchronous Google Analytics snippet -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-38327934-3', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+</body>
+
+</html>

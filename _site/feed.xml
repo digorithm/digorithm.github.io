@@ -5,9 +5,117 @@
     <description>Thoughts on computer science, software engineering, distributed systems, and machine learning</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 14 Jul 2019 23:56:51 +0000</pubDate>
-    <lastBuildDate>Sun, 14 Jul 2019 23:56:51 +0000</lastBuildDate>
+    <pubDate>Mon, 15 Jul 2019 17:32:03 +0000</pubDate>
+    <lastBuildDate>Mon, 15 Jul 2019 17:32:03 +0000</lastBuildDate>
     <generator>Jekyll v3.8.5</generator>
+    
+      <item>
+        <title>From synchronous service calls to message-passing dataflow systems</title>
+        <description>&lt;p&gt;In this past year I have been working on a &lt;em&gt;big&lt;/em&gt; system that is fundamentally an ETL to process real estate data across the US and Canada. I can’t talk much about the business details, but let’s say that if you’re browsing for real estate properties, it’s very likely you’re using this system. You’re welcome. Or I’m sorry, who knows?&lt;/p&gt;
+
+&lt;p&gt;I joined this project from the very beginning. When I joined, a couple of technical decisions had been made. Initially, before I’d arrived on this project, the microservices would talk to each other directly, REST/gRPC style. Nothing new here.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/content/images/images/2019-07-11_19-154e43ee-0c5f-4866-9efc-7af7ac54e7f4.22.05.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The great majority of these services communicated with each other through synchronous calls. In most scenarios, this would be 100% fine. In an ETL constantly streaming copious amounts of data that need fast processing though? Not so much.&lt;/p&gt;
+
+&lt;p&gt;One big problem with this architecture is that this application isn’t an “user-triggered” application and the events happens in a streaming fashion, i.e this is a streaming system, synchronous calls then quickly become a bottleneck. For instance: to process property X we’d need to wait for all other services to do their jobs before moving onto the property X + 1.&lt;/p&gt;
+
+&lt;p&gt;And because of that property (streaming system), it means we can go full asynchronous here; we want to stream data in a constant flow and each service will do its job independently.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/content/images/images/2019-07-12_15-15a5f630-c173-4a14-ab93-ee1bf2ca5092.07.25.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;However, an unfortunate bad technical decision had been made before I arrived on this project: yes, they would go from sync requests to async requests, but they would do it through a service developed internally called &lt;code&gt;Queuer&lt;/code&gt;, which, in hindsight, was nothing like a queue. Queuer would just take the request coming from one service, buffer it, and route it to another service (again, not a queue), which sounded more like what you’d get from a service mesh, but without all the reliability that you’d get from battle-tested robust tools. We had something like this:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/content/images/images/2019-07-11_19-9c20194e-2150-4c4a-b12b-89bd5224e801.28.54.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;We had many problems with this:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Maintaining a “queueing” system built internally was terrible.&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;Queuer&lt;/code&gt; wasn’t service-agnostic; we had to encode domain knowledge about other services inside &lt;code&gt;Queuer&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;My favourite: Queuer had a buffer, which was simply a in-memory variable. It would buffer thousands of jobs there. If queuer died, well, the jobs were lost. Oh and forget about deliver-once guarantees and/or other goodies you can get by using a battle-tested queueing system such as RabbitMQ or Kafka.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;About 3 months into the project I convinced people to move away from Queuer, it had become too much of a hassle to maintain and evolve it. Godspeed &lt;code&gt;Queuer&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Also around that time I had been reading &lt;code&gt;designing high intensive data applications&lt;/code&gt; and it advocates – with very good arguments – for what’s called Message-Passing Dataflow, I have seen this somewhere else with the name event-centric architecture or something like that; but I believe the philosophies between them are very similar. I link the simple way the author explains it, so here it is:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Composing stream operators into dataflow systems has a lot of similar characteristics
+to the microservices approach. However, the underlying communication mechanism is very different: one-directional, asynchronous message streams rather than
+synchronous request/response interactions.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I then decided to experiment with Message-Passing Dataflow; after all, we’re talking about a never-ending stream processing system. Therefore, I didn’t want much synchronous communication between the services and wanted something that’s closer streaming system.&lt;/p&gt;
+
+&lt;p&gt;To achieve this, we need a central component that would act as a communication bus, streaming messages between the services. And the services, instead of being just HTTP rest APIs, would be active consumers, consuming messages from this bus.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/content/images/images/2019-07-12_15-542f22e7-5cae-4f21-aabe-d232f4f56360.27.22.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Not surprisingly, I decided to use Kafka as our communication bus. Most services around it are Kafka consumers and producers. All communication between the services happen through &lt;em&gt;message passing&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;Here are some observations after adopting this paradigm:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;This approach is faster, a service does one thing and does it as fast as it can and don’t have to wait for the next steps. Then, it might produce a message to Kafka, which will be a job being performed by other services, and that’s it.&lt;/li&gt;
+  &lt;li&gt;This approach is much, much more robust. All services are completely stateless and they don’t hold jobs in memory. The service died? All good, the job can be easily recovered from Kafka, Kafka only moves its offsets when the offsets are commited, i.e when the service actually finishes the job.&lt;/li&gt;
+  &lt;li&gt;Even though it’s robust, consumers must be smart about it. Consuming offsets from topics (think of it as jobs in a queue) and failing to commit the new offset properly can be catastrophic. For instance, if we have a Kafka producer’s &lt;code&gt;auto.commit&lt;/code&gt; enabled, the service reads a message from a topic, the auto commit mechanism commits after a few milliseconds, but then the process fail. That means we marked that offset as consumed, but we didn’t finished the job, so it’s… well, lost. Manually committing the offsets is much more reliable in high risk cases.&lt;/li&gt;
+  &lt;li&gt;It’s a very different computational model. Instead of proactively querying things from other services, we &lt;em&gt;subscribe&lt;/em&gt; to channels of messages (called topics) and work our way through the messages in there.&lt;/li&gt;
+  &lt;li&gt;It’s closer to Alan Kay’s view of object-oriented programming (&lt;a href=&quot;https://ovid.github.io/articles/alan-kay-and-oo-programming.html&quot;&gt;https://ovid.github.io/articles/alan-kay-and-oo-programming.html&lt;/a&gt;). Not &lt;em&gt;that&lt;/em&gt; OOP created by the C++/Java community, but the core ideas of OOP thought by Kay and colleagues back in the 60s grounded in Biology. The idea of passing messages to objects in order to better scale systems (like biological cells do!). Kafka is nothing but a (very reliable) communication bus, and the objects (services, microservices, whatever) attach themselves to it and listen to messages, responding accordingly and sending other kinds of messages back to kafka which will be consumed by other services. Once you have well-defined messages and protocols, things flow beautifully.&lt;/li&gt;
+  &lt;li&gt;Be careful with idle consumers, that means you gotta think about your partitions carefully. What’s worked for us is to set 1:1 partition-to-consumer ratio. For instance, we have an image processing service that fetches jobs from kafka. If we have more instances of that services than partitions, that means some of those instances will be idle, preventing us from achieving a higher throughput than we could.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;I am, now, a big fan of this architectural style I can totally recommend &lt;em&gt;if it fits your problems&lt;/em&gt;. Which in most cases it does. I believe we’ve been going with the flow that was set in the early 00s when it comes to architecting systems; we’ve been using the request-response paradigm without really questioning its efficacy.&lt;/p&gt;
+
+&lt;p&gt;To close, the author has some really cool insights on it:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;It would be very natural to extend this programming model to also allow a server to
+push state-change events into this client-side event pipeline. Thus, state changes
+could flow through an end-to-end write path: from the interaction on one device that
+triggers a state change, via event logs and through several derived data systems and
+stream processors, all the way to the user interface of a person observing the state on
+another device. These state changes could be propagated with fairly low delay—say,
+under one second end to end.&lt;/li&gt;
+  &lt;li&gt;Some applications, such as instant messaging and online games, already have such a
+“real-time” architecture (in the sense of interactions with low delay, not in the sense
+of “Response time guarantees” on page 298). But why don’t we build all applications
+this way?&lt;/li&gt;
+  &lt;li&gt;The challenge is that the assumption of stateless clients and request/response interac‐
+tions is very deeply ingrained in our databases, libraries, frameworks, and protocols.
+Many datastores support read and write operations where a request returns one
+response, but much fewer provide an ability to subscribe to changes—i.e., a request
+that returns a stream of responses over time (see “API support for change streams”
+on page 456).&lt;/li&gt;
+  &lt;li&gt;In order to extend the write path all the way to the end user, we would need to funda‐
+mentally rethink the way we build many of these systems: moving away from request/
+response interaction and toward publish/subscribe dataflow. I think that the
+advantages of more responsive user interfaces and better offline support would make
+it worth the effort. If you are designing data systems, I hope that you will keep in
+mind the option of subscribing to changes, not just querying the current state.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;My next steps? Experimenting with this architecture for applications where the events &lt;em&gt;are&lt;/em&gt; user-triggered and the results are near real-time and user-facing.&lt;/p&gt;
+</description>
+        <pubDate>Mon, 15 Jul 2019 00:00:00 +0000</pubDate>
+        <link>http://localhost:4000/post/message-passing-dataflow</link>
+        <guid isPermaLink="true">http://localhost:4000/post/message-passing-dataflow</guid>
+        
+        <category>architecture</category>
+        
+        <category>software</category>
+        
+        <category>thoughts</category>
+        
+        <category>systems</category>
+        
+        
+        <category>software-architecture</category>
+        
+        <category>systems</category>
+        
+      </item>
     
       <item>
         <title>On machine learning enhanced software systems</title>
@@ -1439,389 +1547,6 @@ print scores.mean(), scores.std()
         <category>case-study</category>
         
         <category>machine-learning</category>
-        
-      </item>
-    
-      <item>
-        <title>Making your machine think, learn and predict - Gradient Descent Algorithm in Java</title>
-        <description>&lt;h3 id=&quot;how-can-we-make-a-machine-learn-from-data&quot;&gt;How can we make a machine learn from data?&lt;/h3&gt;
-
-&lt;p&gt;Then, how can we make the machine predicts things based on that learned data? Those are the question answered by one of the most classic Machine Learning Algorithms, the &lt;strong&gt;Gradient Descent Algorithm&lt;/strong&gt;, from a Mathematical-Statistical side it’s called &lt;strong&gt;Univariate Linear Regression&lt;/strong&gt;.&lt;/p&gt;
-
-&lt;p&gt;This is one of the tools of the Machine Learning toolbox, and what it tries to do is to model a relationship between a scalar dependent variable Y and a explanatory variable X.&lt;/p&gt;
-
-&lt;h3 id=&quot;in-laymans-term&quot;&gt;In Layman’s term…&lt;/h3&gt;
-
-&lt;p&gt;Let’s suppose you have a few points distributed in a Graph, so you already know that in a point A you have a well defined X and Y, which means, if you input X, your output will be Y, and in a point B you have a well defined X’ and Y’ as well. But, thing is, if a point emerge between A and B, and you only have the X… what will be the Y &lt;em&gt;(the output)&lt;/em&gt;?&lt;/p&gt;
-
-&lt;!--more--&gt;
-
-&lt;p&gt;What this algorithm does is: &lt;strong&gt;It tries to predict this Y value, based on the previous data&lt;/strong&gt;! Amazing, right?&lt;/p&gt;
-
-&lt;p&gt;At the end of the execution, you’ll have a full trend line that you can use to predict values! just like the image below.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/content/images/2015/06/linearRegression.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;the-theory-behind-it&quot;&gt;The Theory Behind It&lt;/h3&gt;
-
-&lt;p&gt;I’ll cover a few theories about this algorithm here, but, it won’t be complete, as this demand a great coverage of mathematical material that if I would write it all here, It would be a &lt;em&gt;long, long&lt;/em&gt;, &lt;strong&gt;very&lt;/strong&gt; &lt;em&gt;long&lt;/em&gt; post. So I’m assuming that you’re already familiar with Calculus &lt;em&gt;(Sums, Partial Derivatives)&lt;/em&gt;, Statistics and Discrete Mathematics.&lt;/p&gt;
-
-&lt;p&gt;So, our goal here is to &lt;strong&gt;fit the best straight line in our initial data&lt;/strong&gt;, right?&lt;/p&gt;
-
-&lt;p&gt;Thus, we need something to represent this straight line, which will be our hypothesis function:&lt;/p&gt;
-
-&lt;div id=&quot;math&quot;&gt; 
-$ h_{\Theta}(x) = \Theta_{0} + \Theta_{1}x $ 
-&lt;/div&gt;
-
-&lt;p&gt;Where this \( \Theta_{0} \) and \( \Theta_{1} \) are the parameters of the function, and &lt;strong&gt;finding the best parameters for this function is what is going to give us the correct straight line to plot on our data&lt;/strong&gt;.&lt;/p&gt;
-
-&lt;p&gt;Here’s an example of what we’re trying to do, which is, fit the best straight line in the data:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/content/images/2015/06/Linear-regression.svg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;So what we want to do is to find a \( \Theta_{0} \) and \( \Theta_{1} \) so our Hypothesis outputs can be very close to the real Y output.&lt;/p&gt;
-
-&lt;p&gt;Formally we want:&lt;/p&gt;
-
-&lt;div id=&quot;math&quot;&gt;$ \underset{\Theta_{0}\Theta_{1}}{min}(h_{\Theta}(x) - y)^2 $&lt;/div&gt;
-
-&lt;p&gt;So we want &lt;strong&gt;minimize&lt;/strong&gt; \( \Theta_{0} \) and \( \Theta_{1} \) so the difference between the &lt;strong&gt;Hypothesis&lt;/strong&gt; and the &lt;strong&gt;real output&lt;/strong&gt; is minimal.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;But we want it for every point in our data&lt;/strong&gt;, which is \(x(i)\) &lt;em&gt;(which is the i-th x of our data)&lt;/em&gt;, so we want the &lt;strong&gt;sum of this average&lt;/strong&gt;, which is, formally:&lt;/p&gt;
-
-&lt;div id=&quot;math&quot;&gt; 
-$ \underset{\Theta_{0}\Theta_{1}}{min}\,\frac{1}{2m} \sum_{i=1}^{m} (h_{0}(x^{(i)}) - y^{(i)})^2 $
-&lt;/div&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;And we’re going to call this function &lt;strong&gt;Cost Function&lt;/strong&gt;, with the following notation:&lt;/p&gt;
-
-&lt;div id=&quot;math&quot;&gt; 
-$ J(\Theta_{0}, \Theta_{1}) = \,\frac{1}{2m} \sum_{i=1}^{m} (h_{0}(x^{(i)}) - y^{(i)})^2 $
-&lt;/div&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;So, our goals is to &lt;strong&gt;minimize this cost function&lt;/strong&gt;:&lt;/p&gt;
-
-&lt;div id=&quot;math&quot;&gt; 
-$ \underset{\Theta_{0}\Theta_{1}}{min}\,\, J(\Theta_{0}, \Theta_{1}) $
-&lt;/div&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;This cost function is also called &lt;a href=&quot;http://en.wikipedia.org/wiki/Mean_squared_error&quot;&gt;Square Error Function&lt;/a&gt;.&lt;/p&gt;
-
-&lt;h3 id=&quot;now-the-gradient-descent-algorithm&quot;&gt;Now, the gradient descent algorithm&lt;/h3&gt;
-
-&lt;p&gt;With our cost function built, we need to “keep” finding values for \( \Theta_{0} \) and \( \Theta_{1} \) so we can reach our ideal trend line. So, basically:&lt;/p&gt;
-
-&lt;p&gt;1. We start with some \( \Theta_{0} \) and \( \Theta_{1} \)&lt;/p&gt;
-
-&lt;p&gt;2. keep changing \( \Theta_{0} \) and \( \Theta_{1} \) to reduce our cost function \( J(\Theta_{0}, \Theta_{1}) \), until we find the minimum.&lt;/p&gt;
-
-&lt;p&gt;That’s quite simple and intuitive, right? There’s a lot of intuitive explanation and more visual examples of what this algorithm is doing in the &lt;a href=&quot;https://class.coursera.org/ml-007/&quot;&gt;machine learning course taught by Andrews Ng (From Stanford)&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;What this algorithm will be doing is: partially derive our cost function for \( \Theta_{0} \) and \( \Theta_{1} \) simultaneously, so we can find the minimum value for them, with every iteration updating our \( \Theta_{0} \) and \( \Theta_{1} \) with their new value!&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;em&gt;- Meh, talk is cheap show me the math!&lt;/em&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Formally, the algorithm is:&lt;/p&gt;
-
-&lt;div id=&quot;math&quot;&gt;
-$ repeat \, until \, convergence\,\{ \\ \,\,\,\,\,\,\,\,\,\,\,\, \Theta_{j} := \Theta_{j} - \alpha \frac{\partial }{\partial \Theta_{j}} \,\, J(\Theta_{0}, \Theta_{1}) \\ \} \,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\, $
-&lt;/div&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;&lt;strong&gt;Make sure that this will run for j = 0 and j = 1.&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;But, pay attention, this is the generic version, the \( \Theta_{j} \) represent both \( \Theta_{0} \) and \( \Theta_{1} \).&lt;/p&gt;
-
-&lt;p&gt;What the algorithm is saying is that we’ll be doing this procedure to \( \Theta_{0} \) and \( \Theta_{1} \) at the same time! So, we can put it in this way:&lt;/p&gt;
-
-&lt;div id=&quot;math&quot;&gt;
-$ repeat \, until \, convergence\,\{ \\ \Theta_{0} := \Theta_{0} - \alpha \frac{\partial }{\partial \Theta_{0}} \,\, J(\Theta_{0}, \Theta_{1}) \\ \Theta_{1} := \Theta_{1} - \alpha \frac{\partial }{\partial \Theta_{1}} \,\, J(\Theta_{0}, \Theta_{1}) \\ \} \,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\ $
-&lt;/div&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;Also, we can expand the &lt;strong&gt;Cost Function&lt;/strong&gt; that is being derived, doing this, it will be exactly what I’ll be putting into code soon, so, our &lt;strong&gt;final algorithm&lt;/strong&gt; is:&lt;/p&gt;
-
-&lt;div id=&quot;math&quot;&gt;
-$ repeat \, until \, convergence\,\{ \\ \Theta_{0} := \Theta_{0} - \alpha \frac{\partial }{\partial \Theta_{0}} \,\, \Big (\frac{1}{2m} \sum_{i=1}^{m} (h_{\Theta}(x^{(i)}) - y^{(i)})^2 \Big) \\ \Theta_{1} := \Theta_{1} - \alpha \frac{\partial }{\partial \Theta_{1}} \,\, \Big (\frac{1}{2m} \sum_{i=1}^{m} (h_{\Theta}(x^{(i)}) - y^{(i)})^2 \Big) \\ \}
-\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\ $
-&lt;/div&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Now it’s time to code all of it!&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;First things first, we’ll be using &lt;a href=&quot;http://code.google.com/p/jmathplot/&quot;&gt;Google’s JMathPlot&lt;/a&gt; to plot graphs using Java and Swing to use its JFrame, we shall start with our class to represent our &lt;strong&gt;Initial Data&lt;/strong&gt;, which will be the &lt;strong&gt;Training Set&lt;/strong&gt;.&lt;/p&gt;
-&lt;pre&gt;
-&lt;code class=&quot;java hljs&quot;&gt;
-    import javax.swing.JFrame;
-    import org.math.plot.*;
-
-    public class InitialData{
-            public static double[] x = {2, 4, 6, 8};
-            public static double[] y = {2, 5, 5, 8};
-
-            public void plotData(){
-                    Plot2DPanel plot = new Plot2DPanel();
-                    plot.addScatterPlot(&quot;X-Y&quot;, this.x, this.y);
-                    JFrame frame = new JFrame(&quot;Original X-Y Data&quot;);
-                    frame.setContentPane(plot);
-                    frame.setSize(600, 600);
-                    frame.setVisible(true);
-            }
-    }
-&lt;/code&gt;
-&lt;/pre&gt;
-
-&lt;p&gt;&lt;br /&gt;
-To try out the data plotting, create a main class and call &lt;em&gt;plotData()&lt;/em&gt; from &lt;strong&gt;InitialData.java&lt;/strong&gt;, so we can have this:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/content/images/2015/06/example-plot.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Now we’re going to take our first steps on writing the &lt;strong&gt;GradientDescent.java&lt;/strong&gt;, we must be very careful here. Let’s start with the main settings and parameters of it:&lt;/p&gt;
-
-&lt;pre&gt;
-&lt;code class=&quot;java hljs&quot;&gt;
-    import javax.swing.JFrame;
-    import org.math.plot.*;
-
-    public class GradientDescent{
-            private double theta0;
-            private double theta1;
-
-            private int trendline;
-
-            // Algorithm settings
-        double alpha = 0.01;  // learning rate
-        double tol = 1e-11;   // tolerance to determine convergence
-        int maxiter = 9000;   // maximum number of iterations in case convergence is not reached
-        int dispiter = 100;   // interval for displaying results during iterations
-        int iters = 0;
-
-        //track of results
-        double[] theta0plot = new double[maxiter+1];
-        double[] theta1plot = new double[maxiter+1];
-        double[] tplot = new double[maxiter+1];
-
-        InitialData initial_data;
-
-        Plot2DPanel plot;
-
-        public GradientDescent(InitialData id){
-                    //initial guesses
-            this.theta0 = 0;
-            this.theta1 = 0;
-            this.initial_data = id;
-
-            plot = new Plot2DPanel();
-            plot.addScatterPlot(&quot;X-Y&quot;, initial_data.x, initial_data.y);
-            JFrame frame = new JFrame(&quot;Final X-Y Data&quot;);
-            frame.setContentPane(plot);
-            frame.setSize(600, 600);
-            frame.setVisible(true);
-        }
-    [...]
-&lt;/code&gt;
-&lt;/pre&gt;
-
-&lt;p&gt;Now let me explain a few details of this part:&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Alpha&lt;/strong&gt; is the &lt;strong&gt;Learning Rate&lt;/strong&gt;, it’s a &lt;em&gt;dangerous variable&lt;/em&gt;, it’s used to set the size of the step that the algorithm will take while trying to find the \( \Theta_{0} \) and \( \Theta_{1} \), that’s the learning rate of the algorithm. If Alpha is &lt;strong&gt;too low&lt;/strong&gt;, the algorithm can be very slow, although very precise, if Alpha is &lt;strong&gt;higher&lt;/strong&gt;, it will be taking &lt;strong&gt;larger steps&lt;/strong&gt;, which can be &lt;strong&gt;faster&lt;/strong&gt;, or &lt;strong&gt;dangerous&lt;/strong&gt;, causing the algorithm to &lt;strong&gt;DIVERGE&lt;/strong&gt;, which, &lt;em&gt;trust me&lt;/em&gt;, you don’t want this! &lt;em&gt;(Andrew Ng explain this part very well in its course)&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;The variable &lt;strong&gt;TrendLine&lt;/strong&gt; is what we’ll use to plot the straight line which is our main goal.&lt;/p&gt;
-
-&lt;p&gt;The &lt;strong&gt;tol&lt;/strong&gt; variable is our safe move in case of a dangerous convergence, which means, in case of convergence, it will stop the execution.&lt;/p&gt;
-
-&lt;p&gt;The other variables and objects in this part are very intuitive to understand, it’s auto explainable! &lt;em&gt;(forgive if i’m wrong, just say something and I’ll put more detail on that)&lt;/em&gt;.&lt;/p&gt;
-
-&lt;p&gt;About the Constructor, we’re saying that our initial guesses for \( \Theta_{0} \) and \( \Theta_{1} \) is 0. The rest is just data plotting.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;next: our Hypothesis Function&lt;/strong&gt; &lt;em&gt;(that will be doing exactly as the model that I did show above)&lt;/em&gt;&lt;/p&gt;
-&lt;pre&gt;
-&lt;code class=&quot;java hljs&quot;&gt;
-    public double hypothesisFunction(double x){
-            return this.theta1*x + theta0;
-        }
-&lt;/code&gt;
-&lt;/pre&gt;
-
-&lt;p&gt;Now, our two function to derive our \( \Theta \), again, it will be doing exactly the same as the mathematical model, there’s no magic!&lt;/p&gt;
-
-&lt;pre&gt;
-&lt;code class=&quot;java hljs&quot;&gt;
-    public double deriveTheta1(){
-            double sum = 0;
-
-            for (int j=0; j&amp;lt;initial_data.x.length; j++){
-                    sum += (initial_data.y[j] - hypothesisFunction(initial_data.x[j])) * initial_data.x[j];
-            }
-            return -2 * sum / initial_data.x.length;
-        }
-
-        public double deriveTheta0(){
-            double sum = 0;
-
-            for (int j=0; j&amp;lt;initial_data.x.length; j++) {
-                    sum += initial_data.y[j] - hypothesisFunction(initial_data.x[j]);
-            }
-            return -2 * sum / initial_data.x.length;
-
-        }
-&lt;/code&gt;
-&lt;/pre&gt;
-
-&lt;p&gt;&lt;br /&gt;
-Now, the &lt;strong&gt;Gradient Descent Algorithm&lt;/strong&gt; &lt;em&gt;per se&lt;/em&gt;, making use of the functions above:&lt;/p&gt;
-
-&lt;pre&gt;
-&lt;code class=&quot;java hljs&quot;&gt;
-    public void execute(){
-            do {
-
-                    this.theta1 -= alpha * deriveTheta1();
-                    this.theta0 -= alpha * deriveTheta0();
-
-                    //used for plotting
-                    tplot[iters] = iters;
-                    theta0plot[iters] = theta0;
-                    theta1plot[iters] = theta1;
-                    iters++;
-
-                    if (iters % dispiter == 0){
-                            addTrendLine(plot, true);
-
-                    }
-
-                    if (iters &amp;gt; maxiter) break;
-            } while (Math.abs(theta1) &amp;gt; tol || Math.abs(theta0) &amp;gt; tol);
-            plot.addScatterPlot(&quot;X-Y&quot;, initial_data.x, initial_data.y);
-            System.out.println(&quot;theta0 = &quot; + this.theta0 + &quot; and theta1 = &quot; + this.theta1);
-        }
-&lt;/code&gt;
-&lt;/pre&gt;
-
-&lt;p&gt;Note that it does &lt;em&gt;almost&lt;/em&gt; exactly the same as the mathematical model of the Gradient Descent demonstrated above, the difference is only a few details, such as the &lt;em&gt;if&lt;/em&gt; and &lt;em&gt;while&lt;/em&gt; to verify convergence or divergence &lt;em&gt;(which is, if it reached the iteration’s limit)&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;Next we have the &lt;strong&gt;addTrendLine&lt;/strong&gt; function, used to keep plotting our straight line as it will become more updated.&lt;/p&gt;
-
-&lt;pre&gt;
-&lt;code class=&quot;java hljs&quot;&gt;
-    public void addTrendLine(Plot2DPanel plot, boolean removePrev){
-            if (removePrev){
-                    plot.removePlot(trendline);
-            }
-            double[] yEnd = new double[initial_data.x.length];
-            for (int i=0; i&amp;lt;initial_data.x.length; i++)
-                    yEnd[i] = hypothesisFunction(initial_data.x[i]);
-            trendline = plot.addLinePlot(&quot;final&quot;, initial_data.x, yEnd);
-        }
-&lt;/code&gt;
-&lt;/pre&gt;
-
-&lt;p&gt;And now we have an extra, it’s a function to store and plot the convergence history of both \( \Theta_{0} \) and \( \Theta_{1} \), so we can see how it happened.&lt;/p&gt;
-
-&lt;pre&gt;
-&lt;code class=&quot;java hljs&quot;&gt;
-    public void printConvergence(){
-
-          double[] theta0plot2 = new double[iters];
-          double[] theta1plot2 = new double[iters];
-          double[] tplot2 = new double[iters];
-          System.arraycopy(theta0plot, 0, theta0plot2, 0, iters);
-          System.arraycopy(theta1plot, 0, theta1plot2, 0, iters);
-          System.arraycopy(tplot, 0, tplot2, 0, iters);
-
-          // Plot the convergence of data
-          Plot2DPanel convPlot = new Plot2DPanel();
-
-          // add a line plot to the PlotPanel
-          convPlot.addLinePlot(&quot;theta0&quot;, tplot2, theta0plot2);
-          convPlot.addLinePlot(&quot;theta1&quot;, tplot2, theta1plot2);
-
-          // put the PlotPanel in a JFrame, as a JPanel
-          JFrame frame2 = new JFrame(&quot;Convergence of parameters over time&quot;);
-          frame2.setContentPane(convPlot);
-          frame2.setSize(600, 600);
-          frame2.setVisible(true);
-        }
-&lt;/code&gt;
-&lt;/pre&gt;
-
-&lt;p&gt;Finally, we have our &lt;strong&gt;Test Class&lt;/strong&gt;, that will execute everything:&lt;/p&gt;
-
-&lt;pre&gt;
-&lt;code class=&quot;java hljs&quot;&gt;
-    import javax.swing.JFrame;
-
-    import org.math.plot.*;
-
-    public class TestGradDescent {
-            public static void main(String[] args ){
-                    InitialData id = new InitialData();
-                    id.plotData();
-                    GradientDescent gd = new GradientDescent(id);
-                    gd.execute();
-                    gd.printConvergence();
-
-            }
-    }
-&lt;/code&gt;
-&lt;/pre&gt;
-
-&lt;p&gt;Now, executing the code, the output will be, at first, the initial data:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/content/images/2015/06/example-plot-2.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Executing the algorithm, it learns and generate its prediction based on its initial data:&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/content/images/2015/06/example-plot-line-e1420763780646.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;magical-right&quot;&gt;Magical, right?&lt;/h3&gt;
-
-&lt;p&gt;And then, we can see the &lt;strong&gt;convergence&lt;/strong&gt;:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/content/images/2015/06/example-convergence.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;And you can see in the terminal the final values of \( \Theta_{0} \) and \( \Theta_{1} \) that minimized the Cost Function.&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;If it wasn’t Science, probably would be black magic. heh.&lt;/em&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;a-few-considerations&quot;&gt;A few considerations&lt;/h3&gt;
-
-&lt;p&gt;You can download the complete code &lt;a href=&quot;https://github.com/digorithm/ArtificialIntelligenceAlgorithms&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;If you have any questions/suggestion, drop me an email so we can talk!&lt;/p&gt;
-
-&lt;p&gt;If you need further details of the mathematical model, I ultra advice to watch Andrew’s Ng Videos at Stanford@Coursera. &lt;strong&gt;His skills to teach it is something unbelievable awesome&lt;/strong&gt;.&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;Thanks for reading!&lt;/em&gt;&lt;/p&gt;
-</description>
-        <pubDate>Fri, 09 Jan 2015 00:00:00 +0000</pubDate>
-        <link>http://localhost:4000/articles/2015-01/Making-Your-Machine-Think-Learn-And-Predict-Gradient-Descent-Algorithm-in-Java</link>
-        <guid isPermaLink="true">http://localhost:4000/articles/2015-01/Making-Your-Machine-Think-Learn-And-Predict-Gradient-Descent-Algorithm-in-Java</guid>
-        
-        <category>machine learning</category>
-        
-        <category>artificial intelligence</category>
-        
-        <category>java</category>
-        
-        <category>programming</category>
-        
-        <category>engineering</category>
-        
-        <category>tutorial</category>
-        
-        
-        <category>machine-learning</category>
-        
-        <category>java</category>
-        
-        <category>algorithm</category>
         
       </item>
     
