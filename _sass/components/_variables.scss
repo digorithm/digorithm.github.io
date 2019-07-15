@@ -101,14 +101,14 @@ $border-width:               .0625rem !default;
 //
 // Font, line-height, and color for body text, headings, and more.
 
-$font-family-sans-serif:     "Caslon", "Helvetica Neue", Helvetica, Arial, sans-serif !default;
+$font-family-sans-serif:     "Lusitana", "Helvetica Neue", Helvetica, Arial, sans-serif !default;
 $font-family-serif:          "Libre Baskerville", Georgia, "Times New Roman", Times, serif !default;
 $font-family-monospace:      "Roboto Mono", "Courier New", monospace !default;
 $font-family-base:           $font-family-sans-serif !default;
 $font-family-sidebar:        "avenir" !default;
 
 // Pixel value used to responsively scale all typography. Applied to the `<html>` element.
-$font-size-root:             20px !default;
+$font-size-root:             18px !default;
 
 $font-size-base:             $font-size-root * 1.05 !default;
 $font-size-lg:               $font-size-root * 1.25 !default;

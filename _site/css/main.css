@@ -594,7 +594,7 @@ footer {
 .related-articles {
   margin-top: 2em; }
   .related-articles h4 {
-    font-family: "Caslon", "Helvetica Neue", Helvetica, Arial, sans-serif; }
+    font-family: "Lusitana", "Helvetica Neue", Helvetica, Arial, sans-serif; }
   .related-articles ul {
     margin: 0;
     padding: 0;
@@ -1096,12 +1096,12 @@ sup {
    ========================================================================== */
 html {
   line-height: 1.5;
-  font-family: "Caslon", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Lusitana", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: normal;
   color: #512906;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
-  font-size: 21px; }
+  font-size: 18.9px; }
 
 blockquote {
   display: block;
@@ -1188,7 +1188,7 @@ p {
   margin-bottom: 20px;
   padding: 2px 8px;
   font-size: 0.875em;
-  font-family: "Caslon", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Lusitana", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: 700;
   background-color: #99673A;
   color: #fff;
@@ -1256,7 +1256,7 @@ p {
 pre, code {
   font-family: "Roboto Mono", "Courier New", monospace;
   font-size: 0.9em;
-  font-size: 18px; }
+  font-size: 15.9px; }
 
 code {
   border-radius: 2px;
