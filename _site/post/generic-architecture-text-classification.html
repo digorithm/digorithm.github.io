@@ -10,7 +10,7 @@
   <meta name="description" content="One of the most commons tasks in Machine Learning is text classification, which is simply teaching your machine how to read and interpret a text and predict ...">
 
   <!-- CSS files -->
-  <link rel="stylesheet" href="http://localhost:4000/css/font-awesome.min.css">
+  <link rel="stylesheet" href="http://localhost:4000/css/all.css">
   <link rel="stylesheet" href="http://localhost:4000/css/main.css">
 
   <link rel="canonical" href="http://localhost:4000/post/generic-architecture-text-classification">
@@ -21,47 +21,58 @@
   <link rel="shortcut icon" href="http://localhost:4000/favicon.ico">
   <!-- 32x32 -->
   <link rel="shortcut icon" href="http://localhost:4000/favicon.png">
+  <!-- <script defer src="http://localhost:4000/js/all.js"></script>  -->
 </head>
 
 
 <body>
   <div class="row">
-    <div class="col s12 m3">
+
+    <div class="col xs12 s12 m3">
       <div class="table cover">
         
 
 <div class="sidebar cover-card table-cell table-middle">
   <a href="http://localhost:4000/" class="author_name">Rodrigo Araujo</a>
-  <span class="author_job">Computer scientist and SW Engineer</span>
-  <span class="author_bio mbm">Thoughts on computer science, software engineering, distributed systems, and machine learning</span>
+  <span class="author_job">Computer scientist and software engineer</span>
+  <span class="author_bio mbm">Thoughts on everything related to computer science and software engineering (or whatever comes to my mind)</span>
   <nav class="nav">
     <ul class="nav-list">
       
+    </hr><hr>
+      <a href="http://localhost:4000/about">
       <li class="nav-item">
-        <a href="http://localhost:4000/blog">Blog</a>
-        
-          <span style="font-size:10px;">/</span>
-        
+          About
       </li>
+    </a>
       
+    </hr><hr>
+      <a href="http://localhost:4000/">
       <li class="nav-item">
-        <a href="http://localhost:4000/categories">Categories</a>
-        
-          <span style="font-size:10px;">/</span>
-        
+          Archive
       </li>
+    </a>
       
+    </hr><hr>
+      <a href="http://localhost:4000/categories">
       <li class="nav-item">
-        <a href="http://localhost:4000/projects">Projects</a>
-        
-          <span style="font-size:10px;">/</span>
-        
+          Categories
       </li>
+    </a>
       
+    </hr><hr>
+      <a href="http://localhost:4000/projects">
       <li class="nav-item">
-        <a href="http://localhost:4000/publications">Publications</a>
-        
+          Projects
       </li>
+    </a>
+      
+    </hr><hr>
+      <a href="http://localhost:4000/publications">
+      <li class="nav-item">
+          Publications
+      </li>
+    </a>
       
     </ul>
   </nav>
@@ -84,7 +95,7 @@
       <script>gen_mail_to_link('rod.dearaujo@gmail.com', 'Hello from website');</script>
       </li>
     
-    <li><a href="http://twitter.com/digorithm" class="social-link-item" target="_blank"><i class="fa fa-fw fa-twitter"></i></a></li>
+    <li><a href="http://twitter.com/digorithm" class="social-link-item" target="_blank"><i class="fab fa-twitter"></i></a></li>
     
     
     
@@ -92,7 +103,7 @@
     
     
     
-    <li><a href="http://github.com/digorithm" class="social-link-item" target="_blank"><i class="fa fa-fw fa-github"></i></a></li>
+    <li><a href="http://github.com/digorithm" class="social-link-item" target="_blank"><i class="fab fa-github"></i></a></li>
     
     
     
@@ -113,13 +124,31 @@
 
       </div>
     </div>
-    <div class="col s12 m9">
+    <div class="col xs12 s12 m9">
       <div class="post-listing">
         <div class="post-content">
-        <h1 style="max-width: 45%;">A Generic Architecture for Text Classification with Machine Learning</h1>
-        <p style="max-width: 45%; font-size: 14px; font-style:italic;">June 30, 2015</p>
-        <hr>
-        <p>One of the most commons tasks in Machine Learning is text classification, which is simply teaching your machine how to read and interpret a text and predict what kind of text it is.</p>
+          <h1 style="max-width: 45%;">A Generic Architecture for Text Classification with Machine Learning</h1>
+          
+
+          <div style="width:100%;" class="container">
+            <div class="row post-meta">
+              <div class="col m6"><p style="float:left;max-width: 100%; font-size: 14px;"> <i class="far fa-calendar" style="padding-right:5px;"></i> June 30, 2015</p></div>
+              <div class="col m6"><p style="float:right;max-width: 100%; font-size: 14px;"><i class="far fa-hourglass" style="padding-right:5px;"></i> <span style="color:black;" class="read-time" title="Estimated read time">
+  
+  
+    9 mins read
+  
+</span>
+</p></div>
+            </div>
+            <div class="row post-meta">
+                <div class="col m6"><p style="float:left;max-width: 100%; font-size: 14px;"><i class="fas fa-tags" style="padding-right:5px;"></i> machine learning, artificial intelligence, engineering, tips, architecture, text classification</p></div>
+                <div class="col m6"><p style="float:right;max-width: 100%; font-size: 14px;"><i class="far fa-folder" style="padding-right:5px;"></i> machine-learningsoftware-architecture</p></div>
+              </div>
+          </div>
+
+          <hr>
+          <p>One of the most commons tasks in Machine Learning is text classification, which is simply teaching your machine how to read and interpret a text and predict what kind of text it is.</p>
 
 <p>The purpose of this essay is to talk about a simple and generic enough Architecture to a supervised learning text classification. The interesting point of this Architecture is that you can use it as a basic/initial model for many classifications tasks.</p>
 
@@ -204,11 +233,11 @@
 
 <p>Scikit Learn gives us a great API to use the TF-IDF method, it’s really simple.</p>
 
-<pre><code>    from sklearn.feature_extraction.text import TfidfVectorizer
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    from sklearn.feature_extraction.text import TfidfVectorizer
 
     vectorizer = TfidfVectorizer()
     vectorized_x = vectorizer.fit_transform(X)
-</code></pre>
+</code></pre></div></div>
 
 <p>Which will do the TF-IDF on the X data, and then vectorize this data, in other words, transform the whole thing into an array of inverse frequencies.
 So, extracting those features, <strong>this</strong> will be our training and test data, that will feed the algorithm (along with the Y, which is the output, the class of each training data).</p>
@@ -263,7 +292,7 @@ So, extracting those features, <strong>this</strong> will be our training and te
 <p>Master the skills to understand data, this will be crucial to make you see what algorithm to use, you can’t make something learn if you don’t know about what you are teaching.</p>
 
 
-        <footer>
+          <footer>
   &copy; 2019 Rodrigo Araujo 
 </footer>
 

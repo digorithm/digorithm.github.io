@@ -1,6 +1,6 @@
 ---
-layout: default
-title: Making your machine think, learn and predict - Gradient Descent Algorithm in Java
+layout: post
+title: Gradient Descent Algorithm in Java
 categories: [machine-learning, java, algorithm]
 keywords: "machine learning, artificial intelligence, java, programming, engineering, tutorial"
 tags: [machine learning, artificial intelligence, java, programming, engineering, tutorial]

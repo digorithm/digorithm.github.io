@@ -10,7 +10,7 @@
   <meta name="description" content="Thoughts on computer science, software engineering, distributed systems, and machine learning">
 
   <!-- CSS files -->
-  <link rel="stylesheet" href="http://localhost:4000/css/font-awesome.min.css">
+  <link rel="stylesheet" href="http://localhost:4000/css/all.css">
   <link rel="stylesheet" href="http://localhost:4000/css/main.css">
 
   <link rel="canonical" href="http://localhost:4000/">
@@ -21,47 +21,58 @@
   <link rel="shortcut icon" href="http://localhost:4000/favicon.ico">
   <!-- 32x32 -->
   <link rel="shortcut icon" href="http://localhost:4000/favicon.png">
+  <!-- <script defer src="http://localhost:4000/js/all.js"></script>  -->
 </head>
 
 
 <body>
   <div class="row">
-    <div class="col s12 m3">
+    
+    <div class="col xs12 s12 m3">
       <div class="table cover">
         
 
 <div class="sidebar cover-card table-cell table-middle">
   <a href="http://localhost:4000/" class="author_name">Rodrigo Araujo</a>
-  <span class="author_job">Computer scientist and SW Engineer</span>
-  <span class="author_bio mbm">Thoughts on computer science, software engineering, distributed systems, and machine learning</span>
+  <span class="author_job">Computer scientist and software engineer</span>
+  <span class="author_bio mbm">Thoughts on everything related to computer science and software engineering (or whatever comes to my mind)</span>
   <nav class="nav">
     <ul class="nav-list">
       
+    </hr><hr>
+      <a href="http://localhost:4000/about">
       <li class="nav-item">
-        <a href="http://localhost:4000/blog">Blog</a>
-        
-          <span style="font-size:10px;">/</span>
-        
+          About
       </li>
+    </a>
       
+    </hr><hr>
+      <a href="http://localhost:4000/">
       <li class="nav-item">
-        <a href="http://localhost:4000/categories">Categories</a>
-        
-          <span style="font-size:10px;">/</span>
-        
+          Archive
       </li>
+    </a>
       
+    </hr><hr>
+      <a href="http://localhost:4000/categories">
       <li class="nav-item">
-        <a href="http://localhost:4000/projects">Projects</a>
-        
-          <span style="font-size:10px;">/</span>
-        
+          Categories
       </li>
+    </a>
       
+    </hr><hr>
+      <a href="http://localhost:4000/projects">
       <li class="nav-item">
-        <a href="http://localhost:4000/publications">Publications</a>
-        
+          Projects
       </li>
+    </a>
+      
+    </hr><hr>
+      <a href="http://localhost:4000/publications">
+      <li class="nav-item">
+          Publications
+      </li>
+    </a>
       
     </ul>
   </nav>
@@ -84,7 +95,7 @@
       <script>gen_mail_to_link('rod.dearaujo@gmail.com', 'Hello from website');</script>
       </li>
     
-    <li><a href="http://twitter.com/digorithm" class="social-link-item" target="_blank"><i class="fa fa-fw fa-twitter"></i></a></li>
+    <li><a href="http://twitter.com/digorithm" class="social-link-item" target="_blank"><i class="fab fa-twitter"></i></a></li>
     
     
     
@@ -92,7 +103,7 @@
     
     
     
-    <li><a href="http://github.com/digorithm" class="social-link-item" target="_blank"><i class="fa fa-fw fa-github"></i></a></li>
+    <li><a href="http://github.com/digorithm" class="social-link-item" target="_blank"><i class="fab fa-github"></i></a></li>
     
     
     
@@ -113,59 +124,191 @@
 
       </div>
     </div>
-    <div class="col s12 m9">
+    <div class="col xs12 s12 m9">
       <div class="post-listing">
         <div class="post-content">
-        <h1 style="max-width: 45%;"></h1>
+        <h1 style="max-width: 45%;"> Blog posts </h1>
         <p style="max-width: 45%; font-size: 14px; font-style:italic;"></p>
         <hr>
-        <h1>Hey there!</h1>
+          <div id="page">
+    
 
-<p>I'm <strong>Rodrigo Araújo</strong>. I live in Vancouver, Canada, though originally from Brazil. I'm a software engineer with a background in Computer Science. 
-    I build software and do research in order to help humans achieve higher and greater things.</p>
+    <article class="page-content">
+      <div class="archive">
+  <div class="timeline" id="timeline">
+    
+    
+    <!-- <div class="archive-title">
+      <h4 class="archive-year">2019</h4>
+    </div> -->
 
-<p>
-The first job I fell in love with was working as a machine learning engineer at <a href="https://www.jusbrasil.com.br">Jusbrasil</a> -- 
-<a href="https://www.similarweb.com/fr/top-websites/category/law-and-government/legal">the biggest law and government websites in the world</a> at the time of this writing. 
-It was the first time I felt that the code I wrote directly impacted millions of people.
-</p>
+    <ul>
+    
+    <li>
+      <div style="color:black;font-size:15px;width:120px;float:left;">2019-Jul-15</div> <a  style="font-size:18px;" href="http://localhost:4000/post/message-passing-dataflow">From synchronous service calls to message-passing dataflow systems</a></li>
+    
+    
+      
+      
+    
+    </ul>
+    <!-- <div class="archive-title">
+      <h4 class="archive-year">2017</h4>
+    </div> -->
 
-<p>Then, I decided to go to grad school at the beautiful University of British Columbia, 
-    where I was part of the <a href="https://www.cs.ubc.ca/cs-research/software-practices-lab">Software Practices Lab</a> 
-    working as a research software engineer on using machine learning to build reliable self-adaptive distributed systems 
-    (<a href="https://open.library.ubc.ca/cIRcle/collections/ubctheses/24/items/1.0379346">here's my published thesis</a>). 
-    Also around that time I worked as a teaching assistant helping hundreds of students to build better software, where I
-    discovered an unexpected passion for mentoring and teaching. 
-</p>
+    <ul>
+    
+    
+    <li>
+      <div style="color:black;font-size:15px;width:120px;float:left;">2017-Dec-13</div> <a  style="font-size:18px;" href="http://localhost:4000/post/machine-learning-enhanced-software">On machine learning enhanced software systems</a></li>
+    
+    
+      
+      
+    
+    </ul>
+    <!-- <div class="archive-title">
+      <h4 class="archive-year">2015</h4>
+    </div> -->
 
-<p>
-    I had a great time in academia, but I felt I needed to go back to that feeling of building things that have a direct
-    positive impact on people. So I took a senior engineer / tech lead position at  <a href="http://cto.ai/">CTO.ai</a>,
-    building products, data pipelines, and distributed systems that handled copious amounts of data.
-</p>
+    <ul>
+    
+    
+    <li>
+      <div style="color:black;font-size:15px;width:120px;float:left;">2015-Dec-8</div> <a  style="font-size:18px;" href="http://localhost:4000/post/thoughts-visualizing-software-arch">Thoughts on visualizing software architecture</a></li>
+    
+    
+      
+      
+    
+    
+    <li>
+      <div style="color:black;font-size:15px;width:120px;float:left;">2015-Jul-16</div> <a  style="font-size:18px;" href="http://localhost:4000/post/neural-computation-pt1">Neural Computation: An Intuitive Understanding of the Perceptron</a></li>
+    
+    
+      
+      
+    
+    
+    <li>
+      <div style="color:black;font-size:15px;width:120px;float:left;">2015-Jul-2</div> <a  style="font-size:18px;" href="http://localhost:4000/post/case-study-sentiment-analysis-movie-reviews">Case Study: Sentiment Analysis On Movie Reviews</a></li>
+    
+    
+      
+      
+    
+    
+    <li>
+      <div style="color:black;font-size:15px;width:120px;float:left;">2015-Jun-30</div> <a  style="font-size:18px;" href="http://localhost:4000/post/generic-architecture-text-classification">A Generic Architecture for Text Classification with Machine Learning</a></li>
+    
+    
+      
+      
+    
+    
+    <li>
+      <div style="color:black;font-size:15px;width:120px;float:left;">2015-Jun-19</div> <a  style="font-size:18px;" href="http://localhost:4000/post/case-study-python-performance-rotating-vector">Case Study: Python Performance on rotating one-dimensional vectors</a></li>
+    
+    
+      
+      
+    
+    
+    <li>
+      <div style="color:black;font-size:15px;width:120px;float:left;">2015-May-25</div> <a  style="font-size:18px;" href="http://localhost:4000/post/web-scaling-using-redis-as-cache">Web Scaling - using Redis as Cache</a></li>
+    
+    
+      
+      
+    
+    
+    <li>
+      <div style="color:black;font-size:15px;width:120px;float:left;">2015-Apr-22</div> <a  style="font-size:18px;" href="http://localhost:4000/post/build-your-first-rest-api-python">Building your first REST API with Python</a></li>
+    
+    
+      
+      
+    
+    
+    <li>
+      <div style="color:black;font-size:15px;width:120px;float:left;">2015-Mar-31</div> <a  style="font-size:18px;" href="http://localhost:4000/post/using-python-and-ai-to-predict-wine">Using Python and AI to predict types of wine</a></li>
+    
+    
+      
+      
+    
+    
+    <li>
+      <div style="color:black;font-size:15px;width:120px;float:left;">2015-Jan-9</div> <a  style="font-size:18px;" href="http://localhost:4000/articles/2015-01/Making-Your-Machine-Think-Learn-And-Predict-Gradient-Descent-Algorithm-in-Java">Gradient Descent Algorithm in Java</a></li>
+    
+    
+      
+      
+    
+    
+    <li>
+      <div style="color:black;font-size:15px;width:120px;float:left;">2015-Jan-6</div> <a  style="font-size:18px;" href="http://localhost:4000/post/learn-design-patterns">Why, how and where to learn Design Patterns</a></li>
+    
+    
+      
+      
+    
+    </ul>
+    <!-- <div class="archive-title">
+      <h4 class="archive-year">2014</h4>
+    </div> -->
 
-<p>
-    Now I'm working at <a href="https://www.cmd.com">Cmd</a>, building distributed systems in the cybersecurity space.
-</p>
+    <ul>
+    
+    
+    <li>
+      <div style="color:black;font-size:15px;width:120px;float:left;">2014-Oct-31</div> <a  style="font-size:18px;" href="http://localhost:4000/post/thoughts-on-automata-theory">Thoughts on Automata Theory</a></li>
+    
+    
+      
+      
+    
+    
+    <li>
+      <div style="color:black;font-size:15px;width:120px;float:left;">2014-Oct-10</div> <a  style="font-size:18px;" href="http://localhost:4000/post/fun-with-graphs-pt1">Fun with graphs</a></li>
+    
+    
+      
+      
+    
+    
+    <li>
+      <div style="color:black;font-size:15px;width:120px;float:left;">2014-Jul-22</div> <a  style="font-size:18px;" href="http://localhost:4000/post/crud-with-java-jsp">CRUD with Java, JSP and MySQL</a></li>
+    
+    
+      
+      
+    
+    
+    <li>
+      <div style="color:black;font-size:15px;width:120px;float:left;">2014-Jul-16</div> <a  style="font-size:18px;" href="http://localhost:4000/post/object-oriented-thinking">Object Oriented Thinking</a></li>
+    
+    
+      
+      
+    
+    
+    <li>
+      <div style="color:black;font-size:15px;width:120px;float:left;">2014-Jul-16</div> <a  style="font-size:18px;" href="http://localhost:4000/post/a-romantic-vision-of-the-software-engineering">A Romantic Vision Of The Software Engineering</a></li>
+    
+    </ul>
 
-<p>
-    For more details, head over to my <a href="https://www.linkedin.com/in/rodrigo-silva-de-ara%C3%BAjo-196a9358/">LinkedIn</a> or my <a href="/content/Resume.pdf">resume.</a>
-</p>
+  </div>
 
-<h1>Research and work</h1>
+</div>
 
-<p><em><a href="https://www.wsj.com/articles/SB10001424053111903480904576512250915629460">Software</a> <a href="https://a16z.com/2016/08/20/why-software-is-eating-the-world/">is</a> <a href="">eating</a> <a href="https://www.forbes.com/sites/stevedenning/2014/04/11/why-software-is-eating-the-world/#31314bde29a2">the</a> <a href="https://techcrunch.com/2016/06/07/software-is-eating-the-world-5-years-later/">world</a></em> and yet, it's amazing how unreliable and internally broken most software and software practices are. This is mostly due the fact that we are a young field taking its first baby steps, and this is quite exciting. I believe it is our job, as a community, to slowly but steadily improve the way we build software. Thus, one of my personal missions is to <strong>make software more reliable and correct; by both improving software and improving how we build software.</strong></p>
+    </article>
 
-<h2>Interests</h2>
-<p>
-<ul style="color: black;">
-    <li>Distributed Systems</li>
-    <li>Artificial Intelligence and Machine Learning</li>
-    <li>Software Engineering</li>
-    <li>Analysis, Testing, and Verification of Software</li>
-    <li>A mix and match of all items above</li>
-</ul>
-</p>
+
+  </div><!-- end page content -->
+
+
+  
 
         <footer>
   &copy; 2019 Rodrigo Araujo 

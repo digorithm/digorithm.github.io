@@ -1,11 +1,11 @@
 ---
-title: "Neural Computation: Toward an Intuitive Understanding of the Perceptron"  
+title: "Neural Computation: An Intuitive Understanding of the Perceptron"  
 categories: [machine-learning]
 keywords: "machine learning, artificial intelligence, engineering, tutorial, sentiment analysis, nlp, python, scikit learn, sklearn"
 tags: [machine learning, artificial intelligence, engineering, tutorial, text classification, NLP, Sentiment Analysis]
 fullview: true
 permalink: post/neural-computation-pt1
-layout: default
+layout: post
 ---
 
 Artificial Neurons is one of the most beautiful ways to simulate a biological behavior through computation, despite the fact that it's not very close to the level of details of a real neuron. But it captured the core of what a neuron is doing. 

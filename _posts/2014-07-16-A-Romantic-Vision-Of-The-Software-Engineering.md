@@ -5,7 +5,7 @@ tags: [engineering, software, thoughts]
 categories: [software-engineering, advice, industry]
 fullview: true
 permalink: post/a-romantic-vision-of-the-software-engineering
-layout: default
+layout: post
 ---
 
 

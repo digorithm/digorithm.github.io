@@ -10,7 +10,7 @@
   <meta name="description" content="One of the most common kind of applications in today's tech/business world is the CRUD system, that is the idea of the user interacting with a database, so t...">
 
   <!-- CSS files -->
-  <link rel="stylesheet" href="http://localhost:4000/css/font-awesome.min.css">
+  <link rel="stylesheet" href="http://localhost:4000/css/all.css">
   <link rel="stylesheet" href="http://localhost:4000/css/main.css">
 
   <link rel="canonical" href="http://localhost:4000/post/crud-with-java-jsp">
@@ -21,47 +21,58 @@
   <link rel="shortcut icon" href="http://localhost:4000/favicon.ico">
   <!-- 32x32 -->
   <link rel="shortcut icon" href="http://localhost:4000/favicon.png">
+  <!-- <script defer src="http://localhost:4000/js/all.js"></script>  -->
 </head>
 
 
 <body>
   <div class="row">
-    <div class="col s12 m3">
+
+    <div class="col xs12 s12 m3">
       <div class="table cover">
         
 
 <div class="sidebar cover-card table-cell table-middle">
   <a href="http://localhost:4000/" class="author_name">Rodrigo Araujo</a>
-  <span class="author_job">Computer scientist and SW Engineer</span>
-  <span class="author_bio mbm">Thoughts on computer science, software engineering, distributed systems, and machine learning</span>
+  <span class="author_job">Computer scientist and software engineer</span>
+  <span class="author_bio mbm">Thoughts on everything related to computer science and software engineering (or whatever comes to my mind)</span>
   <nav class="nav">
     <ul class="nav-list">
       
+    </hr><hr>
+      <a href="http://localhost:4000/about">
       <li class="nav-item">
-        <a href="http://localhost:4000/blog">Blog</a>
-        
-          <span style="font-size:10px;">/</span>
-        
+          About
       </li>
+    </a>
       
+    </hr><hr>
+      <a href="http://localhost:4000/">
       <li class="nav-item">
-        <a href="http://localhost:4000/categories">Categories</a>
-        
-          <span style="font-size:10px;">/</span>
-        
+          Archive
       </li>
+    </a>
       
+    </hr><hr>
+      <a href="http://localhost:4000/categories">
       <li class="nav-item">
-        <a href="http://localhost:4000/projects">Projects</a>
-        
-          <span style="font-size:10px;">/</span>
-        
+          Categories
       </li>
+    </a>
       
+    </hr><hr>
+      <a href="http://localhost:4000/projects">
       <li class="nav-item">
-        <a href="http://localhost:4000/publications">Publications</a>
-        
+          Projects
       </li>
+    </a>
+      
+    </hr><hr>
+      <a href="http://localhost:4000/publications">
+      <li class="nav-item">
+          Publications
+      </li>
+    </a>
       
     </ul>
   </nav>
@@ -84,7 +95,7 @@
       <script>gen_mail_to_link('rod.dearaujo@gmail.com', 'Hello from website');</script>
       </li>
     
-    <li><a href="http://twitter.com/digorithm" class="social-link-item" target="_blank"><i class="fa fa-fw fa-twitter"></i></a></li>
+    <li><a href="http://twitter.com/digorithm" class="social-link-item" target="_blank"><i class="fab fa-twitter"></i></a></li>
     
     
     
@@ -92,7 +103,7 @@
     
     
     
-    <li><a href="http://github.com/digorithm" class="social-link-item" target="_blank"><i class="fa fa-fw fa-github"></i></a></li>
+    <li><a href="http://github.com/digorithm" class="social-link-item" target="_blank"><i class="fab fa-github"></i></a></li>
     
     
     
@@ -113,13 +124,31 @@
 
       </div>
     </div>
-    <div class="col s12 m9">
+    <div class="col xs12 s12 m9">
       <div class="post-listing">
         <div class="post-content">
-        <h1 style="max-width: 45%;">CRUD with Java, JSP and MySQL</h1>
-        <p style="max-width: 45%; font-size: 14px; font-style:italic;">July 22, 2014</p>
-        <hr>
-        <p>One of the most common kind of applications in today's tech/business world is the CRUD system, that is the idea of the user interacting with a database, so the user can Create, Retrieve, Update and Delete <em>(yep, that awful name came from this)</em> data from this database. Also, <strong>learning how to create a CRUD with a language is a great way to understand the basics of this language, the basics of software design, engineering and architecture.</strong> In layman's term, a CRUD page is just a page where you can insert a thing, edit that thing, search that thing and delete that thing, just that!</p>
+          <h1 style="max-width: 45%;">CRUD with Java, JSP and MySQL</h1>
+          
+
+          <div style="width:100%;" class="container">
+            <div class="row post-meta">
+              <div class="col m6"><p style="float:left;max-width: 100%; font-size: 14px;"> <i class="far fa-calendar" style="padding-right:5px;"></i> July 22, 2014</p></div>
+              <div class="col m6"><p style="float:right;max-width: 100%; font-size: 14px;"><i class="far fa-hourglass" style="padding-right:5px;"></i> <span style="color:black;" class="read-time" title="Estimated read time">
+  
+  
+    6 mins read
+  
+</span>
+</p></div>
+            </div>
+            <div class="row post-meta">
+                <div class="col m6"><p style="float:left;max-width: 100%; font-size: 14px;"><i class="fas fa-tags" style="padding-right:5px;"></i> java, tutorial, programming, engineering, design, architecture, jsp, crud</p></div>
+                <div class="col m6"><p style="float:right;max-width: 100%; font-size: 14px;"><i class="far fa-folder" style="padding-right:5px;"></i> javasoftware-architecturecase-study</p></div>
+              </div>
+          </div>
+
+          <hr>
+          <p>One of the most common kind of applications in today's tech/business world is the CRUD system, that is the idea of the user interacting with a database, so the user can Create, Retrieve, Update and Delete <em>(yep, that awful name came from this)</em> data from this database. Also, <strong>learning how to create a CRUD with a language is a great way to understand the basics of this language, the basics of software design, engineering and architecture.</strong> In layman's term, a CRUD page is just a page where you can insert a thing, edit that thing, search that thing and delete that thing, just that!</p>
 <p> 
 <!--more--></p>
 <h3>Our goal</h3>
@@ -216,7 +245,7 @@ CREATE TABLE IF NOT EXISTS `smallcrud`.`person` (
 <p>If there's something wrong with your implementation, please let me know, drop me an email or post a comment here and I'll make sure it will work properly! :]</p>
 
 
-        <footer>
+          <footer>
   &copy; 2019 Rodrigo Araujo 
 </footer>
 

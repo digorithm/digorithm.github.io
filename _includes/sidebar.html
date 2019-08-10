@@ -7,12 +7,12 @@
   <nav class="nav">
     <ul class="nav-list">
       {% for page in site.pages_list %}
+    </hr><hr>
+      <a href="{{ site.url }}{{ page[1] }}">
       <li class="nav-item">
-        <a href="{{ site.url }}{{ page[1] }}">{{ page[0] }}</a>
-        {% unless forloop.last %}
-          <span style="font-size:10px;">/</span>
-        {% endunless %}
+          {{ page[0] }}
       </li>
+    </a>
       {% endfor %}
     </ul>
   </nav>

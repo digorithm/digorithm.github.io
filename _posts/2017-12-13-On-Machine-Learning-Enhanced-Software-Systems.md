@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: post
 title: On machine learning enhanced software systems
 keywords: "architecture, software, machine learning, systems, machine learning for systems"
 tags: [architecture, software, machine-learning, thoughts, systems]

@@ -10,6 +10,7 @@
 @import url('https://fonts.googleapis.com/css?family=Lora');
 @import url('https://fonts.googleapis.com/css?family=Lusitana');
 @import url('https://fonts.googleapis.com/css?family=PT+Serif');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
 
 @font-face {
 font-family: "avenir";
@@ -54,6 +55,8 @@ font-weight: bold;
 font-style: normal;
 }
 
+@import url('https://fonts.googleapis.com/css?family=Noto+Serif&display=swap');
+
 @font-face {
 font-family: "lora";
 src: url('/fonts/Lora-Italic.ttf');
@@ -85,6 +88,11 @@ src: url('/fonts/proximanova.otf');
 
 @import url('https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700');
 
+@font-face {
+  font-family: "Hack";
+  src: url('//cdn.jsdelivr.net/npm/hack-font@3.3.0/build/web/hack.css');
+  }
+
 // Custom variables
 
 // Spacing
@@ -101,9 +109,9 @@ $border-width:               .0625rem !default;
 //
 // Font, line-height, and color for body text, headings, and more.
 
-$font-family-sans-serif:     "avenir", "Helvetica Neue", Helvetica, Arial, sans-serif !default;
+$font-family-sans-serif:     "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif !default;
 $font-family-serif:          "Libre Baskerville", Georgia, "Times New Roman", Times, serif !default;
-$font-family-monospace:      "Roboto Mono", "Courier New", monospace !default;
+$font-family-monospace:      "Hack", "Courier New", monospace !default;
 $font-family-base:           $font-family-sans-serif !default;
 $font-family-sidebar:        "avenir" !default;
 
@@ -132,16 +140,22 @@ $hr-border-width:             $border-width;
 // Colors
 //
 
-$text-color:       #512906 !default;
-$background-color: #FFE8D3;
+//$text-color:       #512906 !default;;
+// $background-color: #FFE8D3;
+// $background-color: #FFF;
+$background-color: #FFF;
+
 
 $white:            #fff;
-$primary:          #99673A;
-$secondary:        #BC8A5E;
+// $primary:          #99673A;
+$primary: #2e5094;
+//$secondary:        #BC8A5E;
+$secondary: #2E8394;
 $success:          #65e892;
 $danger:           #f83e4b;
 $warning:          #F5A623;
 $info:             #09ABF6;
+$text-color: $primary;
 
 // Tables
 $table-border-color: #d0d0d0 !default;
@@ -154,7 +168,9 @@ $element-top-margin: $gutter-width/3 !default;
 $element-bottom-margin: ($gutter-width*2)/3 !default;
 
 // Media Query Ranges
+$xs-screen: 360px !default;
 $small-screen: 600px !default;
 $medium-screen: 992px !default;
 $large-screen: 1200px !default;
 $larger-screen: 1600px !default;
+$xl-screen: 1800px !default;

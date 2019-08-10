@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: post
 title: Building your first REST API with Python
 categories: [python, software-architecture, api]
 keywords: "api, python, programming, engineering, rest, flask"

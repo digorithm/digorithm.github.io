@@ -25,7 +25,8 @@ permalink:         /articles/:year-:month/:title
 
 gems: [jekyll-paginate]
 pages_list:
-  Blog: '/blog'
+  About: '/about'
+  Archive: '/'
   Categories: '/categories'
   Projects: '/projects'
   Publications: '/publications'
@@ -44,8 +45,8 @@ kramdown:
 owner:
   name: Rodrigo Araujo
   avatar: leonids-logo.png
-  job: "Computer scientist and SW Engineer"
-  bio: "Thoughts on computer science, software engineering, distributed systems, and machine learning"
+  job: "Computer scientist and software engineer"
+  bio: "Thoughts on everything related to computer science and software engineering (or whatever comes to my mind)"
   email: rod.dearaujo@gmail.com
   disqus-shortname:
   twitter: digorithm

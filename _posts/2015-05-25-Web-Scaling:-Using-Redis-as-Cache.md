@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: post
 title: Web Scaling - using Redis as Cache
 categories: [python, software-architecture, software-scalability, caching]
 keywords: "redis, web, scalability, programming, python, programming, engineering"

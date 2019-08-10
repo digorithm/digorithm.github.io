@@ -1,6 +1,6 @@
 ---
 title: Why, how and where to learn Design Patterns
-layout: default
+layout: post
 categories: [software-architecture, software-engineering]
 tags: [design patterns, tips, thoughts, software engineering, programming]
 keywords: "design patterns, tips, thoughts, software engineering, programming"

@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: post
 title: "A Generic Architecture for Text Classification with Machine Learning"  
 categories: [machine-learning, software-architecture]
 keywords: "machine learning, artificial intelligence, engineering, tips, architecture, text classification"

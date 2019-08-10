@@ -10,7 +10,7 @@
   <meta name="description" content="###What are the main goals of the object-oriented programming?###1. Abstraction, yes, i had to put this in the first place, in my point of view, this is the ...">
 
   <!-- CSS files -->
-  <link rel="stylesheet" href="http://localhost:4000/css/font-awesome.min.css">
+  <link rel="stylesheet" href="http://localhost:4000/css/all.css">
   <link rel="stylesheet" href="http://localhost:4000/css/main.css">
 
   <link rel="canonical" href="http://localhost:4000/post/object-oriented-thinking">
@@ -21,47 +21,58 @@
   <link rel="shortcut icon" href="http://localhost:4000/favicon.ico">
   <!-- 32x32 -->
   <link rel="shortcut icon" href="http://localhost:4000/favicon.png">
+  <!-- <script defer src="http://localhost:4000/js/all.js"></script>  -->
 </head>
 
 
 <body>
   <div class="row">
-    <div class="col s12 m3">
+
+    <div class="col xs12 s12 m3">
       <div class="table cover">
         
 
 <div class="sidebar cover-card table-cell table-middle">
   <a href="http://localhost:4000/" class="author_name">Rodrigo Araujo</a>
-  <span class="author_job">Computer scientist and SW Engineer</span>
-  <span class="author_bio mbm">Thoughts on computer science, software engineering, distributed systems, and machine learning</span>
+  <span class="author_job">Computer scientist and software engineer</span>
+  <span class="author_bio mbm">Thoughts on everything related to computer science and software engineering (or whatever comes to my mind)</span>
   <nav class="nav">
     <ul class="nav-list">
       
+    </hr><hr>
+      <a href="http://localhost:4000/about">
       <li class="nav-item">
-        <a href="http://localhost:4000/blog">Blog</a>
-        
-          <span style="font-size:10px;">/</span>
-        
+          About
       </li>
+    </a>
       
+    </hr><hr>
+      <a href="http://localhost:4000/">
       <li class="nav-item">
-        <a href="http://localhost:4000/categories">Categories</a>
-        
-          <span style="font-size:10px;">/</span>
-        
+          Archive
       </li>
+    </a>
       
+    </hr><hr>
+      <a href="http://localhost:4000/categories">
       <li class="nav-item">
-        <a href="http://localhost:4000/projects">Projects</a>
-        
-          <span style="font-size:10px;">/</span>
-        
+          Categories
       </li>
+    </a>
       
+    </hr><hr>
+      <a href="http://localhost:4000/projects">
       <li class="nav-item">
-        <a href="http://localhost:4000/publications">Publications</a>
-        
+          Projects
       </li>
+    </a>
+      
+    </hr><hr>
+      <a href="http://localhost:4000/publications">
+      <li class="nav-item">
+          Publications
+      </li>
+    </a>
       
     </ul>
   </nav>
@@ -84,7 +95,7 @@
       <script>gen_mail_to_link('rod.dearaujo@gmail.com', 'Hello from website');</script>
       </li>
     
-    <li><a href="http://twitter.com/digorithm" class="social-link-item" target="_blank"><i class="fa fa-fw fa-twitter"></i></a></li>
+    <li><a href="http://twitter.com/digorithm" class="social-link-item" target="_blank"><i class="fab fa-twitter"></i></a></li>
     
     
     
@@ -92,7 +103,7 @@
     
     
     
-    <li><a href="http://github.com/digorithm" class="social-link-item" target="_blank"><i class="fa fa-fw fa-github"></i></a></li>
+    <li><a href="http://github.com/digorithm" class="social-link-item" target="_blank"><i class="fab fa-github"></i></a></li>
     
     
     
@@ -113,13 +124,31 @@
 
       </div>
     </div>
-    <div class="col s12 m9">
+    <div class="col xs12 s12 m9">
       <div class="post-listing">
         <div class="post-content">
-        <h1 style="max-width: 45%;">Object Oriented Thinking</h1>
-        <p style="max-width: 45%; font-size: 14px; font-style:italic;">July 16, 2014</p>
-        <hr>
-        <p>###What are the main goals of the object-oriented programming?###</p>
+          <h1 style="max-width: 45%;">Object Oriented Thinking</h1>
+          
+
+          <div style="width:100%;" class="container">
+            <div class="row post-meta">
+              <div class="col m6"><p style="float:left;max-width: 100%; font-size: 14px;"> <i class="far fa-calendar" style="padding-right:5px;"></i> July 16, 2014</p></div>
+              <div class="col m6"><p style="float:right;max-width: 100%; font-size: 14px;"><i class="far fa-hourglass" style="padding-right:5px;"></i> <span style="color:black;" class="read-time" title="Estimated read time">
+  
+  
+    4 mins read
+  
+</span>
+</p></div>
+            </div>
+            <div class="row post-meta">
+                <div class="col m6"><p style="float:left;max-width: 100%; font-size: 14px;"><i class="fas fa-tags" style="padding-right:5px;"></i> thoughts, programming, engineering, architecture</p></div>
+                <div class="col m6"><p style="float:right;max-width: 100%; font-size: 14px;"><i class="far fa-folder" style="padding-right:5px;"></i> software-engineeringsoftware-architecture</p></div>
+              </div>
+          </div>
+
+          <hr>
+          <p>###What are the main goals of the object-oriented programming?###</p>
 
 <p><em>1. Abstraction, yes, i had to put this in the first place, in my point of view, this is the biggest goal of the OO programming</em></p>
 
@@ -141,7 +170,7 @@
 
 <p>Just before the creation of Object-Oriented Programming, the system development in C was using the concept of breaking the big problem into small sub-problems, where each sub-result together would generate the solution of the big problem in question. It’s actually smart to think like this, the OOP languages just formalized this concept (and of course, create others features, but this was the start point). Look at this following problem: We want a data structure to represent the functionaries of determined business, this functionary should have a name, age, salary and a function to change his salary. Let’s deal with it in the smartest way, which is, creating separately some structure that will represent the functionaries, in C we would code something like this:</p>
 
-<pre><code>typedef struct functionary{
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>typedef struct functionary{
   int age;
   char name[50];
   float salary;
@@ -153,13 +182,13 @@ void riseSalary(ap_func pthis){
       scanf("%d", n);
       pthis-&gt;salary = n;
   }
-</code></pre>
+</code></pre></div></div>
 
 <p>As you can see, in this func.c, we have the structure to represent the functionaries and the function that we will use. (from now, we’ll call function as METHODS)</p>
 
 <p>And here’s the <strong>main code:</strong></p>
 
-<pre><code>#include "func.c"
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#include "func.c"
 int main(){
   stru_func new;
   printf("Enter the age, name and salary: \n");
@@ -173,7 +202,7 @@ int main(){
   printf("%f", new.salary);
   return 0;
 }
-</code></pre>
+</code></pre></div></div>
 
 <p>Done, now we have a nice example of class and object…but, made with C! Where the class is this struct called “functionary” and the variables inside it we call “attributes” and the function “riseSalary” we call “method” (obs: look that the function/method is OUTSIDE the struct functionary), in fact we separate the module that represent the functionaries from the main module, and if we want, we can use this functionary module in other problems that need a struct to represent functionaries with those attributes/methods!</p>
 
@@ -183,7 +212,7 @@ int main(){
 
 <p>The same problem that we solved in C, in java, would be something like this:</p>
 
-<pre><code>public class functionary
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public class functionary
 {
   public int age;
   public string name;
@@ -193,7 +222,7 @@ int main(){
       this.salary = n;
   }
 }
-</code></pre>
+</code></pre></div></div>
 
 <p>As you should have noticed, the method now is INSIDE the structure that represent the functionary (the class). And what the big advantage of this? the class is now more portable, we can reuse it easily!</p>
 
@@ -201,7 +230,7 @@ int main(){
 
 <p><strong>Conclusion</strong>: Of course that the big evolution of procedural to Object-Oriented did not stop there! The concept of reuse, organize and divide the code and the problem created others many famous techniques that we can use on classes and objects, like the <strong>polymorfism</strong>, inheritance, abstract class and many others! But this evolution kept one main goal: <strong>modularity with more abstraction.</strong></p>
 
-        <footer>
+          <footer>
   &copy; 2019 Rodrigo Araujo 
 </footer>
 

@@ -8,6 +8,11 @@
   max-width: 1280px;
   width: 90%;
 }
+
+html {
+  background-color: $background-color;
+}
+
 @include media-query($medium-screen) {
   .container {
     width: 85%;
@@ -39,9 +44,28 @@
   }
 }
 
+@media screen and (min-width: $xs-screen) {
+  .row {
+    margin-left: 1% !important;
+  }
+}
+
+@media screen and (min-width: $small-screen) {
+  .row {
+    margin-left: 1% !important;
+  }
+}
+
+@media screen and (min-width: $medium-screen) {
+  .row {
+    margin-left: 15% !important;
+  }
+}
+
+
 // Row and colum
 .row {
-  margin-left: auto;
+  margin-left: 15%;
   margin-right: auto;
 
   // Clear floating children

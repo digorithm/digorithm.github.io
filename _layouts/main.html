@@ -1,51 +1,34 @@
 ---
-layout: default
+layout: page
+title: Blog posts
+permalink: /blog/
 ---
+<div class="archive">
+  <div class="timeline" id="timeline">
+    {% for post in site.posts %}
+    {% unless post.next %}
+    <!-- <div class="archive-title">
+      <h4 class="archive-year">{{ post.date | date: '%Y' }}</h4>
+    </div> -->
 
-<h1>Hey there!</h1>
+    <ul>
+    {% else %}
+      {% capture year %}{{ post.date | date: '%Y' }}{% endcapture %}
+      {% capture nyear %}{{ post.next.date | date: '%Y' }}{% endcapture %}
+    {% if year != nyear %}
+    </ul>
+    <!-- <div class="archive-title">
+      <h4 class="archive-year">{{ post.date | date: '%Y' }}</h4>
+    </div> -->
 
-<p>I'm <strong>Rodrigo Araújo</strong>. I live in Vancouver, Canada, though originally from Brazil. I'm a software engineer with a background in Computer Science. 
-    I build software and do research in order to help humans achieve higher and greater things.</p>
+    <ul>
+    {% endif %}
+    {% endunless %}
+    <li>
+      <div style="color:black;font-size:15px;width:120px;float:left;">{{ post.date | date: "%Y-%b-%-d" }}</div> <a  style="font-size:18px;" href="{{ site.url }}{{ post.url }}">{{ post.title }}</a></li>
+    {% endfor %}
+    </ul>
 
-<p>
-The first job I fell in love with was working as a machine learning engineer at <a href="https://www.jusbrasil.com.br">Jusbrasil</a> -- 
-<a href="https://www.similarweb.com/fr/top-websites/category/law-and-government/legal">the biggest law and government websites in the world</a> at the time of this writing. 
-It was the first time I felt that the code I wrote directly impacted millions of people.
-</p>
+  </div>
 
-<p>Then, I decided to go to grad school at the beautiful University of British Columbia, 
-    where I was part of the <a href="https://www.cs.ubc.ca/cs-research/software-practices-lab">Software Practices Lab</a> 
-    working as a research software engineer on using machine learning to build reliable self-adaptive distributed systems 
-    (<a href="https://open.library.ubc.ca/cIRcle/collections/ubctheses/24/items/1.0379346">here's my published thesis</a>). 
-    Also around that time I worked as a teaching assistant helping hundreds of students to build better software, where I
-    discovered an unexpected passion for mentoring and teaching. 
-</p>
-
-<p>
-    I had a great time in academia, but I felt I needed to go back to that feeling of building things that have a direct
-    positive impact on people. So I took a senior engineer / tech lead position at  <a href="http://cto.ai/">CTO.ai</a>,
-    building products, data pipelines, and distributed systems that handled copious amounts of data.
-</p>
-
-<p>
-    Now I'm working at <a href="https://www.cmd.com">Cmd</a>, building distributed systems in the cybersecurity space.
-</p>
-
-<p>
-    For more details, head over to my <a href="https://www.linkedin.com/in/rodrigo-silva-de-ara%C3%BAjo-196a9358/">LinkedIn</a> or my <a href="/content/Resume.pdf">resume.</a>
-</p>
-
-<h1>Research and work</h1>
-
-<p><em><a href="https://www.wsj.com/articles/SB10001424053111903480904576512250915629460">Software</a> <a href="https://a16z.com/2016/08/20/why-software-is-eating-the-world/">is</a> <a href="">eating</a> <a href="https://www.forbes.com/sites/stevedenning/2014/04/11/why-software-is-eating-the-world/#31314bde29a2">the</a> <a href="https://techcrunch.com/2016/06/07/software-is-eating-the-world-5-years-later/">world</a></em> and yet, it's amazing how unreliable and internally broken most software and software practices are. This is mostly due the fact that we are a young field taking its first baby steps, and this is quite exciting. I believe it is our job, as a community, to slowly but steadily improve the way we build software. Thus, one of my personal missions is to <strong>make software more reliable and correct; by both improving software and improving how we build software.</strong></p>
-
-<h2>Interests</h2>
-<p>
-<ul style="color: black;">
-    <li>Distributed Systems</li>
-    <li>Artificial Intelligence and Machine Learning</li>
-    <li>Software Engineering</li>
-    <li>Analysis, Testing, and Verification of Software</li>
-    <li>A mix and match of all items above</li>
-</ul>
-</p>
+</div>

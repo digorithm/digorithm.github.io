@@ -5,9 +5,9 @@
     <description>Thoughts on computer science, software engineering, distributed systems, and machine learning</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 15 Jul 2019 17:32:03 +0000</pubDate>
-    <lastBuildDate>Mon, 15 Jul 2019 17:32:03 +0000</lastBuildDate>
-    <generator>Jekyll v3.8.5</generator>
+    <pubDate>Sat, 10 Aug 2019 00:04:38 +0000</pubDate>
+    <lastBuildDate>Sat, 10 Aug 2019 00:04:38 +0000</lastBuildDate>
+    <generator>Jekyll v3.8.6</generator>
     
       <item>
         <title>From synchronous service calls to message-passing dataflow systems</title>
@@ -15,7 +15,8 @@
 
 &lt;p&gt;I joined this project from the very beginning. When I joined, a couple of technical decisions had been made. Initially, before I’d arrived on this project, the microservices would talk to each other directly, REST/gRPC style. Nothing new here.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/content/images/images/2019-07-11_19-154e43ee-0c5f-4866-9efc-7af7ac54e7f4.22.05.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/content/images/images/2019-07-11_19-154e43ee-0c5f-4866-9efc-7af7ac54e7f4.22.05.png&quot; alt=&quot;&quot; /&gt;
+&lt;em&gt;Simple architecture where the services talk to each other directly&lt;/em&gt;&lt;/p&gt;
 
 &lt;p&gt;The great majority of these services communicated with each other through synchronous calls. In most scenarios, this would be 100% fine. In an ETL constantly streaming copious amounts of data that need fast processing though? Not so much.&lt;/p&gt;
 
@@ -23,78 +24,98 @@
 
 &lt;p&gt;And because of that property (streaming system), it means we can go full asynchronous here; we want to stream data in a constant flow and each service will do its job independently.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/content/images/images/2019-07-12_15-15a5f630-c173-4a14-ab93-ee1bf2ca5092.07.25.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/content/images/images/2019-07-12_15-15a5f630-c173-4a14-ab93-ee1bf2ca5092.07.25.png&quot; alt=&quot;&quot; /&gt;
+&lt;em&gt;Direct communication through an API gateway vs. streaming system using message-passing (fully async)&lt;/em&gt;&lt;/p&gt;
 
-&lt;p&gt;However, an unfortunate bad technical decision had been made before I arrived on this project: yes, they would go from sync requests to async requests, but they would do it through a service developed internally called &lt;code&gt;Queuer&lt;/code&gt;, which, in hindsight, was nothing like a queue. Queuer would just take the request coming from one service, buffer it, and route it to another service (again, not a queue), which sounded more like what you’d get from a service mesh, but without all the reliability that you’d get from battle-tested robust tools. We had something like this:&lt;/p&gt;
+&lt;p&gt;However, an unfortunate bad technical decision had been made before I arrived on this project: yes, they would go from sync requests to async requests, but they would do it through a service developed internally called &lt;code class=&quot;highlighter-rouge&quot;&gt;Queuer&lt;/code&gt;, which, in hindsight, was nothing like a queue. Queuer would just take the request coming from one service, buffer it, and route it to another service (again, not a queue), which sounded more like what you’d get from a service mesh, but without all the reliability that you’d get from battle-tested robust tools. We had something like this:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/content/images/images/2019-07-11_19-9c20194e-2150-4c4a-b12b-89bd5224e801.28.54.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/content/images/images/2019-07-11_19-9c20194e-2150-4c4a-b12b-89bd5224e801.28.54.png&quot; alt=&quot;&quot; /&gt;
+&lt;em&gt;A queueing system that acts exactly like an API gateway&lt;/em&gt;&lt;/p&gt;
 
 &lt;p&gt;We had many problems with this:&lt;/p&gt;
 
 &lt;ol&gt;
-  &lt;li&gt;Maintaining a “queueing” system built internally was terrible.&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;Queuer&lt;/code&gt; wasn’t service-agnostic; we had to encode domain knowledge about other services inside &lt;code&gt;Queuer&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;Maintaining a “queueing” system built in-house was terrible.&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Queuer&lt;/code&gt; wasn’t service-agnostic; we had to encode domain knowledge about other services inside &lt;code class=&quot;highlighter-rouge&quot;&gt;Queuer&lt;/code&gt;.&lt;/li&gt;
   &lt;li&gt;My favourite: Queuer had a buffer, which was simply a in-memory variable. It would buffer thousands of jobs there. If queuer died, well, the jobs were lost. Oh and forget about deliver-once guarantees and/or other goodies you can get by using a battle-tested queueing system such as RabbitMQ or Kafka.&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;p&gt;About 3 months into the project I convinced people to move away from Queuer, it had become too much of a hassle to maintain and evolve it. Godspeed &lt;code&gt;Queuer&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;About 3 months into the project I convinced people to move away from Queuer, it had become too much of a hassle to maintain and evolve it. Godspeed &lt;code class=&quot;highlighter-rouge&quot;&gt;Queuer&lt;/code&gt;.&lt;/p&gt;
 
-&lt;p&gt;Also around that time I had been reading &lt;code&gt;designing high intensive data applications&lt;/code&gt; and it advocates – with very good arguments – for what’s called Message-Passing Dataflow, I have seen this somewhere else with the name event-centric architecture or something like that; but I believe the philosophies between them are very similar. I link the simple way the author explains it, so here it is:&lt;/p&gt;
+&lt;p&gt;Also, around that time I was reading &lt;code class=&quot;highlighter-rouge&quot;&gt;designing high intensive data applications&lt;/code&gt;. It advocates – with very good arguments – for what’s called Message-Passing Dataflow. I’d seen this somewhere else with the name event-centric architecture or something like that; but I believe the philosophies between them are very similar. I like the simple way the author explains it, so here it is:&lt;/p&gt;
 
-&lt;ul&gt;
-  &lt;li&gt;Composing stream operators into dataflow systems has a lot of similar characteristics
+&lt;blockquote&gt;
+  &lt;p&gt;Composing stream operators into dataflow systems has a lot of similar characteristics
 to the microservices approach. However, the underlying communication mechanism is very different: one-directional, asynchronous message streams rather than
-synchronous request/response interactions.&lt;/li&gt;
-&lt;/ul&gt;
+synchronous request/response interactions.&lt;/p&gt;
+&lt;/blockquote&gt;
 
-&lt;p&gt;I then decided to experiment with Message-Passing Dataflow; after all, we’re talking about a never-ending stream processing system. Therefore, I didn’t want much synchronous communication between the services and wanted something that’s closer streaming system.&lt;/p&gt;
+&lt;p&gt;I then decided to experiment with Message-Passing Dataflow; after all, we’re talking about a never-ending stream processing system. Therefore, I didn’t want much synchronous communication between the services and wanted something that’s closer to an actual streaming system.&lt;/p&gt;
 
 &lt;p&gt;To achieve this, we need a central component that would act as a communication bus, streaming messages between the services. And the services, instead of being just HTTP rest APIs, would be active consumers, consuming messages from this bus.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/content/images/images/2019-07-12_15-542f22e7-5cae-4f21-aabe-d232f4f56360.27.22.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/content/images/images/2019-07-12_15-542f22e7-5cae-4f21-aabe-d232f4f56360.27.22.png&quot; alt=&quot;&quot; /&gt;
+&lt;em&gt;Services consume messages being passed to the channels they’re subscribed to&lt;/em&gt;&lt;/p&gt;
 
-&lt;p&gt;Not surprisingly, I decided to use Kafka as our communication bus. Most services around it are Kafka consumers and producers. All communication between the services happen through &lt;em&gt;message passing&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;Not surprisingly, I decided to use Kafka as our communication bus. The services around Kafka are Kafka consumers and producers. All communication between the services happens through &lt;em&gt;message passing&lt;/em&gt;.&lt;/p&gt;
 
 &lt;p&gt;Here are some observations after adopting this paradigm:&lt;/p&gt;
 
-&lt;ol&gt;
-  &lt;li&gt;This approach is faster, a service does one thing and does it as fast as it can and don’t have to wait for the next steps. Then, it might produce a message to Kafka, which will be a job being performed by other services, and that’s it.&lt;/li&gt;
-  &lt;li&gt;This approach is much, much more robust. All services are completely stateless and they don’t hold jobs in memory. The service died? All good, the job can be easily recovered from Kafka, Kafka only moves its offsets when the offsets are commited, i.e when the service actually finishes the job.&lt;/li&gt;
-  &lt;li&gt;Even though it’s robust, consumers must be smart about it. Consuming offsets from topics (think of it as jobs in a queue) and failing to commit the new offset properly can be catastrophic. For instance, if we have a Kafka producer’s &lt;code&gt;auto.commit&lt;/code&gt; enabled, the service reads a message from a topic, the auto commit mechanism commits after a few milliseconds, but then the process fail. That means we marked that offset as consumed, but we didn’t finished the job, so it’s… well, lost. Manually committing the offsets is much more reliable in high risk cases.&lt;/li&gt;
-  &lt;li&gt;It’s a very different computational model. Instead of proactively querying things from other services, we &lt;em&gt;subscribe&lt;/em&gt; to channels of messages (called topics) and work our way through the messages in there.&lt;/li&gt;
-  &lt;li&gt;It’s closer to Alan Kay’s view of object-oriented programming (&lt;a href=&quot;https://ovid.github.io/articles/alan-kay-and-oo-programming.html&quot;&gt;https://ovid.github.io/articles/alan-kay-and-oo-programming.html&lt;/a&gt;). Not &lt;em&gt;that&lt;/em&gt; OOP created by the C++/Java community, but the core ideas of OOP thought by Kay and colleagues back in the 60s grounded in Biology. The idea of passing messages to objects in order to better scale systems (like biological cells do!). Kafka is nothing but a (very reliable) communication bus, and the objects (services, microservices, whatever) attach themselves to it and listen to messages, responding accordingly and sending other kinds of messages back to kafka which will be consumed by other services. Once you have well-defined messages and protocols, things flow beautifully.&lt;/li&gt;
-  &lt;li&gt;Be careful with idle consumers, that means you gotta think about your partitions carefully. What’s worked for us is to set 1:1 partition-to-consumer ratio. For instance, we have an image processing service that fetches jobs from kafka. If we have more instances of that services than partitions, that means some of those instances will be idle, preventing us from achieving a higher throughput than we could.&lt;/li&gt;
-&lt;/ol&gt;
+&lt;h4 id=&quot;async-usually-means-that-it-will-be-faster&quot;&gt;Async usually means that it will be faster&lt;/h4&gt;
+&lt;p&gt;I noticed that this approach is faster that what we had before. A service does one thing and does it as fast as it can and don’t have to wait for the next steps. Then, it might produce a message to Kafka, which will be a job being performed by other services, and that’s it.&lt;/p&gt;
+
+&lt;h4 id=&quot;more-robustness&quot;&gt;More robustness&lt;/h4&gt;
+&lt;p&gt;This approach is much, much more robust. All services are completely stateless and they don’t hold jobs in memory. The service died? All good, the job can be easily recovered from Kafka, Kafka only moves its offsets when the offsets are commited, i.e when the service actually finishes the job.&lt;/p&gt;
+
+&lt;h4 id=&quot;you-must-think-about-how-you-handle-the-offsets&quot;&gt;You must think about how you handle the offsets&lt;/h4&gt;
+&lt;p&gt;Even though it’s robust, consumers must be smart about it. Consuming offsets from topics (think of it as jobs in a queue) and failing to commit the new offset properly can be catastrophic. For instance, if we have a Kafka producer’s &lt;code class=&quot;highlighter-rouge&quot;&gt;auto.commit&lt;/code&gt; enabled, the service reads a message from a topic, the auto commit mechanism commits after a few milliseconds, but then the process fail. That means we marked that offset as consumed, but we didn’t finished the job, so it’s… well, lost. Manually committing the offsets is much more reliable in high risk cases.&lt;/p&gt;
+
+&lt;h4 id=&quot;a-different-and-refreshing-computational-model&quot;&gt;A different and refreshing computational model&lt;/h4&gt;
+&lt;p&gt;It’s a very different computational model. Instead of proactively querying things from other services, we &lt;em&gt;subscribe&lt;/em&gt; to channels of messages (called topics) and work our way through the messages in there.
+It’s closer to Alan Kay’s view of object-oriented programming (&lt;a href=&quot;https://ovid.github.io/articles/alan-kay-and-oo-programming.html&quot;&gt;https://ovid.github.io/articles/alan-kay-and-oo-programming.html&lt;/a&gt;). And I’m not talking about &lt;em&gt;that&lt;/em&gt; OOP created by the C++/Java community, but the core ideas of OOP thought by Kay and colleagues back in the early days of computing – which curiously was grounded in Biology. The idea of passing messages to objects in order to better scale systems (like biological cells do!). Kafka is nothing but a (very reliable) communication bus, and the objects (services, microservices, whatever) attach themselves to it and listen to messages, responding accordingly and sending other kinds of messages back to kafka which will be consumed by other services. Once you have well-defined messages and protocols, things flow beautifully.&lt;/p&gt;
+
+&lt;h4 id=&quot;watch-out-for-waste&quot;&gt;Watch out for waste&lt;/h4&gt;
+&lt;p&gt;Be careful with idle consumers, that means you gotta think about your partitions carefully. What’s worked for us is to set 1:1 partition-to-consumer ratio. For instance, we have an image processing service that fetches jobs from kafka. If we have more instances of that services than partitions, that means some of those instances will be idle, preventing us from achieving a higher throughput than we could.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Closing thoughts&lt;/strong&gt;&lt;/p&gt;
 
 &lt;p&gt;I am, now, a big fan of this architectural style I can totally recommend &lt;em&gt;if it fits your problems&lt;/em&gt;. Which in most cases it does. I believe we’ve been going with the flow that was set in the early 00s when it comes to architecting systems; we’ve been using the request-response paradigm without really questioning its efficacy.&lt;/p&gt;
 
-&lt;p&gt;To close, the author has some really cool insights on it:&lt;/p&gt;
+&lt;p&gt;To close, the author of &lt;code class=&quot;highlighter-rouge&quot;&gt;designing data-intensive applications&lt;/code&gt; has some really cool insights about this paradigm:&lt;/p&gt;
 
-&lt;ul&gt;
-  &lt;li&gt;It would be very natural to extend this programming model to also allow a server to
+&lt;blockquote&gt;
+  &lt;p&gt;It would be very natural to extend this programming model to also allow a server to
 push state-change events into this client-side event pipeline. Thus, state changes
 could flow through an end-to-end write path: from the interaction on one device that
 triggers a state change, via event logs and through several derived data systems and
 stream processors, all the way to the user interface of a person observing the state on
 another device. These state changes could be propagated with fairly low delay—say,
-under one second end to end.&lt;/li&gt;
-  &lt;li&gt;Some applications, such as instant messaging and online games, already have such a
+under one second end to end.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Some applications, such as instant messaging and online games, already have such a
 “real-time” architecture (in the sense of interactions with low delay, not in the sense
-of “Response time guarantees” on page 298). But why don’t we build all applications
-this way?&lt;/li&gt;
-  &lt;li&gt;The challenge is that the assumption of stateless clients and request/response interac‐
+of “Response time guarantees”). &lt;strong&gt;But why don’t we build all applications
+this way?&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;The challenge is that the assumption of stateless clients and request/response interac‐
 tions is very deeply ingrained in our databases, libraries, frameworks, and protocols.
 Many datastores support read and write operations where a request returns one
 response, but much fewer provide an ability to subscribe to changes—i.e., a request
-that returns a stream of responses over time (see “API support for change streams”
-on page 456).&lt;/li&gt;
-  &lt;li&gt;In order to extend the write path all the way to the end user, we would need to funda‐
+that returns a stream of responses over time.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;In order to extend the write path all the way to the end user, we would need to funda‐
 mentally rethink the way we build many of these systems: moving away from request/
 response interaction and toward publish/subscribe dataflow. I think that the
 advantages of more responsive user interfaces and better offline support would make
 it worth the effort. If you are designing data systems, I hope that you will keep in
-mind the option of subscribing to changes, not just querying the current state.&lt;/li&gt;
-&lt;/ul&gt;
+mind the option of subscribing to changes, not just querying the current state.&lt;/p&gt;
+&lt;/blockquote&gt;
 
 &lt;p&gt;My next steps? Experimenting with this architecture for applications where the events &lt;em&gt;are&lt;/em&gt; user-triggered and the results are near real-time and user-facing.&lt;/p&gt;
 </description>
@@ -111,9 +132,7 @@ mind the option of subscribing to changes, not just querying the current state.&
         <category>systems</category>
         
         
-        <category>software-architecture</category>
-        
-        <category>systems</category>
+        <category>system-design</category>
         
       </item>
     
@@ -294,7 +313,7 @@ mind the option of subscribing to changes, not just querying the current state.&
       </item>
     
       <item>
-        <title>Neural Computation: Toward an Intuitive Understanding of the Perceptron</title>
+        <title>Neural Computation: An Intuitive Understanding of the Perceptron</title>
         <description>&lt;p&gt;Artificial Neurons is one of the most beautiful ways to simulate a biological behavior through computation, despite the fact that it’s not very close to the level of details of a real neuron. But it captured the core of what a neuron is doing.&lt;/p&gt;
 
 &lt;p&gt;And I find that trying to understand this mathematical method by first understanding the concept through a metaphor &lt;em&gt;(which, in this case, I think that the metaphor is our mathematical side, and not the biological one, the biological is just, you know, the real thing)&lt;/em&gt; is really valuable to gain an intuition on this topic.&lt;/p&gt;
@@ -414,72 +433,72 @@ It’s fair simple, isn’t it? The problem arises when the data isn’t linearl
 
 &lt;p&gt;Now, here’s a code of a Perceptron that will behave like a simple Boolean function. I didn’t use the Delta Dule (Gradient Descent) to optimize the weights, as this problem (binary Boolean functions) is linearly separable.&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&quot;language-python&quot;&gt;  import math
-  from numpy import random, array
-  from random import choice
-  import matplotlib.pyplot as plt
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;math&lt;/span&gt;
+  &lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;numpy&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;random&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;array&lt;/span&gt;
+  &lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;random&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;choice&lt;/span&gt;
+  &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;matplotlib.pyplot&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;plt&lt;/span&gt;
 
-  class Perceptron():
+  &lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Perceptron&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;():&lt;/span&gt;
       
-      &quot;&quot;&quot;
+      &lt;span class=&quot;s&quot;&gt;&quot;&quot;&quot;
       this is the thereshold to activate the unit 
-      &quot;&quot;&quot;
-      def activation(self,x):
-          return 1/(1 + math.exp(-x))
+      &quot;&quot;&quot;&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;activation&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+          &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;math&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;exp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
 
-      def linear_combination(self, X):
-          total = 0
-          for i in xrange(len(self.weights)):
-              total += self.weights[i] * X[i]
-          return total
+      &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;linear_combination&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+          &lt;span class=&quot;n&quot;&gt;total&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;
+          &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;xrange&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;weights&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)):&lt;/span&gt;
+              &lt;span class=&quot;n&quot;&gt;total&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;weights&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+          &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;total&lt;/span&gt;
       
-      def unit_output(self, X):
-          return self.activation(self.linear_combination(X))
+      &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;unit_output&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+          &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;activation&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;linear_combination&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
 
-      def train(self, training_data, epochs):
+      &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;train&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;training_data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;epochs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
           
-          self.learning_rate = 0.5
-          self.errors = []
+          &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;learning_rate&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;0.5&lt;/span&gt;
+          &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;errors&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[]&lt;/span&gt;
 
-          # initializing weights
-          self.weights = random.rand(len(training_data[1][0]))
+          &lt;span class=&quot;c1&quot;&gt;# initializing weights
+&lt;/span&gt;          &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;weights&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;random&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rand&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;training_data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]))&lt;/span&gt;
           
-          for i in xrange(epochs):
-              X, y = choice(training_data)
-              # &amp;gt; calculate output with current weight
-              output = self.unit_output(X)
-              # &amp;gt; calculate error rate (t - o)
-              error_rate = y - output
-              self.errors.append(error_rate)
-              print 'the X: ', X
-              print 'output: ',output
-              print 'correct target: ', y
-              # &amp;gt; apply learning rule which will update weights
-              self.weights += self.learning_rate * error_rate * X
+          &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;xrange&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;epochs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+              &lt;span class=&quot;n&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;choice&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;training_data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+              &lt;span class=&quot;c1&quot;&gt;# &amp;gt; calculate output with current weight
+&lt;/span&gt;              &lt;span class=&quot;n&quot;&gt;output&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;unit_output&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+              &lt;span class=&quot;c1&quot;&gt;# &amp;gt; calculate error rate (t - o)
+&lt;/span&gt;              &lt;span class=&quot;n&quot;&gt;error_rate&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;output&lt;/span&gt;
+              &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;errors&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;append&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;error_rate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+              &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'the X: '&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;X&lt;/span&gt;
+              &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'output: '&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;output&lt;/span&gt;
+              &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'correct target: '&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;
+              &lt;span class=&quot;c1&quot;&gt;# &amp;gt; apply learning rule which will update weights
+&lt;/span&gt;              &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;weights&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;learning_rate&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;error_rate&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;X&lt;/span&gt;
 
-      def predict(self,X):
-          y = self.unit_output(X)
-          return y
+      &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;predict&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+          &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;unit_output&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+          &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;
                   
 
-          training_data = [
-                  (array([0,0,1]), 0),
-                  (array([0,1,1]), 0),
-                  (array([1,0,1]), 0),
-                  (array([1,1,1]), 1),
+          &lt;span class=&quot;n&quot;&gt;training_data&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+                  &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]),&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+                  &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]),&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+                  &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]),&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+                  &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]),&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
                   
-          ]
+          &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
 
-  p = Perceptron()
+  &lt;span class=&quot;n&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Perceptron&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
 
-  p.train(training_data, 2000)
-  print p.predict([1,0,1])
-  plt.plot(p.errors)
-  plt.ylabel('errors')
-  plt.xlabel('epochs')
-  plt.show()
+  &lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;train&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;training_data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;predict&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;plt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;plot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;errors&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;plt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ylabel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'errors'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;plt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;xlabel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'epochs'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;plt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;show&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
 
-&lt;/code&gt;&lt;/pre&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h3 id=&quot;conclusion-and-next-steps&quot;&gt;Conclusion and next steps&lt;/h3&gt;
 
@@ -534,12 +553,12 @@ It’s fair simple, isn’t it? The problem arises when the data isn’t linearl
 
 &lt;p&gt;Here’s an example of a simple pipeline that does PCA to reduce the dimension of the features and creates a SVC:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;    from sklearn.pipeline import Pipeline
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    from sklearn.pipeline import Pipeline
     from sklearn.svm import SVC
     from sklearn.decomposition import PCA
     estimators = [('reduce_dim', PCA()), ('svm', SVC())]
     clf = Pipeline(estimators)
-&lt;/code&gt;&lt;/pre&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h3 id=&quot;grid-search&quot;&gt;Grid Search&lt;/h3&gt;
 
@@ -559,40 +578,40 @@ It’s fair simple, isn’t it? The problem arises when the data isn’t linearl
 
 &lt;p&gt;Another interesting thing is, after the model inside the grid search is trained, methods like &lt;em&gt;predict&lt;/em&gt; are computed using the best features. If we look inside the SKlearn’s grid search’s code, we can see how easily and elegant it’s done:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&quot;language-python&quot;&gt;[...]
-scores = list()
-grid_scores = list()
-for grid_start in range(0, n_fits, n_folds):
-    n_test_samples = 0
-    score = 0
-    all_scores = []
-    for this_score, this_n_test_samples, _, parameters in \
-            out[grid_start:grid_start + n_folds]:
-        all_scores.append(this_score)
-        if self.iid:
-            this_score *= this_n_test_samples
-            n_test_samples += this_n_test_samples
-        score += this_score
-    if self.iid:
-        score /= float(n_test_samples)
-    else:
-        score /= float(n_folds)
-    scores.append((score, parameters))
-    # TODO: shall we also store the test_fold_sizes?
-    grid_scores.append(_CVScoreTuple(
-        parameters,
-        score,
-        np.array(all_scores)))
-# Store the computed scores
-self.grid_scores_ = grid_scores
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;scores&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;list&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;grid_scores&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;list&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;grid_start&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n_fits&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n_folds&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;n_test_samples&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;score&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;all_scores&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[]&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;this_score&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;this_n_test_samples&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;parameters&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; \
+            &lt;span class=&quot;n&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;grid_start&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;grid_start&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n_folds&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]:&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;all_scores&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;append&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;this_score&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;iid&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;this_score&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;this_n_test_samples&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;n_test_samples&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;this_n_test_samples&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;score&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;this_score&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;iid&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;score&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;float&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n_test_samples&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;score&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;float&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n_folds&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;scores&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;append&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;score&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;parameters&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;# TODO: shall we also store the test_fold_sizes?
+&lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;grid_scores&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;append&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_CVScoreTuple&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;parameters&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;score&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;all_scores&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)))&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# Store the computed scores
+&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;grid_scores_&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;grid_scores&lt;/span&gt;
 
-# Find the best parameters by comparing on the mean validation score:
+&lt;span class=&quot;c1&quot;&gt;# Find the best parameters by comparing on the mean validation score:
 # note that `sorted` is deterministic in the way it breaks ties
-best = sorted(grid_scores, key=lambda x: x.mean_validation_score,
-              reverse=True)[0]
-self.best_params_ = best.parameters
-self.best_score_ = best.mean_validation_score
-&lt;/code&gt;&lt;/pre&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;best&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;sorted&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;grid_scores&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;lambda&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;mean_validation_score&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+              &lt;span class=&quot;n&quot;&gt;reverse&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;best_params_&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;best&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;parameters&lt;/span&gt;
+&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;best_score_&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;best&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;mean_validation_score&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;As you can see, in the end it keeps the best parameters and scores, so it can be used when it needs to predict or output its &lt;em&gt;predict_proba&lt;/em&gt; or &lt;em&gt;decision_function&lt;/em&gt;&lt;/p&gt;
 
@@ -608,9 +627,9 @@ self.best_score_ = best.mean_validation_score
 
 &lt;p&gt;Ok, so now let’s head to the real problem. The dataset can be downloaded with:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;wget http://www.cs.cornell.edu/people/pabo/movie-review-data/review_polarity.tar.gz
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;wget http://www.cs.cornell.edu/people/pabo/movie-review-data/review_polarity.tar.gz
 tar xzf review_polarity.tar.gz
-&lt;/code&gt;&lt;/pre&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;What I did to solve it was: I used grid search to search a few parameters, such as &lt;em&gt;TfidfVectorizer’s max_features&lt;/em&gt;, that in the end I kept with max_features=10000, also its ngram_range, searching between (1,1) and (1,2) and &lt;em&gt;the LinearSVC()’s C parameter&lt;/em&gt;.&lt;/p&gt;
 
@@ -632,7 +651,7 @@ tar xzf review_polarity.tar.gz
 
 &lt;p&gt;So, here’s the code where I built the pipeline, the gridsearch, use a subset of the dataset to develop the grid search and another subset to validate using the &lt;em&gt;cross_val_scores&lt;/em&gt;, then, I call &lt;em&gt;predict&lt;/em&gt; to get the vector of predictions to build a report &lt;em&gt;(or, with this, I can start to build a ROC curve, confusion matrix and other statistics debug tools)&lt;/em&gt;&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;from sklearn.datasets import load_files
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;from sklearn.datasets import load_files
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.grid_search import GridSearchCV
 from sklearn.pipeline import make_pipeline
@@ -671,11 +690,11 @@ print scores.mean(), scores.std()
 y_pred = grid_search.predict(X_test)
 
 print classification_report(y_test, y_pred)
-&lt;/code&gt;&lt;/pre&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;and the output:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;Best score: 0.849
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Best score: 0.849
 
 Best parameters iset:
 	linearsvc__C: 1
@@ -692,7 +711,7 @@ Classification report:
           1       0.87      0.88      0.87       504
 
 avg / total       0.87      0.87      0.87      1000
-&lt;/code&gt;&lt;/pre&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;So, around 86%~87% of precision/f1-score, not &lt;em&gt;that&lt;/em&gt; bad.&lt;/p&gt;
 
@@ -814,11 +833,11 @@ avg / total       0.87      0.87      0.87      1000
 
 &lt;p&gt;Scikit Learn gives us a great API to use the TF-IDF method, it’s really simple.&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;    from sklearn.feature_extraction.text import TfidfVectorizer
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    from sklearn.feature_extraction.text import TfidfVectorizer
 
     vectorizer = TfidfVectorizer()
     vectorized_x = vectorizer.fit_transform(X)
-&lt;/code&gt;&lt;/pre&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;Which will do the TF-IDF on the X data, and then vectorize this data, in other words, transform the whole thing into an array of inverse frequencies.
 So, extracting those features, &lt;strong&gt;this&lt;/strong&gt; will be our training and test data, that will feed the algorithm (along with the Y, which is the output, the class of each training data).&lt;/p&gt;
@@ -932,8 +951,8 @@ So, extracting those features, &lt;strong&gt;this&lt;/strong&gt; will be our tra
 
 &lt;p&gt;Now, searching for other approaches, I looked inside the code from CPython, and there’s a nice comment:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt; &quot;Conceptually, a rotate by one is equivalent to a pop on one side and an append on the other&quot;
-&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &quot;Conceptually, a rotate by one is equivalent to a pop on one side and an append on the other&quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;Quite elegant solution as well. So, an example:&lt;/p&gt;
 
@@ -975,7 +994,7 @@ def rotate_original_solution_with_reversed(arr, i):
 
 &lt;p&gt;and the result:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;    Original Idea using reversed(arr): 
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    Original Idea using reversed(arr): 
 
     4 function calls in 0.611 seconds
 
@@ -985,7 +1004,7 @@ def rotate_original_solution_with_reversed(arr, i):
     1 0.440 0.440 0.440 0.440 2_1b.py:21(rotate_original_solution_with_reversed)
     1 0.171 0.171 0.611 0.611 string:1 module
     1 0.000 0.000 0.000 0.000 {len}
-&lt;/code&gt;&lt;/pre&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;####Damn, 0.6s, that’s too slow!&lt;/p&gt;
 
@@ -1010,7 +1029,7 @@ def rotate_original_solution_with_reverse(arr, i):
 
 &lt;p&gt;And the result:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;    Original Idea using arr.reversed(): 
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    Original Idea using arr.reversed(): 
     7 function calls in 0.322 seconds
 
     Ordered by: standard name
@@ -1021,7 +1040,7 @@ def rotate_original_solution_with_reverse(arr, i):
     1 0.000 0.000 0.000 0.000 {len}
     1 0.000 0.000 0.000 0.000 {method 'disable' of '_lsprof.Profiler' objects}
     3 0.023 0.008 0.023 0.008 {method 'reverse' of 'list' objects}
-&lt;/code&gt;&lt;/pre&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;####From 0.6s to 0.3s, that’s a great improvement. lesson: choose your built-ins/Data Structures/Algorithms carefully.&lt;/p&gt;
 
@@ -1242,13 +1261,13 @@ ncalls tottime percall cumtime percall filename:lineno(function)
 
 &lt;p&gt;Here’s a silly example:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;from database_library import Connection
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;from database_library import Connection
 
 connection = Connection()
 connection.OpenConnection()
 … do whatever you want
 connection.CloseConnection()
-&lt;/code&gt;&lt;/pre&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;When you called those function, you were dealing with the interface that the object provided to you, sure the object may be doing thousand of things at the moment you call its functions, but, it doesn’t matter to you, does it? You just want the &lt;em&gt;damn&lt;/em&gt; connection open and then closed.&lt;/p&gt;
 
@@ -1268,7 +1287,7 @@ connection.CloseConnection()
 
 &lt;p&gt;Which will request my profile’s data, and the Facebook’s API will return:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;{
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;{
    &quot;id&quot;: &quot;100001638888259&quot;,
    &quot;first_name&quot;: &quot;Rodrigo&quot;,
    &quot;gender&quot;: &quot;male&quot;,
@@ -1278,7 +1297,7 @@ connection.CloseConnection()
    &quot;name&quot;: &quot;Rodrigo Ara\u00fajo&quot;,
    &quot;username&quot;: &quot;contatodigo&quot;
 }
-&lt;/code&gt;&lt;/pre&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;As simple as that.&lt;/p&gt;
 
@@ -1292,48 +1311,48 @@ connection.CloseConnection()
 
 &lt;p&gt;So after the API is built, you or you program can get books or insert books by sending HTTP request to the API’s URIs, simple as that. I’ll be very straight forward, here’s the code:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;#!flask/bin/python
-from flask import Flask, jsonify, request
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;#!flask/bin/python
+&lt;/span&gt;&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;flask&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Flask&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;jsonify&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;request&lt;/span&gt;
 
-app = Flask(__name__)
+&lt;span class=&quot;n&quot;&gt;app&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Flask&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;__name__&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 
-books = [
-    {
-        'id': 1,
-        'title': u'Game of Thrones',
-        'description': u'Cool dragons', 
-        'finished': False
-    },
-    {
-        'id': 2,
-        'title': u'50 shadows of grey',
-        'description': u'It start as bullshit, end as a huge bullshit', 
-        'finished': True
-    }
-]
+&lt;span class=&quot;n&quot;&gt;books&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;s&quot;&gt;'id'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;s&quot;&gt;'title'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;u'Game of Thrones'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;s&quot;&gt;'description'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;u'Cool dragons'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; 
+        &lt;span class=&quot;s&quot;&gt;'finished'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;False&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;s&quot;&gt;'id'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;s&quot;&gt;'title'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;u'50 shadows of grey'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;s&quot;&gt;'description'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;u'It start as bullshit, end as a huge bullshit'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; 
+        &lt;span class=&quot;s&quot;&gt;'finished'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
 
-@app.route('/bookapi/v1.0/books/', methods=['GET'])
-def get_books():
-    return jsonify({'books': books})
+&lt;span class=&quot;o&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;app&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;route&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'/bookapi/v1.0/books/'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;methods&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'GET'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;get_books&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;():&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;jsonify&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'books'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;books&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
 
-@app.route('/bookapi/v1.0/books', methods=['POST'])
-def create_book():
-    if not request.json or not 'title' in request.json:
-        abort(404)
+&lt;span class=&quot;o&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;app&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;route&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'/bookapi/v1.0/books'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;methods&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'POST'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;create_book&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;():&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;not&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;request&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;json&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;or&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;not&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'title'&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;request&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;json&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;abort&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;404&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 
-    book = {
-            'id': books[-1]['id'] + 1,
-            'title': request.json['title'],
-            'description': request.json.get('description', &quot;&quot;),
-            'finished': False
-            }
+    &lt;span class=&quot;n&quot;&gt;book&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;s&quot;&gt;'id'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;books&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'id'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+            &lt;span class=&quot;s&quot;&gt;'title'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;request&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;json&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'title'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+            &lt;span class=&quot;s&quot;&gt;'description'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;request&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;json&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'description'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+            &lt;span class=&quot;s&quot;&gt;'finished'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;False&lt;/span&gt;
+            &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 
-    books.append(book)
-    return jsonify({'book': book}), 201 
+    &lt;span class=&quot;n&quot;&gt;books&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;append&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;book&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;jsonify&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'book'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;book&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}),&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;201&lt;/span&gt; 
 
-if __name__ == '__main__':
-    app.run(debug=True)
-&lt;/code&gt;&lt;/pre&gt;
+&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;__name__&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'__main__'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;app&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;debug&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;Note that we’re creating a simple in-memory &lt;em&gt;database&lt;/em&gt;, which is a simple python’s dict. This could be a database. But for the sake of simplicity, I’m using just a dict.&lt;/p&gt;
 

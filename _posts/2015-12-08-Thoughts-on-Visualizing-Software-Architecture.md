@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: post
 title: Thoughts on visualizing software architecture
 keywords: "architecture, software, visualization, thoughts"
 tags: [architecture, software, visualization, thoughts]

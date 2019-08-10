@@ -5,7 +5,7 @@ tags: [thoughts, programming, engineering, architecture]
 categories: [software-engineering, software-architecture]
 fullview: true
 permalink: post/object-oriented-thinking
-layout: default
+layout: post
 ---
 
 ###What are the main goals of the object-oriented programming?###

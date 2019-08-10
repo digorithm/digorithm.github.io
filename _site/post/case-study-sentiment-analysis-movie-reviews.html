@@ -10,7 +10,7 @@
   <meta name="description" content="Well, this case was a fun one, sentiment analysis is a sub type of NLP (natural language processing) in which you have to train a model to analyze a text, an...">
 
   <!-- CSS files -->
-  <link rel="stylesheet" href="http://localhost:4000/css/font-awesome.min.css">
+  <link rel="stylesheet" href="http://localhost:4000/css/all.css">
   <link rel="stylesheet" href="http://localhost:4000/css/main.css">
 
   <link rel="canonical" href="http://localhost:4000/post/case-study-sentiment-analysis-movie-reviews">
@@ -21,47 +21,58 @@
   <link rel="shortcut icon" href="http://localhost:4000/favicon.ico">
   <!-- 32x32 -->
   <link rel="shortcut icon" href="http://localhost:4000/favicon.png">
+  <!-- <script defer src="http://localhost:4000/js/all.js"></script>  -->
 </head>
 
 
 <body>
   <div class="row">
-    <div class="col s12 m3">
+
+    <div class="col xs12 s12 m3">
       <div class="table cover">
         
 
 <div class="sidebar cover-card table-cell table-middle">
   <a href="http://localhost:4000/" class="author_name">Rodrigo Araujo</a>
-  <span class="author_job">Computer scientist and SW Engineer</span>
-  <span class="author_bio mbm">Thoughts on computer science, software engineering, distributed systems, and machine learning</span>
+  <span class="author_job">Computer scientist and software engineer</span>
+  <span class="author_bio mbm">Thoughts on everything related to computer science and software engineering (or whatever comes to my mind)</span>
   <nav class="nav">
     <ul class="nav-list">
       
+    </hr><hr>
+      <a href="http://localhost:4000/about">
       <li class="nav-item">
-        <a href="http://localhost:4000/blog">Blog</a>
-        
-          <span style="font-size:10px;">/</span>
-        
+          About
       </li>
+    </a>
       
+    </hr><hr>
+      <a href="http://localhost:4000/">
       <li class="nav-item">
-        <a href="http://localhost:4000/categories">Categories</a>
-        
-          <span style="font-size:10px;">/</span>
-        
+          Archive
       </li>
+    </a>
       
+    </hr><hr>
+      <a href="http://localhost:4000/categories">
       <li class="nav-item">
-        <a href="http://localhost:4000/projects">Projects</a>
-        
-          <span style="font-size:10px;">/</span>
-        
+          Categories
       </li>
+    </a>
       
+    </hr><hr>
+      <a href="http://localhost:4000/projects">
       <li class="nav-item">
-        <a href="http://localhost:4000/publications">Publications</a>
-        
+          Projects
       </li>
+    </a>
+      
+    </hr><hr>
+      <a href="http://localhost:4000/publications">
+      <li class="nav-item">
+          Publications
+      </li>
+    </a>
       
     </ul>
   </nav>
@@ -84,7 +95,7 @@
       <script>gen_mail_to_link('rod.dearaujo@gmail.com', 'Hello from website');</script>
       </li>
     
-    <li><a href="http://twitter.com/digorithm" class="social-link-item" target="_blank"><i class="fa fa-fw fa-twitter"></i></a></li>
+    <li><a href="http://twitter.com/digorithm" class="social-link-item" target="_blank"><i class="fab fa-twitter"></i></a></li>
     
     
     
@@ -92,7 +103,7 @@
     
     
     
-    <li><a href="http://github.com/digorithm" class="social-link-item" target="_blank"><i class="fa fa-fw fa-github"></i></a></li>
+    <li><a href="http://github.com/digorithm" class="social-link-item" target="_blank"><i class="fab fa-github"></i></a></li>
     
     
     
@@ -113,13 +124,31 @@
 
       </div>
     </div>
-    <div class="col s12 m9">
+    <div class="col xs12 s12 m9">
       <div class="post-listing">
         <div class="post-content">
-        <h1 style="max-width: 45%;">Case Study: Sentiment Analysis On Movie Reviews</h1>
-        <p style="max-width: 45%; font-size: 14px; font-style:italic;">July 02, 2015</p>
-        <hr>
-        <p>Well, this case was a fun one, sentiment analysis is a sub type of NLP <em>(natural language processing)</em> in which you have to train a model to analyze a text, and classify it was a negative sentiment or a positive sentiment. In this case, I wanted to apply it on movies reviews, to see if a review is a negative one or a positive one. So, basically, teaching this kind of sentiment to the machine.</p>
+          <h1 style="max-width: 45%;">Case Study: Sentiment Analysis On Movie Reviews</h1>
+          
+
+          <div style="width:100%;" class="container">
+            <div class="row post-meta">
+              <div class="col m6"><p style="float:left;max-width: 100%; font-size: 14px;"> <i class="far fa-calendar" style="padding-right:5px;"></i> July 02, 2015</p></div>
+              <div class="col m6"><p style="float:right;max-width: 100%; font-size: 14px;"><i class="far fa-hourglass" style="padding-right:5px;"></i> <span style="color:black;" class="read-time" title="Estimated read time">
+  
+  
+    8 mins read
+  
+</span>
+</p></div>
+            </div>
+            <div class="row post-meta">
+                <div class="col m6"><p style="float:left;max-width: 100%; font-size: 14px;"><i class="fas fa-tags" style="padding-right:5px;"></i> machine learning, artificial intelligence, engineering, tutorial, text classification, NLP, Sentiment Analysis</p></div>
+                <div class="col m6"><p style="float:right;max-width: 100%; font-size: 14px;"><i class="far fa-folder" style="padding-right:5px;"></i> machine-learningcase-study</p></div>
+              </div>
+          </div>
+
+          <hr>
+          <p>Well, this case was a fun one, sentiment analysis is a sub type of NLP <em>(natural language processing)</em> in which you have to train a model to analyze a text, and classify it was a negative sentiment or a positive sentiment. In this case, I wanted to apply it on movies reviews, to see if a review is a negative one or a positive one. So, basically, teaching this kind of sentiment to the machine.</p>
 
 <p>There’s a lot of challenges in doing this kind of NLP, experience has told me that when the text is big, it is usually hard to predict things about it… and most of the times, movie reviews are big chunk of text.</p>
 
@@ -142,12 +171,12 @@
 
 <p>Here’s an example of a simple pipeline that does PCA to reduce the dimension of the features and creates a SVC:</p>
 
-<pre><code>    from sklearn.pipeline import Pipeline
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    from sklearn.pipeline import Pipeline
     from sklearn.svm import SVC
     from sklearn.decomposition import PCA
     estimators = [('reduce_dim', PCA()), ('svm', SVC())]
     clf = Pipeline(estimators)
-</code></pre>
+</code></pre></div></div>
 
 <h3 id="grid-search">Grid Search</h3>
 
@@ -167,40 +196,40 @@
 
 <p>Another interesting thing is, after the model inside the grid search is trained, methods like <em>predict</em> are computed using the best features. If we look inside the SKlearn’s grid search’s code, we can see how easily and elegant it’s done:</p>
 
-<pre><code class="language-python">[...]
-scores = list()
-grid_scores = list()
-for grid_start in range(0, n_fits, n_folds):
-    n_test_samples = 0
-    score = 0
-    all_scores = []
-    for this_score, this_n_test_samples, _, parameters in \
-            out[grid_start:grid_start + n_folds]:
-        all_scores.append(this_score)
-        if self.iid:
-            this_score *= this_n_test_samples
-            n_test_samples += this_n_test_samples
-        score += this_score
-    if self.iid:
-        score /= float(n_test_samples)
-    else:
-        score /= float(n_folds)
-    scores.append((score, parameters))
-    # TODO: shall we also store the test_fold_sizes?
-    grid_scores.append(_CVScoreTuple(
-        parameters,
-        score,
-        np.array(all_scores)))
-# Store the computed scores
-self.grid_scores_ = grid_scores
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="o">...</span><span class="p">]</span>
+<span class="n">scores</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+<span class="n">grid_scores</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">grid_start</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n_fits</span><span class="p">,</span> <span class="n">n_folds</span><span class="p">):</span>
+    <span class="n">n_test_samples</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">score</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">all_scores</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">this_score</span><span class="p">,</span> <span class="n">this_n_test_samples</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">parameters</span> <span class="ow">in</span> \
+            <span class="n">out</span><span class="p">[</span><span class="n">grid_start</span><span class="p">:</span><span class="n">grid_start</span> <span class="o">+</span> <span class="n">n_folds</span><span class="p">]:</span>
+        <span class="n">all_scores</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">this_score</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">iid</span><span class="p">:</span>
+            <span class="n">this_score</span> <span class="o">*=</span> <span class="n">this_n_test_samples</span>
+            <span class="n">n_test_samples</span> <span class="o">+=</span> <span class="n">this_n_test_samples</span>
+        <span class="n">score</span> <span class="o">+=</span> <span class="n">this_score</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">iid</span><span class="p">:</span>
+        <span class="n">score</span> <span class="o">/=</span> <span class="nb">float</span><span class="p">(</span><span class="n">n_test_samples</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">score</span> <span class="o">/=</span> <span class="nb">float</span><span class="p">(</span><span class="n">n_folds</span><span class="p">)</span>
+    <span class="n">scores</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">score</span><span class="p">,</span> <span class="n">parameters</span><span class="p">))</span>
+    <span class="c1"># TODO: shall we also store the test_fold_sizes?
+</span>    <span class="n">grid_scores</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_CVScoreTuple</span><span class="p">(</span>
+        <span class="n">parameters</span><span class="p">,</span>
+        <span class="n">score</span><span class="p">,</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">all_scores</span><span class="p">)))</span>
+<span class="c1"># Store the computed scores
+</span><span class="bp">self</span><span class="o">.</span><span class="n">grid_scores_</span> <span class="o">=</span> <span class="n">grid_scores</span>
 
-# Find the best parameters by comparing on the mean validation score:
+<span class="c1"># Find the best parameters by comparing on the mean validation score:
 # note that `sorted` is deterministic in the way it breaks ties
-best = sorted(grid_scores, key=lambda x: x.mean_validation_score,
-              reverse=True)[0]
-self.best_params_ = best.parameters
-self.best_score_ = best.mean_validation_score
-</code></pre>
+</span><span class="n">best</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">grid_scores</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">mean_validation_score</span><span class="p">,</span>
+              <span class="n">reverse</span><span class="o">=</span><span class="bp">True</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">best_params_</span> <span class="o">=</span> <span class="n">best</span><span class="o">.</span><span class="n">parameters</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">best_score_</span> <span class="o">=</span> <span class="n">best</span><span class="o">.</span><span class="n">mean_validation_score</span>
+</code></pre></div></div>
 
 <p>As you can see, in the end it keeps the best parameters and scores, so it can be used when it needs to predict or output its <em>predict_proba</em> or <em>decision_function</em></p>
 
@@ -216,9 +245,9 @@ self.best_score_ = best.mean_validation_score
 
 <p>Ok, so now let’s head to the real problem. The dataset can be downloaded with:</p>
 
-<pre><code>wget http://www.cs.cornell.edu/people/pabo/movie-review-data/review_polarity.tar.gz
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wget http://www.cs.cornell.edu/people/pabo/movie-review-data/review_polarity.tar.gz
 tar xzf review_polarity.tar.gz
-</code></pre>
+</code></pre></div></div>
 
 <p>What I did to solve it was: I used grid search to search a few parameters, such as <em>TfidfVectorizer’s max_features</em>, that in the end I kept with max_features=10000, also its ngram_range, searching between (1,1) and (1,2) and <em>the LinearSVC()’s C parameter</em>.</p>
 
@@ -240,7 +269,7 @@ tar xzf review_polarity.tar.gz
 
 <p>So, here’s the code where I built the pipeline, the gridsearch, use a subset of the dataset to develop the grid search and another subset to validate using the <em>cross_val_scores</em>, then, I call <em>predict</em> to get the vector of predictions to build a report <em>(or, with this, I can start to build a ROC curve, confusion matrix and other statistics debug tools)</em></p>
 
-<pre><code>from sklearn.datasets import load_files
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>from sklearn.datasets import load_files
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.grid_search import GridSearchCV
 from sklearn.pipeline import make_pipeline
@@ -279,11 +308,11 @@ print scores.mean(), scores.std()
 y_pred = grid_search.predict(X_test)
 
 print classification_report(y_test, y_pred)
-</code></pre>
+</code></pre></div></div>
 
 <p>and the output:</p>
 
-<pre><code>Best score: 0.849
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Best score: 0.849
 
 Best parameters iset:
 	linearsvc__C: 1
@@ -300,7 +329,7 @@ Classification report:
           1       0.87      0.88      0.87       504
 
 avg / total       0.87      0.87      0.87      1000
-</code></pre>
+</code></pre></div></div>
 
 <p>So, around 86%~87% of precision/f1-score, not <em>that</em> bad.</p>
 
@@ -310,7 +339,7 @@ avg / total       0.87      0.87      0.87      1000
 
 <p>Possible improvements could be: find and extracting new features, to do this, we gotta understand better this data, extract more information about it. Trying new algorithms and techniques such as Ensemble, Classifiers Combination or Fusion. Stemming and Stop Words could improve it too. If you solved this problem and got a better result, share it with me, I’m very curious about how to improve this!</p>
 
-        <footer>
+          <footer>
   &copy; 2019 Rodrigo Araujo 
 </footer>
 

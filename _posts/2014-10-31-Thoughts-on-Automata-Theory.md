@@ -4,7 +4,7 @@ categories: [theory, computer-science]
 keywords: "theory, computer science, thoughts, automata, compilers, dfa, nfa"
 tags: [theory, computer science, thoughts, automata, compilers, dfa, nfa]
 fullview: true
-layout: default
+layout: post
 permalink: post/thoughts-on-automata-theory
 ---
 
