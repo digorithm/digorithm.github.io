@@ -28,7 +28,7 @@ It was the first time I felt that the code I wrote directly impacted millions of
 </p>
 
 <p>
-    Now I'm working at <a href="https://www.cmd.com">Cmd</a>, building distributed systems in the cybersecurity space.
+    Now I'm at <a href="https://www.cmd.com">Cmd</a>, building secure distributed systems in the cybersecurity space.
 </p>
 
 <p>

@@ -15,17 +15,29 @@
       <div class="post-listing">
         <div class="post-content">
           <h1 style="max-width: 45%;">{{page.title}}</h1>
-          
+
 
           <div style="width:100%;" class="container">
             <div class="row post-meta">
-              <div class="col m6"><p style="float:left;max-width: 100%; font-size: 14px;"> <i class="far fa-calendar" style="padding-right:5px;"></i> {{ page.date | date: '%B %d, %Y' }}</p></div>
-              <div class="col m6"><p style="float:right;max-width: 100%; font-size: 14px;"><i class="far fa-hourglass" style="padding-right:5px;"></i> {% include read_time.html %}</p></div>
-            </div>
-            <div class="row post-meta">
-                <div class="col m6"><p style="float:left;max-width: 100%; font-size: 14px;"><i class="fas fa-tags" style="padding-right:5px;"></i> {{ page.tags | join: ", "}}</p></div>
-                <div class="col m6"><p style="float:right;max-width: 100%; font-size: 14px;"><i class="far fa-folder" style="padding-right:5px;"></i> {{ page.categories }}</p></div>
+              <div class="col m6">
+                <p style="float:left;max-width: 100%; font-size: 14px;"> <i class="far fa-calendar"
+                    style="padding-right:5px;"></i> {{ page.date | date: '%B %d, %Y' }}</p>
               </div>
+              <div class="col m6">
+                <p style="float:right;max-width: 100%; font-size: 14px; padding-right:5%;"><i class="far fa-hourglass"
+                    style="padding-right:5px;"></i> {% include read_time.html %}</p>
+              </div>
+            </div>
+            <!-- <div class="row post-meta">
+              <div class="col m6">
+                <p style="float:left;max-width: 100%; font-size: 14px;"><i class="fas fa-tags"
+                    style="padding-right:5px;"></i> {{ page.tags | join: ", "}}</p>
+              </div>
+              <div class="col m6">
+                <p style="float:right;max-width: 100%; font-size: 14px;"><i class="far fa-folder"
+                    style="padding-right:5px;"></i> {{ page.categories }}</p>
+              </div>
+            </div> -->
           </div>
 
           <hr>

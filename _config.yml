@@ -27,7 +27,7 @@ gems: [jekyll-paginate]
 pages_list:
   About: '/about'
   Archive: '/'
-  Categories: '/categories'
+  # Categories: '/categories'
   Projects: '/projects'
   Publications: '/publications'
 kramdown:
