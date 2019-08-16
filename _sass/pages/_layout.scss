@@ -149,3 +149,7 @@ img + em { display: block; text-align: center; font-size: 15px;}
   font-weight: lighter !important;
   padding-top:0px !important;
 }
+
+.archive #timeline::before {
+  left: -5px !important;
+}

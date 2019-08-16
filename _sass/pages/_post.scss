@@ -40,12 +40,18 @@
     width: 70%;
     font-size: $font-size-base - 5 !important;
   }
+  .archive a {
+    font-size: $font-size-base - 5 !important;
+  }
 }
 
 @media screen and (min-width: $medium-screen) {
   .post-content {
     padding-left: 5%;
     width: 70%;
+    font-size: $font-size-base - 3 !important;
+  }
+  .archive a {
     font-size: $font-size-base - 3 !important;
   }
 }
@@ -56,6 +62,9 @@
     width: 70%;
     font-size: $font-size-base - 3 !important;
   }
+  .archive a {
+    font-size: $font-size-base - 3 !important;
+  }
 }
 
 @media screen and (min-width: $larger-screen){
@@ -64,12 +73,19 @@
     width: 60%;
     font-size: $font-size-base - 3 !important;
   }
+  .archive a {
+    font-size: $font-size-base - 3 !important;
+  }
 }
 
 @media screen and (min-width: $xl-screen){
   .post-content {
     padding-left: 3%;
     width: 50%;
+    font-size: $font-size-base !important;
+  }
+
+  .archive a {
     font-size: $font-size-base !important;
   }
 }

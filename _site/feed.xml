@@ -5,8 +5,8 @@
     <description>Thoughts on computer science, software engineering, distributed systems, and machine learning</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 16 Aug 2019 22:35:10 +0000</pubDate>
-    <lastBuildDate>Fri, 16 Aug 2019 22:35:10 +0000</lastBuildDate>
+    <pubDate>Fri, 16 Aug 2019 22:47:36 +0000</pubDate>
+    <lastBuildDate>Fri, 16 Aug 2019 22:47:36 +0000</lastBuildDate>
     <generator>Jekyll v3.8.6</generator>
     
       <item>
@@ -42,7 +42,7 @@
 
 &lt;p&gt;About 3 months into the project I convinced people to move away from Queuer, it had become too much of a hassle to maintain and evolve it. Godspeed &lt;code class=&quot;highlighter-rouge&quot;&gt;Queuer&lt;/code&gt;.&lt;/p&gt;
 
-&lt;p&gt;Also, around that time I was reading &lt;code class=&quot;highlighter-rouge&quot;&gt;designing high intensive data applications&lt;/code&gt;. It advocates – with very good arguments – for what’s called Message-Passing Dataflow. I’d seen this somewhere else with the name event-centric architecture or something like that; but I believe the philosophies between them are very similar. I like the simple way the author explains it, so here it is:&lt;/p&gt;
+&lt;p&gt;Also, around that time I was reading &lt;code class=&quot;highlighter-rouge&quot;&gt;designing data-intensive data applications&lt;/code&gt;. It advocates – with very good arguments – for what’s called Message-Passing Dataflow. I’d seen this somewhere else with the name event-centric architecture or something like that; but I believe the philosophies between them are very similar. I like the simple way the author explains it, so here it is:&lt;/p&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;Composing stream operators into dataflow systems has a lot of similar characteristics
