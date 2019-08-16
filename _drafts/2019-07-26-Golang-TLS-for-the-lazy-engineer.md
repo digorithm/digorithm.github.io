@@ -60,9 +60,12 @@ import (
 )
 
 func main() {
-	// Request /hello over port 8080 via a POST method and send some payload
+	// POST @ /hello over port 8080 via a POST method 
+	// and send some payload
 	reqBody, _ := json.Marshal(map[string]string{"name": "rodrigo"})
-	r, err := http.Post("http://localhost:8282/hello", "application/json", bytes.NewBuffer(reqBody))
+	r, err := http.Post("http://localhost:8282/hello", 
+	"application/json", bytes.NewBuffer(reqBody))
+	
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -148,7 +151,9 @@ func main() {
 
 	reqBody, _ := json.Marshal(map[string]string{"name": "rodrigo"})
 
-	r, err := client.Post("https://localhost:8282/hello", "application/json", bytes.NewBuffer(reqBody))
+	r, err := client.Post("https://localhost:8282/hello",
+			"application/json", bytes.NewBuffer(reqBody))
+	
 	if err != nil {
 		log.Fatal(err)
 	}

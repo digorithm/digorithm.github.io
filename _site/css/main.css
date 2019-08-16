@@ -78,6 +78,7 @@
 @import url("https://fonts.googleapis.com/css?family=Work+Sans");
 @import url("https://fonts.googleapis.com/css?family=Merriweather:400,400i,700,700i,900,900i");
 @import url("https://fonts.googleapis.com/css?family=Lora");
+@import url("https://fonts.googleapis.com/css?family=Fira+Sans&display=swap");
 @import url("https://fonts.googleapis.com/css?family=Lusitana");
 @import url("https://fonts.googleapis.com/css?family=PT+Serif");
 @import url("https://fonts.googleapis.com/css?family=Open+Sans&display=swap");
@@ -599,7 +600,7 @@ footer {
 .related-articles {
   margin-top: 2em; }
   .related-articles h4 {
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif; }
+    font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif; }
   .related-articles ul {
     margin: 0;
     padding: 0;
@@ -1113,7 +1114,7 @@ html {
    ========================================================================== */
 html {
   line-height: 1.5;
-  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: normal;
   color: #2e5094;
   -webkit-font-smoothing: antialiased;
@@ -1205,7 +1206,7 @@ p {
   margin-bottom: 20px;
   padding: 2px 8px;
   font-size: 0.875em;
-  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: 700;
   background-color: #2e5094;
   color: #fff;
@@ -1606,26 +1607,31 @@ ul.tag-cloud {
   font-size: 32px;
   font-family: "Libre Baskerville", Georgia; }
 
-@media screen and (min-width: 1300px) {
+@media screen and (min-width: 600px) {
   .post-content {
     padding-left: 5%;
-    width: 70%; } }
+    width: 70%;
+    font-size: 13.9px !important; } }
 @media screen and (min-width: 992px) {
   .post-content {
     padding-left: 5%;
-    width: 70%; } }
+    width: 70%;
+    font-size: 15.9px !important; } }
 @media screen and (min-width: 1200px) {
   .post-content {
     padding-left: 3%;
-    width: 70%; } }
+    width: 70%;
+    font-size: 15.9px !important; } }
 @media screen and (min-width: 1600px) {
   .post-content {
     padding-left: 3%;
-    width: 60%; } }
+    width: 60%;
+    font-size: 15.9px !important; } }
 @media screen and (min-width: 1800px) {
   .post-content {
     padding-left: 3%;
-    width: 50%; } }
+    width: 50%;
+    font-size: 18.9px !important; } }
 .back-home a {
   font-size: 13px;
   font-weight: bold;

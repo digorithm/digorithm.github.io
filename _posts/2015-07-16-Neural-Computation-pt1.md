@@ -137,8 +137,8 @@ So, it's just a technique to solve our previous problem, but still, the weights 
 
 Now, here's a code of a Perceptron that will behave like a simple Boolean function. I didn't use the Delta Dule (Gradient Descent) to optimize the weights, as this problem (binary Boolean functions) is linearly separable.
 
+{% highlight python %}
 
-```python
   import math
   from numpy import random, array
   from random import choice
@@ -204,7 +204,7 @@ Now, here's a code of a Perceptron that will behave like a simple Boolean functi
   plt.xlabel('epochs')
   plt.show()
 
-```
+{% endhighlight %}
 
 ### Conclusion and next steps
 

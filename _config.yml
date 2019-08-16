@@ -20,6 +20,11 @@ paginate_path: "page:num"
 timezone:          Vancouver/Canada
 markdown:          kramdown
 highlighter:       rouge
+kramdown:
+  input: GFM
+  syntax_highlighter_opts:
+    default_lang: html
+    css_class   : 'syntax'
 excerpt_separator: <!--more-->
 permalink:         /articles/:year-:month/:title
 

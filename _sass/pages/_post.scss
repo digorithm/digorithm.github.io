@@ -18,9 +18,6 @@
   }
 }
 
-
-
-
 .image-credit {
   float: right;
   font-weight: bold;
@@ -37,10 +34,11 @@
   font-family: "Libre Baskerville", Georgia;
 }
 
-@media screen and (min-width: 1300px) {
+@media screen and (min-width: $small-screen) {
   .post-content {
     padding-left: 5%;
     width: 70%;
+    font-size: $font-size-base - 5 !important;
   }
 }
 
@@ -48,6 +46,7 @@
   .post-content {
     padding-left: 5%;
     width: 70%;
+    font-size: $font-size-base - 3 !important;
   }
 }
 
@@ -55,6 +54,7 @@
   .post-content {
     padding-left: 3%;
     width: 70%;
+    font-size: $font-size-base - 3 !important;
   }
 }
 
@@ -62,6 +62,7 @@
   .post-content {
     padding-left: 3%;
     width: 60%;
+    font-size: $font-size-base - 3 !important;
   }
 }
 
@@ -69,6 +70,7 @@
   .post-content {
     padding-left: 3%;
     width: 50%;
+    font-size: $font-size-base !important;
   }
 }
 
