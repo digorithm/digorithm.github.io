@@ -37,7 +37,7 @@ We had many problems with this:
 
 About 3 months into the project I convinced people to move away from Queuer, it had become too much of a hassle to maintain and evolve it. Godspeed `Queuer`.
 
-Also, around that time I was reading `designing high intensive data applications`. It advocates -- with very good arguments -- for what's called Message-Passing Dataflow. I'd seen this somewhere else with the name event-centric architecture or something like that; but I believe the philosophies between them are very similar. I like the simple way the author explains it, so here it is:
+Also, around that time I was reading `designing data-intensive data applications`. It advocates -- with very good arguments -- for what's called Message-Passing Dataflow. I'd seen this somewhere else with the name event-centric architecture or something like that; but I believe the philosophies between them are very similar. I like the simple way the author explains it, so here it is:
 
 > Composing stream operators into dataflow systems has a lot of similar characteristics
 to the microservices approach. However, the underlying communication mechanism is very different: one-directional, asynchronous message streams rather than
