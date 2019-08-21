@@ -6,7 +6,7 @@
 title: Rodrigo Araujo
 email: rod.dearaujo@gmail.com
 description: Thoughts on computer science, software engineering, distributed systems, and machine learning
-url: # the base hostname & protocol for your site
+url: "http://rodrigoaraujo.me" # the base hostname & protocol for your site
 
 
 #
@@ -14,7 +14,6 @@ url: # the base hostname & protocol for your site
 # Jekyll configuration
 ####################################
 #
-gems: [jekyll-paginate]
 paginate: 3
 paginate_path: "page:num"
 timezone:          Vancouver/Canada
@@ -27,8 +26,9 @@ kramdown:
     css_class   : 'syntax'
 excerpt_separator: <!--more-->
 permalink:         /articles/:year-:month/:title
-
-gems: [jekyll-paginate]
+plugins:
+  - jekyll-sitemap
+  - jekyll-paginate
 pages_list:
   About: '/about'
   Archive: '/'
