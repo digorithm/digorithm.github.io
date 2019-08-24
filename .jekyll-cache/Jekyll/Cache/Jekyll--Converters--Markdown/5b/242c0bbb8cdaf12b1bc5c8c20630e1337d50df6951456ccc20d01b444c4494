@@ -1,0 +1,108 @@
+I"�*<p>In this past year I have been working on a <em>big</em> system that is fundamentally an ETL to process real estate data across the US and Canada. I can’t talk much about the business details, but let’s say that if you’re browsing for real estate properties, it’s very likely you’re using this system. You’re welcome. Or I’m sorry, who knows?</p>
+
+<p>I joined this project from the very beginning. When I joined, a couple of technical decisions had been made. Initially, before I’d arrived on this project, the microservices would talk to each other directly, REST/gRPC style. Nothing new here.</p>
+
+<p><img src="/content/images/images/2019-07-11_19-154e43ee-0c5f-4866-9efc-7af7ac54e7f4.22.05.png" alt="" />
+<em>Simple architecture where the services talk to each other directly</em></p>
+
+<p>The great majority of these services communicated with each other through synchronous calls. In most scenarios, this would be 100% fine. In an ETL constantly streaming copious amounts of data that need fast processing though? Not so much.</p>
+
+<p>One big problem with this architecture is that this application isn’t an “user-triggered” application and the events happens in a streaming fashion, i.e this is a streaming system, synchronous calls then quickly become a bottleneck. For instance: to process property X we’d need to wait for all other services to do their jobs before moving onto the property X + 1.</p>
+
+<p>And because of that property (streaming system), it means we can go full asynchronous here; we want to stream data in a constant flow and each service will do its job independently.</p>
+
+<p><img src="/content/images/images/2019-07-12_15-15a5f630-c173-4a14-ab93-ee1bf2ca5092.07.25.png" alt="" />
+<em>Direct communication through an API gateway vs. streaming system using message-passing (fully async)</em></p>
+
+<p>However, an unfortunate bad technical decision had been made before I arrived on this project: yes, they would go from sync requests to async requests, but they would do it through a service developed internally called <code class="highlighter-rouge">Queuer</code>, which, in hindsight, was nothing like a queue. Queuer would just take the request coming from one service, buffer it, and route it to another service (again, not a queue), which sounded more like what you’d get from a service mesh, but without all the reliability that you’d get from battle-tested robust tools. We had something like this:</p>
+
+<p><img src="/content/images/images/2019-07-11_19-9c20194e-2150-4c4a-b12b-89bd5224e801.28.54.png" alt="" />
+<em>A queueing system that acts exactly like an API gateway</em></p>
+
+<p>We had many problems with this:</p>
+
+<ol>
+  <li>Maintaining a “queueing” system built in-house was terrible.</li>
+  <li><code class="highlighter-rouge">Queuer</code> wasn’t service-agnostic; we had to encode domain knowledge about other services inside <code class="highlighter-rouge">Queuer</code>.</li>
+  <li>My favourite: Queuer had a buffer, which was simply a in-memory variable. It would buffer thousands of jobs there. If queuer died, well, the jobs were lost. Oh and forget about deliver-once guarantees and/or other goodies you can get by using a battle-tested queueing system such as RabbitMQ or Kafka.</li>
+</ol>
+
+<p>About 3 months into the project I convinced people to move away from Queuer, it had become too much of a hassle to maintain and evolve it. Godspeed <code class="highlighter-rouge">Queuer</code>.</p>
+
+<p>Also, around that time I was reading <code class="highlighter-rouge">designing data-intensive data applications</code>. It advocates – with very good arguments – for what’s called Message-Passing Dataflow. I’d seen this somewhere else with the name event-centric architecture or something like that; but I believe the philosophies between them are very similar. I like the simple way the author explains it, so here it is:</p>
+
+<blockquote>
+  <p>Composing stream operators into dataflow systems has a lot of similar characteristics
+to the microservices approach. However, the underlying communication mechanism is very different: one-directional, asynchronous message streams rather than
+synchronous request/response interactions.</p>
+</blockquote>
+
+<p>I then decided to experiment with Message-Passing Dataflow; after all, we’re talking about a never-ending stream processing system. Therefore, I didn’t want much synchronous communication between the services and wanted something that’s closer to an actual streaming system.</p>
+
+<p>To achieve this, we need a central component that would act as a communication bus, streaming messages between the services. And the services, instead of being just HTTP rest APIs, would be active consumers, consuming messages from this bus.</p>
+
+<p><img src="/content/images/images/2019-07-12_15-542f22e7-5cae-4f21-aabe-d232f4f56360.27.22.png" alt="" />
+<em>Services consume messages being passed to the channels they’re subscribed to</em></p>
+
+<p>Not surprisingly, I decided to use Kafka as our communication bus. The services around Kafka are Kafka consumers and producers. All communication between the services happens through <em>message passing</em>.</p>
+
+<p>Here are some observations after adopting this paradigm:</p>
+
+<h4 id="async-usually-means-that-it-will-be-faster">Async usually means that it will be faster</h4>
+<p>I noticed that this approach is faster that what we had before. A service does one thing and does it as fast as it can and don’t have to wait for the next steps. Then, it might produce a message to Kafka, which will be a job being performed by other services, and that’s it.</p>
+
+<h4 id="more-robustness">More robustness</h4>
+<p>This approach is much, much more robust. All services are completely stateless and they don’t hold jobs in memory. The service died? All good, the job can be easily recovered from Kafka, Kafka only moves its offsets when the offsets are commited, i.e when the service actually finishes the job.</p>
+
+<h4 id="you-must-think-about-how-you-handle-the-offsets">You must think about how you handle the offsets</h4>
+<p>Even though it’s robust, consumers must be smart about it. Consuming offsets from topics (think of it as jobs in a queue) and failing to commit the new offset properly can be catastrophic. For instance, if we have a Kafka producer’s <code class="highlighter-rouge">auto.commit</code> enabled, the service reads a message from a topic, the auto commit mechanism commits after a few milliseconds, but then the process fail. That means we marked that offset as consumed, but we didn’t finished the job, so it’s… well, lost. Manually committing the offsets is much more reliable in high risk cases.</p>
+
+<h4 id="a-different-and-refreshing-computational-model">A different and refreshing computational model</h4>
+<p>It’s a very different computational model. Instead of proactively querying things from other services, we <em>subscribe</em> to channels of messages (called topics) and work our way through the messages in there.
+It’s closer to Alan Kay’s view of object-oriented programming (<a href="https://ovid.github.io/articles/alan-kay-and-oo-programming.html">https://ovid.github.io/articles/alan-kay-and-oo-programming.html</a>). And I’m not talking about <em>that</em> OOP created by the C++/Java community, but the core ideas of OOP thought by Kay and colleagues back in the early days of computing – which curiously was grounded in Biology. The idea of passing messages to objects in order to better scale systems (like biological cells do!). Kafka is nothing but a (very reliable) communication bus, and the objects (services, microservices, whatever) attach themselves to it and listen to messages, responding accordingly and sending other kinds of messages back to kafka which will be consumed by other services. Once you have well-defined messages and protocols, things flow beautifully.</p>
+
+<h4 id="watch-out-for-waste">Watch out for waste</h4>
+<p>Be careful with idle consumers, that means you gotta think about your partitions carefully. What’s worked for us is to set 1:1 partition-to-consumer ratio. For instance, we have an image processing service that fetches jobs from kafka. If we have more instances of that services than partitions, that means some of those instances will be idle, preventing us from achieving a higher throughput than we could.</p>
+
+<p><strong>Closing thoughts</strong></p>
+
+<p>I am, now, a big fan of this architectural style I can totally recommend <em>if it fits your problems</em>. Which in most cases it does. I believe we’ve been going with the flow that was set in the early 00s when it comes to architecting systems; we’ve been using the request-response paradigm without really questioning its efficacy.</p>
+
+<p>To close, the author of <code class="highlighter-rouge">designing data-intensive applications</code> has some really cool insights about this paradigm:</p>
+
+<blockquote>
+  <p>It would be very natural to extend this programming model to also allow a server to
+push state-change events into this client-side event pipeline. Thus, state changes
+could flow through an end-to-end write path: from the interaction on one device that
+triggers a state change, via event logs and through several derived data systems and
+stream processors, all the way to the user interface of a person observing the state on
+another device. These state changes could be propagated with fairly low delay—say,
+under one second end to end.</p>
+</blockquote>
+
+<blockquote>
+  <p>Some applications, such as instant messaging and online games, already have such a
+“real-time” architecture (in the sense of interactions with low delay, not in the sense
+of “Response time guarantees”). <strong>But why don’t we build all applications
+this way?</strong></p>
+</blockquote>
+
+<blockquote>
+  <p>The challenge is that the assumption of stateless clients and request/response interac‐
+tions is very deeply ingrained in our databases, libraries, frameworks, and protocols.
+Many datastores support read and write operations where a request returns one
+response, but much fewer provide an ability to subscribe to changes—i.e., a request
+that returns a stream of responses over time.</p>
+</blockquote>
+
+<blockquote>
+  <p>In order to extend the write path all the way to the end user, we would need to funda‐
+mentally rethink the way we build many of these systems: moving away from request/
+response interaction and toward publish/subscribe dataflow. I think that the
+advantages of more responsive user interfaces and better offline support would make
+it worth the effort. If you are designing data systems, I hope that you will keep in
+mind the option of subscribing to changes, not just querying the current state.</p>
+</blockquote>
+
+<p>My next steps? Experimenting with this architecture for applications where the events <em>are</em> user-triggered and the results are near real-time and user-facing.</p>
+:ET

@@ -1,0 +1,7 @@
+I"�<p><strong>Redis is such a great technology.</strong> Unfortunately, there’s still people who don’t know Redis or don’t know that Redis can be used as a Cache System to improve the speed of responses.</p>
+
+<h3 id="why-redis">Why Redis</h3>
+
+<p>Well, let’s start this discussion remembering how a common Relational Database basically works: Suppose we’re using a MySQL, every time your app sends a request to the MySQL client, the MySQL client gotta make a trip to the hard drive to get the data asked in the request, this can become a problem if the data asked in request is big… and if there are many requests at the same time, this can generate a huge latency, annoying users or worse.</p>
+
+:ET

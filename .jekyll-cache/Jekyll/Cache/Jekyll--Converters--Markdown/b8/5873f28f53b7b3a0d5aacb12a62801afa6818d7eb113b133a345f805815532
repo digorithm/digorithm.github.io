@@ -1,0 +1,12 @@
+I"/<p>Well, it all starts with your first attempt to write a program; a very innocent and and naive program - I mean, your very first “Hello World” and the classic“Read 3 inputs and print the sum of them”. Your only concerns will be  some missing commas, whitespaces and some misplaced IF’s - things that  may cause a little confusion first. You’ll eve think that it is hard.</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include
+</span><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"Hello World"</span><span class="p">);</span>
+    <span class="k">return</span> <span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Then time will pass, you’ll understand the logic better and get impressed with your first program; 150 lines of pure java code, and you will be amazed by it</p>
+
+:ET

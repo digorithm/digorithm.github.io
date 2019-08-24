@@ -1,0 +1,11 @@
+I"<h3 id="how-can-we-make-a-machine-learn-from-data">How can we make a machine learn from data?</h3>
+
+<p>Then, how can we make the machine predicts things based on that learned data? Those are the question answered by one of the most classic Machine Learning Algorithms, the <strong>Gradient Descent Algorithm</strong>, from a Mathematical-Statistical side it’s called <strong>Univariate Linear Regression</strong>.</p>
+
+<p>This is one of the tools of the Machine Learning toolbox, and what it tries to do is to model a relationship between a scalar dependent variable Y and a explanatory variable X.</p>
+
+<h3 id="in-laymans-term">In Layman’s term…</h3>
+
+<p>Let’s suppose you have a few points distributed in a Graph, so you already know that in a point A you have a well defined X and Y, which means, if you input X, your output will be Y, and in a point B you have a well defined X’ and Y’ as well. But, thing is, if a point emerge between A and B, and you only have the X… what will be the Y <em>(the output)</em>?</p>
+
+:ET
