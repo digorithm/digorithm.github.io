@@ -668,7 +668,9 @@ pre code span { word-break: break-all; }
 .highlight .ss { color: #83a598; }
 
 /* LAYOUT CSS */
-p { color: #333 !important; font-size: 18px !important; line-height: 1.5 !important; }
+p { color: #333 !important; font-size: 17px !important; line-height: 1.5 !important; }
+
+ol { color: #333 !important; }
 
 .cover { background-color: #FFF; position: fixed; text-align: center; width: 100%; min-height: 400px; padding: 30px 15px 20px; z-index: 1; }
 
@@ -682,7 +684,10 @@ p { color: #333 !important; font-size: 18px !important; line-height: 1.5 !import
 
 @media screen and (min-width: 1600px) { .cover-card { padding-left: 0px !important; } }
 
-@media screen and (min-width: 1800px) { .cover-card { padding-left: 100px !important; } }
+@media screen and (min-width: 1800px) { .cover-card { padding-left: 100px !important; }
+  p { font-size: 16px !important; }
+  .post-content { font-size: 15px !important; }
+  ol { font-size: 16px !important; color: #333 !important; } }
 
 .cover-card { color: #2e5094; padding: 0 30px; }
 

@@ -1,9 +1,13 @@
 /* LAYOUT CSS */
 p {
   color: #333 !important;
-  font-size: 18px !important;
+  font-size: 17px !important;
   line-height: 1.5 !important;
 }
+
+ol {
+	  color: #333 !important;  
+  }
 
 .cover {
   background-color: $background-color;
@@ -46,6 +50,17 @@ p {
 @media screen and (min-width: $xl-screen){
   .cover-card {
     padding-left:100px !important;
+  }
+  p {
+	  font-size: 16px !important;
+  }
+  .post-content {
+    font-size: 15px !important;
+  }
+
+  ol {
+	  font-size: 16px !important;
+	  color: #333 !important;  
   }
 }
 
