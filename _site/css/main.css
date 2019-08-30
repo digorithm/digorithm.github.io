@@ -796,7 +796,7 @@ ul.tag-cloud li a.post-tag { border-radius: 0.2em; }
   .archive a { font-size: 15.9px !important; } }
 
 @media screen and (min-width: 1800px) { .post-content { padding-left: 3%; width: 50%; font-size: 18.9px !important; }
-  .archive a { font-size: 18.9px !important; } }
+  .archive a { font-size: 16px !important; } }
 
 .back-home a { font-size: 13px; font-weight: bold; color: #09ABF6; border: 1px solid #bdccea; border-radius: 0.4em; padding: 0.5em 1em; }
 

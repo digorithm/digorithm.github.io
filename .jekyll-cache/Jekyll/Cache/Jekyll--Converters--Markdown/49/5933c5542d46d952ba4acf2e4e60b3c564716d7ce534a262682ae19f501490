@@ -1,10 +1,4 @@
----
-layout: page
-title: About
-permalink: /about/
----
-
-<p>I'm <strong>Rodrigo Araújo</strong>. I live in Vancouver, Canada, though originally from Brazil. I'm a software engineer with a background in Computer Science. 
+I"�<p>I'm <strong>Rodrigo Araújo</strong>. I live in Vancouver, Canada, though originally from Brazil. I'm a software engineer with a background in Computer Science. 
     I build software and do research to help humans achieve greater things.</p>
 
 <p>
@@ -39,9 +33,9 @@ It was the first time I felt that the code I wrote directly impacted millions of
 
 <p><em><a href="https://www.wsj.com/articles/SB10001424053111903480904576512250915629460">Software</a> <a href="https://a16z.com/2016/08/20/why-software-is-eating-the-world/">is</a> <a href="">eating</a> <a href="https://www.forbes.com/sites/stevedenning/2014/04/11/why-software-is-eating-the-world/#31314bde29a2">the</a> <a href="https://techcrunch.com/2016/06/07/software-is-eating-the-world-5-years-later/">world</a></em> and yet, it's amazing how unreliable and internally broken most software and software practices are. This is mostly due the fact that we are a young field taking its first baby steps, and this is quite exciting. I believe it is our job, as a community, to slowly but steadily improve the way we build software. Thus, one of my personal missions is to <strong>make software more reliable and correct; by both improving software and improving how we build software.</strong></p>
 
-I like working with ambitious small-to-medium size companies that are looking for making a big _and_ good impact in society. 
+<p>I like working with ambitious small-to-medium size companies that are looking for making a big <em>and</em> good impact in society.</p>
 
-My main interests in software are:
+<p>My main interests in software are:</p>
 
 <ul style="color: #333; font-size: 16px;">
     <li>Distributed Systems</li>
@@ -51,4 +45,5 @@ My main interests in software are:
     <li>A mix and match of all items above</li>
 </ul>
 
-Currently I'm not open to full-time employment, but am available for consulting opportunities.
+<p>Currently I’m not open to full-time employment, but am available for consulting opportunities.</p>
+:ET
