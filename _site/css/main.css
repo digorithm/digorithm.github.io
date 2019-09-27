@@ -31,6 +31,7 @@
 @import url("https://fonts.googleapis.com/css?family=Lusitana");
 @import url("https://fonts.googleapis.com/css?family=PT+Serif");
 @import url("https://fonts.googleapis.com/css?family=Open+Sans&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Crimson+Text&display=swap");
 @import url("https://fonts.googleapis.com/css?family=Noto+Serif&display=swap");
 @import url("https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700");
 @font-face { font-family: "avenir"; src: url("/fonts/AvenirLTStd-Book.otf"); }
@@ -233,7 +234,7 @@ footer .heart-icon { color: #f83e4b; text-shadow: 0 0 5px #fff, 0 0 10px #f83e4b
 
 .related-articles { margin-top: 2em; }
 
-.related-articles h4 { font-family: "Noto Serif", "Libre Baskerville", Georgia, "Times New Roman", Times, serif; }
+.related-articles h4 { font-family: "Crimson Text", "Libre Baskerville", Georgia, "Times New Roman", Times, serif; }
 
 .related-articles ul { margin: 0; padding: 0; list-style: none; }
 
@@ -534,7 +535,7 @@ html { background-color: #FFF; }
   .row .col.offset-l12 { margin-left: 100%; } }
 
 /* ========================================================================== Typography ========================================================================== */
-html { line-height: 1.5; font-family: "Noto Serif", "Libre Baskerville", Georgia, "Times New Roman", Times, serif; font-weight: normal; color: #2e5094; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; font-size: 18.9px; }
+html { line-height: 1.5; font-family: "Crimson Text", "Libre Baskerville", Georgia, "Times New Roman", Times, serif; font-weight: normal; color: #2e5094; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; font-size: 18.9px; }
 
 blockquote { display: block; position: relative; padding-left: 20px; font-style: italic; margin-left: 0px; border-left: 3px solid #2E8394; }
 
@@ -575,7 +576,7 @@ p { margin: 1.2em 0; word-spacing: 0.05em; line-height: 1.5em; }
 .abstract p { font-size: 0.9em; }
 
 /* Buttons ========================================================================== */
-.btn { display: inline-block; margin-bottom: 20px; padding: 2px 8px; font-size: 0.875em; font-family: "Noto Serif", "Libre Baskerville", Georgia, "Times New Roman", Times, serif; font-weight: 700; background-color: #2e5094; color: #fff; border-width: 2px !important; border-style: solid !important; border-color: #2e5094; text-decoration: none !important; border-radius: 5px; }
+.btn { display: inline-block; margin-bottom: 20px; padding: 2px 8px; font-size: 0.875em; font-family: "Crimson Text", "Libre Baskerville", Georgia, "Times New Roman", Times, serif; font-weight: 700; background-color: #2e5094; color: #fff; border-width: 2px !important; border-style: solid !important; border-color: #2e5094; text-decoration: none !important; border-radius: 5px; }
 
 .btn:visited { color: #fff; border-color: #2e5094; }
 
@@ -668,7 +669,7 @@ pre code span { word-break: break-all; }
 .highlight .ss { color: #83a598; }
 
 /* LAYOUT CSS */
-p { color: #333 !important; font-size: 17px !important; line-height: 1.5 !important; }
+p { color: #333 !important; font-size: 20px !important; line-height: 1.2 !important; }
 
 ol { color: #333 !important; }
 
