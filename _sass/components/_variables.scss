@@ -13,6 +13,7 @@
 @import url('https://fonts.googleapis.com/css?family=PT+Serif');
 @import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Crimson+Text&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Source+Code+Pro&display=swap');
 
 @font-face {
 font-family: "avenir";
@@ -113,7 +114,7 @@ $border-width:               .0625rem !default;
 
 $font-family-sans-serif:     -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI", "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif !default;
 $font-family-serif:          "Crimson Text", "Libre Baskerville", Georgia, "Times New Roman", Times, serif !default;
-$font-family-monospace:      "Hack", "Courier New", monospace !default;
+$font-family-monospace:      "Source Code Pro", "Courier New", monospace !default;
 $font-family-base:           $font-family-serif !default;
 $font-family-sidebar:        "avenir" !default;
 

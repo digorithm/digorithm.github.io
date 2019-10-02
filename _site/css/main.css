@@ -32,6 +32,7 @@
 @import url("https://fonts.googleapis.com/css?family=PT+Serif");
 @import url("https://fonts.googleapis.com/css?family=Open+Sans&display=swap");
 @import url("https://fonts.googleapis.com/css?family=Crimson+Text&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Source+Code+Pro&display=swap");
 @import url("https://fonts.googleapis.com/css?family=Noto+Serif&display=swap");
 @import url("https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700");
 @font-face { font-family: "avenir"; src: url("/fonts/AvenirLTStd-Book.otf"); }
@@ -606,7 +607,7 @@ p { margin: 1.2em 0; word-spacing: 0.05em; line-height: 1.5em; }
 
 .btn-info:hover { background-color: #fff; color: #09ABF6; border-color: #09ABF6; }
 
-pre, code { font-family: "Hack", "Courier New", monospace; font-size: 0.9em; }
+pre, code { font-family: "Source Code Pro", "Courier New", monospace; font-size: 0.8em; }
 
 code { border-radius: 2px; white-space: nowrap; }
 
@@ -686,9 +687,9 @@ ol { color: #333 !important; }
 @media screen and (min-width: 1600px) { .cover-card { padding-left: 0px !important; } }
 
 @media screen and (min-width: 1800px) { .cover-card { padding-left: 100px !important; }
-  p { font-size: 16px !important; }
+  p { font-size: 18px !important; }
   .post-content { font-size: 15px !important; }
-  ol { font-size: 16px !important; color: #333 !important; } }
+  ol { font-size: 18px !important; color: #333 !important; } }
 
 .cover-card { color: #2e5094; padding: 0 30px; }
 
